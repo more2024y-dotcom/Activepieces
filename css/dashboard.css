@@ -1,32 +1,22 @@
-.task button{
-
-background:#6d28d9;
-color:white;
-border:none;
-
-padding:12px 25px;
-
-border-radius:8px;
-
-margin-top:15px;
-
-cursor:pointer;
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
+body{
+    background:#f5f6fa;
+}
 
-.logout{
+.dashboard{
+    display:flex;
+}
 
-margin-top:40px;
-
-background:#dc2626;
-
-color:white;
-
-border:none;
-
-padding:12px 30px;
-
-border-radius:8px;
-
+.sidebar{
+    width:260px;
+    height:100vh;
+    background:#6d28d9;
+    color:white;
+    padding:30px;
 }
