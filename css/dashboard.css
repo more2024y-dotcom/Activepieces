@@ -9,9 +9,13 @@ body{
     background:#f5f6fa;
 }
 
+
 .dashboard{
     display:flex;
 }
+
+
+/* Sidebar */
 
 .sidebar{
     width:260px;
@@ -19,4 +23,143 @@ body{
     background:#6d28d9;
     color:white;
     padding:30px;
+}
+
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+
+.brand img{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+}
+
+
+.sidebar ul{
+    list-style:none;
+    margin-top:40px;
+}
+
+
+.sidebar li{
+    padding:15px 0;
+    font-size:17px;
+}
+
+
+
+/* Main */
+
+.content{
+    flex:1;
+    padding:35px;
+}
+
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+
+.profile img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+}
+
+
+
+/* Statistics */
+
+.stats{
+    display:flex;
+    gap:25px;
+    margin-top:40px;
+}
+
+
+.box{
+    background:white;
+    width:220px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+
+.box p{
+    font-size:35px;
+    color:#6d28d9;
+    margin-top:10px;
+}
+
+
+
+/* Tasks */
+
+.title{
+    margin-top:40px;
+}
+
+
+.tasks{
+    display:flex;
+    gap:25px;
+    margin-top:25px;
+}
+
+
+.task{
+    background:white;
+    width:300px;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+
+.task button{
+
+    background:#6d28d9;
+    color:white;
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:8px;
+
+    margin-top:15px;
+
+    cursor:pointer;
+}
+
+
+.logout{
+
+    margin-top:40px;
+
+    background:#dc2626;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:8px;
+
 }
