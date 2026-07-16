@@ -1,17 +1,15 @@
 let completed = 15;
-let remaining = 25;
 
 function completeTask(button){
 
-    button.innerHTML = "Completed ✓";
-    button.style.background = "green";
-
+    button.innerHTML = "Completed";
     button.disabled = true;
 
     completed++;
-    remaining--;
 
     document.getElementById("completed").innerHTML = completed;
-    document.getElementById("remaining").innerHTML = remaining;
 
+    let remaining = 40 - completed;
+
+    document.getElementById("remaining").innerHTML = remaining;
 }
