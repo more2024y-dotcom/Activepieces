@@ -52,13 +52,13 @@
 
 <div class="box">
 <h3>Completed</h3>
-<p>15</p>
+<p id="completed">15</p>
 </div>
 
 
 <div class="box">
 <h3>Remaining</h3>
-<p>25</p>
+<p id="remaining">25</p>
 </div>
 
 </section>
@@ -80,7 +80,7 @@ Today's Tasks
 Verify customer information
 </p>
 
-<button>
+<button onclick="completeTask(this)">
 Complete
 </button>
 
@@ -132,6 +132,6 @@ Logout
 </div>
 
 
-</body>
+<script src="js/dashboard.js"></script>
 
 </html>
