@@ -47,11 +47,11 @@ JSON.stringify(tasks)
 alert("Task Created Successfully");
 
 
-
 loadAdminTasks();
 
 
 }
+
 
 
 
@@ -73,26 +73,45 @@ list.innerHTML = "";
 
 
 
-tasks.forEach((task)=>{
+tasks.forEach((task,index)=>{
 
 
 list.innerHTML += `
 
 <div class="task">
 
-<h3>${task.title}</h3>
+<h3>
+${task.title}
+</h3>
+
 
 <p>
 ${task.description}
 </p>
 
+
 <p>
 Assigned: ${task.user}
 </p>
 
+
 <p>
 Status: ${task.status}
 </p>
+
+
+<button onclick="resetTask(${index})">
+
+Reset
+
+</button>
+
+
+<button onclick="deleteTask(${index})">
+
+Delete
+
+</button>
 
 
 </div>
@@ -103,6 +122,64 @@ Status: ${task.status}
 
 
 }
+
+
+
+
+
+function deleteTask(index){
+
+
+let tasks =
+JSON.parse(localStorage.getItem("tasks")) || [];
+
+
+
+tasks.splice(index,1);
+
+
+
+localStorage.setItem(
+"tasks",
+JSON.stringify(tasks)
+);
+
+
+
+loadAdminTasks();
+
+
+}
+
+
+
+
+
+function resetTask(index){
+
+
+let tasks =
+JSON.parse(localStorage.getItem("tasks")) || [];
+
+
+
+tasks[index].status = "Active";
+
+
+
+localStorage.setItem(
+"tasks",
+JSON.stringify(tasks)
+);
+
+
+
+loadAdminTasks();
+
+
+}
+
+
 
 
 
