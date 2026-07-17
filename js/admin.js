@@ -1,78 +1,44 @@
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-
 function createTask(){
 
-    let title = document.getElementById("taskTitle").value;
-
-    let description = document.getElementById("taskDescription").value;
-
-
-    if(title === "" || description === ""){
-        alert("Please fill in all fields");
-        return;
-    }
+let title =
+document.getElementById("task-title").value;
 
 
-    let task = {
-
-        title: title,
-
-        description: description,
-
-        status: "Pending"
-
-    };
+let description =
+document.getElementById("task-description").value;
 
 
-    tasks.push(task);
+let user =
+document.getElementById("task-user").value;
 
 
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+let task = {
+
+title:title,
+
+description:description,
+
+user:user,
+
+status:"Active"
+
+};
 
 
-    displayTasks();
+let tasks =
+JSON.parse(localStorage.getItem("tasks")) || [];
 
 
-    document.getElementById("taskTitle").value = "";
+tasks.push(task);
 
-    document.getElementById("taskDescription").value = "";
+
+localStorage.setItem(
+"tasks",
+JSON.stringify(tasks)
+);
+
+
+alert("Task Created Successfully");
+
 
 }
-
-
-
-function displayTasks(){
-
-    let taskList = document.getElementById("taskList");
-
-
-    taskList.innerHTML = "";
-
-
-    tasks.forEach(function(task){
-
-
-        taskList.innerHTML += `
-
-        <div class="task">
-
-            <h3>${task.title}</h3>
-
-            <p>${task.description}</p>
-
-            <button>
-            Assign Task
-            </button>
-
-        </div>
-
-        `;
-
-
-    });
-
-}
-
-
-displayTasks();
