@@ -9,6 +9,10 @@ let description =
 document.getElementById("taskDescription").value;
 
 
+let priority =
+document.getElementById("taskPriority").value;
+
+
 let user =
 document.getElementById("taskUser").value;
 
@@ -19,6 +23,8 @@ let task = {
 title: title,
 
 description: description,
+
+priority: priority,
 
 user: user,
 
@@ -95,6 +101,11 @@ ${task.description}
 
 
 <p>
+Priority: ${task.priority || "Medium"}
+</p>
+
+
+<p>
 Assigned: ${task.user}
 </p>
 
@@ -167,6 +178,7 @@ JSON.parse(localStorage.getItem("tasks")) || [];
 
 tasks[index].completedBy = [];
 
+
 tasks[index].status = "Active";
 
 
@@ -194,6 +206,7 @@ function updateStats(){
 
 let users =
 JSON.parse(localStorage.getItem("users")) || [];
+
 
 
 let tasks =
