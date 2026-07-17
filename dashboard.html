@@ -134,5 +134,19 @@ Logout
 
 <script src="js/dashboard.js"></script>
 
+<script>
+
+let user = localStorage.getItem("user");
+
+if(user){
+
+document.getElementById("username").innerHTML =
+"Welcome, " + user;
+
+}
+
+</script>
+
+
 </body>
 </html>
