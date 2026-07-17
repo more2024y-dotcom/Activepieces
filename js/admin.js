@@ -98,7 +98,9 @@ list.innerHTML += `
 <h3>
 ${task.title}
 </h3>
-
+<p>
+Product: ${task.productName || "No Product"}
+</p>
 
 <p>
 ${task.description}
