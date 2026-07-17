@@ -1,25 +1,56 @@
 let completed = 0;
 
-let tasks = [
-{
-title: "Task #1",
-category: "AI Training Review",
-description: "Review and verify AI training data."
-},
+let tasks = [];
 
-{
-title: "Task #2",
-category: "Customer Verification",
-description: "Verify customer information and complete review."
-},
 
-{
-title: "Task #3",
-category: "Platform Review",
-description: "Review platform data accuracy."
+function loadTasks(){
+
+let container = document.querySelector(".tasks");
+
+
+container.innerHTML = "";
+
+
+let savedTasks =
+JSON.parse(localStorage.getItem("tasks")) || [];
+
+
+
+savedTasks.forEach((task)=>{
+
+
+container.innerHTML += `
+
+<div class="task">
+
+<h3>
+${task.title}
+</h3>
+
+
+<p>
+${task.description}
+</p>
+
+
+<p>
+Assigned: ${task.user}
+</p>
+
+
+<button onclick="completeTask(this)">
+Start Task
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
 }
-
-];
 
 
 function loadTasks(){
