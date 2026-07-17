@@ -6,147 +6,237 @@
 <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
+
 <body>
+
 
 <div class="dashboard">
 
+
+<!-- Sidebar -->
+
 <aside class="sidebar">
 
+
 <div class="brand">
+
 <img src="assets/logo.png">
+
 <h2>Activepieces</h2>
+
 </div>
 
+
 <ul>
+
 <li>🏠 Dashboard</li>
 <li>📋 Tasks</li>
 <li>⚡ Automation</li>
 <li>👥 Team</li>
 <li>⚙ Settings</li>
+
 </ul>
+
 
 </aside>
 
 
+
+<!-- Main Content -->
+
 <main class="content">
+
+
 
 <header>
 
+
 <h1>User Dashboard</h1>
 
+
 <div class="profile">
+
 <img src="assets/logo.png" alt="Activepieces Logo">
-<span id="username">Welcome</span>
+
+<span id="username">
+Welcome
+</span>
+
+
 </div>
+
 
 </header>
 
 
+
+
+<!-- Statistics -->
+
+
 <section class="stats">
 
+
 <div class="box">
+
 <h3>Daily Tasks</h3>
-<p id="total">40</p>
+
+<p id="total">
+40
+</p>
+
 </div>
 
 
+
 <div class="box">
+
 <h3>Completed</h3>
-<p id="completed">15</p>
+
+<p id="completed">
+0
+</p>
+
 </div>
+
 
 
 <div class="box">
+
 <h3>Remaining</h3>
-<p id="remaining">25</p>
+
+<p id="remaining">
+0
+</p>
+
 </div>
+
 
 </section>
+
+
+
 
 
 <h2 class="title">
 Today's Tasks
 </h2>
+
+
+
+
+
+<!-- Progress -->
+
+
 <div class="progress-section">
 
-<h2>Daily Progress</h2>
+
+<h2>
+Daily Progress
+</h2>
+
+
 
 <div class="progress-bar">
 
-<div id="progress"></div>
+<div id="progress">
 
 </div>
+
+</div>
+
+
 
 <p id="progress-text">
+
 0% Completed
+
 </p>
 
+
+
 </div>
+
+
+
+
+
+
+<!-- Tasks will load from user-task.js -->
 
 <div class="tasks">
 
 
-<div class="task">
+</div>
 
-<h3>Task #001</h3>
 
-<p>
-Verify customer information
-</p>
 
-<button onclick="completeTask(this)">
-Start Task
+
+
+
+<button class="logout" onclick="logout()">
+
+Logout
+
 </button>
 
-</div>
 
 
 
-<div class="task">
+</main>
 
-<h3>Task #002</h3>
-
-<p>
-Review platform data
-</p>
-
-<button onclick="completeTask(this)">
-Start Task
-</button>
 
 </div>
 
 
 
-<div class="tasks">
 
-</div>
 
 
 <script src="js/dashboard.js"></script>
+
 <script src="js/user-task.js"></script>
+
+
+
 <script>
+
 
 let user = localStorage.getItem("user");
 
+
 if(user){
 
-    document.getElementById("username").innerHTML =
-    "Welcome, " + user;
+
+document.getElementById("username").innerHTML =
+
+"Welcome, " + user;
+
 
 }
+
+
 
 
 function logout(){
 
-    localStorage.removeItem("user");
 
-    window.location.href="login.html";
+localStorage.removeItem("user");
+
+
+window.location.href="login.html";
+
 
 }
+
+
 
 </script>
 
 
+
+
 </body>
+
 </html>
