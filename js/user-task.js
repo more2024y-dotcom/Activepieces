@@ -1,5 +1,4 @@
-let completed = 0;
-
+window.completed = 0;
 
 
 function loadTasks(){
