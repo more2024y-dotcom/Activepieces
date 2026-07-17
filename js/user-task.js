@@ -79,14 +79,56 @@ Status: ${isCompleted ? "Completed" : "Active"}
 
 
 
-<button 
-onclick="completeTask(${index})"
-${isCompleted ? "disabled" : ""}
->
+${!isCompleted ? `
 
-${isCompleted ? "Completed ✓" : "Start Task"}
+<div class="rating">
+
+<p>Your Rating:</p>
+
+<select id="rating-${index}">
+
+<option value="1">
+⭐
+</option>
+
+<option value="2">
+⭐⭐
+</option>
+
+<option value="3">
+⭐⭐⭐
+</option>
+
+<option value="4">
+⭐⭐⭐⭐
+</option>
+
+<option value="5">
+⭐⭐⭐⭐⭐
+</option>
+
+</select>
+
+
+<button onclick="submitReview(${index})">
+
+Submit Review
 
 </button>
+
+</div>
+
+` : `
+
+<p>
+Rating: ${task.rating || "No Rating"}
+</p>
+
+<button disabled>
+Completed ✓
+</button>
+
+`}
 
 
 </div>
