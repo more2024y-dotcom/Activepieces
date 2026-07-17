@@ -1,35 +1,40 @@
 function createTask(){
 
+
 let title =
-document.getElementById("task-title").value;
+document.getElementById("taskTitle").value;
 
 
 let description =
-document.getElementById("task-description").value;
+document.getElementById("taskDescription").value;
 
 
 let user =
-document.getElementById("task-user").value;
+document.getElementById("taskUser").value;
+
 
 
 let task = {
 
-title:title,
+title: title,
 
-description:description,
+description: description,
 
-user:user,
+user: user,
 
-status:"Active"
+status: "Active"
 
 };
+
 
 
 let tasks =
 JSON.parse(localStorage.getItem("tasks")) || [];
 
 
+
 tasks.push(task);
+
 
 
 localStorage.setItem(
@@ -38,7 +43,67 @@ JSON.stringify(tasks)
 );
 
 
+
 alert("Task Created Successfully");
 
 
+
+loadAdminTasks();
+
+
 }
+
+
+
+
+function loadAdminTasks(){
+
+
+let list =
+document.getElementById("taskList");
+
+
+
+let tasks =
+JSON.parse(localStorage.getItem("tasks")) || [];
+
+
+
+list.innerHTML = "";
+
+
+
+tasks.forEach((task)=>{
+
+
+list.innerHTML += `
+
+<div class="task">
+
+<h3>${task.title}</h3>
+
+<p>
+${task.description}
+</p>
+
+<p>
+Assigned: ${task.user}
+</p>
+
+<p>
+Status: ${task.status}
+</p>
+
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+
+loadAdminTasks();
