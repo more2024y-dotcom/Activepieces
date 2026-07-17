@@ -1,4 +1,4 @@
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 
 function createTask(){
@@ -18,12 +18,17 @@ function createTask(){
 
         title: title,
 
-        description: description
+        description: description,
+
+        status: "Pending"
 
     };
 
 
     tasks.push(task);
+
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
 
 
     displayTasks();
@@ -68,3 +73,6 @@ function displayTasks(){
     });
 
 }
+
+
+displayTasks();
