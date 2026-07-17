@@ -2,8 +2,11 @@
 <html>
 
 <head>
+
 <title>Activepieces Admin</title>
+
 <link rel="stylesheet" href="css/admin.css">
+
 </head>
 
 
@@ -16,83 +19,72 @@
 <h1>Admin Panel</h1>
 
 
+
 <div class="create-task">
+
 
 <h2>Create New Task</h2>
 
 
-<input id="taskTitle" placeholder="Task title">
+<label>Task Title</label>
+
+<input 
+id="taskTitle" 
+placeholder="Task title">
 
 
-<textarea id="taskDescription" placeholder="Task description"></textarea>
+
+<label>Description</label>
+
+<textarea 
+id="taskDescription" 
+placeholder="Task description"></textarea>
+
+
+
+<label>Assign User</label>
+
+<select id="taskUser">
+
+<option value="All Users">
+All Users
+</option>
+
+<option value="John">
+John
+</option>
+
+<option value="Sarah">
+Sarah
+</option>
+
+</select>
+
 
 
 <button onclick="createTask()">
+
 Create Task
+
 </button>
 
 
 </div>
 
 
-<h2>Task List</h2>
-
-
-<div id="taskList"></div>
-
-
-</div>
-
-
-<script src="js/admin.js"></script>
-
-
-</body>
-
-</html><!DOCTYPE html>
-<html>
-
-<head>
-<title>Activepieces Admin</title>
-<link rel="stylesheet" href="css/admin.css">
-</head>
-
-
-<body>
-
-
-<div class="admin">
-
-
-<h1>Admin Panel</h1>
-
-
-<div class="create-task">
-
-<h2>Create New Task</h2>
-
-
-<input id="taskTitle" placeholder="Task title">
-
-
-<textarea id="taskDescription" placeholder="Task description"></textarea>
-
-
-<button onclick="createTask()">
-Create Task
-</button>
-
-
-</div>
 
 
 <h2>Task List</h2>
 
 
-<div id="taskList"></div>
+<div id="taskList">
+
+</div>
+
 
 
 </div>
+
 
 
 <script src="js/admin.js"></script>
