@@ -58,9 +58,18 @@ ${task.description}
 
 
 <p>
-Assigned: ${task.user}
+Priority: ${task.priority || "Medium"}
 </p>
 
+
+<p>
+Due Date: ${task.dueDate || "No Due Date"}
+</p>
+
+
+<p>
+Assigned: ${task.user}
+</p>
 
 <p>
 Status: ${isCompleted ? "Completed" : "Active"}
