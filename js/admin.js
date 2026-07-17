@@ -3,7 +3,8 @@ function createTask(){
 
 let title =
 document.getElementById("taskTitle").value;
-
+let productName =
+document.getElementById("productName").value;
 
 let description =
 document.getElementById("taskDescription").value;
