@@ -29,11 +29,17 @@ task.user === "All Users"
 ){
 
 
+let isCompleted =
+task.completedBy &&
+task.completedBy.includes(currentUser);
 
-if(task.status === "Completed"){
-    completed++;
+
+
+if(isCompleted){
+
+completed++;
+
 }
-
 
 
 
@@ -57,17 +63,17 @@ Assigned: ${task.user}
 
 
 <p>
-Status: ${task.status}
+Status: ${isCompleted ? "Completed" : "Active"}
 </p>
 
 
 
 <button 
 onclick="completeTask(${index})"
-${task.status === "Completed" ? "disabled" : ""}
+${isCompleted ? "disabled" : ""}
 >
 
-${task.status === "Completed" ? "Completed ✓" : "Start Task"}
+${isCompleted ? "Completed ✓" : "Start Task"}
 
 </button>
 
@@ -89,6 +95,7 @@ updateProgress();
 
 
 
+
 function completeTask(index){
 
 
@@ -96,8 +103,23 @@ let savedTasks =
 JSON.parse(localStorage.getItem("tasks")) || [];
 
 
+let currentUser =
+localStorage.getItem("user");
 
-savedTasks[index].status = "Completed";
+
+
+savedTasks[index].completedBy =
+savedTasks[index].completedBy || [];
+
+
+
+if(
+!savedTasks[index].completedBy.includes(currentUser)
+){
+
+savedTasks[index].completedBy.push(currentUser);
+
+}
 
 
 
@@ -149,6 +171,7 @@ percent + "% Completed";
 
 
 }
+
 
 
 
