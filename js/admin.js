@@ -22,7 +22,9 @@ description: description,
 
 user: user,
 
-status: "Active"
+status: "Active",
+
+completedBy: []
 
 };
 
@@ -48,6 +50,8 @@ alert("Task Created Successfully");
 
 
 loadAdminTasks();
+
+updateStats();
 
 
 }
@@ -101,16 +105,12 @@ Status: ${task.status}
 
 
 <button onclick="resetTask(${index})">
-
 Reset
-
 </button>
 
 
 <button onclick="deleteTask(${index})">
-
 Delete
-
 </button>
 
 
@@ -148,6 +148,8 @@ JSON.stringify(tasks)
 
 loadAdminTasks();
 
+updateStats();
+
 
 }
 
@@ -163,6 +165,8 @@ JSON.parse(localStorage.getItem("tasks")) || [];
 
 
 
+tasks[index].completedBy = [];
+
 tasks[index].status = "Active";
 
 
@@ -176,6 +180,57 @@ JSON.stringify(tasks)
 
 loadAdminTasks();
 
+updateStats();
+
+
+}
+
+
+
+
+
+function updateStats(){
+
+
+let users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+
+let tasks =
+JSON.parse(localStorage.getItem("tasks")) || [];
+
+
+
+let completed = tasks.filter(task => 
+task.completedBy &&
+task.completedBy.length > 0
+).length;
+
+
+
+let active =
+tasks.length - completed;
+
+
+
+document.getElementById("totalUsers").innerHTML =
+users.length;
+
+
+
+document.getElementById("totalTasks").innerHTML =
+tasks.length;
+
+
+
+document.getElementById("completedTasks").innerHTML =
+completed;
+
+
+
+document.getElementById("activeTasks").innerHTML =
+active;
+
 
 }
 
@@ -184,3 +239,5 @@ loadAdminTasks();
 
 
 loadAdminTasks();
+
+updateStats();
