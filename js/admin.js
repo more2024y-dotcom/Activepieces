@@ -11,7 +11,8 @@ document.getElementById("taskDescription").value;
 
 let priority =
 document.getElementById("taskPriority").value;
-
+let dueDate =
+document.getElementById("taskDueDate").value;
 
 let user =
 document.getElementById("taskUser").value;
@@ -25,6 +26,8 @@ title: title,
 description: description,
 
 priority: priority,
+
+dueDate: dueDate,
 
 user: user,
 
@@ -103,7 +106,9 @@ ${task.description}
 <p>
 Priority: ${task.priority || "Medium"}
 </p>
-
+<p>
+Due Date: ${task.dueDate || "No Due Date"}
+</p>
 
 <p>
 Assigned: ${task.user}
