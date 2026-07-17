@@ -122,7 +122,7 @@ Complete
 </div>
 
 
-<button class="logout">
+<button class="logout" onclick="logout()">
 Logout
 </button>
 
@@ -140,8 +140,17 @@ let user = localStorage.getItem("user");
 
 if(user){
 
-document.getElementById("username").innerHTML =
-"Welcome, " + user;
+    document.getElementById("username").innerHTML =
+    "Welcome, " + user;
+
+}
+
+
+function logout(){
+
+    localStorage.removeItem("user");
+
+    window.location.href="login.html";
 
 }
 
