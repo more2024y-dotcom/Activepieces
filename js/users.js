@@ -1,19 +1,36 @@
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
 
+
 function addUser(){
 
 let username =
-document.getElementById("newUser").value;
+document.getElementById("newUser").value.trim();
+
 
 
 if(username === ""){
-    alert("Enter username");
-    return;
+
+alert("Enter username");
+
+return;
+
 }
 
 
+
+if(users.includes(username)){
+
+alert("User already exists");
+
+return;
+
+}
+
+
+
 users.push(username);
+
 
 
 localStorage.setItem(
@@ -22,22 +39,34 @@ JSON.stringify(users)
 );
 
 
+
+document.getElementById("newUser").value = "";
+
+
+
 loadUsers();
+
+loadUserDropdown();
 
 }
 
 
 
+
 function loadUsers(){
+
 
 let list =
 document.getElementById("userList");
 
 
+
 if(!list) return;
 
 
+
 list.innerHTML = "";
+
 
 
 users.forEach((user)=>{
@@ -57,14 +86,18 @@ ${user}
 }
 
 
-loadUsers();
+
+
 function loadUserDropdown(){
+
 
 let dropdown =
 document.getElementById("taskUser");
 
 
+
 if(!dropdown) return;
+
 
 
 dropdown.innerHTML = `
@@ -93,5 +126,9 @@ ${user}
 
 }
 
+
+
+
+loadUsers();
 
 loadUserDropdown();
