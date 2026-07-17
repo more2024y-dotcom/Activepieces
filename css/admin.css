@@ -1,1 +1,80 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
+
+body{
+    background:#f5f6fa;
+    padding:40px;
+}
+
+
+.admin{
+    max-width:900px;
+    margin:auto;
+}
+
+
+h1{
+    color:#6d28d9;
+    margin-bottom:30px;
+}
+
+
+.create-task{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+
+input, textarea{
+
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+
+    border:1px solid #ddd;
+    border-radius:8px;
+
+}
+
+
+textarea{
+    height:100px;
+}
+
+
+button{
+
+    background:#6d28d9;
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+.task{
+
+    background:white;
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+}
