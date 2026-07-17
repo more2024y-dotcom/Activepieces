@@ -6,17 +6,11 @@
 <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
-
 <body>
-
 
 <div class="dashboard">
 
-
-<!-- Sidebar -->
-
 <aside class="sidebar">
-
 
 <div class="brand">
 
@@ -25,7 +19,6 @@
 <h2>Activepieces</h2>
 
 </div>
-
 
 <ul>
 
@@ -37,22 +30,15 @@
 
 </ul>
 
-
 </aside>
 
-
-
-<!-- Main Content -->
 
 <main class="content">
 
 
-
 <header>
 
-
 <h1>User Dashboard</h1>
-
 
 <div class="profile">
 
@@ -62,16 +48,10 @@
 Welcome
 </span>
 
-
 </div>
-
 
 </header>
 
-
-
-
-<!-- Statistics -->
 
 
 <section class="stats">
@@ -88,7 +68,6 @@ Welcome
 </div>
 
 
-
 <div class="box">
 
 <h3>Completed</h3>
@@ -98,7 +77,6 @@ Welcome
 </p>
 
 </div>
-
 
 
 <div class="box">
@@ -116,17 +94,10 @@ Welcome
 
 
 
-
-
 <h2 class="title">
 Today's Tasks
 </h2>
 
-
-
-
-
-<!-- Progress -->
 
 
 <div class="progress-section">
@@ -135,7 +106,6 @@ Today's Tasks
 <h2>
 Daily Progress
 </h2>
-
 
 
 <div class="progress-bar">
@@ -147,7 +117,6 @@ Daily Progress
 </div>
 
 
-
 <p id="progress-text">
 
 0% Completed
@@ -155,23 +124,15 @@ Daily Progress
 </p>
 
 
-
 </div>
 
 
 
-
-
-
-<!-- Tasks will load from user-task.js -->
+<!-- Tasks created by Admin will appear here -->
 
 <div class="tasks">
 
-
 </div>
-
-
-
 
 
 
@@ -183,14 +144,10 @@ Logout
 
 
 
-
 </main>
 
 
 </div>
-
-
-
 
 
 
@@ -199,42 +156,29 @@ Logout
 <script src="js/user-task.js"></script>
 
 
-
 <script>
-
 
 let user = localStorage.getItem("user");
 
 
 if(user){
 
-
 document.getElementById("username").innerHTML =
-
 "Welcome, " + user;
 
-
 }
-
 
 
 
 function logout(){
 
-
 localStorage.removeItem("user");
-
 
 window.location.href="login.html";
 
-
 }
 
-
-
 </script>
-
-
 
 
 </body>
