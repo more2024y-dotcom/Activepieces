@@ -13,10 +13,16 @@ container.innerHTML = "";
 
 let savedTasks =
 JSON.parse(localStorage.getItem("tasks")) || [];
+let currentUser =
+localStorage.getItem("user");
 
 
-
-savedTasks.forEach((task, index)=>{
+savedTasks
+.filter(task => 
+    task.user === currentUser ||
+    task.user === "All Users"
+)
+.forEach((task,index)=>{
 
 
 if(task.status === "Completed"){
