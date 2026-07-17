@@ -55,7 +55,9 @@ ${task.title}
 <p>
 ${task.description}
 </p>
-
+<p>
+Product: ${task.productName || "No Product"}
+</p>
 
 <p>
 Priority: ${task.priority || "Medium"}
