@@ -78,3 +78,17 @@ button{
     box-shadow:0 5px 20px rgba(0,0,0,0.1);
 
 }
+.task button{
+
+    margin-top:15px;
+
+    margin-right:10px;
+
+}
+
+
+.task button:last-child{
+
+    background:#dc2626;
+
+}
