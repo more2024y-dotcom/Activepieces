@@ -1,6 +1,5 @@
 let completed = 0;
 
-let tasks = [];
 
 
 function loadTasks(){
@@ -53,49 +52,13 @@ Start Task
 }
 
 
-function loadTasks(){
-
-let container = document.querySelector(".tasks");
-
-container.innerHTML = "";
-
-
-tasks.forEach((task,index)=>{
-
-
-container.innerHTML += `
-
-<div class="task">
-
-<h3>${task.title}</h3>
-
-<p>
-${task.category}
-<br>
-${task.description}
-</p>
-
-
-<button onclick="completeTask(this)">
-Start Task
-</button>
-
-
-</div>
-
-`;
-
-});
-
-
-}
-
 
 
 function completeTask(button){
 
 
-button.innerHTML="Completed";
+button.innerHTML="Completed ✓";
+
 
 button.disabled=true;
 
@@ -127,6 +90,7 @@ percent + "% Completed";
 
 
 }
+
 
 
 
