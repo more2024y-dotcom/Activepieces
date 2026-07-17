@@ -13,21 +13,27 @@ container.innerHTML = "";
 
 let savedTasks =
 JSON.parse(localStorage.getItem("tasks")) || [];
+
+
 let currentUser =
 localStorage.getItem("user");
 
 
-savedTasks
-.filter(task => 
-    task.user === currentUser ||
-    task.user === "All Users"
-)
-.forEach((task,index)=>{
+
+savedTasks.forEach((task,index)=>{
+
+
+if(
+task.user === currentUser ||
+task.user === "All Users"
+){
+
 
 
 if(task.status === "Completed"){
     completed++;
 }
+
 
 
 
@@ -70,6 +76,9 @@ ${task.status === "Completed" ? "Completed ✓" : "Start Task"}
 
 `;
 
+}
+
+
 });
 
 
@@ -103,6 +112,7 @@ loadTasks();
 
 
 }
+
 
 
 
