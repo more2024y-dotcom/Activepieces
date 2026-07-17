@@ -58,3 +58,40 @@ ${user}
 
 
 loadUsers();
+function loadUserDropdown(){
+
+let dropdown =
+document.getElementById("taskUser");
+
+
+if(!dropdown) return;
+
+
+dropdown.innerHTML = `
+
+<option value="All Users">
+All Users
+</option>
+
+`;
+
+
+
+users.forEach((user)=>{
+
+
+dropdown.innerHTML += `
+
+<option value="${user}">
+${user}
+</option>
+
+`;
+
+});
+
+
+}
+
+
+loadUserDropdown();
