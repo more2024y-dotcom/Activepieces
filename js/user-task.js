@@ -3,6 +3,9 @@ window.completed = 0;
 
 function loadTasks(){
 
+completed = 0;
+
+
 let container = document.querySelector(".tasks");
 
 container.innerHTML = "";
@@ -12,12 +15,14 @@ let savedTasks =
 JSON.parse(localStorage.getItem("tasks")) || [];
 
 
+
 savedTasks.forEach((task, index)=>{
 
 
 if(task.status === "Completed"){
     completed++;
 }
+
 
 
 container.innerHTML += `
@@ -44,8 +49,9 @@ Status: ${task.status}
 </p>
 
 
+
 <button 
-onclick="completeTask(${index}, this)"
+onclick="completeTask(${index})"
 ${task.status === "Completed" ? "disabled" : ""}
 >
 
@@ -68,7 +74,7 @@ updateProgress();
 
 
 
-function completeTask(index, button){
+function completeTask(index){
 
 
 let savedTasks =
@@ -87,16 +93,7 @@ JSON.stringify(savedTasks)
 
 
 
-button.innerHTML = "Completed ✓";
-
-button.disabled = true;
-
-
-
-completed++;
-
-
-updateProgress();
+loadTasks();
 
 
 }
@@ -111,6 +108,7 @@ document.getElementById("completed").innerHTML =
 completed;
 
 
+
 let remaining = 40 - completed;
 
 
@@ -119,7 +117,9 @@ remaining;
 
 
 
-let percent = Math.floor((completed / 40) * 100);
+let percent = Math.floor(
+(completed / 40) * 100
+);
 
 
 
@@ -133,6 +133,7 @@ percent + "% Completed";
 
 
 }
+
 
 
 
