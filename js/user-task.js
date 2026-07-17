@@ -1,41 +1,61 @@
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let completed = 0;
+
+let tasks = [
+{
+title: "Task #1",
+category: "AI Training Review",
+description: "Review and verify AI training data."
+},
+
+{
+title: "Task #2",
+category: "Customer Verification",
+description: "Verify customer information and complete review."
+},
+
+{
+title: "Task #3",
+category: "Platform Review",
+description: "Review platform data accuracy."
+}
+
+];
 
 
-function loadUserTasks(){
+function loadTasks(){
 
-    let taskContainer = document.querySelector(".tasks");
+let container = document.querySelector(".tasks");
 
-
-    if(!taskContainer){
-        return;
-    }
+container.innerHTML = "";
 
 
-    taskContainer.innerHTML = "";
+tasks.forEach((task,index)=>{
 
 
-    tasks.forEach(function(task, index){
+container.innerHTML += `
 
-        taskContainer.innerHTML += `
+<div class="task">
 
-        <div class="task">
+<h3>${task.title}</h3>
 
-            <h3>Task #${index + 1}</h3>
+<p>
+${task.category}
+<br>
+${task.description}
+</p>
 
-            <p>${task.title}</p>
 
-            <p>${task.description}</p>
+<button onclick="completeTask(this)">
+Start Task
+</button>
 
 
-            <button onclick="completeTask(this)">
-                Start Task
-            </button>
+</div>
 
-        </div>
+`;
 
-        `;
+});
 
-    });
 
 }
 
@@ -43,11 +63,40 @@ function loadUserTasks(){
 
 function completeTask(button){
 
-    button.innerHTML = "Completed";
 
-    button.style.background = "green";
+button.innerHTML="Completed";
+
+button.disabled=true;
+
+
+completed++;
+
+
+document.getElementById("completed").innerHTML = completed;
+
+
+let remaining = 40 - completed;
+
+
+document.getElementById("remaining").innerHTML = remaining;
+
+
+
+let percent = Math.floor((completed/40)*100);
+
+
+
+document.getElementById("progress").style.width =
+percent + "%";
+
+
+
+document.getElementById("progress-text").innerHTML =
+percent + "% Completed";
+
 
 }
 
 
-loadUserTasks();
+
+loadTasks();
