@@ -24,6 +24,8 @@ let task = {
 
 title: title,
 
+productName: productName,
+
 description: description,
 
 priority: priority,
@@ -37,7 +39,6 @@ status: "Active",
 completedBy: []
 
 };
-
 
 
 let tasks =
