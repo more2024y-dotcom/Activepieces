@@ -2,33 +2,65 @@
 <html>
 
 <head>
+
 <title>Activepieces Login</title>
+
 <link rel="stylesheet" href="css/login.css">
+
 </head>
+
 
 <body>
 
+
 <div class="login-box">
 
-    <img src="assets/logo.png">
+<img src="assets/logo.png" class="logo">
 
-    <h2>Welcome Back</h2>
+<h1>Activepieces</h1>
 
-    <p>Login to your account</p>
+<h2>Login</h2>
 
-    <input type="email" placeholder="Email">
 
-    <input type="password" placeholder="Password">
+<input type="text" id="username" placeholder="Username">
 
-    <button>
-        Login
-    </button>
 
-    <a href="dashboard.html">
-        Demo Login
-    </a>
+<input type="password" id="password" placeholder="Password">
+
+
+<button onclick="login()">
+Login
+</button>
+
 
 </div>
+
+
+
+<script>
+
+function login(){
+
+let username = document.getElementById("username").value;
+
+if(username == ""){
+
+alert("Please enter username");
+
+}
+
+else{
+
+localStorage.setItem("user", username);
+
+window.location.href="dashboard.html";
+
+}
+
+}
+
+</script>
+
 
 </body>
 
