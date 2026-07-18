@@ -95,3 +95,31 @@ async function loadTasks(){
 
 
 loadTasks();
+async function completeTask(id){
+
+
+    const { error } = await supabaseClient
+        .from("tasks")
+        .update({
+            status:"completed"
+        })
+        .eq("id", id);
+
+
+
+    if(error){
+
+        console.log("Update Error:", error);
+
+        return;
+
+    }
+
+
+    console.log("Task completed");
+
+
+    loadTasks();
+
+
+}
