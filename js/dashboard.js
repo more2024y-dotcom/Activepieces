@@ -22,8 +22,9 @@ async function loadTasks(){
 
 
 
-  console.log("Tasks:", data);
+ console.log("Tasks:", data);
 console.log("First task:", data[0]);
+console.log("Columns:", Object.keys(data[0]));
 
 
 
