@@ -22,7 +22,8 @@ async function loadTasks(){
 
 
 
-    console.log("Tasks:", data);
+  console.log("Tasks:", data);
+console.log("First task:", data[0]);
 
 
 
