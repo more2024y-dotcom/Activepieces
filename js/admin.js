@@ -1,58 +1,63 @@
 console.log("ADMIN JS LOADED");
 
 
-// Create Task
+// ===============================
+// CREATE TASK
+// ===============================
 
 async function createTask(){
 
 
-    let title =
-    document.getElementById("taskTitle").value;
+    console.log("Create button clicked");
 
 
-    let description =
-    document.getElementById("taskDescription").value;
+    let title = document.getElementById("taskTitle").value;
+
+    let description = document.getElementById("taskDescription").value;
+
+    let priority = document.getElementById("taskPriority").value;
+
+    let dueDate = document.getElementById("taskDueDate").value;
+
+    let user = document.getElementById("taskUser").value;
 
 
 
-    let priority =
-    document.getElementById("taskPriority").value;
+    if(!title || !description){
 
+        alert("Please enter title and description");
 
-    let dueDate =
-    document.getElementById("taskDueDate").value;
+        return;
 
-
-    let user =
-    document.getElementById("taskUser").value;
+    }
 
 
 
     const { data, error } = await supabaseClient
 
-    .from("tasks")
+        .from("tasks")
 
-    .insert([
+        .insert([
 
-        {
+            {
 
-            title:title,
+                title:title,
 
-            description:description,
+                description:description,
 
-            priority:priority,
+                priority:priority,
 
-            due_date:dueDate,
+                due_date:dueDate,
 
-            user:user,
+                user:user,
 
-            status:"Pending"
+                status:"Pending"
 
-        }
+            }
 
-    ])
+        ])
 
-    .select();
+        .select();
 
 
 
@@ -63,7 +68,10 @@ async function createTask(){
             error
         );
 
-        alert("Error creating task");
+
+        alert(
+            error.message
+        );
 
         return;
 
@@ -77,14 +85,13 @@ async function createTask(){
     );
 
 
-
     alert(
         "Task Created Successfully"
     );
 
 
-    loadAdminTasks();
 
+    loadAdminTasks();
 
     updateStats();
 
@@ -96,24 +103,25 @@ async function createTask(){
 
 
 
-// Load Tasks From Supabase
+// ===============================
+// LOAD TASKS
+// ===============================
 
 async function loadAdminTasks(){
 
 
-
     const { data, error } = await supabaseClient
 
-    .from("tasks")
+        .from("tasks")
 
-    .select("*")
+        .select("*")
 
-    .order(
-        "created_at",
-        {
-            ascending:false
-        }
-    );
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
 
 
 
@@ -130,9 +138,20 @@ async function loadAdminTasks(){
 
 
 
-
     let list =
     document.getElementById("taskList");
+
+
+
+    if(!list){
+
+        console.log(
+            "taskList not found"
+        );
+
+        return;
+
+    }
 
 
 
@@ -145,13 +164,9 @@ async function loadAdminTasks(){
 
         list.innerHTML += `
 
-
         <div class="task">
 
-
-            <h3>
-            ${task.title}
-            </h3>
+            <h3>${task.title}</h3>
 
 
             <p>
@@ -160,10 +175,8 @@ async function loadAdminTasks(){
 
 
             <p>
-            Status:
-            ${task.status}
+            Status: ${task.status}
             </p>
-
 
 
             <button onclick="deleteTask(${task.ID})">
@@ -174,7 +187,6 @@ async function loadAdminTasks(){
 
 
         </div>
-
 
         `;
 
@@ -190,7 +202,9 @@ async function loadAdminTasks(){
 
 
 
-// Delete Task
+// ===============================
+// DELETE TASK
+// ===============================
 
 async function deleteTask(id){
 
@@ -198,14 +212,14 @@ async function deleteTask(id){
 
     const { error } = await supabaseClient
 
-    .from("tasks")
+        .from("tasks")
 
-    .delete()
+        .delete()
 
-    .eq(
-        "ID",
-        id
-    );
+        .eq(
+            "ID",
+            id
+        );
 
 
 
@@ -224,6 +238,8 @@ async function deleteTask(id){
 
     loadAdminTasks();
 
+    updateStats();
+
 
 }
 
@@ -232,18 +248,21 @@ async function deleteTask(id){
 
 
 
-// Stats
+
+
+// ===============================
+// UPDATE STATS
+// ===============================
 
 async function updateStats(){
 
 
 
-    const { data, error } =
-    await supabaseClient
+    const { data, error } = await supabaseClient
 
-    .from("tasks")
+        .from("tasks")
 
-    .select("*");
+        .select("*");
 
 
 
@@ -257,9 +276,7 @@ async function updateStats(){
 
 
 
-    let total =
-    data.length;
-
+    let total = data.length;
 
 
     let completed =
@@ -276,28 +293,38 @@ async function updateStats(){
 
 
 
-    if(document.getElementById("totalTasks")){
+    let totalTasks =
+    document.getElementById("totalTasks");
 
-        document.getElementById("totalTasks").innerHTML =
-        total;
+
+    let completedTasks =
+    document.getElementById("completedTasks");
+
+
+    let activeTasks =
+    document.getElementById("activeTasks");
+
+
+
+    if(totalTasks){
+
+        totalTasks.innerHTML = total;
 
     }
 
 
 
-    if(document.getElementById("completedTasks")){
+    if(completedTasks){
 
-        document.getElementById("completedTasks").innerHTML =
-        completed;
+        completedTasks.innerHTML = completed;
 
     }
 
 
 
-    if(document.getElementById("activeTasks")){
+    if(activeTasks){
 
-        document.getElementById("activeTasks").innerHTML =
-        active;
+        activeTasks.innerHTML = active;
 
     }
 
@@ -310,6 +337,7 @@ async function updateStats(){
 
 
 
+// START
 
 loadAdminTasks();
 
