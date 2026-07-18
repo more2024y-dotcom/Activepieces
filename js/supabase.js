@@ -7,3 +7,6 @@ const supabaseClient = supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
+console.log("Supabase URL:", supabaseUrl);
+console.log("Supabase Key:", supabaseKey.substring(0,20));
+console.log("Supabase Client:", supabaseClient);
