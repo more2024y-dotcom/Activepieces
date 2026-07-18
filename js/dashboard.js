@@ -59,19 +59,33 @@ async function loadTasks(){
     data.forEach((task)=>{
 
 
-        container.innerHTML += `
+      container.innerHTML += `
 
-        <div class="task">
+<div class="task">
 
-            <h3>${task.title}</h3>
+    <h3>${task.title}</h3>
 
-            <p>${task.description}</p>
+    <p>${task.description}</p>
 
-            <p>Status: ${task.status}</p>
+    <p>Status: ${task.status}</p>
 
-        </div>
 
-        `;
+    ${
+        task.status !== "completed"
+        ?
+        `<button onclick="completeTask('${task.id}')">
+            Complete Task
+        </button>`
+        :
+        `<button disabled>
+            Completed ✓
+        </button>`
+    }
+
+
+</div>
+
+`;
 
 
     });
