@@ -1,20 +1,25 @@
 async function loadTasks(){
 
+
     const { data, error } = await supabaseClient
         .from("tasks")
         .select("*")
         .order("created_at", { ascending:false });
 
 
+
     if(error){
 
         console.log("Database Error:", error);
+
         return;
 
     }
 
 
+
     console.log("Tasks:", data);
+
 
 
     let container = document.querySelector(".tasks");
@@ -22,14 +27,19 @@ async function loadTasks(){
     container.innerHTML = "";
 
 
+
     let total = data.length;
+
+
 
     let completed = data.filter(
         task => task.status === "completed"
     ).length;
 
 
+
     let remaining = total - completed;
+
 
 
     document.getElementById("total").innerHTML = total;
@@ -40,7 +50,9 @@ async function loadTasks(){
 
 
 
+
     let percent = 0;
+
 
     if(total > 0){
 
@@ -51,77 +63,171 @@ async function loadTasks(){
     }
 
 
+
     document.getElementById("progress-text").innerHTML =
     percent + "% Completed";
+
+
 
 
 
     data.forEach((task)=>{
 
 
-      container.innerHTML += `
-
-<div class="task">
-
-    <h3>${task.title}</h3>
-
-    <p>${task.description}</p>
-
-    <p>Status: ${task.status}</p>
+        container.innerHTML += `
 
 
-    ${
-        task.status !== "completed"
-        ?
-        `<button onclick="completeTask('${task.id}')">
-            Complete Task
-        </button>`
-        :
-        `<button disabled>
-            Completed ✓
-        </button>`
-    }
+        <div class="task">
 
 
-</div>
+            <h3>${task.title}</h3>
 
-`;
+
+            <p>${task.description}</p>
+
+
+            <p>
+            Status: ${task.status}
+            </p>
+
+
+
+            ${
+                task.status !== "completed"
+
+                ?
+
+                `
+                <button 
+                class="complete-btn"
+                data-id="${task.id}">
+                Complete Task
+                </button>
+                `
+
+                :
+
+                `
+                <button disabled>
+                Completed ✓
+                </button>
+                `
+
+            }
+
+
+
+        </div>
+
+
+        `;
 
 
     });
 
 
+
 }
 
 
+
+
+// Load tasks when page opens
+
 loadTasks();
+
+
+
+
+
+
+// Complete button click
+
+document.addEventListener("click", function(event){
+
+
+
+    if(event.target.classList.contains("complete-btn")){
+
+
+        let taskId = event.target.dataset.id;
+
+
+        console.log(
+            "Button clicked:",
+            taskId
+        );
+
+
+        completeTask(taskId);
+
+
+    }
+
+
+});
+
+
+
+
+
+
+
+// Update task status in Supabase
+
 async function completeTask(id){
 
-    console.log("Clicked task ID:", id);
+
+
+    console.log(
+        "Updating task:",
+        id
+    );
+
 
 
     const { error } = await supabaseClient
+
         .from("tasks")
+
         .update({
+
             status:"completed"
+
         })
+
         .eq("id", id);
+
+
 
 
 
     if(error){
 
-        console.log("Update Error:", error);
+
+        console.log(
+            "Update Error:",
+            error
+        );
+
 
         return;
+
 
     }
 
 
-    console.log("Task completed");
+
+
+
+    console.log(
+        "Task completed"
+    );
+
 
 
     loadTasks();
+
 
 
 }
