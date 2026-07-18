@@ -104,7 +104,7 @@ async function loadTasks(){
 
         console.log(
             "Task ID:",
-            task.id
+            task.ID
         );
 
 
@@ -124,7 +124,7 @@ async function loadTasks(){
 
             <button 
             class="complete-btn"
-            data-task-id="${task.id}">
+            data-task-id="${task.ID}">
                 Complete Task
             </button>
 
@@ -287,7 +287,7 @@ async function completeTask(id){
         })
 
         .eq(
-            "id",
+            "ID",
             id
         )
 
