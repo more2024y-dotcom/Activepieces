@@ -22,9 +22,27 @@ async function loadTasks(){
 
 
 
- console.log("Tasks:", data);
-console.log("First task:", data[0]);
-console.log("Columns:", Object.keys(data[0]));
+    console.log("Tasks:", data);
+
+
+
+    if(!data || data.length === 0){
+
+        console.log("No tasks found");
+
+        return;
+
+    }
+
+
+
+    console.log("First task:", data[0]);
+
+    console.log(
+        "Columns:",
+        Object.keys(data[0])
+    );
+
 
 
 
@@ -40,7 +58,7 @@ console.log("Columns:", Object.keys(data[0]));
 
     let completed = data.filter(task =>
 
-        task.status.toLowerCase() === "completed"
+        String(task.status).toLowerCase() === "completed"
 
     ).length;
 
@@ -79,7 +97,15 @@ console.log("Columns:", Object.keys(data[0]));
 
 
 
+
+
     data.forEach((task)=>{
+
+
+        console.log(
+            "Task ID:",
+            task.id
+        );
 
 
 
@@ -87,33 +113,40 @@ console.log("Columns:", Object.keys(data[0]));
 
 
 
-        if(task.status.toLowerCase() !== "completed"){
+        if(
+            String(task.status).toLowerCase()
+            !== "completed"
+        ){
+
 
 
             button = `
 
             <button 
             class="complete-btn"
-            data-id="${task.id}">
-            Complete Task
+            data-task-id="${task.id}">
+                Complete Task
             </button>
 
             `;
 
 
+
         }else{
+
 
 
             button = `
 
             <button disabled>
-            Completed ✓
+                Completed ✓
             </button>
 
             `;
 
 
         }
+
 
 
 
@@ -156,7 +189,8 @@ console.log("Columns:", Object.keys(data[0]));
 
 
 
-// Start dashboard
+
+// Load tasks
 
 loadTasks();
 
@@ -165,22 +199,49 @@ loadTasks();
 
 
 
-// Click Complete button
 
-document.addEventListener("click", function(event){
+// Button click handler
+
+document.addEventListener(
+"click",
+function(event){
 
 
 
-    if(event.target.classList.contains("complete-btn")){
+    if(
+        event.target.classList.contains(
+            "complete-btn"
+        )
+    ){
 
 
-        let id = event.target.getAttribute("data-id");
+
+        let id =
+        event.target.getAttribute(
+            "data-task-id"
+        );
+
 
 
         console.log(
-            "Button clicked:",
+            "Button clicked ID:",
             id
         );
+
+
+
+        if(!id){
+
+
+            console.log(
+                "ERROR: Task ID missing"
+            );
+
+
+            return;
+
+        }
+
 
 
 
@@ -202,9 +263,10 @@ document.addEventListener("click", function(event){
 
 
 
-// Update Supabase
+// Update task
 
 async function completeTask(id){
+
 
 
     console.log(
@@ -224,9 +286,13 @@ async function completeTask(id){
 
         })
 
-        .eq("id", id)
+        .eq(
+            "id",
+            id
+        )
 
         .select();
+
 
 
 
@@ -245,6 +311,7 @@ async function completeTask(id){
 
 
     }
+
 
 
 
