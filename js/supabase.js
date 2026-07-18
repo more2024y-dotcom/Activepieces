@@ -1,6 +1,6 @@
-const supabaseUrl = "YOUR_SUPABASE_PROJECT_URL";
+const supabaseUrl = "https://sbrldbbdomfydlynxlsp.supabase.co";
 
-const supabaseKey = "YOUR_SUPABASE_ANON_KEY";
+const supabaseKey = "YOUR_ANON_KEY";
 
 
 const supabaseClient = supabase.createClient(
