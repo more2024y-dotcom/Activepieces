@@ -18,13 +18,15 @@ body{
 /* Sidebar */
 
 .sidebar{
-    width:260px;
+    width:280px;
     height:100vh;
     background:#6d28d9;
     color:white;
-    padding:30px;
+    padding:35px 30px;
 }
 
+
+/* Logo */
 
 .brand{
     display:flex;
@@ -34,30 +36,37 @@ body{
 
 
 .brand img{
-    width:55px;
-    height:55px;
+    width:120px;
+    height:120px;
     object-fit:contain;
 }
 
 
+.brand h2{
+    font-size:22px;
+}
+
+
+/* Sidebar Menu */
+
 .sidebar ul{
     list-style:none;
-    margin-top:40px;
+    margin-top:50px;
 }
 
 
 .sidebar li{
-    padding:15px 0;
-    font-size:17px;
+    padding:18px 0;
+    font-size:18px;
 }
 
 
 
-/* Main */
+/* Main Content */
 
 .content{
     flex:1;
-    padding:35px;
+    padding:40px;
 }
 
 
@@ -76,8 +85,8 @@ header{
 
 
 .profile img{
-    width:45px;
-    height:45px;
+    width:50px;
+    height:50px;
     border-radius:50%;
 }
 
@@ -94,15 +103,15 @@ header{
 
 .box{
     background:white;
-    width:220px;
-    padding:25px;
+    width:230px;
+    padding:30px;
     border-radius:15px;
     box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
 
 .box p{
-    font-size:35px;
+    font-size:38px;
     color:#6d28d9;
     margin-top:10px;
 }
@@ -112,7 +121,7 @@ header{
 /* Tasks */
 
 .title{
-    margin-top:40px;
+    margin-top:45px;
 }
 
 
@@ -125,8 +134,8 @@ header{
 
 .task{
     background:white;
-    width:300px;
-    padding:25px;
+    width:320px;
+    padding:30px;
     border-radius:15px;
     box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
@@ -136,6 +145,7 @@ header{
 
     background:#6d28d9;
     color:white;
+
     border:none;
 
     padding:12px 25px;
@@ -148,9 +158,17 @@ header{
 }
 
 
+.task button:hover{
+    background:#5b21b6;
+}
+
+
+
+/* Logout Button */
+
 .logout{
 
-    margin-top:40px;
+    margin-top:50px;
 
     background:#dc2626;
 
@@ -161,5 +179,14 @@ header{
     padding:12px 30px;
 
     border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+
+.logout:hover{
+
+    background:#b91c1c;
 
 }
