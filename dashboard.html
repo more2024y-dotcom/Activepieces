@@ -6,11 +6,14 @@
 <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
+
 <body>
 
 <div class="dashboard">
 
+
 <aside class="sidebar">
+
 
 <div class="brand">
 
@@ -19,6 +22,7 @@
 <h2>Activepieces</h2>
 
 </div>
+
 
 <ul>
 
@@ -30,15 +34,19 @@
 
 </ul>
 
+
 </aside>
+
 
 
 <main class="content">
 
 
+
 <header>
 
 <h1>User Dashboard</h1>
+
 
 <div class="profile">
 
@@ -50,7 +58,9 @@ Welcome
 
 </div>
 
+
 </header>
+
 
 
 
@@ -68,6 +78,7 @@ Welcome
 </div>
 
 
+
 <div class="box">
 
 <h3>Completed</h3>
@@ -77,6 +88,7 @@ Welcome
 </p>
 
 </div>
+
 
 
 <div class="box">
@@ -94,9 +106,13 @@ Welcome
 
 
 
+
+
 <h2 class="title">
 Today's Tasks
 </h2>
+
+
 
 
 
@@ -108,6 +124,7 @@ Daily Progress
 </h2>
 
 
+
 <div class="progress-bar">
 
 <div id="progress">
@@ -115,6 +132,7 @@ Daily Progress
 </div>
 
 </div>
+
 
 
 <p id="progress-text">
@@ -128,11 +146,15 @@ Daily Progress
 
 
 
-<!-- Tasks created by Admin will appear here -->
+
+
+<!-- Tasks from Supabase will load here -->
 
 <div class="tasks">
 
 </div>
+
+
 
 
 
@@ -144,6 +166,7 @@ Logout
 
 
 
+
 </main>
 
 
@@ -151,12 +174,29 @@ Logout
 
 
 
+
+
+
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<!-- Dashboard Script -->
+
 <script src="js/dashboard.js?v=2"></script>
+
+
+<!-- User Task Script -->
 
 <script src="js/user-task.js?v=2"></script>
 
 
+
+
+
 <script>
+
 
 let user = localStorage.getItem("user");
 
@@ -178,7 +218,9 @@ window.location.href="login.html";
 
 }
 
+
 </script>
+
 
 
 </body>
