@@ -1,3 +1,7 @@
+console.log("NEW DASHBOARD JS LOADED");
+
+
+
 async function loadTasks(){
 
 
@@ -32,8 +36,10 @@ async function loadTasks(){
 
 
 
-    let completed = data.filter(
-        task => task.status === "completed"
+    let completed = data.filter(task =>
+
+        task.status.toLowerCase() === "completed"
+
     ).length;
 
 
@@ -74,6 +80,42 @@ async function loadTasks(){
     data.forEach((task)=>{
 
 
+
+        let button = "";
+
+
+
+        if(task.status.toLowerCase() !== "completed"){
+
+
+            button = `
+
+            <button 
+            class="complete-btn"
+            data-id="${task.id}">
+            Complete Task
+            </button>
+
+            `;
+
+
+        }else{
+
+
+            button = `
+
+            <button disabled>
+            Completed ✓
+            </button>
+
+            `;
+
+
+        }
+
+
+
+
         container.innerHTML += `
 
 
@@ -91,36 +133,14 @@ async function loadTasks(){
             </p>
 
 
-
-            ${
-                task.status !== "completed"
-
-                ?
-
-                `
-                <button 
-                class="complete-btn"
-                data-id="${task.id}">
-                Complete Task
-                </button>
-                `
-
-                :
-
-                `
-                <button disabled>
-                Completed ✓
-                </button>
-                `
-
-            }
-
+            ${button}
 
 
         </div>
 
 
         `;
+
 
 
     });
@@ -132,7 +152,9 @@ async function loadTasks(){
 
 
 
-// Load tasks when page opens
+
+
+// Start dashboard
 
 loadTasks();
 
@@ -141,7 +163,7 @@ loadTasks();
 
 
 
-// Complete button click
+// Click Complete button
 
 document.addEventListener("click", function(event){
 
@@ -150,19 +172,22 @@ document.addEventListener("click", function(event){
     if(event.target.classList.contains("complete-btn")){
 
 
-        let taskId = event.target.dataset.id;
+        let id = event.target.getAttribute("data-id");
 
 
         console.log(
             "Button clicked:",
-            taskId
+            id
         );
 
 
-        completeTask(taskId);
+
+        completeTask(id);
+
 
 
     }
+
 
 
 });
@@ -173,10 +198,11 @@ document.addEventListener("click", function(event){
 
 
 
-// Update task status in Supabase
+
+
+// Update Supabase
 
 async function completeTask(id){
-
 
 
     console.log(
@@ -186,7 +212,7 @@ async function completeTask(id){
 
 
 
-    const { error } = await supabaseClient
+    const { data, error } = await supabaseClient
 
         .from("tasks")
 
@@ -196,7 +222,9 @@ async function completeTask(id){
 
         })
 
-        .eq("id", id);
+        .eq("id", id)
+
+        .select();
 
 
 
@@ -221,7 +249,8 @@ async function completeTask(id){
 
 
     console.log(
-        "Task completed"
+        "Updated:",
+        data
     );
 
 
