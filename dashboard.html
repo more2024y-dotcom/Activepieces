@@ -5,7 +5,7 @@
 
 <title>Activepieces Dashboard</title>
 
-<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/dashboard.css?v=5">
 
 </head>
 
@@ -14,7 +14,6 @@
 
 
 <div class="dashboard">
-
 
 
 <!-- Sidebar -->
@@ -45,7 +44,6 @@
 </ul>
 
 
-
 </aside>
 
 
@@ -72,9 +70,7 @@
 
 
 <span id="username">
-
 Welcome
-
 </span>
 
 
@@ -87,10 +83,6 @@ Welcome
 
 
 
-
-<!-- Statistics -->
-
-
 <section class="stats">
 
 
@@ -100,11 +92,8 @@ Welcome
 <h3>Daily Tasks</h3>
 
 <p id="total">
-
 0
-
 </p>
-
 
 </div>
 
@@ -113,17 +102,12 @@ Welcome
 
 
 <div class="box">
-
 
 <h3>Completed</h3>
 
-
 <p id="completed">
-
 0
-
 </p>
-
 
 </div>
 
@@ -131,19 +115,13 @@ Welcome
 
 
 
-
 <div class="box">
-
 
 <h3>Remaining</h3>
 
-
 <p id="remaining">
-
 0
-
 </p>
-
 
 </div>
 
@@ -157,50 +135,33 @@ Welcome
 
 
 
-
-
 <h2 class="title">
-
 Today's Tasks
-
 </h2>
 
 
 
-
-
-
-
-<!-- Progress -->
 
 
 <div class="progress-section">
 
 
 <h2>
-
 Daily Progress
-
 </h2>
 
 
 
 <div class="progress-bar">
 
-
-<div id="progress">
-
-</div>
-
+<div id="progress"></div>
 
 </div>
 
 
 
 <p id="progress-text">
-
 0% Completed
-
 </p>
 
 
@@ -211,14 +172,11 @@ Daily Progress
 
 
 
-
-<!-- Tasks From Supabase -->
+<!-- Tasks -->
 
 <div class="tasks">
 
-
 </div>
-
 
 
 
@@ -233,10 +191,7 @@ Logout
 
 
 
-
-
 </main>
-
 
 
 </div>
@@ -248,30 +203,30 @@ Logout
 
 
 
-
-<!-- Supabase Library -->
+<!-- Supabase -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 
-<!-- Supabase Connection -->
+<!-- Connection -->
 
-<script src="js/supabase.js"></script>
-
-
-
-
-<!-- Dashboard Logic -->
-
-<script src="js/dashboard.js"></script>
+<script src="js/supabase.js?v=5"></script>
 
 
 
 
-<!-- Task Logic -->
+<!-- Dashboard -->
 
-<script src="js/user-task.js"></script>
+<script src="js/dashboard.js?v=5"></script>
+
+
+
+
+<!-- User Tasks -->
+
+<script src="js/user-task.js?v=5"></script>
+
 
 
 
@@ -286,11 +241,8 @@ let user = localStorage.getItem("user");
 
 if(user){
 
-
 document.getElementById("username").innerHTML =
-
 "Welcome, " + user;
-
 
 }
 
@@ -299,15 +251,11 @@ document.getElementById("username").innerHTML =
 
 function logout(){
 
-
 localStorage.removeItem("user");
-
 
 window.location.href="login.html";
 
-
 }
-
 
 
 </script>
@@ -315,6 +263,5 @@ window.location.href="login.html";
 
 
 </body>
-
 
 </html>
