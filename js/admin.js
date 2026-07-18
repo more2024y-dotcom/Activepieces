@@ -1,68 +1,92 @@
-function createTask(){
+console.log("ADMIN JS LOADED");
 
 
-let title =
-document.getElementById("taskTitle").value;
-let productName =
-document.getElementById("productName").value;
+// Create Task
 
-let description =
-document.getElementById("taskDescription").value;
+async function createTask(){
 
 
-let priority =
-document.getElementById("taskPriority").value;
-let dueDate =
-document.getElementById("taskDueDate").value;
+    let title =
+    document.getElementById("taskTitle").value;
 
-let user =
-document.getElementById("taskUser").value;
+
+    let description =
+    document.getElementById("taskDescription").value;
 
 
 
-let task = {
-
-title: title,
-
-productName: productName,
-
-description: description,
-
-priority: priority,
-
-dueDate: dueDate,
-
-user: user,
-
-status: "Active",
-
-completedBy: []
-
-};
+    let priority =
+    document.getElementById("taskPriority").value;
 
 
-let tasks =
-JSON.parse(localStorage.getItem("tasks")) || [];
+    let dueDate =
+    document.getElementById("taskDueDate").value;
+
+
+    let user =
+    document.getElementById("taskUser").value;
 
 
 
-tasks.push(task);
+    const { data, error } = await supabaseClient
+
+    .from("tasks")
+
+    .insert([
+
+        {
+
+            title:title,
+
+            description:description,
+
+            priority:priority,
+
+            due_date:dueDate,
+
+            user:user,
+
+            status:"Pending"
+
+        }
+
+    ])
+
+    .select();
 
 
 
-localStorage.setItem(
-"tasks",
-JSON.stringify(tasks)
-);
+    if(error){
+
+        console.log(
+            "Create Task Error:",
+            error
+        );
+
+        alert("Error creating task");
+
+        return;
+
+    }
 
 
 
-alert("Task Created Successfully");
+    console.log(
+        "Task Created:",
+        data
+    );
 
 
-loadAdminTasks();
 
-updateStats();
+    alert(
+        "Task Created Successfully"
+    );
+
+
+    loadAdminTasks();
+
+
+    updateStats();
 
 
 }
@@ -71,104 +95,91 @@ updateStats();
 
 
 
-function loadAdminTasks(){
 
+// Load Tasks From Supabase
 
-let list =
-document.getElementById("taskList");
-
-
-
-let tasks =
-JSON.parse(localStorage.getItem("tasks")) || [];
+async function loadAdminTasks(){
 
 
 
-list.innerHTML = "";
+    const { data, error } = await supabaseClient
+
+    .from("tasks")
+
+    .select("*")
+
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    );
 
 
 
-tasks.forEach((task,index)=>{
+    if(error){
 
+        console.log(
+            "Load Error:",
+            error
+        );
 
-list.innerHTML += `
+        return;
 
-<div class="task">
-
-<h3>
-${task.title}
-</h3>
-<p>
-Product: ${task.productName || "No Product"}
-</p>
-
-<p>
-${task.description}
-</p>
-
-
-<p>
-Priority: ${task.priority || "Medium"}
-</p>
-<p>
-Due Date: ${task.dueDate || "No Due Date"}
-</p>
-
-<p>
-Assigned: ${task.user}
-</p>
-
-
-<p>
-Status: ${task.status}
-</p>
-
-
-<button onclick="resetTask(${index})">
-Reset
-</button>
-
-
-<button onclick="deleteTask(${index})">
-Delete
-</button>
-
-
-</div>
-
-`;
-
-});
-
-
-}
+    }
 
 
 
 
-
-function deleteTask(index){
-
-
-let tasks =
-JSON.parse(localStorage.getItem("tasks")) || [];
+    let list =
+    document.getElementById("taskList");
 
 
 
-tasks.splice(index,1);
+    list.innerHTML = "";
 
 
 
-localStorage.setItem(
-"tasks",
-JSON.stringify(tasks)
-);
+    data.forEach((task)=>{
+
+
+        list.innerHTML += `
+
+
+        <div class="task">
+
+
+            <h3>
+            ${task.title}
+            </h3>
+
+
+            <p>
+            ${task.description}
+            </p>
+
+
+            <p>
+            Status:
+            ${task.status}
+            </p>
 
 
 
-loadAdminTasks();
+            <button onclick="deleteTask(${task.ID})">
 
-updateStats();
+            Delete
+
+            </button>
+
+
+        </div>
+
+
+        `;
+
+
+    });
 
 
 }
@@ -177,84 +188,124 @@ updateStats();
 
 
 
-function resetTask(index){
 
 
-let tasks =
-JSON.parse(localStorage.getItem("tasks")) || [];
+// Delete Task
 
-
-
-tasks[index].completedBy = [];
-
-
-tasks[index].status = "Active";
+async function deleteTask(id){
 
 
 
-localStorage.setItem(
-"tasks",
-JSON.stringify(tasks)
-);
+    const { error } = await supabaseClient
+
+    .from("tasks")
+
+    .delete()
+
+    .eq(
+        "ID",
+        id
+    );
 
 
 
-loadAdminTasks();
+    if(error){
 
-updateStats();
+        console.log(
+            "Delete Error:",
+            error
+        );
+
+        return;
+
+    }
+
+
+
+    loadAdminTasks();
+
+
+}
+
+
+
+
+
+
+// Stats
+
+async function updateStats(){
+
+
+
+    const { data, error } =
+    await supabaseClient
+
+    .from("tasks")
+
+    .select("*");
+
+
+
+    if(error){
+
+        console.log(error);
+
+        return;
+
+    }
+
+
+
+    let total =
+    data.length;
+
+
+
+    let completed =
+    data.filter(task =>
+        String(task.status).toLowerCase()
+        === "completed"
+    ).length;
+
+
+
+    let active =
+    total - completed;
+
+
+
+
+    if(document.getElementById("totalTasks")){
+
+        document.getElementById("totalTasks").innerHTML =
+        total;
+
+    }
+
+
+
+    if(document.getElementById("completedTasks")){
+
+        document.getElementById("completedTasks").innerHTML =
+        completed;
+
+    }
+
+
+
+    if(document.getElementById("activeTasks")){
+
+        document.getElementById("activeTasks").innerHTML =
+        active;
+
+    }
+
 
 
 }
 
 
-
-
-
-function updateStats(){
-
-
-let users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-
-
-let tasks =
-JSON.parse(localStorage.getItem("tasks")) || [];
-
-
-
-let completed = tasks.filter(task => 
-task.completedBy &&
-task.completedBy.length > 0
-).length;
-
-
-
-let active =
-tasks.length - completed;
-
-
-
-document.getElementById("totalUsers").innerHTML =
-users.length;
-
-
-
-document.getElementById("totalTasks").innerHTML =
-tasks.length;
-
-
-
-document.getElementById("completedTasks").innerHTML =
-completed;
-
-
-
-document.getElementById("activeTasks").innerHTML =
-active;
-
-
-}
 
 
 
