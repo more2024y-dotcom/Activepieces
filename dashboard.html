@@ -2,47 +2,57 @@
 <html>
 
 <head>
+
 <title>Activepieces Dashboard</title>
+
 <link rel="stylesheet" href="css/dashboard.css">
+
 </head>
 
 
 <body>
 
+
 <div class="dashboard">
 
+
+
+<!-- Sidebar -->
 
 <aside class="sidebar">
 
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
+<div class="brand">
 
+<img src="assets/logo.png" alt="Activepieces Logo">
 
-.brand img{
-    width:200px;
-    height:200px;
-    object-fit:contain;
-}
+</div>
+
 
 
 <ul>
 
 <li>🏠 Dashboard</li>
+
 <li>📋 Tasks</li>
+
 <li>⚡ Automation</li>
+
 <li>👥 Team</li>
+
 <li>⚙ Settings</li>
 
 </ul>
 
 
+
 </aside>
 
 
+
+
+
+<!-- Main Content -->
 
 <main class="content">
 
@@ -50,16 +60,23 @@
 
 <header>
 
+
 <h1>User Dashboard</h1>
+
 
 
 <div class="profile">
 
-<img src="assets/logo.png" alt="Activepieces Logo">
+
+<img src="assets/logo.png" alt="Profile">
+
 
 <span id="username">
+
 Welcome
+
 </span>
+
 
 </div>
 
@@ -69,7 +86,13 @@ Welcome
 
 
 
+
+
+<!-- Statistics -->
+
+
 <section class="stats">
+
 
 
 <div class="box">
@@ -77,34 +100,53 @@ Welcome
 <h3>Daily Tasks</h3>
 
 <p id="total">
-40
+
+0
+
 </p>
+
 
 </div>
 
 
 
+
+
 <div class="box">
+
 
 <h3>Completed</h3>
 
+
 <p id="completed">
+
 0
+
 </p>
 
+
 </div>
+
+
+
 
 
 
 <div class="box">
 
+
 <h3>Remaining</h3>
 
+
 <p id="remaining">
-40
+
+0
+
 </p>
 
+
 </div>
+
 
 
 </section>
@@ -113,28 +155,43 @@ Welcome
 
 
 
+
+
+
+
 <h2 class="title">
+
 Today's Tasks
+
 </h2>
 
 
 
+
+
+
+
+<!-- Progress -->
 
 
 <div class="progress-section">
 
 
 <h2>
+
 Daily Progress
+
 </h2>
 
 
 
 <div class="progress-bar">
 
+
 <div id="progress">
 
 </div>
+
 
 </div>
 
@@ -153,11 +210,16 @@ Daily Progress
 
 
 
-<!-- Tasks from Supabase will load here -->
+
+
+<!-- Tasks From Supabase -->
 
 <div class="tasks">
 
+
 </div>
+
+
 
 
 
@@ -172,7 +234,9 @@ Logout
 
 
 
+
 </main>
+
 
 
 </div>
@@ -182,19 +246,32 @@ Logout
 
 
 
-<!-- Supabase -->
+
+
+
+<!-- Supabase Library -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-<!-- Dashboard Script -->
 
-<script src="js/dashboard.js?v=2"></script>
+<!-- Supabase Connection -->
+
+<script src="js/supabase.js"></script>
 
 
-<!-- User Task Script -->
 
-<script src="js/user-task.js?v=2"></script>
+
+<!-- Dashboard Logic -->
+
+<script src="js/dashboard.js"></script>
+
+
+
+
+<!-- Task Logic -->
+
+<script src="js/user-task.js"></script>
 
 
 
@@ -206,22 +283,31 @@ Logout
 let user = localStorage.getItem("user");
 
 
+
 if(user){
 
+
 document.getElementById("username").innerHTML =
+
 "Welcome, " + user;
 
+
 }
+
 
 
 
 function logout(){
 
+
 localStorage.removeItem("user");
+
 
 window.location.href="login.html";
 
+
 }
+
 
 
 </script>
@@ -229,5 +315,6 @@ window.location.href="login.html";
 
 
 </body>
+
 
 </html>
