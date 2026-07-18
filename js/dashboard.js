@@ -1,27 +1,9 @@
-const SUPABASE_URL = "https://sbrldbbdomfydlynxlsp.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_UCyYCPiO-Xnbwn0f92z0fw_1Xda2C-s";
-
-
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-
-
-let completed = 0;
-let total = 0;
-
-
-
 async function loadTasks(){
 
     const { data, error } = await supabaseClient
         .from("tasks")
         .select("*")
-        .order("created_at", { ascending:false });
-
+        .order("created_at", { ascending: false });
 
 
     if(error){
@@ -33,51 +15,33 @@ async function loadTasks(){
     }
 
 
+    console.log("Tasks:", data);
 
-    const container = document.querySelector(".tasks");
+
+    let container = document.querySelector(".tasks");
 
     container.innerHTML = "";
-
-
-
-    total = data.length;
-
 
 
     data.forEach((task)=>{
 
 
-        let card = document.createElement("div");
+        container.innerHTML += `
 
-        card.className = "task-card";
+        <div class="task">
 
+            <h3>${task.title}</h3>
 
+            <p>${task.description}</p>
 
-        card.innerHTML = `
+            <p>Status: ${task.status}</p>
 
-        <h3>${task.title}</h3>
-
-        <p>${task.description || ""}</p>
-
-        <p>Status: ${task.status}</p>
+        </div>
 
         `;
 
 
-
-        container.appendChild(card);
-
-
-
     });
-
-
-
-    document.getElementById("total").innerHTML = total;
-
-
-    document.getElementById("remaining").innerHTML =
-    total - completed;
 
 
 }
