@@ -3,13 +3,12 @@ async function loadTasks(){
     const { data, error } = await supabaseClient
         .from("tasks")
         .select("*")
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending:false });
 
 
     if(error){
 
         console.log("Database Error:", error);
-
         return;
 
     }
@@ -21,6 +20,40 @@ async function loadTasks(){
     let container = document.querySelector(".tasks");
 
     container.innerHTML = "";
+
+
+    let total = data.length;
+
+    let completed = data.filter(
+        task => task.status === "completed"
+    ).length;
+
+
+    let remaining = total - completed;
+
+
+    document.getElementById("total").innerHTML = total;
+
+    document.getElementById("completed").innerHTML = completed;
+
+    document.getElementById("remaining").innerHTML = remaining;
+
+
+
+    let percent = 0;
+
+    if(total > 0){
+
+        percent = Math.floor(
+            (completed / total) * 100
+        );
+
+    }
+
+
+    document.getElementById("progress-text").innerHTML =
+    percent + "% Completed";
+
 
 
     data.forEach((task)=>{
