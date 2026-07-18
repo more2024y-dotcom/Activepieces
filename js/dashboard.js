@@ -97,6 +97,8 @@ async function loadTasks(){
 loadTasks();
 async function completeTask(id){
 
+    console.log("Clicked task ID:", id);
+
 
     const { error } = await supabaseClient
         .from("tasks")
