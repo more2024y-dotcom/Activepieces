@@ -2,79 +2,56 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:Arial, sans-serif;
 }
 
 
 body{
 
-    background:#f5f6fa;
+    background:#080808;
+
+    color:white;
 
 }
 
 
-/* Main Layout */
 
-.dashboard{
-
-    width:100%;
-
-}
-
-
-/* Hide old sidebar */
-
-.sidebar{
-
-    display:none;
-
-}
-
-
-/* Main Content */
+/* Main */
 
 .content{
 
     width:100%;
 
-    padding:25px;
+    padding:20px;
 
     padding-bottom:100px;
 
 }
 
 
-/* Header */
 
-header{
+
+
+/* Logo */
+
+
+.home-logo{
 
     display:flex;
 
-    justify-content:space-between;
+    justify-content:center;
 
-    align-items:center;
+    margin:20px 0 30px;
 
 }
 
 
 
-.brand{
+.home-logo img{
 
-    display:flex;
+    width:160px;
 
-    align-items:center;
-
-    gap:10px;
-
-}
-
-
-
-.brand img{
-
-    width:50px;
-
-    height:50px;
+    height:160px;
 
     object-fit:contain;
 
@@ -82,34 +59,18 @@ header{
 
 
 
-.profile{
-
-    font-size:25px;
-
-}
 
 
-
-/* ======================
-   HOME TOP MENU
-====================== */
+/* Top Menu */
 
 
 .home-menu{
 
-    display:flex;
+    display:grid;
 
-    justify-content:space-around;
+    grid-template-columns:repeat(4,1fr);
 
-    background:white;
-
-    padding:20px;
-
-    border-radius:15px;
-
-    margin-top:20px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    gap:12px;
 
 }
 
@@ -117,7 +78,20 @@ header{
 
 .home-menu div{
 
+    background:linear-gradient(
+        145deg,
+        #7c3aed,
+        #4c1d95
+    );
+
+    border-radius:18px;
+
+    padding:18px 5px;
+
     text-align:center;
+
+    box-shadow:
+    0 5px 20px rgba(124,58,237,.4);
 
 }
 
@@ -127,7 +101,7 @@ header{
 
     display:block;
 
-    font-size:28px;
+    font-size:30px;
 
 }
 
@@ -137,28 +111,38 @@ header{
 
     margin-top:8px;
 
-    font-size:13px;
+    font-size:12px;
+
+    color:white;
 
 }
 
 
 
-/* ======================
-   VIP CARD
-====================== */
+
+
+/* VIP Card */
 
 
 .vip-card{
 
-    background:white;
-
     margin-top:25px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2b1055,
+        #7c3aed
+    );
 
     padding:25px;
 
-    border-radius:15px;
+    border-radius:20px;
 
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    border:1px solid #d4af37;
+
+    box-shadow:
+    0 0 20px rgba(212,175,55,.3);
 
 }
 
@@ -166,28 +150,50 @@ header{
 
 .vip-card h2{
 
-    color:#6d28d9;
+    color:#ffd700;
+
+    font-size:30px;
 
 }
 
 
 
-/* ======================
-   GIFTS
-====================== */
+.vip-card p{
+
+    margin-top:8px;
+
+}
+
+
+
+
+
+/* Gift Section */
 
 
 .gift-section{
 
-    background:white;
-
     margin-top:25px;
 
-    padding:25px;
+    background:#111;
 
-    border-radius:15px;
+    padding:20px;
+
+    border-radius:20px;
 
 }
+
+
+
+.gift-section h2{
+
+    color:#ffd700;
+
+    margin-bottom:15px;
+
+}
+
+
 
 
 
@@ -199,9 +205,23 @@ header{
 
     align-items:center;
 
-    padding:15px 0;
+    background:#1b1b1b;
 
-    border-bottom:1px solid #eee;
+    margin-bottom:12px;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    border:1px solid #333;
+
+}
+
+
+
+.gift-card p{
+
+    font-size:14px;
 
 }
 
@@ -209,48 +229,79 @@ header{
 
 .gift-card span{
 
+    color:#ffd700;
+
+    font-size:22px;
+
     font-weight:bold;
 
-    color:#6d28d9;
-
 }
+
+
 
 
 
 .gift-section button{
 
-    margin-top:20px;
 
     width:100%;
 
-    padding:12px;
+    margin-top:15px;
 
-    background:#6d28d9;
-
-    color:white;
+    padding:15px;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:15px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #d4af37,
+        #ffd700
+    );
+
+
+    color:black;
+
+    font-weight:bold;
 
 }
 
 
 
-/* ======================
-   REAL TIME
-====================== */
+
+
+/* Real Time */
 
 
 .realtime{
 
-    background:white;
-
     margin-top:25px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #111,
+        #1f1f1f
+    );
+
 
     padding:25px;
 
-    border-radius:15px;
+    border-radius:20px;
+
+    border:1px solid #7c3aed;
+
+}
+
+
+
+.realtime h2{
+
+    color:#ffd700;
 
 }
 
@@ -260,68 +311,19 @@ header{
 
     display:block;
 
-    font-size:30px;
+    color:#b56cff;
 
-    color:#6d28d9;
+    font-size:32px;
 
-    margin:10px 0 20px;
-
-}
-
-
-
-/* ======================
-   TASKS
-====================== */
-
-
-.tasks{
-
-    display:flex;
-
-    gap:25px;
-
-    flex-wrap:wrap;
+    margin:8px 0 20px;
 
 }
 
 
 
-.task{
-
-    background:white;
-
-    padding:25px;
-
-    border-radius:15px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-
-}
 
 
-
-.task button{
-
-    background:#6d28d9;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 25px;
-
-    border-radius:8px;
-
-    margin-top:15px;
-
-}
-
-
-
-/* ======================
-   BOTTOM NAVIGATION
-====================== */
+/* Bottom Navigation */
 
 
 .bottom-nav{
@@ -336,7 +338,9 @@ header{
 
     height:75px;
 
-    background:white;
+
+    background:#0d0d0d;
+
 
     display:flex;
 
@@ -344,7 +348,11 @@ header{
 
     align-items:center;
 
-    border-top:1px solid #ddd;
+
+    border-top:
+
+    1px solid #333;
+
 
     z-index:9999;
 
@@ -352,17 +360,21 @@ header{
 
 
 
+
+
 .bottom-nav a{
 
     text-decoration:none;
 
-    color:#666;
+    color:#999;
 
     text-align:center;
 
-    font-size:12px;
+    font-size:11px;
 
 }
+
+
 
 
 
@@ -370,355 +382,16 @@ header{
 
     display:block;
 
-    font-size:22px;
-
-    margin-bottom:3px;
+    font-size:25px;
 
 }
+
+
 
 
 
 .bottom-nav a:hover{
 
-    color:#6d28d9;
-
-}
-
-
-
-/* ======================
-   MOBILE
-====================== */
-
-
-@media(max-width:768px){
-
-
-    .content{
-
-        padding:15px;
-
-        padding-bottom:100px;
-
-    }
-
-
-
-    .home-menu{
-
-        padding:15px 5px;
-
-    }
-
-
-
-    .home-menu span{
-
-        font-size:22px;
-
-    }
-
-
-
-    .home-menu p{
-
-        font-size:11px;
-
-    }
-
-
-}
-.home-logo{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-margin-top:25px;
-
-}
-
-
-
-.home-logo img{
-
-width:100px;
-
-height:100px;
-
-object-fit:contain;
-
-}
-body{
-
-background:#f5f6fa;
-
-}
-
-
-.content{
-
-width:100%;
-
-padding:0;
-
-padding-bottom:90px;
-
-}
-
-
-
-.home-menu,
-.vip-card,
-.gift-section,
-.realtime{
-
-margin-left:15px;
-
-margin-right:15px;
-
-}
-
-
-
-.vip-card{
-
-background:white;
-
-padding:25px;
-
-border-radius:15px;
-
-margin-top:20px;
-
-}
-
-
-
-.vip-card h2{
-
-font-size:28px;
-
-}
-
-
-
-.gift-section h2{
-
-margin-bottom:15px;
-
-}
-
-
-
-.realtime h2{
-
-margin-bottom:15px;
-
-}
-.home-logo{
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-width:100%;
-
-margin:20px 0;
-
-}
-
-
-.home-logo img{
-
-width:220px;
-
-height:auto;
-
-}
-/* HOME MOBILE APP STYLE */
-
-
-.content{
-
-width:100%;
-
-padding:15px;
-
-padding-bottom:100px;
-
-}
-
-
-
-/* Logo */
-
-.home-logo{
-
-display:flex;
-
-justify-content:center;
-
-margin:20px 0;
-
-}
-
-
-.home-logo img{
-
-width:120px;
-
-height:120px;
-
-object-fit:contain;
-
-}
-
-
-
-/* Top Menu */
-
-.home-menu{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-background:white;
-
-border-radius:15px;
-
-padding:20px 10px;
-
-gap:10px;
-
-}
-
-
-
-.home-menu div{
-
-text-align:center;
-
-}
-
-
-
-.home-menu span{
-
-font-size:28px;
-
-}
-
-
-
-.home-menu p{
-
-font-size:13px;
-
-margin-top:8px;
-
-}
-
-
-
-/* Full width cards */
-
-.vip-card,
-.gift-section,
-.realtime{
-
-width:100%;
-
-background:white;
-
-margin-top:20px;
-
-padding:20px;
-
-border-radius:15px;
-
-}
-
-
-
-/* Gift rows */
-
-.gift-card{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:15px 0;
-
-border-bottom:1px solid #eee;
-
-}
-
-
-.gift-card span{
-
-font-size:20px;
-
-font-weight:bold;
-
-color:#6d28d9;
-
-}
-
-
-
-/* Bottom navigation */
-
-.bottom-nav{
-
-position:fixed;
-
-bottom:0;
-
-left:0;
-
-width:100%;
-
-height:70px;
-
-background:white;
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
-border-top:1px solid #ddd;
-
-}
-
-
-.bottom-nav a{
-
-text-decoration:none;
-
-color:#555;
-
-font-size:12px;
-
-text-align:center;
-
-}
-
-
-.bottom-nav span{
-
-display:block;
-
-font-size:22px;
+    color:#ffd700;
 
 }
