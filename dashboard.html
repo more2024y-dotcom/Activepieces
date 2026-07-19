@@ -5,7 +5,7 @@
 
 <title>Activepieces Dashboard</title>
 
-<link rel="stylesheet" href="css/dashboard.css?v=10">
+<link rel="stylesheet" href="css/dashboard.css?v=11">
 
 </head>
 
@@ -74,13 +74,10 @@
 
 <header>
 
-
 <h1>User Dashboard</h1>
 
 
-
 <div class="profile">
-
 
 <img src="assets/logo.png" alt="Profile">
 
@@ -99,8 +96,9 @@ Welcome
 
 
 
-<section class="stats">
 
+
+<section class="stats">
 
 
 <div class="box">
@@ -140,8 +138,9 @@ Welcome
 </div>
 
 
-
 </section>
+
+
 
 
 
@@ -185,12 +184,12 @@ Daily Progress
 
 
 
+
 <!-- Tasks -->
 
 <div class="tasks">
 
 </div>
-
 
 
 
@@ -213,10 +212,7 @@ Daily Progress
 
 
 
-
 <div class="gift-slider">
-
-
 
 
 
@@ -237,6 +233,7 @@ Apple iPad Pro
 
 
 </div>
+
 
 
 
@@ -266,6 +263,7 @@ iPhone 14 Plus
 
 
 
+
 <div class="gift-card" onclick="openGift('macbook')">
 
 
@@ -287,8 +285,8 @@ MacBook Air M2
 
 
 
-</div>
 
+</div>
 
 
 </section>
@@ -321,20 +319,16 @@ Logout
 
 
 
-<!-- Supabase -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-
-<script src="js/supabase.js?v=10"></script>
-
-
-<script src="js/dashboard.js?v=10"></script>
+<script src="js/supabase.js?v=11"></script>
 
 
-<script src="js/user-task.js?v=10"></script>
+<script src="js/dashboard.js?v=11"></script>
 
+
+<script src="js/user-task.js?v=11"></script>
 
 
 
@@ -348,14 +342,12 @@ Logout
 let user = localStorage.getItem("user");
 
 
-
 if(user){
 
 document.getElementById("username").innerHTML =
 "Welcome, " + user;
 
 }
-
 
 
 
@@ -369,7 +361,6 @@ window.location.href="login.html";
 
 
 
-
 function openGift(product){
 
 alert("Opening gift: " + product);
@@ -379,7 +370,6 @@ alert("Opening gift: " + product);
 
 
 </script>
-
 
 
 
@@ -441,7 +431,6 @@ MY
 
 
 </nav>
-
 
 
 
