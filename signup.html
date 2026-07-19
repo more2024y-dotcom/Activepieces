@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Create Account</title>
+
+<link rel="stylesheet" href="css/signup.css">
+
+</head>
+
+
+<body>
+
+
+<div class="signup-box">
+
+
+<h1>Create Account</h1>
+
+
+<input id="username" placeholder="Username">
+
+
+<input id="phone" placeholder="Enter a phone number">
+
+
+<input 
+type="password"
+id="transactionPassword"
+placeholder="Transaction Password">
+
+
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Login Password">
+
+
+
+<select id="gender">
+
+<option value="">
+Gender
+</option>
+
+<option value="Male">
+Male
+</option>
+
+<option value="Female">
+Female
+</option>
+
+</select>
+
+
+
+<input id="inviteCode" placeholder="Invite Code">
+
+
+
+<button onclick="createAccount()">
+
+Create account
+
+</button>
+
+
+
+<p>
+
+Already have an account?
+
+<a href="login.html">
+Login here
+</a>
+
+</p>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/signup.js"></script>
+
+
+</body>
+
+</html>
