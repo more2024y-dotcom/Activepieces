@@ -5,7 +5,7 @@
 
 <title>Activepieces Dashboard</title>
 
-<link rel="stylesheet" href="css/dashboard.css?v=5">
+<link rel="stylesheet" href="css/dashboard.css?v=6">
 
 </head>
 
@@ -150,7 +150,6 @@ Welcome
 
 
 
-
 <h2 class="title">
 Today's Tasks
 </h2>
@@ -199,6 +198,103 @@ Daily Progress
 
 
 
+
+<!-- ===================== -->
+<!-- Selected Gifts -->
+<!-- ===================== -->
+
+
+<section class="gift-section">
+
+
+<h2>
+🎁 Selected Gifts
+</h2>
+
+
+
+<div class="gift-list">
+
+
+
+<div class="gift-card" onclick="openGift('ipad')">
+
+
+<img src="assets/products/ipad.png">
+
+
+<h3>
+Apple iPad Pro
+</h3>
+
+
+<p>
+⭐ 68 Points
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="gift-card" onclick="openGift('iphone')">
+
+
+<img src="assets/products/iphone.png">
+
+
+<h3>
+iPhone 14 Plus
+</h3>
+
+
+<p>
+⭐ 80 Points
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="gift-card" onclick="openGift('macbook')">
+
+
+<img src="assets/products/macbook.png">
+
+
+<h3>
+MacBook Air M2
+</h3>
+
+
+<p>
+⭐ 120 Points
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
 <button class="logout" onclick="logout()">
 
 Logout
@@ -225,23 +321,16 @@ Logout
 
 
 
-<!-- Connection -->
-
-<script src="js/supabase.js?v=5"></script>
+<script src="js/supabase.js?v=6"></script>
 
 
 
-
-<!-- Dashboard -->
-
-<script src="js/dashboard.js?v=5"></script>
+<script src="js/dashboard.js?v=6"></script>
 
 
 
+<script src="js/user-task.js?v=6"></script>
 
-<!-- User Tasks -->
-
-<script src="js/user-task.js?v=5"></script>
 
 
 
@@ -274,41 +363,80 @@ window.location.href="login.html";
 }
 
 
+
+
+function openGift(product){
+
+alert("Opening gift: " + product);
+
+}
+
+
+
 </script>
+
+
+
+
 
 
 <nav class="bottom-nav">
 
+
 <a href="home.html">
+
 <span>🏠</span>
+
 HOME
+
 </a>
+
 
 
 <a href="certificate.html">
+
 <span>🏆</span>
+
 CERTIFICATE
+
 </a>
+
 
 
 <a href="start.html">
+
 <span>🚀</span>
+
 START
+
 </a>
+
 
 
 <a href="records.html">
+
 <span>📋</span>
+
 RECORDS
+
 </a>
+
 
 
 <a href="profile.html">
+
 <span>👤</span>
+
 MY
+
 </a>
 
+
+
 </nav>
+
+
+
 </body>
 
 </html>
