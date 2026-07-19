@@ -16,6 +16,8 @@ body{
 
 
 
+
+
 /* Main */
 
 .content{
@@ -121,6 +123,8 @@ body{
 
 
 
+
+
 /* VIP Card */
 
 
@@ -170,6 +174,7 @@ body{
 
 
 
+
 /* ========================= */
 /* Selected Gifts */
 /* ========================= */
@@ -189,6 +194,8 @@ body{
 
 
 
+
+
 .gift-section h2{
 
     color:#ffd700;
@@ -203,30 +210,41 @@ body{
 
 
 
-/* Horizontal Gift Slider */
 
 
-.gift-list{
+/* Gift Horizontal Slider */
+
+
+.gift-slider{
+
 
     display:flex;
 
+
     gap:15px;
+
 
     overflow-x:auto;
 
+
     scroll-behavior:smooth;
+
 
     padding-bottom:10px;
 
+
 }
 
 
 
-.gift-list::-webkit-scrollbar{
+.gift-slider::-webkit-scrollbar{
+
 
     display:none;
 
+
 }
+
 
 
 
@@ -282,6 +300,7 @@ body{
 
 
 
+
 .gift-card:hover{
 
 
@@ -292,6 +311,8 @@ body{
 
 
 }
+
+
 
 
 
@@ -321,6 +342,8 @@ body{
 
 
 
+
+
 .gift-card h3{
 
 
@@ -339,6 +362,8 @@ body{
 
 
 
+
+
 .gift-card p{
 
 
@@ -352,6 +377,7 @@ body{
 
 
 }
+
 
 
 
@@ -403,12 +429,15 @@ body{
 
 
 
+
 /* Real Time */
 
 
 .realtime{
 
+
     margin-top:25px;
+
 
     background:
 
@@ -421,9 +450,12 @@ body{
 
     padding:25px;
 
+
     border-radius:20px;
 
+
     border:1px solid #7c3aed;
+
 
 }
 
@@ -431,7 +463,9 @@ body{
 
 .realtime h2{
 
+
     color:#ffd700;
+
 
 }
 
@@ -439,15 +473,21 @@ body{
 
 .realtime strong{
 
+
     display:block;
+
 
     color:#b56cff;
 
+
     font-size:32px;
+
 
     margin:8px 0 20px;
 
+
 }
+
 
 
 
@@ -460,11 +500,15 @@ body{
 
 .bottom-nav{
 
+
     position:fixed;
+
 
     bottom:0;
 
+
     left:0;
+
 
     width:100%;
 
@@ -489,6 +533,7 @@ body{
 
     z-index:9999;
 
+
 }
 
 
@@ -497,7 +542,9 @@ body{
 
 
 
+
 .bottom-nav a{
+
 
     text-decoration:none;
 
@@ -510,6 +557,7 @@ body{
 
     font-size:11px;
 
+
 }
 
 
@@ -520,10 +568,12 @@ body{
 
 .bottom-nav span{
 
+
     display:block;
 
 
     font-size:25px;
+
 
 }
 
@@ -535,6 +585,8 @@ body{
 
 .bottom-nav a:hover{
 
+
     color:#ffd700;
+
 
 }
