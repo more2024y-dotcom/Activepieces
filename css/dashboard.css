@@ -540,3 +540,185 @@ width:220px;
 height:auto;
 
 }
+/* HOME MOBILE APP STYLE */
+
+
+.content{
+
+width:100%;
+
+padding:15px;
+
+padding-bottom:100px;
+
+}
+
+
+
+/* Logo */
+
+.home-logo{
+
+display:flex;
+
+justify-content:center;
+
+margin:20px 0;
+
+}
+
+
+.home-logo img{
+
+width:120px;
+
+height:120px;
+
+object-fit:contain;
+
+}
+
+
+
+/* Top Menu */
+
+.home-menu{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+background:white;
+
+border-radius:15px;
+
+padding:20px 10px;
+
+gap:10px;
+
+}
+
+
+
+.home-menu div{
+
+text-align:center;
+
+}
+
+
+
+.home-menu span{
+
+font-size:28px;
+
+}
+
+
+
+.home-menu p{
+
+font-size:13px;
+
+margin-top:8px;
+
+}
+
+
+
+/* Full width cards */
+
+.vip-card,
+.gift-section,
+.realtime{
+
+width:100%;
+
+background:white;
+
+margin-top:20px;
+
+padding:20px;
+
+border-radius:15px;
+
+}
+
+
+
+/* Gift rows */
+
+.gift-card{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+
+.gift-card span{
+
+font-size:20px;
+
+font-weight:bold;
+
+color:#6d28d9;
+
+}
+
+
+
+/* Bottom navigation */
+
+.bottom-nav{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:70px;
+
+background:white;
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+border-top:1px solid #ddd;
+
+}
+
+
+.bottom-nav a{
+
+text-decoration:none;
+
+color:#555;
+
+font-size:12px;
+
+text-align:center;
+
+}
+
+
+.bottom-nav span{
+
+display:block;
+
+font-size:22px;
+
+}
