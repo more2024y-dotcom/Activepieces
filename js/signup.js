@@ -9,11 +9,11 @@ let phone =
 document.getElementById("phone").value;
 
 
-let transactionPassword =
+let transaction_password =
 document.getElementById("transactionPassword").value;
 
 
-let loginPassword =
+let login_password =
 document.getElementById("loginPassword").value;
 
 
@@ -21,7 +21,7 @@ let gender =
 document.getElementById("gender").value;
 
 
-let inviteCode =
+let invite_code =
 document.getElementById("inviteCode").value;
 
 
@@ -34,17 +34,12 @@ const {data,error} = await supabaseClient
 
 {
 
-username:username,
-
-phone:phone,
-
-transaction_password:transactionPassword,
-
-login_password:loginPassword,
-
-gender:gender,
-
-invite_code:inviteCode
+username,
+phone,
+transaction_password,
+login_password,
+gender,
+invite_code
 
 }
 
@@ -61,7 +56,6 @@ alert(error.message);
 return;
 
 }
-
 
 
 alert("Account Created Successfully");
