@@ -5,7 +5,7 @@
 
 <title>Activepieces Dashboard</title>
 
-<link rel="stylesheet" href="css/dashboard.css?v=11">
+<link rel="stylesheet" href="css/dashboard.css?v=12">
 
 </head>
 
@@ -15,8 +15,6 @@
 
 <div class="dashboard">
 
-
-<!-- Sidebar -->
 
 <aside class="sidebar">
 
@@ -66,8 +64,6 @@
 
 
 
-<!-- Main Content -->
-
 <main class="content">
 
 
@@ -79,7 +75,7 @@
 
 <div class="profile">
 
-<img src="assets/logo.png" alt="Profile">
+<img src="assets/logo.png">
 
 
 <span id="username">
@@ -113,7 +109,6 @@ Welcome
 
 
 
-
 <div class="box">
 
 <h3>Completed</h3>
@@ -139,7 +134,6 @@ Welcome
 
 
 </section>
-
 
 
 
@@ -184,9 +178,6 @@ Daily Progress
 
 
 
-
-<!-- Tasks -->
-
 <div class="tasks">
 
 </div>
@@ -198,9 +189,7 @@ Daily Progress
 
 
 
-<!-- ===================== -->
 <!-- Selected Gifts -->
-<!-- ===================== -->
 
 
 <section class="gift-section">
@@ -218,22 +207,17 @@ Daily Progress
 
 <div class="gift-card" onclick="openGift('ipad')">
 
-
 <img src="assets/products/ipad.png">
-
 
 <h3>
 Apple iPad Pro
 </h3>
 
-
 <p>
 ⭐ 68 Points
 </p>
 
-
 </div>
-
 
 
 
@@ -242,22 +226,17 @@ Apple iPad Pro
 
 <div class="gift-card" onclick="openGift('iphone')">
 
-
 <img src="assets/products/iphone.png">
-
 
 <h3>
 iPhone 14 Plus
 </h3>
 
-
 <p>
 ⭐ 80 Points
 </p>
 
-
 </div>
-
 
 
 
@@ -266,23 +245,17 @@ iPhone 14 Plus
 
 <div class="gift-card" onclick="openGift('macbook')">
 
-
 <img src="assets/products/macbook.png">
-
 
 <h3>
 MacBook Air M2
 </h3>
 
-
 <p>
 ⭐ 120 Points
 </p>
 
-
 </div>
-
-
 
 
 
@@ -291,6 +264,69 @@ MacBook Air M2
 
 </section>
 
+
+
+
+
+
+
+<!-- Gift Detail Popup -->
+
+
+<div id="gift-popup" class="gift-popup">
+
+
+<div class="gift-detail">
+
+
+<span class="close-btn" onclick="closeGift()">
+✕
+</span>
+
+
+
+<img id="gift-image">
+
+
+
+<h2 id="gift-title">
+Gift Name
+</h2>
+
+
+
+<p id="gift-points">
+⭐ Points
+</p>
+
+
+
+<h3>
+Product Details
+</h3>
+
+
+<p>
+Premium VIP reward product.
+</p>
+
+
+<p>
+Status: Available
+</p>
+
+
+
+<button>
+Redeem Now
+</button>
+
+
+
+</div>
+
+
+</div>
 
 
 
@@ -306,6 +342,7 @@ Logout
 
 
 
+
 </main>
 
 
@@ -318,17 +355,16 @@ Logout
 
 
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-<script src="js/supabase.js?v=11"></script>
+<script src="js/supabase.js?v=12"></script>
 
 
-<script src="js/dashboard.js?v=11"></script>
+<script src="js/dashboard.js?v=12"></script>
 
 
-<script src="js/user-task.js?v=11"></script>
+<script src="js/user-task.js?v=12"></script>
 
 
 
@@ -351,6 +387,8 @@ document.getElementById("username").innerHTML =
 
 
 
+
+
 function logout(){
 
 localStorage.removeItem("user");
@@ -358,6 +396,8 @@ localStorage.removeItem("user");
 window.location.href="login.html";
 
 }
+
+
 
 
 
@@ -369,28 +409,37 @@ let image="";
 let points="";
 
 
+
 if(product=="ipad"){
 
 title="Apple iPad Pro";
+
 image="assets/products/ipad.png";
+
 points="68";
 
 }
 
 
+
 if(product=="iphone"){
 
 title="iPhone 14 Plus";
+
 image="assets/products/iphone.png";
+
 points="80";
 
 }
 
 
+
 if(product=="macbook"){
 
 title="MacBook Air M2";
+
 image="assets/products/macbook.png";
+
 points="120";
 
 }
@@ -398,12 +447,16 @@ points="120";
 
 
 
+
 document.getElementById("gift-title").innerHTML=title;
+
 
 document.getElementById("gift-image").src=image;
 
-document.getElementById("gift-points").innerHTML=
+
+document.getElementById("gift-points").innerHTML =
 "⭐ "+points+" Points";
+
 
 
 document.getElementById("gift-popup").style.display="flex";
@@ -411,61 +464,6 @@ document.getElementById("gift-popup").style.display="flex";
 
 }
 
-
-
-function closeGift(){
-
-document.getElementById("gift-popup").style.display="none";
-
-}function openGift(product){
-
-
-let title="";
-let image="";
-let points="";
-
-
-if(product=="ipad"){
-
-title="Apple iPad Pro";
-image="assets/products/ipad.png";
-points="68";
-
-}
-
-
-if(product=="iphone"){
-
-title="iPhone 14 Plus";
-image="assets/products/iphone.png";
-points="80";
-
-}
-
-
-if(product=="macbook"){
-
-title="MacBook Air M2";
-image="assets/products/macbook.png";
-points="120";
-
-}
-
-
-
-
-document.getElementById("gift-title").innerHTML=title;
-
-document.getElementById("gift-image").src=image;
-
-document.getElementById("gift-points").innerHTML=
-"⭐ "+points+" Points";
-
-
-document.getElementById("gift-popup").style.display="flex";
-
-
-}
 
 
 
@@ -478,6 +476,7 @@ document.getElementById("gift-popup").style.display="none";
 
 
 </script>
+
 
 
 
@@ -539,6 +538,7 @@ MY
 
 
 </nav>
+
 
 
 
