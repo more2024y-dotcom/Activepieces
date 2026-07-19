@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html>
 
 <head>
 
-<title>Create Account</title>
+<title>Create Your Account</title>
 
 <link rel="stylesheet" href="css/signup.css">
 
@@ -13,34 +14,91 @@
 <body>
 
 
-<div class="signup-box">
+<div class="signup-container">
 
 
-<h1>Create Account</h1>
+<div class="signup-card">
 
 
-<input id="username" placeholder="Username">
+<img src="assets/logo.png" class="logo">
 
 
-<input id="phone" placeholder="Enter a phone number">
+<h1>Create Your Account</h1>
 
+<p class="subtitle">
+Join Activepieces platform
+</p>
+
+
+
+<label>Full Name</label>
 
 <input 
-id="transactionPassword"
-type="password"
-placeholder="Transaction Password">
+id="username"
+type="text"
+placeholder="Enter your name">
 
 
-<input 
+
+<label>Phone Number</label>
+
+<div class="phone-box">
+
+<select>
+
+<option>
++1
+</option>
+
+<option>
++66
+</option>
+
+<option>
++44
+</option>
+
+</select>
+
+
+<input
+id="phone"
+type="text"
+placeholder="Phone number">
+
+</div>
+
+
+
+
+<label>Login Password</label>
+
+<input
 id="loginPassword"
 type="password"
-placeholder="Login Password">
+placeholder="Create password">
 
+
+
+
+
+<label>Security PIN</label>
+
+<input
+id="transactionPassword"
+type="password"
+placeholder="Transaction PIN">
+
+
+
+
+
+<label>Gender</label>
 
 <select id="gender">
 
 <option value="">
-Gender
+Select gender
 </option>
 
 <option value="Male">
@@ -54,23 +112,59 @@ Female
 </select>
 
 
-<input id="inviteCode" placeholder="Invite Code">
+
+
+
+<label>Invitation Code</label>
+
+<input
+id="inviteCode"
+type="text"
+placeholder="Enter invite code">
+
+
+
+
+
+<div class="terms">
+
+<input type="checkbox">
+
+<span>
+I agree to Terms & Privacy
+</span>
+
+</div>
+
+
 
 
 <button onclick="createAccount()">
-Create account
+
+Create Account
+
 </button>
 
 
-<p>
-Already have an account?
+
+
+<p class="login-link">
+
+Already registered?
+
 <a href="login.html">
-Login here
+Login
 </a>
+
 </p>
 
 
+
 </div>
+
+
+</div>
+
 
 
 
@@ -84,3 +178,4 @@ Login here
 </body>
 
 </html>
+```
