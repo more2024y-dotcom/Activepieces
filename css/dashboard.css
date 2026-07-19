@@ -518,3 +518,25 @@ margin-bottom:15px;
 margin-bottom:15px;
 
 }
+.home-logo{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+width:100%;
+
+margin:20px 0;
+
+}
+
+
+.home-logo img{
+
+width:220px;
+
+height:auto;
+
+}
