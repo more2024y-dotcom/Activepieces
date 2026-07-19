@@ -205,7 +205,6 @@ body{
 
 
 
-
 .gift-list{
 
     display:grid;
@@ -237,7 +236,10 @@ body{
     border-radius:22px;
 
 
-    padding:20px 10px;
+    padding:25px 10px;
+
+
+    min-height:300px;
 
 
     text-align:center;
@@ -285,16 +287,19 @@ body{
 .gift-card img{
 
 
-    width:120px;
+    width:180px;
 
 
-    height:120px;
+    height:180px;
 
 
     object-fit:contain;
 
 
-    margin-bottom:15px;
+    display:block;
+
+
+    margin:0 auto 15px;
 
 
 }
@@ -311,7 +316,7 @@ body{
     color:white;
 
 
-    font-size:15px;
+    font-size:16px;
 
 
     margin-bottom:10px;
@@ -331,7 +336,7 @@ body{
     color:#ffd700;
 
 
-    font-size:17px;
+    font-size:18px;
 
 
     font-weight:bold;
