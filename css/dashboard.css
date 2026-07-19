@@ -428,3 +428,26 @@ header{
 
 
 }
+.home-logo{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+margin-top:25px;
+
+}
+
+
+
+.home-logo img{
+
+width:100px;
+
+height:100px;
+
+object-fit:contain;
+
+}
