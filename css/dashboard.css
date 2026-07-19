@@ -81,30 +81,7 @@ body{
 
     text-align:center;
 
-    box-shadow:
-    0 5px 20px rgba(124,58,237,.4);
-
 }
-
-
-.home-menu span{
-
-    display:block;
-
-    font-size:30px;
-
-}
-
-
-.home-menu p{
-
-    margin-top:8px;
-
-    font-size:12px;
-
-}
-
-
 
 
 
@@ -127,30 +104,7 @@ body{
 
     border:1px solid #d4af37;
 
-    box-shadow:
-    0 0 20px rgba(212,175,55,.3);
-
 }
-
-
-.vip-card h2{
-
-    color:#ffd700;
-
-    font-size:30px;
-
-}
-
-
-.vip-card p{
-
-    margin-top:8px;
-
-}
-
-
-
-
 
 
 
@@ -187,6 +141,7 @@ body{
 
 /* Horizontal Gift Area */
 
+
 .gift-slider{
 
     display:flex !important;
@@ -217,17 +172,16 @@ body{
 
 
 
-
-
 /* Gift Card */
+
 
 .gift-card{
 
     flex:0 0 auto !important;
 
-    min-width:180px !important;
+    min-width:220px !important;
 
-    width:180px;
+    width:220px;
 
     background:
 
@@ -241,7 +195,7 @@ body{
 
     padding:20px 10px;
 
-    min-height:260px;
+    min-height:360px;
 
     text-align:center;
 
@@ -269,11 +223,14 @@ body{
 
 
 
+/* Bigger Product Image */
+
+
 .gift-card img{
 
-    width:130px;
+    width:200px;
 
-    height:130px;
+    height:200px;
 
     object-fit:contain;
 
@@ -285,11 +242,12 @@ body{
 
 
 
+
 .gift-card h3{
 
     color:white;
 
-    font-size:15px;
+    font-size:16px;
 
     margin-bottom:10px;
 
@@ -301,7 +259,7 @@ body{
 
     color:#ffd700;
 
-    font-size:17px;
+    font-size:18px;
 
     font-weight:bold;
 
@@ -311,9 +269,8 @@ body{
 
 
 
-
-
 /* Gold Button */
+
 
 .gift-section button{
 
@@ -346,8 +303,8 @@ body{
 
 
 
-
 /* Real Time */
+
 
 .realtime{
 
@@ -386,8 +343,6 @@ body{
 
     font-size:32px;
 
-    margin:8px 0 20px;
-
 }
 
 
@@ -397,6 +352,7 @@ body{
 
 
 /* Bottom Navigation */
+
 
 .bottom-nav{
 
