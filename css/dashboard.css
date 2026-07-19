@@ -590,3 +590,15 @@ body{
 
 
 }
+.gift-slider{
+    display:flex !important;
+    flex-direction:row !important;
+    gap:15px;
+    overflow-x:auto;
+}
+
+
+.gift-card{
+    min-width:180px !important;
+    flex-shrink:0;
+}
