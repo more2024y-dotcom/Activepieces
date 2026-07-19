@@ -2,51 +2,57 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 
 body{
-
     background:#080808;
-
     color:white;
+}
+
+
+
+/* MAIN LAYOUT */
+
+.dashboard{
+
+    display:flex;
+    min-height:100vh;
 
 }
 
 
-/* Main */
 
-.content{
+/* SIDEBAR */
 
-    width:100%;
+.sidebar{
+
+    width:230px;
+
+    background:#111;
 
     padding:20px;
 
-    padding-bottom:100px;
+    border-right:1px solid #333;
 
 }
 
 
+.brand{
 
-/* Logo */
+    text-align:center;
 
-.home-logo{
-
-    display:flex;
-
-    justify-content:center;
-
-    margin:20px 0 30px;
+    margin-bottom:30px;
 
 }
 
 
-.home-logo img{
+.brand img{
 
-    width:160px;
+    width:120px;
 
-    height:160px;
+    height:120px;
 
     object-fit:contain;
 
@@ -54,30 +60,127 @@ body{
 
 
 
-/* Top Menu */
+.sidebar ul{
 
-.home-menu{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:12px;
+    list-style:none;
 
 }
 
 
-.home-menu div{
+
+.sidebar li{
+
+    padding:15px;
+
+    margin-bottom:10px;
+
+    background:#1b1b1b;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+}
+
+
+
+.sidebar li:hover{
+
+    background:#7c3aed;
+
+}
+
+
+
+/* CONTENT */
+
+.content{
+
+    flex:1;
+
+    padding:25px;
+
+    padding-bottom:100px;
+
+}
+
+
+
+/* HEADER */
+
+
+header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+header h1{
+
+    color:#ffd700;
+
+}
+
+
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+
+.profile img{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+}
+
+
+
+/* STATS */
+
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.box{
 
     background:linear-gradient(
         145deg,
         #7c3aed,
-        #4c1d95
+        #2b1055
     );
 
-    border-radius:18px;
+    padding:25px;
 
-    padding:18px 5px;
+    border-radius:20px;
 
     text-align:center;
 
@@ -85,37 +188,104 @@ body{
 
 
 
-/* VIP Card */
+.box p{
 
-.vip-card{
+    font-size:35px;
 
-    margin-top:25px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #2b1055,
-        #7c3aed
-    );
-
-    padding:25px;
-
-    border-radius:20px;
-
-    border:1px solid #d4af37;
+    color:#ffd700;
 
 }
 
 
 
-/* ========================= */
-/* Selected Gifts */
-/* ========================= */
+
+
+/* TASK */
+
+
+.title{
+
+    margin-top:30px;
+
+    color:#ffd700;
+
+}
+
+
+
+.progress-section{
+
+    margin-top:20px;
+
+    background:#111;
+
+    padding:20px;
+
+    border-radius:20px;
+
+}
+
+
+
+.progress-bar{
+
+    height:15px;
+
+    background:#333;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+
+#progress{
+
+    height:100%;
+
+    width:100%;
+
+    background:#ffd700;
+
+}
+
+
+
+/* TASK CARDS */
+
+
+.tasks{
+
+    margin-top:20px;
+
+}
+
+
+
+.task{
+
+    background:#171717;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+    border-radius:15px;
+
+}
+
+
+
+
+
+/* GIFTS */
 
 
 .gift-section{
 
-    margin-top:25px;
+    margin-top:30px;
 
     background:#111;
 
@@ -133,97 +303,38 @@ body{
 
     margin-bottom:20px;
 
-    font-size:24px;
-
 }
 
-
-
-/* Horizontal Gift Area */
 
 
 .gift-slider{
 
-    display:flex !important;
+    display:flex;
 
-    flex-direction:row !important;
-
-    flex-wrap:nowrap !important;
-
-    gap:15px;
+    gap:20px;
 
     overflow-x:auto;
 
-    scroll-behavior:smooth;
-
-    width:100%;
-
-    padding-bottom:10px;
-
 }
 
-
-
-.gift-slider::-webkit-scrollbar{
-
-    display:none;
-
-}
-
-
-
-/* Gift Card */
 
 
 .gift-card{
 
-    flex:0 0 auto !important;
+    flex:0 0 220px;
 
-    min-width:220px !important;
+    background:#1b1b1b;
 
-    width:220px;
+    border-radius:20px;
 
-    background:
-
-    linear-gradient(
-        145deg,
-        #1f1f1f,
-        #090909
-    );
-
-    border-radius:22px;
-
-    padding:20px 10px;
-
-    min-height:360px;
+    padding:15px;
 
     text-align:center;
 
     border:1px solid #333;
 
-    box-shadow:
-
-    0 0 15px rgba(124,58,237,.25);
-
-    transition:.3s;
-
-    cursor:pointer;
-
 }
 
-
-
-.gift-card:hover{
-
-    transform:translateY(-5px);
-
-    border-color:#ffd700;
-
-}
-
-
-
-/* Bigger Product Image */
 
 
 .gift-card img{
@@ -234,22 +345,13 @@ body{
 
     object-fit:contain;
 
-    display:block;
-
-    margin:0 auto 15px;
-
 }
-
 
 
 
 .gift-card h3{
 
-    color:white;
-
-    font-size:16px;
-
-    margin-bottom:10px;
+    margin-top:15px;
 
 }
 
@@ -261,38 +363,26 @@ body{
 
     font-size:18px;
 
-    font-weight:bold;
-
 }
 
 
 
 
 
-/* Gold Button */
+/* LOGOUT */
 
 
-.gift-section button{
+.logout{
 
-    width:100%;
+    margin-top:30px;
 
-    margin-top:15px;
-
-    padding:15px;
+    padding:15px 40px;
 
     border:none;
 
     border-radius:15px;
 
-    background:
-
-    linear-gradient(
-        90deg,
-        #d4af37,
-        #ffd700
-    );
-
-    color:black;
+    background:#ffd700;
 
     font-weight:bold;
 
@@ -300,58 +390,7 @@ body{
 
 
 
-
-
-
-/* Real Time */
-
-
-.realtime{
-
-    margin-top:25px;
-
-    background:
-
-    linear-gradient(
-        145deg,
-        #111,
-        #1f1f1f
-    );
-
-    padding:25px;
-
-    border-radius:20px;
-
-    border:1px solid #7c3aed;
-
-}
-
-
-
-.realtime h2{
-
-    color:#ffd700;
-
-}
-
-
-.realtime strong{
-
-    display:block;
-
-    color:#b56cff;
-
-    font-size:32px;
-
-}
-
-
-
-
-
-
-
-/* Bottom Navigation */
+/* BOTTOM NAV */
 
 
 .bottom-nav{
@@ -366,7 +405,7 @@ body{
 
     height:75px;
 
-    background:#0d0d0d;
+    background:#111;
 
     display:flex;
 
@@ -376,21 +415,19 @@ body{
 
     border-top:1px solid #333;
 
-    z-index:9999;
-
 }
 
 
 
 .bottom-nav a{
 
-    text-decoration:none;
-
     color:#999;
+
+    text-decoration:none;
 
     text-align:center;
 
-    font-size:11px;
+    font-size:12px;
 
 }
 
@@ -409,5 +446,35 @@ body{
 .bottom-nav a:hover{
 
     color:#ffd700;
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+
+.sidebar{
+
+    display:none;
+
+}
+
+
+.stats{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.content{
+
+    padding:15px;
+
+}
+
 
 }
