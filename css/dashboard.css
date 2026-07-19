@@ -189,8 +189,6 @@ body{
 
 
 
-
-
 .gift-section h2{
 
     color:#ffd700;
@@ -205,13 +203,28 @@ body{
 
 
 
+/* Horizontal Gift Slider */
+
+
 .gift-list{
 
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
+    display:flex;
 
     gap:15px;
+
+    overflow-x:auto;
+
+    scroll-behavior:smooth;
+
+    padding-bottom:10px;
+
+}
+
+
+
+.gift-list::-webkit-scrollbar{
+
+    display:none;
 
 }
 
@@ -221,7 +234,13 @@ body{
 
 
 
+/* Gift Card */
+
+
 .gift-card{
+
+
+    min-width:180px;
 
 
     background:
@@ -236,10 +255,10 @@ body{
     border-radius:22px;
 
 
-    padding:25px 10px;
+    padding:20px 10px;
 
 
-    min-height:300px;
+    min-height:260px;
 
 
     text-align:center;
@@ -263,10 +282,6 @@ body{
 
 
 
-
-
-
-
 .gift-card:hover{
 
 
@@ -282,15 +297,13 @@ body{
 
 
 
-
-
 .gift-card img{
 
 
-    width:180px;
+    width:130px;
 
 
-    height:180px;
+    height:130px;
 
 
     object-fit:contain;
@@ -308,15 +321,13 @@ body{
 
 
 
-
-
 .gift-card h3{
 
 
     color:white;
 
 
-    font-size:16px;
+    font-size:15px;
 
 
     margin-bottom:10px;
@@ -328,15 +339,13 @@ body{
 
 
 
-
-
 .gift-card p{
 
 
     color:#ffd700;
 
 
-    font-size:18px;
+    font-size:17px;
 
 
     font-weight:bold;
