@@ -363,7 +363,115 @@ window.location.href="login.html";
 
 function openGift(product){
 
-alert("Opening gift: " + product);
+
+let title="";
+let image="";
+let points="";
+
+
+if(product=="ipad"){
+
+title="Apple iPad Pro";
+image="assets/products/ipad.png";
+points="68";
+
+}
+
+
+if(product=="iphone"){
+
+title="iPhone 14 Plus";
+image="assets/products/iphone.png";
+points="80";
+
+}
+
+
+if(product=="macbook"){
+
+title="MacBook Air M2";
+image="assets/products/macbook.png";
+points="120";
+
+}
+
+
+
+
+document.getElementById("gift-title").innerHTML=title;
+
+document.getElementById("gift-image").src=image;
+
+document.getElementById("gift-points").innerHTML=
+"⭐ "+points+" Points";
+
+
+document.getElementById("gift-popup").style.display="flex";
+
+
+}
+
+
+
+function closeGift(){
+
+document.getElementById("gift-popup").style.display="none";
+
+}function openGift(product){
+
+
+let title="";
+let image="";
+let points="";
+
+
+if(product=="ipad"){
+
+title="Apple iPad Pro";
+image="assets/products/ipad.png";
+points="68";
+
+}
+
+
+if(product=="iphone"){
+
+title="iPhone 14 Plus";
+image="assets/products/iphone.png";
+points="80";
+
+}
+
+
+if(product=="macbook"){
+
+title="MacBook Air M2";
+image="assets/products/macbook.png";
+points="120";
+
+}
+
+
+
+
+document.getElementById("gift-title").innerHTML=title;
+
+document.getElementById("gift-image").src=image;
+
+document.getElementById("gift-points").innerHTML=
+"⭐ "+points+" Points";
+
+
+document.getElementById("gift-popup").style.display="flex";
+
+
+}
+
+
+
+function closeGift(){
+
+document.getElementById("gift-popup").style.display="none";
 
 }
 
