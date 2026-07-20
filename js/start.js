@@ -1,6 +1,3 @@
-alert("START JS CONNECTED");
-
-
 let orderPrice = 100;
 
 let commissionRate = 0.005;
@@ -13,7 +10,9 @@ profit.toFixed(2);
 
 
 
+// =====================
 // ORDER SYSTEM
+// =====================
 
 let completedOrders =
 Number(localStorage.getItem("completedOrders")) || 0;
@@ -34,6 +33,9 @@ updateProgress();
 function completeOrder(){
 
 
+if(completedOrders < 40){
+
+
 completedOrders++;
 
 
@@ -46,17 +48,16 @@ completedOrders
 updateProgress();
 
 
-alert(
-"Order Completed! Profit added: $" 
-+ profit.toFixed(2)
-);
+}
 
 
 }
 
 
 
+// =====================
 // AUTOMATIC REVIEW
+// =====================
 
 let reviewStars = 0;
 
@@ -100,15 +101,19 @@ starDisplay;
 
 if(reviewStars === 0){
 
+
 document.getElementById("review-text").innerHTML =
 "No review yet.";
+
 
 }
 
 else{
 
+
 document.getElementById("review-text").innerHTML =
 "Excellent product with premium quality. Highly recommended.";
+
 
 }
 
