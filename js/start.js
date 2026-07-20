@@ -37,7 +37,7 @@ price: 300
 // ORDER SYSTEM
 // =====================
 
-let completedOrders =
+let completedOrders = 
 Number(localStorage.getItem("completedOrders")) || 0;
 
 
@@ -46,43 +46,54 @@ Number(localStorage.getItem("currentProduct")) || 0;
 
 
 
+
 function loadProduct(){
 
 
-let product =
-products[currentProduct % products.length];
+let product = products[currentProduct];
 
 
+
+// Change product image
 
 document.getElementById("product-image").src =
 product.image;
 
 
 
+// Change product name
+
 document.getElementById("product-name").innerHTML =
 product.name;
 
 
+
+// Change price
 
 document.getElementById("price").innerHTML =
 product.price;
 
 
 
+// Commission
+
 document.getElementById("commission").innerHTML =
 "0.5%";
 
 
 
+// Calculate profit
+
 let profit =
 product.price * 0.005;
-
 
 
 document.getElementById("profit").innerHTML =
 profit.toFixed(2);
 
 
+
+// Update order progress
 
 document.getElementById("progress").innerHTML =
 "Order " + completedOrders + " / 40";
@@ -91,6 +102,9 @@ document.getElementById("progress").innerHTML =
 }
 
 
+
+
+// Load first product
 
 loadProduct();
 
@@ -101,21 +115,35 @@ loadProduct();
 function completeOrder(){
 
 
+
 if(completedOrders < 40){
+
 
 
 completedOrders++;
 
 
+// Move to next product
+
 currentProduct++;
 
 
+// Reset to first product after the list ends
+
+if(currentProduct >= products.length){
+
+currentProduct = 0;
+
+}
+
+
+
+// Save progress
 
 localStorage.setItem(
 "completedOrders",
 completedOrders
 );
-
 
 
 localStorage.setItem(
@@ -125,10 +153,14 @@ currentProduct
 
 
 
+// Show next product
+
 loadProduct();
 
 
+
 }
+
 
 
 }
@@ -142,11 +174,13 @@ loadProduct();
 // AUTOMATIC REVIEW SYSTEM
 // =====================
 
+
 let reviewStars = 0;
 
 
 
 function automaticReview(){
+
 
 
 reviewStars++;
@@ -158,7 +192,6 @@ if(reviewStars > 4){
 reviewStars = 0;
 
 }
-
 
 
 
@@ -187,7 +220,6 @@ starDisplay;
 
 
 
-
 if(reviewStars === 0){
 
 
@@ -205,6 +237,7 @@ document.getElementById("review-text").innerHTML =
 
 
 }
+
 
 
 }
