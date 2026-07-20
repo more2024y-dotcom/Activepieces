@@ -32,6 +32,7 @@ price: 300
 
 
 
+
 // =====================
 // ORDER SYSTEM
 // =====================
@@ -68,11 +69,13 @@ product.price;
 
 
 
-let commissionRate = 0.005;
+document.getElementById("commission").innerHTML =
+"0.5%";
+
 
 
 let profit =
-product.price * commissionRate;
+product.price * 0.005;
 
 
 
@@ -134,10 +137,10 @@ loadProduct();
 
 
 
-// =====================
-// AUTOMATIC REVIEW
-// =====================
 
+// =====================
+// AUTOMATIC REVIEW SYSTEM
+// =====================
 
 let reviewStars = 0;
 
