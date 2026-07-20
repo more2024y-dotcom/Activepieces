@@ -12,19 +12,19 @@ price: 100
 
 {
 name: "Apple Watch",
-image: "assets/products/iphone.png",
+image: "assets/products/watch.png",
 price: 80
 },
 
 {
 name: "AirPods Pro",
-image: "assets/products/iphone.png",
+image: "assets/products/airpods.png",
 price: 150
 },
 
 {
 name: "MacBook Pro",
-image: "assets/products/iphone.png",
+image: "assets/products/macbook.png",
 price: 300
 }
 
@@ -55,28 +55,28 @@ products[currentProduct];
 
 
 
-// Update image
+// Change product picture
 
 document.getElementById("product-image").src =
 product.image;
 
 
 
-// Update product name
+// Change product name
 
 document.getElementById("product-name").innerHTML =
 product.name;
 
 
 
-// Update price
+// Change price
 
 document.getElementById("price").innerHTML =
 product.price;
 
 
 
-// Update commission
+// Commission
 
 document.getElementById("commission").innerHTML =
 "0.5%";
@@ -89,12 +89,13 @@ let profit =
 product.price * 0.005;
 
 
+
 document.getElementById("profit").innerHTML =
 profit.toFixed(2);
 
 
 
-// Update order number
+// Update progress
 
 document.getElementById("progress").innerHTML =
 "Order " + completedOrders + " / 40";
@@ -121,9 +122,12 @@ if(completedOrders < 40){
 
 completedOrders++;
 
+
 currentProduct++;
 
 
+
+// Restart product list after last product
 
 if(currentProduct >= products.length){
 
@@ -133,12 +137,13 @@ currentProduct = 0;
 
 
 
-// Save data
+// Save progress
 
 localStorage.setItem(
 "completedOrders",
 completedOrders
 );
+
 
 
 localStorage.setItem(
@@ -148,13 +153,12 @@ currentProduct
 
 
 
-// Load next order
+// Load next product
 
 loadProduct();
 
 
 }
-
 
 
 }
@@ -167,6 +171,7 @@ loadProduct();
 // =====================
 // AUTOMATIC REVIEW SYSTEM
 // =====================
+
 
 let reviewStars = 0;
 
