@@ -12,19 +12,19 @@ price: 100
 
 {
 name: "Apple Watch",
-image: "assets/products/watch.png",
+image: "assets/products/iphone.png",
 price: 80
 },
 
 {
 name: "AirPods Pro",
-image: "assets/products/airpods.png",
+image: "assets/products/iphone.png",
 price: 150
 },
 
 {
 name: "MacBook Pro",
-image: "assets/products/macbook.png",
+image: "assets/products/iphone.png",
 price: 300
 }
 
@@ -37,7 +37,7 @@ price: 300
 // ORDER SYSTEM
 // =====================
 
-let completedOrders = 
+let completedOrders =
 Number(localStorage.getItem("completedOrders")) || 0;
 
 
@@ -50,32 +50,33 @@ Number(localStorage.getItem("currentProduct")) || 0;
 function loadProduct(){
 
 
-let product = products[currentProduct];
+let product =
+products[currentProduct];
 
 
 
-// Change product image
+// Update image
 
 document.getElementById("product-image").src =
 product.image;
 
 
 
-// Change product name
+// Update product name
 
 document.getElementById("product-name").innerHTML =
 product.name;
 
 
 
-// Change price
+// Update price
 
 document.getElementById("price").innerHTML =
 product.price;
 
 
 
-// Commission
+// Update commission
 
 document.getElementById("commission").innerHTML =
 "0.5%";
@@ -93,7 +94,7 @@ profit.toFixed(2);
 
 
 
-// Update order progress
+// Update order number
 
 document.getElementById("progress").innerHTML =
 "Order " + completedOrders + " / 40";
@@ -103,8 +104,6 @@ document.getElementById("progress").innerHTML =
 
 
 
-
-// Load first product
 
 loadProduct();
 
@@ -122,13 +121,9 @@ if(completedOrders < 40){
 
 completedOrders++;
 
-
-// Move to next product
-
 currentProduct++;
 
 
-// Reset to first product after the list ends
 
 if(currentProduct >= products.length){
 
@@ -138,7 +133,7 @@ currentProduct = 0;
 
 
 
-// Save progress
+// Save data
 
 localStorage.setItem(
 "completedOrders",
@@ -153,10 +148,9 @@ currentProduct
 
 
 
-// Show next product
+// Load next order
 
 loadProduct();
-
 
 
 }
@@ -173,7 +167,6 @@ loadProduct();
 // =====================
 // AUTOMATIC REVIEW SYSTEM
 // =====================
-
 
 let reviewStars = 0;
 
