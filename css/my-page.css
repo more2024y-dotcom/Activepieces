@@ -1,1 +1,199 @@
+body {
 
+    margin: 0;
+
+    min-height: 100vh;
+
+    background: #080808;
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+
+}
+
+
+
+.my-page {
+
+    width: 80%;
+
+    margin: 40px auto;
+
+}
+
+
+
+/* Profile */
+
+.profile-card {
+
+    text-align: center;
+
+    background: #111;
+
+    border: 1px solid #d4af37;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+}
+
+
+
+.profile-card h1 {
+
+    color: #d4af37;
+
+}
+
+
+
+.profile-card span {
+
+    color: #d4af37;
+
+}
+
+
+
+
+
+/* Balance */
+
+.balance-card {
+
+    margin-top: 25px;
+
+    text-align: center;
+
+    background: #111;
+
+    border: 1px solid #6d28d9;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+}
+
+
+
+.balance-card h1 {
+
+    color: #d4af37;
+
+}
+
+
+
+
+
+.wallet-buttons {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 200px);
+
+    gap: 20px;
+
+    justify-content: center;
+
+    margin-top: 25px;
+
+}
+
+
+
+.wallet-buttons button {
+
+    padding: 15px;
+
+    background: #6d28d9;
+
+    color: white;
+
+    border: 1px solid #d4af37;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+}
+
+
+
+.wallet-buttons button:hover {
+
+    background: #d4af37;
+
+    color: black;
+
+}
+
+
+
+
+
+/* Profit */
+
+.profit-card {
+
+    margin-top: 25px;
+
+    text-align: center;
+
+    background: #111;
+
+    border: 1px solid #d4af37;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+}
+
+
+
+.profit-card h1 {
+
+    color: #d4af37;
+
+}
+
+
+
+.profit-box {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 40px;
+
+    margin-top: 30px;
+
+}
+
+
+
+.profit-box div {
+
+    background: #1a1a1a;
+
+    padding: 20px;
+
+    width: 200px;
+
+    border-radius: 10px;
+
+}
+
+
+
+.profit-box h3 {
+
+    color: #d4af37;
+
+}
