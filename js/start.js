@@ -1,3 +1,6 @@
+alert("START JS CONNECTED");
+
+
 let orderPrice = 100;
 
 let commissionRate = 0.005;
@@ -10,11 +13,9 @@ profit.toFixed(2);
 
 
 
-// =====================
-// ORDER PROGRESS SYSTEM
-// =====================
+// ORDER SYSTEM
 
-let completedOrders = 
+let completedOrders =
 Number(localStorage.getItem("completedOrders")) || 0;
 
 
@@ -32,8 +33,6 @@ updateProgress();
 
 function completeOrder(){
 
-
-if(completedOrders < 40){
 
 completedOrders++;
 
@@ -55,30 +54,11 @@ alert(
 
 }
 
-else{
 
 
-alert(
-"All 40 orders completed!"
-);
-
-
-}
-
-
-}
-
-
-
-
-
-// =====================
-// AUTOMATIC REVIEW SYSTEM
-// =====================
-
+// AUTOMATIC REVIEW
 
 let reviewStars = 0;
-
 
 
 function automaticReview(){
@@ -98,13 +78,11 @@ reviewStars = 0;
 let starDisplay = "";
 
 
-
 for(let i = 0; i < reviewStars; i++){
 
 starDisplay += "⭐";
 
 }
-
 
 
 for(let i = reviewStars; i < 4; i++){
@@ -122,19 +100,15 @@ starDisplay;
 
 if(reviewStars === 0){
 
-
 document.getElementById("review-text").innerHTML =
 "No review yet.";
-
 
 }
 
 else{
 
-
 document.getElementById("review-text").innerHTML =
 "Excellent product with premium quality. Highly recommended.";
-
 
 }
 
