@@ -22,17 +22,19 @@ font-family:Arial, sans-serif;
 
 background:#151515;
 
-padding:45px;
+padding:60px;
 
-width:380px;
+width:450px;
+
+min-height:520px;
 
 text-align:center;
 
-border-radius:25px;
+border-radius:30px;
 
-border:1px solid #7c3aed;
+border:2px solid #7c3aed;
 
-box-shadow:0 0 30px rgba(124,58,237,0.4);
+box-shadow:0 0 40px rgba(255,215,0,0.25);
 
 }
 
@@ -40,13 +42,13 @@ box-shadow:0 0 30px rgba(124,58,237,0.4);
 
 .logo{
 
-width:100px;
+width:150px;
 
-height:100px;
+height:150px;
 
 object-fit:contain;
 
-margin-bottom:15px;
+margin-bottom:20px;
 
 }
 
@@ -56,9 +58,9 @@ h1{
 
 color:#ffd700;
 
-font-size:32px;
+font-size:42px;
 
-margin:10px 0;
+margin:15px 0;
 
 }
 
@@ -68,7 +70,9 @@ h2{
 
 color:white;
 
-margin-bottom:25px;
+font-size:28px;
+
+margin-bottom:35px;
 
 }
 
@@ -78,9 +82,11 @@ input{
 
 width:90%;
 
-padding:14px;
+height:50px;
 
-margin:12px 0;
+padding:0 15px;
+
+margin:15px 0;
 
 border-radius:12px;
 
@@ -90,9 +96,7 @@ background:#222;
 
 color:white;
 
-font-size:15px;
-
-outline:none;
+font-size:18px;
 
 }
 
@@ -100,15 +104,7 @@ outline:none;
 
 input::placeholder{
 
-color:#aaa;
-
-}
-
-
-
-input:focus{
-
-border:1px solid #ffd700;
+color:#999;
 
 }
 
@@ -116,7 +112,11 @@ border:1px solid #ffd700;
 
 button{
 
-margin-top:20px;
+margin-top:25px;
+
+width:220px;
+
+height:55px;
 
 background:linear-gradient(45deg,#d4af37,#ffd700);
 
@@ -124,17 +124,13 @@ color:black;
 
 border:none;
 
-padding:14px 45px;
-
 border-radius:15px;
 
-cursor:pointer;
+font-size:20px;
 
 font-weight:bold;
 
-font-size:16px;
-
-box-shadow:0 0 15px gold;
+cursor:pointer;
 
 }
 
@@ -152,9 +148,9 @@ transform:scale(1.05);
 
 color:white;
 
-margin-top:25px;
+margin-top:35px;
 
-font-size:14px;
+font-size:18px;
 
 }
 
@@ -166,14 +162,8 @@ color:#ffd700;
 
 font-weight:bold;
 
+font-size:18px;
+
 text-decoration:none;
-
-}
-
-
-
-.signup-link a:hover{
-
-text-decoration:underline;
 
 }
