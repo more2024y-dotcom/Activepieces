@@ -15,25 +15,64 @@
 
 <div class="login-box">
 
+
 <img src="assets/logo.png" class="logo">
 
-<h1>Activepieces</h1>
 
-<h2>Login</h2>
+<h1>
+Activepieces
+</h1>
+
+
+<h2>
+Login
+</h2>
+
+
 
 
 <input type="text" id="username" placeholder="Username">
 
 
+
 <input type="password" id="password" placeholder="Password">
 
 
+
+
+
 <button onclick="login()">
+
 Login
+
 </button>
 
 
+
+
+
+<p class="signup-link">
+
+Don't have an account?
+
+<br>
+
+<a href="signup.html">
+
+Create Account
+
+</a>
+
+</p>
+
+
+
+
+
 </div>
+
+
+
 
 
 
@@ -41,33 +80,40 @@ Login
 
 function login(){
 
-let username = document.getElementById("username").value;
+
+let username =
+document.getElementById("username").value;
+
+
 
 if(username == ""){
 
+
 alert("Please enter username");
 
+
 }
+
 
 else{
 
+
 localStorage.setItem("user", username);
+
 
 window.location.href="dashboard.html";
 
-}
 
 }
+
+
+}
+
 
 </script>
+
 
 
 </body>
 
 </html>
-<p>
-Don't have an account?
-<a href="signup.html">
-Create Account
-</a>
-</p>
