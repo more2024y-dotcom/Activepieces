@@ -4,15 +4,16 @@ background:#080808;
 
 color:white;
 
-font-family:Arial;
+font-family:Arial, sans-serif;
 
 }
 
 
 
+
 .start-container{
 
-padding:20px;
+padding:30px;
 
 text-align:center;
 
@@ -20,11 +21,15 @@ text-align:center;
 
 
 
+
 h1{
 
 color:#ffd700;
 
+font-size:32px;
+
 }
+
 
 
 
@@ -34,25 +39,41 @@ background:#151515;
 
 border-radius:25px;
 
-padding:25px;
+padding:35px;
 
-margin-top:20px;
+margin-top:25px;
 
 border:1px solid #7c3aed;
 
+max-width:500px;
+
+margin-left:auto;
+
+margin-right:auto;
+
+box-shadow:0 0 25px rgba(124,58,237,0.3);
+
 }
+
 
 
 
 .order-card img{
 
-width:220px;
+width:320px;
 
-height:220px;
+height:320px;
 
 object-fit:contain;
 
+display:block;
+
+margin:20px auto;
+
+border-radius:20px;
+
 }
+
 
 
 
@@ -60,7 +81,12 @@ object-fit:contain;
 
 color:white;
 
+font-size:28px;
+
+margin-top:20px;
+
 }
+
 
 
 
@@ -68,13 +94,16 @@ color:white;
 
 background:#222;
 
-padding:15px;
+padding:20px;
 
 border-radius:15px;
 
-margin:20px 0;
+margin:25px 0;
+
+font-size:18px;
 
 }
+
 
 
 
@@ -86,15 +115,28 @@ color:#ffd700;
 
 
 
+
 .review{
 
 background:#111;
 
-padding:15px;
+padding:20px;
 
 border-radius:15px;
 
+margin-top:20px;
+
 }
+
+
+
+
+.review h3{
+
+color:#ffd700;
+
+}
+
 
 
 
@@ -102,9 +144,12 @@ border-radius:15px;
 
 color:#ffd700;
 
-font-size:30px;
+font-size:35px;
+
+letter-spacing:5px;
 
 }
+
 
 
 
@@ -112,7 +157,7 @@ button{
 
 margin-top:25px;
 
-padding:15px 40px;
+padding:16px 45px;
 
 border:none;
 
@@ -120,46 +165,70 @@ border-radius:20px;
 
 background:#ffd700;
 
+color:black;
+
 font-weight:bold;
 
-font-size:16px;
+font-size:17px;
+
+cursor:pointer;
+
+transition:0.3s;
 
 }
+
+
+
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
 
 
 
 #progress{
 
-margin-top:25px;
+margin-top:30px;
 
 color:#b56cff;
 
-}
-.auto-review {
+font-size:22px;
 
-background: linear-gradient(45deg,#d4af37,#ffd700);
+}
+
+
+
+
+.auto-review{
+
+background:linear-gradient(45deg,#d4af37,#ffd700);
 
 color:black;
 
 border:none;
 
-padding:12px 25px;
+padding:14px 30px;
 
-border-radius:10px;
+border-radius:12px;
 
 font-weight:bold;
 
 cursor:pointer;
 
-margin-top:15px;
+margin-top:20px;
 
-box-shadow:0 0 15px gold;
+box-shadow:0 0 20px gold;
 
 }
 
 
-.auto-review:hover {
 
-transform:scale(1.05);
+
+.auto-review:hover{
+
+transform:scale(1.08);
 
 }
