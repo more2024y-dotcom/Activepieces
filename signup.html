@@ -28,7 +28,7 @@ Activepieces
 
 
 <p class="subtitle">
-Create your account
+Create Account
 </p>
 
 
@@ -38,35 +38,51 @@ Create your account
 Username
 </label>
 
-<input type="text" id="username" placeholder="Enter username">
+<input type="text" id="username" placeholder="Username">
+
+<p id="usernameError" class="error">
+Username is required
+</p>
+
+
 
 
 
 <label>
-Password
+Phone
 </label>
 
-<input type="password" id="password" placeholder="Enter password">
+
+<div class="phone-box">
 
 
+<select id="country">
 
-<label>
-Confirm Password
-</label>
+<option>
++66
+</option>
 
-<input type="password" id="confirmPassword" placeholder="Confirm password">
+<option>
++95
+</option>
+
+<option>
++1
+</option>
+
+<option>
++44
+</option>
+
+</select>
 
 
+<input 
+type="text" 
+id="phone"
+placeholder="Enter a phone number"
+>
 
-
-
-<div class="terms">
-
-<input type="checkbox" id="terms">
-
-<span>
-I agree to the terms
-</span>
 
 </div>
 
@@ -74,11 +90,103 @@ I agree to the terms
 
 
 
+<label>
+Transaction Password
+</label>
+
+
+<input 
+type="password" 
+id="transactionPassword"
+placeholder="Transaction Password"
+>
+
+
+<p id="transactionError" class="error">
+Transaction Password is required
+</p>
+
+
+
+
+
+
+<label>
+Login Password
+</label>
+
+
+<input 
+type="password" 
+id="loginPassword"
+placeholder="Login Password"
+>
+
+
+
+
+
+
+
+<label>
+Gender
+</label>
+
+
+<select id="gender">
+
+
+<option value="">
+Select Gender
+</option>
+
+
+<option>
+Male
+</option>
+
+
+<option>
+Female
+</option>
+
+
+<option>
+Other
+</option>
+
+
+</select>
+
+
+
+
+
+
+
+<label>
+Invite Code
+</label>
+
+
+<input 
+type="text" 
+id="invite"
+placeholder="Invite Code"
+>
+
+
+
+
+
+
+
 <button onclick="createAccount()">
 
-Create Account
+Create account
 
 </button>
+
 
 
 
@@ -91,18 +199,18 @@ Already have an account?
 <br>
 
 <a href="login.html">
-Login
+Login here
 </a>
 
 </p>
 
 
 
-
 </div>
 
 
 </div>
+
 
 
 
@@ -114,30 +222,21 @@ Login
 function createAccount(){
 
 
-let username = document.getElementById("username").value;
+let username=document.getElementById("username").value;
 
-let password = document.getElementById("password").value;
+let phone=document.getElementById("phone").value;
 
-let confirmPassword = document.getElementById("confirmPassword").value;
+let transaction=document.getElementById("transactionPassword").value;
 
-let terms = document.getElementById("terms").checked;
-
-
-
-
-if(username == "" || password == ""){
-
-alert("Please fill all fields");
-
-return;
-
-}
+let password=document.getElementById("loginPassword").value;
 
 
 
-if(password != confirmPassword){
 
-alert("Passwords do not match");
+
+if(username==""){
+
+alert("Username is required");
 
 return;
 
@@ -145,9 +244,9 @@ return;
 
 
 
-if(!terms){
+if(transaction==""){
 
-alert("Please accept the terms");
+alert("Transaction Password is required");
 
 return;
 
@@ -156,17 +255,23 @@ return;
 
 
 
-localStorage.setItem("username", username);
 
-localStorage.setItem("password", password);
+localStorage.setItem("username",username);
+
+localStorage.setItem("phone",phone);
+
+localStorage.setItem("transactionPassword",transaction);
+
+localStorage.setItem("password",password);
+
+
 
 
 
 alert("Account created successfully!");
 
-
-
 window.location.href="login.html";
+
 
 }
 
