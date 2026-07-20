@@ -1,8 +1,6 @@
 let orderPrice = 100;
 
-
 let commissionRate = 0.005;
-
 
 let profit = orderPrice * commissionRate;
 
@@ -12,7 +10,41 @@ profit.toFixed(2);
 
 
 
+// =====================
+// ORDER PROGRESS SYSTEM
+// =====================
+
+let completedOrders = 
+Number(localStorage.getItem("completedOrders")) || 0;
+
+
+function updateProgress(){
+
+document.getElementById("progress").innerHTML =
+"Order " + completedOrders + " / 40";
+
+}
+
+
+updateProgress();
+
+
+
 function completeOrder(){
+
+
+if(completedOrders < 40){
+
+completedOrders++;
+
+
+localStorage.setItem(
+"completedOrders",
+completedOrders
+);
+
+
+updateProgress();
 
 
 alert(
@@ -22,10 +54,35 @@ alert(
 
 
 }
+
+else{
+
+
+alert(
+"All 40 orders completed!"
+);
+
+
+}
+
+
+}
+
+
+
+
+
+// =====================
+// AUTOMATIC REVIEW SYSTEM
+// =====================
+
+
 let reviewStars = 0;
 
 
+
 function automaticReview(){
+
 
 reviewStars++;
 
@@ -37,37 +94,47 @@ reviewStars = 0;
 }
 
 
+
 let starDisplay = "";
 
-for(let i=0;i<reviewStars;i++){
+
+
+for(let i = 0; i < reviewStars; i++){
 
 starDisplay += "⭐";
 
 }
 
 
-for(let i=reviewStars;i<4;i++){
+
+for(let i = reviewStars; i < 4; i++){
 
 starDisplay += "☆";
 
 }
 
 
-document.getElementById("stars").innerHTML = starDisplay;
+
+document.getElementById("stars").innerHTML =
+starDisplay;
 
 
 
 if(reviewStars === 0){
 
+
 document.getElementById("review-text").innerHTML =
 "No review yet.";
+
 
 }
 
 else{
 
+
 document.getElementById("review-text").innerHTML =
 "Excellent product with premium quality. Highly recommended.";
+
 
 }
 
