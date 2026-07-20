@@ -135,3 +135,31 @@ margin-top:25px;
 color:#b56cff;
 
 }
+.auto-review {
+
+background: linear-gradient(45deg,#d4af37,#ffd700);
+
+color:black;
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-top:15px;
+
+box-shadow:0 0 15px gold;
+
+}
+
+
+.auto-review:hover {
+
+transform:scale(1.05);
+
+}
