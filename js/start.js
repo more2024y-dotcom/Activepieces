@@ -1,12 +1,34 @@
-let orderPrice = 100;
+// =====================
+// PRODUCT LIST
+// =====================
 
-let commissionRate = 0.005;
+let products = [
 
-let profit = orderPrice * commissionRate;
+{
+name: "iPhone 15 Pro",
+image: "assets/products/iphone.png",
+price: 100
+},
 
+{
+name: "Apple Watch",
+image: "assets/products/watch.png",
+price: 80
+},
 
-document.getElementById("profit").innerHTML =
-profit.toFixed(2);
+{
+name: "AirPods Pro",
+image: "assets/products/airpods.png",
+price: 150
+},
+
+{
+name: "MacBook Pro",
+image: "assets/products/macbook.png",
+price: 300
+}
+
+];
 
 
 
@@ -18,15 +40,58 @@ let completedOrders =
 Number(localStorage.getItem("completedOrders")) || 0;
 
 
-function updateProgress(){
+let currentProduct =
+Number(localStorage.getItem("currentProduct")) || 0;
+
+
+
+function loadProduct(){
+
+
+let product =
+products[currentProduct % products.length];
+
+
+
+document.getElementById("product-image").src =
+product.image;
+
+
+
+document.getElementById("product-name").innerHTML =
+product.name;
+
+
+
+document.getElementById("price").innerHTML =
+product.price;
+
+
+
+let commissionRate = 0.005;
+
+
+let profit =
+product.price * commissionRate;
+
+
+
+document.getElementById("profit").innerHTML =
+profit.toFixed(2);
+
+
 
 document.getElementById("progress").innerHTML =
 "Order " + completedOrders + " / 40";
 
+
 }
 
 
-updateProgress();
+
+loadProduct();
+
+
 
 
 
@@ -39,19 +104,33 @@ if(completedOrders < 40){
 completedOrders++;
 
 
+currentProduct++;
+
+
+
 localStorage.setItem(
 "completedOrders",
 completedOrders
 );
 
 
-updateProgress();
+
+localStorage.setItem(
+"currentProduct",
+currentProduct
+);
+
+
+
+loadProduct();
 
 
 }
 
 
 }
+
+
 
 
 
@@ -59,13 +138,16 @@ updateProgress();
 // AUTOMATIC REVIEW
 // =====================
 
+
 let reviewStars = 0;
+
 
 
 function automaticReview(){
 
 
 reviewStars++;
+
 
 
 if(reviewStars > 4){
@@ -76,7 +158,9 @@ reviewStars = 0;
 
 
 
+
 let starDisplay = "";
+
 
 
 for(let i = 0; i < reviewStars; i++){
@@ -84,6 +168,7 @@ for(let i = 0; i < reviewStars; i++){
 starDisplay += "⭐";
 
 }
+
 
 
 for(let i = reviewStars; i < 4; i++){
@@ -96,6 +181,7 @@ starDisplay += "☆";
 
 document.getElementById("stars").innerHTML =
 starDisplay;
+
 
 
 
