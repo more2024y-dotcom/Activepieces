@@ -30,7 +30,6 @@ Login
 
 
 
-
 <input type="text" id="username" placeholder="Username">
 
 
@@ -39,14 +38,11 @@ Login
 
 
 
-
-
 <button onclick="login()">
 
 Login
 
 </button>
-
 
 
 
@@ -67,10 +63,7 @@ Create Account
 
 
 
-
-
 </div>
-
 
 
 
@@ -81,21 +74,32 @@ Create Account
 function login(){
 
 
-let username =
-document.getElementById("username").value;
+let username = document.getElementById("username").value;
+
+let password = document.getElementById("password").value;
 
 
 
-if(username == ""){
+let savedUsername = localStorage.getItem("username");
+
+let savedPassword = localStorage.getItem("password");
 
 
-alert("Please enter username");
+
+if(username == "" || password == ""){
+
+
+alert("Please enter username and password");
+
+
+return;
 
 
 }
 
 
-else{
+
+if(username == savedUsername && password == savedPassword){
 
 
 localStorage.setItem("user", username);
@@ -106,8 +110,17 @@ window.location.href="dashboard.html";
 
 }
 
+else{
+
+
+alert("Account not found. Please create an account first.");
+
 
 }
+
+
+}
+
 
 
 </script>
