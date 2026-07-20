@@ -1,181 +1,290 @@
-```html
-<!DOCTYPE html>
-<html>
+body{
 
-<head>
+margin:0;
 
-<title>Create Your Account</title>
+min-height:100vh;
 
-<link rel="stylesheet" href="css/signup.css">
+display:flex;
 
-</head>
+justify-content:center;
 
+align-items:center;
 
-<body>
+background:#080808;
 
+font-family:Arial, sans-serif;
 
-<div class="signup-container">
+padding:30px 0;
 
+}
 
-<div class="signup-card">
 
 
-<img src="assets/logo.png" class="logo">
 
+.signup-container{
 
-<h1>Create Your Account</h1>
+width:100%;
 
-<p class="subtitle">
-Join Activepieces platform
-</p>
+display:flex;
 
+justify-content:center;
 
+}
 
-<label>Full Name</label>
 
-<input 
-id="username"
-type="text"
-placeholder="Enter your name">
 
 
+.signup-card{
 
-<label>Phone Number</label>
+background:#151515;
 
-<div class="phone-box">
+width:450px;
 
-<select>
+padding:45px;
 
-<option>
-+1
-</option>
+border-radius:30px;
 
-<option>
-+66
-</option>
+border:2px solid #7c3aed;
 
-<option>
-+44
-</option>
+box-shadow:0 0 40px rgba(255,215,0,0.25);
 
-</select>
+text-align:center;
 
+}
 
-<input
-id="phone"
-type="text"
-placeholder="Phone number">
 
-</div>
 
 
+.logo{
 
+width:120px;
 
-<label>Login Password</label>
+height:120px;
 
-<input
-id="loginPassword"
-type="password"
-placeholder="Create password">
+object-fit:contain;
 
+margin-bottom:15px;
 
+}
 
 
 
-<label>Security PIN</label>
 
-<input
-id="transactionPassword"
-type="password"
-placeholder="Transaction PIN">
+h1{
 
+color:#ffd700;
 
+font-size:34px;
 
+margin:15px 0;
 
+}
 
-<label>Gender</label>
 
-<select id="gender">
 
-<option value="">
-Select gender
-</option>
 
-<option value="Male">
-Male
-</option>
+.subtitle{
 
-<option value="Female">
-Female
-</option>
+color:white;
 
-</select>
+font-size:18px;
 
+margin-bottom:30px;
 
+}
 
 
 
-<label>Invitation Code</label>
 
-<input
-id="inviteCode"
-type="text"
-placeholder="Enter invite code">
+label{
 
+display:block;
 
+color:#ffd700;
 
+text-align:left;
 
+margin-top:18px;
 
-<div class="terms">
+font-weight:bold;
 
-<input type="checkbox">
+}
 
-<span>
-I agree to Terms & Privacy
-</span>
 
-</div>
 
 
+input,
+select{
 
+width:100%;
 
-<button onclick="createAccount()">
+height:50px;
 
-Create Account
+box-sizing:border-box;
 
-</button>
+margin-top:8px;
 
+padding:0 15px;
 
+border-radius:12px;
 
+border:none;
 
-<p class="login-link">
+background:#222;
 
-Already registered?
+color:white;
 
-<a href="login.html">
-Login
-</a>
+font-size:16px;
 
-</p>
+}
 
 
 
-</div>
 
+input::placeholder{
 
-</div>
+color:#999;
 
+}
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="js/supabase.js"></script>
+select{
 
-<script src="js/signup.js"></script>
+cursor:pointer;
 
+}
 
-</body>
 
-</html>
-```
+
+
+.phone-box{
+
+display:flex;
+
+gap:10px;
+
+}
+
+
+
+
+.phone-box select{
+
+width:100px;
+
+}
+
+
+
+
+.phone-box input{
+
+flex:1;
+
+}
+
+
+
+
+.terms{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+margin-top:25px;
+
+color:white;
+
+font-size:14px;
+
+}
+
+
+
+
+.terms input{
+
+width:18px;
+
+height:18px;
+
+margin:0;
+
+}
+
+
+
+
+button{
+
+margin-top:30px;
+
+width:240px;
+
+height:55px;
+
+border:none;
+
+border-radius:15px;
+
+background:linear-gradient(45deg,#d4af37,#ffd700);
+
+color:black;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:0 0 15px gold;
+
+}
+
+
+
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+
+.login-link{
+
+color:white;
+
+margin-top:30px;
+
+font-size:16px;
+
+}
+
+
+
+
+.login-link a{
+
+color:#ffd700;
+
+font-weight:bold;
+
+text-decoration:none;
+
+}
+
+
+
+.login-link a:hover{
+
+text-decoration:underline;
+
+}
