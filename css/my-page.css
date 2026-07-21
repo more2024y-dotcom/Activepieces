@@ -20,7 +20,7 @@ body {
 
     max-width: 700px;
 
-    margin: 30px auto;
+    margin: 25px auto;
 
 }
 
@@ -32,7 +32,8 @@ body {
 
 .profile-card,
 .balance-card,
-.profit-card {
+.profit-card,
+.gift-card {
 
     background: #111;
 
@@ -74,15 +75,15 @@ body {
 
 .profile-pic {
 
-    width: 90px;
+    width: 95px;
 
-    height: 90px;
+    height: 95px;
 
     border-radius: 50%;
 
     object-fit: cover;
 
-    border: 2px solid #d4af37;
+    border: 3px solid #d4af37;
 
 }
 
@@ -98,7 +99,7 @@ body {
 
 .profile-info h1 {
 
-    margin: 0 0 10px;
+    margin: 0 0 8px;
 
     color: #d4af37;
 
@@ -109,6 +110,26 @@ body {
 .profile-card span {
 
     color: #d4af37;
+
+}
+
+
+
+.vip {
+
+    display: inline-block;
+
+    background: #6d28d9;
+
+    border: 1px solid #d4af37;
+
+    padding: 5px 15px;
+
+    border-radius: 20px;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
 
 }
 
@@ -132,7 +153,7 @@ body {
 
     color: #d4af37;
 
-    font-size: 32px;
+    font-size: 34px;
 
 }
 
@@ -208,8 +229,6 @@ body {
 
 
 
-
-
 .profit-box {
 
     display: flex;
@@ -239,6 +258,66 @@ body {
 
 
 .profit-box h3 {
+
+    color: #d4af37;
+
+}
+
+
+
+
+
+/* Selected Gifts */
+
+.gift-card {
+
+    border: 1px solid #6d28d9;
+
+}
+
+
+
+.gift-card h2 {
+
+    color: #d4af37;
+
+}
+
+
+
+.gift-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background: #1a1a1a;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+}
+
+
+
+.gift-item img {
+
+    width: 70px;
+
+    height: 70px;
+
+    object-fit: contain;
+
+}
+
+
+
+.gift-item h3 {
+
+    margin: 0;
 
     color: #d4af37;
 
@@ -286,5 +365,6 @@ body {
         align-items: center;
 
     }
+
 
 }
