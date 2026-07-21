@@ -1,1 +1,79 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Platform</title>
+    <link rel="stylesheet" href="css/my-page.css">
+</head>
+
+<body>
+
+    <div class="my-page">
+
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <img src="assets/logo.png" alt="Profile Picture" class="profile-pic">
+                <div class="profile-info">
+                    <div class="vip">VIP 1</div>
+                    <h1>John Doe</h1>
+                    <p>Username: <span>user123</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <h2>Total Balance</h2>
+            <h1>$1,250.00</h1>
+            
+            <div class="wallet-buttons">
+                <button onclick="location.href='deposit.html'">Deposit</button>
+                <button onclick="location.href='withdrawal.html'">Withdrawal</button>
+            </div>
+        </div>
+
+        <!-- Profit Card -->
+        <div class="profit-card">
+            <h2>Earnings Overview</h2>
+            <div class="profit-box">
+                <div>
+                    <h3>Today's Profit</h3>
+                    <p>$45.50</p>
+                </div>
+                <div>
+                    <h3>Total Profit</h3>
+                    <p>$415.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selected Gifts Card -->
+        <div class="gift-card">
+            <h2>Selected Gifts</h2>
+            <div class="gift-item">
+                <img src="assets/products/ipad.png" alt="iPad">
+                <div>
+                    <h3>Apple iPad Pro</h3>
+                    <p>⭐ 68 Points</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #333;">
+        <a href="home.html" style="color: white; text-decoration: none; text-align: center;">🏠<br>Home</a>
+        <a href="certificate.html" style="color: white; text-decoration: none; text-align: center;">🏆<br>Certificate</a>
+        <a href="start.html" style="color: white; text-decoration: none; text-align: center;">🚀<br>Starting</a>
+        <a href="records.html" style="color: white; text-decoration: none; text-align: center;">📋<br>Records</a>
+        <a href="profile.html" style="color: #ffd700; text-decoration: none; text-align: center;">👤<br>My</a>
+    </nav>
+
+</body>
+
+</html>
