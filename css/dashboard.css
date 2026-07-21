@@ -9,8 +9,9 @@
 body {
     background-color: #fcf6f5;
     color: #222222;
-    padding-bottom: 110px;
+    padding-bottom: 140px;
     overflow-x: hidden;
+    font-size: 18px;
 }
 
 a {
@@ -19,29 +20,29 @@ a {
 }
 
 .content {
-    padding: 24px 20px;
-    max-width: 600px;
+    padding: 35px 28px;
+    max-width: 650px;
     margin: 0 auto;
 }
 
 /* --- Logo Header --- */
 .home-logo {
-    margin-bottom: 24px;
+    margin-bottom: 35px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
 .home-logo img {
-    max-height: 48px;
+    max-height: 70px;
 }
 
 /* --- Top Menu Icons Grid (8 items) --- */
 .home-menu-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px 12px;
-    margin-bottom: 30px;
+    gap: 24px 16px;
+    margin-bottom: 40px;
     text-align: center;
 }
 
@@ -50,77 +51,78 @@ a {
     flex-direction: column;
     align-items: center;
     background: #ffffff;
-    padding: 16px 8px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 24px 12px;
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .icon-circle {
-    width: 64px;
-    height: 64px;
+    width: 90px;
+    height: 90px;
     background-color: #ff334b;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    font-size: 28px;
-    margin-bottom: 10px;
-    box-shadow: 0 6px 16px rgba(255, 51, 75, 0.3);
+    font-size: 40px;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 24px rgba(255, 51, 75, 0.4);
 }
 
 .menu-icon-item span:not(.icon-circle span) {
-    font-size: 14px;
-    color: #222222;
-    font-weight: 700;
+    font-size: 18px;
+    color: #111111;
+    font-weight: 900;
 }
 
 /* --- VIP Banner Card --- */
 .vip-banner {
     background: linear-gradient(135deg, #d4af37 0%, #fff2b2 50%, #d4af37 100%);
-    border-radius: 16px;
-    padding: 22px 24px;
+    border-radius: 24px;
+    padding: 30px 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
 }
 
 .vip-left {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
 }
 
 .vip-shield {
     background: #1e3a8a;
     color: #fff;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
+    width: 68px;
+    height: 68px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 26px;
 }
 
 .vip-banner h2 {
-    font-size: 20px;
+    font-size: 28px;
     color: #111;
-    font-weight: 800;
+    font-weight: 900;
 }
 
 .vip-banner p {
-    font-size: 13px !important;
-    color: #333 !important;
-    margin-top: 2px;
+    font-size: 17px !important;
+    color: #222 !important;
+    margin-top: 6px;
+    font-weight: 700;
 }
 
 .vip-right {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 900;
     color: #111;
 }
 
@@ -129,12 +131,12 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .section-header h2 {
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 26px;
+    font-weight: 900;
     color: #111;
 }
 
@@ -142,18 +144,18 @@ a {
     background-color: #ff334b;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 28px;
+    font-size: 17px;
+    font-weight: 900;
     cursor: pointer;
 }
 
 .gifts-scroll-container {
     display: flex;
-    gap: 16px;
+    gap: 24px;
     overflow-x: auto;
-    padding-bottom: 12px;
+    padding-bottom: 18px;
     scrollbar-width: none;
 }
 
@@ -164,31 +166,31 @@ a {
 .gift-card-horizontal {
     background: #ffffff;
     border: 1px solid #eaeaea;
-    border-radius: 16px;
-    min-width: 180px;
-    max-width: 180px;
-    padding: 18px;
+    border-radius: 24px;
+    min-width: 250px;
+    max-width: 250px;
+    padding: 26px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     flex-shrink: 0;
 }
 
 .gift-card-horizontal img {
-    width: 120px;
-    height: 120px;
+    width: 170px;
+    height: 170px;
     object-fit: contain;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
 }
 
 .gift-card-horizontal h3 {
-    font-size: 14px;
-    font-weight: 700;
-    color: #333;
+    font-size: 20px;
+    font-weight: 900;
+    color: #222;
     text-align: center;
-    margin-bottom: 12px;
-    height: 40px;
+    margin-bottom: 16px;
+    height: 56px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -198,53 +200,53 @@ a {
 .points-badge {
     background-color: #ff334b;
     color: white;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 800;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 900;
     text-align: center;
     width: 100%;
 }
 
 /* --- Real-Time Heatmap Section --- */
 .realtime-section {
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .realtime-section h2 {
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 12px;
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 18px;
     color: #111;
 }
 
 .heatmap-card {
     background: #ffffff;
     border: 1px solid #eaeaea;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .heatmap-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 15px;
-    font-weight: 700;
-    color: #333;
+    font-size: 20px;
+    font-weight: 900;
+    color: #222;
     background: #f8f9fa;
-    padding: 14px 16px;
-    border-radius: 10px;
-    margin-bottom: 18px;
+    padding: 18px 24px;
+    border-radius: 14px;
+    margin-bottom: 24px;
 }
 
 .fake-chart {
-    height: 130px;
+    height: 180px;
     width: 100%;
     position: relative;
-    background: linear-gradient(to bottom, rgba(255, 51, 75, 0.1), transparent);
-    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(255, 51, 75, 0.15), transparent);
+    border-radius: 14px;
     overflow: hidden;
 }
 
@@ -253,8 +255,8 @@ a {
     bottom: -20px;
     left: -10%;
     width: 120%;
-    height: 100px;
-    border-top: 3px solid #ff334b;
+    height: 130px;
+    border-top: 5px solid #ff334b;
     border-radius: 50% 50% 0 0 / 100% 100% 0 0;
 }
 
@@ -267,16 +269,16 @@ a {
     background-color: #000000;
     display: flex;
     justify-content: space-around;
-    padding: 14px 0;
+    padding: 18px 0;
     z-index: 1000;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 -8px 24px rgba(0,0,0,0.3);
 }
 
 .bottom-nav a {
     text-align: center;
     color: #888;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 900;
     flex: 1;
 }
 
@@ -286,6 +288,6 @@ a {
 
 .bottom-nav a span {
     display: block;
-    font-size: 24px;
-    margin-bottom: 4px;
+    font-size: 34px;
+    margin-bottom: 6px;
 }
