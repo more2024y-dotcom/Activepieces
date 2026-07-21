@@ -190,3 +190,78 @@ body {
     }
 
 }
+/* Profile Layout */
+
+.profile-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+}
+
+
+.profile-pic {
+
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid #d4af37;
+
+}
+
+
+.profile-info {
+
+    text-align: left;
+
+}
+
+
+.profile-info h1 {
+
+    margin: 0 0 10px 0;
+
+}
+
+
+
+/* Make cards closer together */
+
+.profile-card,
+.balance-card,
+.profit-card {
+
+    margin-bottom: 15px;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:700px){
+
+    .profile-header {
+
+        flex-direction: column;
+
+        text-align: center;
+
+    }
+
+
+    .profile-info {
+
+        text-align: center;
+
+    }
+
+}
