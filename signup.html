@@ -127,7 +127,6 @@ placeholder="Login Password"
 
 
 
-
 <label>
 Gender
 </label>
@@ -163,7 +162,6 @@ Other
 
 
 
-
 <label>
 Invite Code
 </label>
@@ -174,7 +172,6 @@ type="text"
 id="invite"
 placeholder="Invite Code"
 >
-
 
 
 
@@ -216,6 +213,7 @@ Login here
 
 
 
+
 <script>
 
 
@@ -229,6 +227,8 @@ let phone=document.getElementById("phone").value;
 let transaction=document.getElementById("transactionPassword").value;
 
 let password=document.getElementById("loginPassword").value;
+
+let gender=document.getElementById("gender").value;
 
 
 
@@ -264,13 +264,18 @@ localStorage.setItem("transactionPassword",transaction);
 
 localStorage.setItem("password",password);
 
+localStorage.setItem("gender",gender);
+
 
 
 
 
 alert("Account created successfully!");
 
-window.location.href="login.html";
+
+// Go to dashboard after account creation
+
+window.location.href="dashboard.html";
 
 
 }
