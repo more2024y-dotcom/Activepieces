@@ -1,55 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Platform</title>
+    <title>User Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
-
 <body>
 
     <div class="content">
-
         <!-- Logo Header -->
         <div class="home-logo">
-            <img src="assets/logo.png" alt="Platform Logo">
+            <img src="assets/logo.png" alt="Logo">
         </div>
 
-        <!-- Top Menu Grid (8 Icons layout) -->
+        <!-- Top Menu Icons Grid (8 items) -->
         <div class="home-menu-grid">
-            <a href="vip.html" class="menu-icon-item">
+            <div class="menu-icon-item">
+                <div class="icon-circle">🏠</div>
+                <span>Home</span>
+            </div>
+            <div class="menu-icon-item">
                 <div class="icon-circle">⭐</div>
                 <span>VIP</span>
-            </a>
+            </div>
             <div class="menu-icon-item">
-                <div class="icon-circle">🎉</div>
-                <span>Event</span>
+                <div class="icon-circle">📋</div>
+                <span>Tasks</span>
+            </div>
+            <div class="menu-icon-item">
+                <div class="icon-circle">💳</div>
+                <span>Withdraw</span>
             </div>
             <div class="menu-icon-item">
                 <div class="icon-circle">💰</div>
-                <span>Withdrawal</span>
-            </div>
-            <div class="menu-icon-item">
-                <div class="icon-circle">💵</div>
                 <span>Deposit</span>
             </div>
             <div class="menu-icon-item">
-                <div class="icon-circle">📝</div>
-                <span>T & C</span>
+                <div class="icon-circle">🎁</div>
+                <span>Gifts</span>
             </div>
             <div class="menu-icon-item">
-                <div class="icon-circle">🛡️</div>
-                <span>Certificate</span>
+                <div class="icon-circle">📊</div>
+                <span>Records</span>
             </div>
             <div class="menu-icon-item">
-                <div class="icon-circle">❓</div>
-                <span>FAQs</span>
-            </div>
-            <div class="menu-icon-item">
-                <div class="icon-circle">👥</div>
-                <span>About</span>
+                <div class="icon-circle">⚙️</div>
+                <span>Settings</span>
             </div>
         </div>
 
@@ -57,86 +52,72 @@
         <div class="vip-banner">
             <div class="vip-left">
                 <div class="vip-shield">VIP</div>
-                <h2>VIP 1</h2>
+                <div>
+                    <h2>VIP Member</h2>
+                    <p style="font-size: 11px; color: #444;">Active status verified</p>
+                </div>
             </div>
-            <div class="vip-right">
-                Current VIP Level <span>›</span>
-            </div>
+            <div class="vip-right">Level 1</div>
         </div>
 
         <!-- Selected Gifts Section -->
-        <div class="gift-section">
-            <div class="section-header">
-                <h2>Selected Gifts</h2>
-                <button class="view-more-red">View More</button>
-            </div>
+        <div class="section-header">
+            <h2>Selected Gifts</h2>
+            <button class="view-more-red">View More</button>
+        </div>
 
-            <!-- Horizontal Scroll Cards -->
-            <div class="gifts-scroll-container">
-                <div class="gift-card-horizontal">
-                    <img src="assets/products/ipad.png" alt="iPad">
-                    <h3>Apple iPad Pro 13-Inch</h3>
-                    <div class="points-badge">⭐ 68</div>
-                </div>
-                <div class="gift-card-horizontal">
-                    <img src="assets/products/iphone.png" alt="iPhone">
-                    <h3>NEW iPhone 16 Pro Max</h3>
-                    <div class="points-badge">⭐ 120</div>
-                </div>
-                <div class="gift-card-horizontal">
-                    <img src="assets/products/macbook.png" alt="Laptop">
-                    <h3>Gaming Laptop AMD</h3>
-                    <div class="points-badge">⭐ 15</div>
-                </div>
-                <div class="gift-card-horizontal">
-                    <img src="assets/products/ipad.png" alt="Perfume">
-                    <h3>Versace Eros Men's</h3>
-                    <div class="points-badge">⭐ 30</div>
-                </div>
+        <div class="gifts-scroll-container">
+            <div class="gift-card-horizontal">
+                <img src="assets/ipad.png" alt="iPad Pro">
+                <h3>Apple iPad Pro</h3>
+                <div class="points-badge">60 Points</div>
+            </div>
+            <div class="gift-card-horizontal">
+                <img src="assets/phone.png" alt="Phone">
+                <h3>iPhone 14 Pro</h3>
+                <div class="points-badge">80 Points</div>
             </div>
         </div>
 
         <!-- Real-Time Heatmap Section -->
         <div class="realtime-section">
-            <h2>Real-time</h2>
+            <h2>Daily Progress</h2>
             <div class="heatmap-card">
                 <div class="heatmap-header">
-                    <span>Optimization Needs Heatmap</span>
-                    <span>⌄</span>
+                    <span>Task Completion Rate</span>
+                    <span style="color: #ff334b;">100%</span>
                 </div>
                 <div class="fake-chart">
-                    <!-- Corrected chart curve element matching dashboard.css -->
                     <div class="chart-curve"></div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a href="home.html" class="active">
             <span>🏠</span>
-            Home
+            HOME
         </a>
         <a href="certificate.html">
             <span>🏆</span>
-            Certificate
+            CERTIFICATE
         </a>
         <a href="start.html">
             <span>🚀</span>
-            Starting
+            START
         </a>
         <a href="records.html">
             <span>📋</span>
-            Records
+            RECORDS
         </a>
         <a href="profile.html">
             <span>👤</span>
-            My
+            MY
         </a>
     </nav>
 
+    <script src="dashboard.js?v=12"></script>
 </body>
-
 </html>
