@@ -2,253 +2,94 @@
 <html>
 
 <head>
-
-<title>Activepieces Admin</title>
-
-<link rel="stylesheet" href="css/admin.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activepieces Admin</title>
+    <!-- Fixed stylesheet path to point to your css folder -->
+    <link rel="stylesheet" href="css/admin.css">
 </head>
-
 
 <body>
 
+    <div class="admin">
 
-<div class="admin">
+        <h1>Admin Panel</h1>
 
+        <div class="stats">
+            <div class="box">
+                <h3>Total Users</h3>
+                <p id="totalUsers">0</p>
+            </div>
 
-<h1>Admin Panel</h1>
+            <div class="box">
+                <h3>Total Tasks</h3>
+                <p id="totalTasks">0</p>
+            </div>
 
+            <div class="box">
+                <h3>Completed Tasks</h3>
+                <p id="completedTasks">0</p>
+            </div>
 
+            <div class="box">
+                <h3>Active Tasks</h3>
+                <p id="activeTasks">0</p>
+            </div>
+        </div>
 
-<div class="stats">
+        <div class="create-task">
+            <h2>Create New Task</h2>
 
+            <label>Task Title</label>
+            <input id="taskTitle" placeholder="Task title">
 
-<div class="box">
-<h3>Total Users</h3>
-<p id="totalUsers">0</p>
-</div>
+            <label>Product Name</label>
+            <input id="productName" placeholder="Product name">
 
+            <label>Description</label>
+            <textarea id="taskDescription" placeholder="Task description"></textarea>
 
+            <label>Priority</label>
+            <select id="taskPriority">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+            </select>
 
-<div class="box">
-<h3>Total Tasks</h3>
-<p id="totalTasks">0</p>
-</div>
+            <label>Due Date</label>
+            <input type="date" id="taskDueDate">
 
+            <label>Assign User</label>
+            <select id="taskUser">
+                <option value="All Users">All Users</option>
+            </select>
 
+            <button onclick="createTask()">Create Task</button>
+        </div>
 
-<div class="box">
-<h3>Completed Tasks</h3>
-<p id="completedTasks">0</p>
-</div>
+        <h2>Users</h2>
+        <div class="users">
+            <input id="newUser" placeholder="Username">
+            <button onclick="addUser()">Add User</button>
+            <div id="userList"></div>
+        </div>
 
+        <h2>Task List</h2>
+        <div id="taskList"></div>
 
+    </div>
 
-<div class="box">
-<h3>Active Tasks</h3>
-<p id="activeTasks">0</p>
-</div>
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Supabase Connection -->
+    <script src="js/supabase.js"></script>
 
-</div>
+    <!-- User Management -->
+    <script src="js/users.js"></script>
 
-
-
-
-
-<div class="create-task">
-
-
-<h2>Create New Task</h2>
-
-
-
-<label>Task Title</label>
-
-<input 
-id="taskTitle"
-placeholder="Task title">
-
-
-
-<label>Product Name</label>
-
-<input
-id="productName"
-placeholder="Product name">
-
-
-
-
-
-<label>Description</label>
-
-<textarea
-id="taskDescription"
-placeholder="Task description"></textarea>
-
-
-
-
-
-<label>Priority</label>
-
-<select id="taskPriority">
-
-
-<option value="High">
-High
-</option>
-
-
-<option value="Medium" selected>
-Medium
-</option>
-
-
-<option value="Low">
-Low
-</option>
-
-
-</select>
-
-
-
-
-
-
-<label>Due Date</label>
-
-<input
-type="date"
-id="taskDueDate">
-
-
-
-
-
-
-<label>Assign User</label>
-
-<select id="taskUser">
-
-
-<option value="All Users">
-All Users
-</option>
-
-
-</select>
-
-
-
-
-
-
-<button onclick="createTask()">
-
-Create Task
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-<h2>Users</h2>
-
-
-<div class="users">
-
-
-<input
-id="newUser"
-placeholder="Username">
-
-
-
-<button onclick="addUser()">
-
-Add User
-
-</button>
-
-
-
-<div id="userList">
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<h2>Task List</h2>
-
-
-
-<div id="taskList">
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- Supabase Library -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-
-
-<!-- Supabase Connection -->
-
-<script src="js/supabase.js"></script>
-
-
-
-
-
-<!-- User Management -->
-
-<script src="js/users.js"></script>
-
-
-
-
-
-<!-- Admin Logic -->
-
-<script src="js/admin.js?v=4"></script>
-
-
-
-
+    <!-- Admin Logic -->
+    <script src="js/admin.js?v=4"></script>
 
 </body>
 
