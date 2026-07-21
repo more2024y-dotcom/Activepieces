@@ -1,196 +1,64 @@
 body {
+
     margin: 0;
+
     min-height: 100vh;
+
     background: #080808;
+
     font-family: Arial, sans-serif;
+
     color: white;
+
 }
+
 
 
 .my-page {
-    width: 80%;
-    max-width: 900px;
-    margin: 40px auto;
+
+    width: 90%;
+
+    max-width: 700px;
+
+    margin: 30px auto;
+
 }
+
+
+
+
+
+/* All Cards */
+
+.profile-card,
+.balance-card,
+.profit-card {
+
+    background: #111;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    margin-top: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+
+}
+
+
+
 
 
 /* Profile */
 
 .profile-card {
-    text-align: center;
-    background: #111;
-    border: 1px solid #d4af37;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 0 15px rgba(212,175,55,0.3);
-}
-
-
-.profile-card h1 {
-    color: #d4af37;
-}
-
-
-.profile-card span {
-    color: #d4af37;
-}
-
-
-
-/* Balance */
-
-.balance-card {
-    margin-top: 25px;
-    text-align: center;
-    background: #111;
-    border: 1px solid #6d28d9;
-    border-radius: 15px;
-    padding: 30px;
-}
-
-
-.balance-card h1 {
-    color: #d4af37;
-}
-
-
-
-/* Buttons */
-
-.wallet-buttons {
-
-    display: grid;
-
-    grid-template-columns: repeat(2, minmax(150px,200px));
-
-    gap: 20px;
-
-    justify-content: center;
-
-    margin-top: 25px;
-
-}
-
-
-.wallet-buttons button {
-
-    padding: 15px;
-
-    background: #6d28d9;
-
-    color: white;
 
     border: 1px solid #d4af37;
 
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
 }
 
 
-.wallet-buttons button:hover {
-
-    background: #d4af37;
-
-    color: black;
-
-}
-
-
-
-/* Profit */
-
-.profit-card {
-
-    margin-top: 25px;
-
-    text-align: center;
-
-    background: #111;
-
-    border: 1px solid #d4af37;
-
-    border-radius: 15px;
-
-    padding: 30px;
-
-}
-
-
-
-.profit-card h1 {
-
-    color: #d4af37;
-
-}
-
-
-
-.profit-box {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 40px;
-
-    margin-top: 30px;
-
-}
-
-
-
-.profit-box div {
-
-    background: #1a1a1a;
-
-    padding: 20px;
-
-    width: 200px;
-
-    border-radius: 10px;
-
-}
-
-
-
-.profit-box h3 {
-
-    color: #d4af37;
-
-}
-
-
-
-@media(max-width:700px){
-
-    .my-page{
-
-        width:90%;
-
-    }
-
-
-    .profit-box{
-
-        flex-direction:column;
-
-        align-items:center;
-
-    }
-
-
-    .wallet-buttons{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-/* Profile Layout */
 
 .profile-header {
 
@@ -198,9 +66,10 @@ body {
 
     align-items: center;
 
-    gap: 25px;
+    gap: 20px;
 
 }
+
 
 
 .profile-pic {
@@ -218,6 +87,7 @@ body {
 }
 
 
+
 .profile-info {
 
     text-align: left;
@@ -225,29 +95,163 @@ body {
 }
 
 
+
 .profile-info h1 {
 
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
+
+    color: #d4af37;
 
 }
 
 
 
-/* Make cards closer together */
+.profile-card span {
 
-.profile-card,
-.balance-card,
+    color: #d4af37;
+
+}
+
+
+
+
+
+/* Balance */
+
+.balance-card {
+
+    text-align: center;
+
+    border: 1px solid #6d28d9;
+
+}
+
+
+
+.balance-card h1 {
+
+    color: #d4af37;
+
+    font-size: 32px;
+
+}
+
+
+
+
+
+/* Buttons */
+
+.wallet-buttons {
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+}
+
+
+
+.wallet-buttons button {
+
+    padding: 14px;
+
+    background: #6d28d9;
+
+    color: white;
+
+    border: 1px solid #d4af37;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+
+
+.wallet-buttons button:hover {
+
+    background: #d4af37;
+
+    color: black;
+
+}
+
+
+
+
+
+/* Profit */
+
 .profit-card {
 
-    margin-bottom: 15px;
+    text-align: center;
+
+    border: 1px solid #d4af37;
 
 }
+
+
+
+.profit-card h1 {
+
+    color: #d4af37;
+
+}
+
+
+
+
+
+.profit-box {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-top: 20px;
+
+}
+
+
+
+.profit-box div {
+
+    background: #1a1a1a;
+
+    padding: 18px;
+
+    width: 200px;
+
+    border-radius: 12px;
+
+}
+
+
+
+.profit-box h3 {
+
+    color: #d4af37;
+
+}
+
+
 
 
 
 /* Mobile */
 
 @media(max-width:700px){
+
 
     .profile-header {
 
@@ -258,9 +262,28 @@ body {
     }
 
 
+
     .profile-info {
 
         text-align: center;
+
+    }
+
+
+
+    .wallet-buttons {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+
+    .profit-box {
+
+        flex-direction: column;
+
+        align-items: center;
 
     }
 
