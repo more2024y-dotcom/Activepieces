@@ -1,410 +1,141 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Home</title>
-
-<link rel="stylesheet" href="css/dashboard.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - VIP Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
-
-
 <body>
 
-
-<div class="content">
-
-
-
-<!-- Activepieces Logo -->
-
-<div class="home-logo">
-
-<img src="assets/logo.png" alt="Activepieces Logo">
-
-</div>
-
-
-
-
-
-<!-- Top Menu -->
-
-<div class="home-menu">
-
-
-<div>
-
-<span>⭐</span>
-
-<p>
-VIP
-</p>
-
-</div>
-
-
-
-<div>
-
-<span>🎉</span>
-
-<p>
-Event
-</p>
-
-</div>
-
-
-
-
-<div>
-
-<span>💰</span>
-
-<p>
-Withdrawal
-</p>
-
-</div>
-
-
-
-
-<div>
-
-<span>💵</span>
-
-<p>
-Deposit
-</p>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- VIP Level -->
-
-
-<div class="vip-card">
-
-
-<h2>
-VIP 1
-</h2>
-
-
-<p>
-Current VIP Level
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- Selected Gifts -->
-
-
-<div class="gift-section">
-
-
-<h2>
-Selected Gifts
-</h2>
-
-
-
-
-
-<div class="gift-card">
-
-<img src="assets/products/ipad.png">
-
-
-<div>
-
-<h3>
-Apple iPad Pro 13-Inch
-</h3>
-
-<p>
-⭐ 68 Points
-</p>
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="gift-card">
-
-<div>
-
-<p>
-Apple iPhone 14 Plus
-</p>
-
-</div>
-
-
-<span>
-80
-</span>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="gift-card">
-
-<div>
-
-<p>
-Apple MacBook Air M2
-</p>
-
-</div>
-
-
-<span>
-120
-</span>
-
-
-</div>
-
-
-
-
-
-<button>
-
-View More
-
-</button>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- Real Time -->
-
-
-<div class="realtime">
-
-
-<h2>
-Real-time
-</h2>
-
-
-
-<p>
-Optimization Needs Heatmap
-</p>
-
-
-
-
-
-<h3>
-Total Online Users
-</h3>
-
-
-<strong>
-105.41K
-</strong>
-
-
-
-
-
-
-<h3>
-Average User Optimization Volume
-</h3>
-
-
-<strong>
-52.59K
-</strong>
-
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- Bottom Navigation -->
-
-<!-- Gift Detail Popup -->
-
-<div id="gift-popup" class="gift-popup">
-
-
-<div class="gift-detail">
-
-
-<button onclick="closeGift()" class="close-btn">
-✕
-</button>
-
-
-<img id="gift-image" src="">
-
-
-<h2 id="gift-title">
-Gift Name
-</h2>
-
-
-<p id="gift-points">
-⭐ Points
-</p>
-
-
-<div class="product-info">
-
-<h3>
-Product Details
-</h3>
-
-<p>
-Premium VIP reward product.
-</p>
-
-
-<p>
-Status: Available
-</p>
-
-</div>
-
-
-<button class="redeem-btn">
-Redeem Now
-</button>
-
-
-</div>
-
-
-</div>
-<nav class="bottom-nav">
-
-
-<a href="home.html">
-
-<span>🏠</span>
-
-HOME
-
-</a>
-
-
-
-
-
-<a href="certificate.html">
-
-<span>🏆</span>
-
-CERTIFICATE
-
-</a>
-
-
-
-
-
-<a href="start.html">
-
-<span>🚀</span>
-
-START
-
-</a>
-
-
-
-
-
-<a href="records.html">
-
-<span>📋</span>
-
-RECORDS
-
-</a>
-
-
-
-
-
-<a href="profile.html">
-
-<span>👤</span>
-
-MY
-
-</a>
-
-
-</nav>
-
-
-
-
-
+    <div class="content">
+
+        <!-- Activepieces Logo / Header -->
+        <div class="home-logo">
+            <img src="assets/logo.png" alt="Activepieces Logo">
+        </div>
+
+        <!-- Top Menu Items -->
+        <div class="home-menu">
+            <a href="vip.html" class="menu-item">
+                <span>⭐</span>
+                <p>VIP</p>
+            </a>
+            <div class="menu-item">
+                <span>🎉</span>
+                <p>Event</p>
+            </div>
+            <div class="menu-item">
+                <span>💰</span>
+                <p>Withdrawal</p>
+            </div>
+            <div class="menu-item">
+                <span>💵</span>
+                <p>Deposit</p>
+            </div>
+        </div>
+
+        <!-- VIP Level Card -->
+        <div class="vip-card">
+            <h2>VIP 1</h2>
+            <p>Current VIP Level</p>
+        </div>
+
+        <!-- Selected Gifts Section -->
+        <div class="gift-section">
+            <h2>Selected Gifts</h2>
+
+            <!-- Gift Card 1: iPad -->
+            <div class="gift-card">
+                <img src="assets/products/ipad.png" alt="Apple iPad Pro 13-Inch">
+                <div class="gift-info">
+                    <h3>Apple iPad Pro 13-Inch</h3>
+                    <p class="points">⭐ 68 Points</p>
+                </div>
+            </div>
+
+            <!-- Gift Card 2: iPhone -->
+            <div class="gift-card">
+                <img src="assets/products/iphone.png" alt="Apple iPhone 14 Plus" onerror="this.src='assets/logo.png'">
+                <div class="gift-info">
+                    <h3>Apple iPhone 14 Plus</h3>
+                    <p class="points">⭐ 80 Points</p>
+                </div>
+            </div>
+
+            <!-- Gift Card 3: MacBook -->
+            <div class="gift-card">
+                <img src="assets/products/macbook.png" alt="Apple MacBook Air M2" onerror="this.src='assets/logo.png'">
+                <div class="gift-info">
+                    <h3>Apple MacBook Air M2</h3>
+                    <p class="points">⭐ 120 Points</p>
+                </div>
+            </div>
+
+            <button class="view-more-btn">View More</button>
+        </div>
+
+        <!-- Real Time Stats -->
+        <div class="realtime">
+            <h2>Real-time</h2>
+            <p class="subtitle">Optimization Needs Heatmap</p>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <h3>Total Online Users</h3>
+                    <strong>105.41K</strong>
+                </div>
+                <div class="stat-box">
+                    <h3>Average User Optimization Volume</h3>
+                    <strong>52.59K</strong>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Gift Detail Popup Modal -->
+    <div id="gift-popup" class="gift-popup" style="display: none;">
+        <div class="gift-detail">
+            <button onclick="closeGift()" class="close-btn">✕</button>
+            <img id="gift-image" src="" alt="Gift Preview">
+            <h2 id="gift-title">Gift Name</h2>
+            <p id="gift-points">⭐ Points</p>
+
+            <div class="product-info">
+                <h3>Product Details</h3>
+                <p>Premium VIP reward product.</p>
+                <p>Status: Available</p>
+            </div>
+
+            <button class="redeem-btn">Redeem Now</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="active">
+            <span>🏠</span>
+            HOME
+        </a>
+        <a href="certificate.html">
+            <span>🏆</span>
+            CERTIFICATE
+        </a>
+        <a href="start.html">
+            <span>🚀</span>
+            START
+        </a>
+        <a href="records.html">
+            <span>📋</span>
+            RECORDS
+        </a>
+        <a href="profile.html">
+            <span>👤</span>
+            MY
+        </a>
+    </nav>
 
 </body>
-
 </html>
