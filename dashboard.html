@@ -37,6 +37,23 @@
             font-size: 20px;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-select {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
         .logout-btn {
             background-color: #ef4444;
             color: white;
@@ -107,22 +124,38 @@
 <body>
 
     <div class="navbar">
-        <h2>My Platform</h2>
-        <button id="logoutBtn" class="logout-btn">Log Out</button>
+        <h2 id="navTitle">My Platform</h2>
+        <div class="nav-right">
+            <select id="languageSelect" class="lang-select">
+                <option value="en">🇺🇸 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="sv">🇸🇪 Svenska</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="no">🇳🇴 Norsk</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="hu">🇭🇺 Magyar</option>
+                <option value="pl">🇵🇱 Polski</option>
+                <option value="sk">🇸🇰 Slovenčina</option>
+            </select>
+            <button id="logoutBtn" class="logout-btn">Log Out</button>
+        </div>
     </div>
 
     <div class="container">
         <div class="welcome-card">
             <h1 id="welcomeHeading">Welcome Back! 👋</h1>
-            <p>Here is your account overview and details.</p>
+            <p id="welcomeSub">Here is your account overview and details.</p>
 
             <div class="info-grid">
                 <div class="info-item">
-                    <label>Username</label>
+                    <label id="labelUsername">Username</label>
                     <span id="displayUsername">-</span>
                 </div>
                 <div class="info-item">
-                    <label>Phone Number</label>
+                    <label id="labelPhone">Phone Number</label>
                     <span id="displayPhone">-</span>
                 </div>
             </div>
@@ -130,27 +163,117 @@
     </div>
 
     <script>
-        // Check if user is logged in
+        // Check authentication
         const isLoggedIn = localStorage.getItem('isLoggedIn');
         if (!isLoggedIn) {
             alert('Please log in first.');
             window.location.href = 'login.html';
         }
 
-        // Load user details onto the dashboard
+        // Translations Dictionary for Dashboard
+        const translations = {
+            en: {
+                nav: "My Platform", subText: "Here is your account overview and details.",
+                usernameLabel: "Username", phoneLabel: "Phone Number", logout: "Log Out"
+            },
+            es: {
+                nav: "Mi Plataforma", subText: "Aquí está su resumen y detalles de la cuenta.",
+                usernameLabel: "Nombre de usuario", phoneLabel: "Número de teléfono", logout: "Cerrar Sesión"
+            },
+            fr: {
+                nav: "Ma Plateforme", subText: "Voici un aperçu et les détails de votre compte.",
+                usernameLabel: "Nom d'utilisateur", phoneLabel: "Numéro de téléphone", logout: "Se Déconnecter"
+            },
+            ja: {
+                nav: "マイプラットフォーム", subText: "アカウントの概要と詳細はこちらです。",
+                usernameLabel: "ユーザー名", phoneLabel: "電話番号", logout: "ログアウト"
+            },
+            sv: {
+                nav: "Min Plattform", subText: "Här är din kontoöversikt och uppgifter.",
+                usernameLabel: "Användarnamn", phoneLabel: "Telefonnummer", logout: "Logga Ut"
+            },
+            it: {
+                nav: "La Mia Piattaforma", subText: "Ecco una panoramica e i dettagli del tuo account.",
+                usernameLabel: "Nome utente", phoneLabel: "Numero di telefono", logout: "Esci"
+            },
+            de: {
+                nav: "Meine Plattform", subText: "Hier ist Ihre Kontoübersicht und Details.",
+                usernameLabel: "Benutzername", phoneLabel: "Telefonnummer", logout: "Abmelden"
+            },
+            no: {
+                nav: "Min Plattform", subText: "Her er din kontooversikt og detaljer.",
+                usernameLabel: "Brukernavn", phoneLabel: "Telefonnummer", logout: "Logg Ut"
+            },
+            ru: {
+                nav: "Моя Платформа", subText: "Здесь представлен обзор вашей учетной записи и детали.",
+                usernameLabel: "Имя пользователя", phoneLabel: "Номер телефона", logout: "Выйти"
+            },
+            hu: {
+                nav: "Platformom", subText: "Itt található a fiókja áttekintése és részletei.",
+                usernameLabel: "Felhasználónév", phoneLabel: "Telefonszám", logout: "Kijelentkezés"
+            },
+            pl: {
+                nav: "Moja Platforma", subText: "Oto podsumowanie i szczegóły Twojego konta.",
+                usernameLabel: "Nazwa użytkownika", phoneLabel: "Numer telefonu", logout: "Wyloguj Się"
+            },
+            sk: {
+                nav: "Moja Platforma", subText: "Tu je prehľad a podrobnosti vášho účtu.",
+                usernameLabel: "Používateľské meno", phoneLabel: "Telefónne číslo", logout: "Odhlásiť sa"
+            }
+        };
+
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLanguage', lang);
+            document.getElementById('languageSelect').value = lang;
+            const t = translations[lang];
+            if (!t) return;
+
+            document.getElementById('navTitle').innerText = t.nav;
+            document.getElementById('welcomeSub').innerText = t.subText;
+            document.getElementById('labelUsername').innerText = t.usernameLabel;
+            document.getElementById('labelPhone').innerText = t.phoneLabel;
+            document.getElementById('logoutBtn').innerText = t.logout;
+
+            // Update welcome message dynamically with username
+            const userName = localStorage.getItem('userName') || '';
+            if (lang === 'es') {
+                document.getElementById('welcomeHeading').innerText = `¡Bienvenido de nuevo, ${userName}! 👋`;
+            } else if (lang === 'fr') {
+                document.getElementById('welcomeHeading').innerText = `Bon retour, ${userName} ! 👋`;
+            } else if (lang === 'ja') {
+                document.getElementById('welcomeHeading').innerText = `おかえりなさい、${userName}さん！ 👋`;
+            } else if (lang === 'de') {
+                document.getElementById('welcomeHeading').innerText = `Willkommen zurück, ${userName}! 👋`;
+            } else if (lang === 'ru') {
+                document.getElementById('welcomeHeading').innerText = `С возвращением, ${userName}! 👋`;
+            } else {
+                document.getElementById('welcomeHeading').innerText = `Welcome Back, ${userName}! 👋`;
+            }
+        }
+
+        // Load saved language on start
+        const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+        setLanguage(savedLang);
+
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            setLanguage(this.value);
+        });
+
+        // Load user info
         const userName = localStorage.getItem('userName');
         const userPhone = localStorage.getItem('userPhone');
 
         if (userName) {
-            document.getElementById('welcomeHeading').innerText = `Welcome Back, ${userName}! 👋`;
             document.getElementById('displayUsername').innerText = userName;
+            // Re-trigger language setting to correctly format the customized welcome title
+            setLanguage(localStorage.getItem('preferredLanguage') || 'en');
         }
 
         if (userPhone) {
             document.getElementById('displayPhone').innerText = userPhone;
         }
 
-        // Logout functionality
+        // Logout
         document.getElementById('logoutBtn').addEventListener('click', function() {
             localStorage.removeItem('isLoggedIn');
             window.location.href = 'login.html';
