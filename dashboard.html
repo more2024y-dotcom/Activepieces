@@ -5,139 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
-        :root {
-            --primary-blue: #1d4ed8;
-            --bg-color: #f1f5f9;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
             margin: 0;
             padding: 0;
-            padding-bottom: 90px;
+            color: #333;
         }
-        .top-bar {
-            background-color: var(--primary-blue);
+        .header {
+            background-color: #dc2626;
             color: white;
+            padding: 20px;
             text-align: center;
-            padding: 18px 20px;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: bold;
         }
         .container {
             padding: 20px;
         }
         .card {
             background: white;
-            border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
         }
-        .balance-title {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
+        .balance {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc2626;
         }
-        .balance-amount {
-            font-size: 28px;
-            font-weight: 800;
-            color: #000;
-        }
-        .menu-grid {
+        .btn-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
         }
-        .menu-btn {
-            background: white;
-            border: 1px solid #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
+        .btn {
+            background-color: #dc2626;
+            color: white;
+            padding: 12px;
             text-align: center;
+            border-radius: 6px;
             text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            font-weight: bold;
             display: block;
         }
-        .menu-btn:hover {
-            border-color: var(--primary-blue);
-            color: var(--primary-blue);
+        .btn:hover {
+            background-color: #b91c1c;
         }
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #000000;
+            background: white;
             display: flex;
             justify-content: space-around;
-            align-items: center;
-            height: 75px;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
         }
         .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #94a3b8;
             text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            flex: 1;
+            color: #666;
+            font-size: 14px;
+            font-weight: bold;
         }
         .nav-item.active {
-            color: #3b82f6;
-        }
-        .nav-item span.icon {
-            font-size: 22px;
-            margin-bottom: 3px;
+            color: #dc2626;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        Dashboard
+    <div class="header">
+        User Dashboard
     </div>
 
     <div class="container">
         <div class="card">
-            <div class="balance-title">Total Balance</div>
-            <div class="balance-amount" id="homeBalance">-532.99 USD</div>
+            <h3>Account Balance</h3>
+            <div class="balance" id="balanceDisplay">-532.99 USD</div>
         </div>
 
-        <div class="menu-grid">
-            <a href="withdraw.html" class="menu-btn">💳 Withdraw</a>
-            <a href="withdraw.html" class="menu-btn">📝 History</a>
+        <div class="card">
+            <h3>Quick Actions</h3>
+            <div class="btn-grid">
+                <a href="withdraw.html" class="btn">Withdraw</a>
+                <a href="withdraw.html" class="btn">History</a>
+            </div>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item active">
-            <span class="icon">🏠</span><span>Home</span>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">💳</span><span>Withdraw</span>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">📝</span><span>History</span>
-        </a>
+        <a href="dashboard.html" class="nav-item active">Home</a>
+        <a href="withdraw.html" class="nav-item">Withdraw</a>
+        <a href="withdraw.html" class="nav-item">History</a>
     </div>
 
     <script>
-        const savedBalance = localStorage.getItem('userBalance');
-        if (savedBalance !== null) {
-            document.getElementById('homeBalance').textContent = parseFloat(savedBalance).toFixed(2) + ' USD';
+        const storedBalance = localStorage.getItem('userBalance');
+        if (storedBalance !== null) {
+            document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
         }
     </script>
+
 </body>
 </html>
