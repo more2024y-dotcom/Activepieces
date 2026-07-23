@@ -33,22 +33,9 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 440px;
+            max-width: 420px;
             box-sizing: border-box;
             position: relative;
-        }
-
-        /* Language Selector Header Position */
-        .language-header {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-        }
-
-        .language-header select {
-            width: auto;
-            padding: 6px 10px;
-            font-size: 12px;
         }
 
         h2 {
@@ -59,6 +46,7 @@
 
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
 
         label {
@@ -68,7 +56,7 @@
             font-size: 14px;
         }
 
-        input, select {
+        input {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
@@ -77,18 +65,9 @@
             font-size: 14px;
         }
 
-        input:focus, select:focus {
+        input:focus {
             outline: none;
             border-color: var(--accent-color);
-        }
-
-        .phone-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .phone-group select {
-            width: 130px;
         }
 
         .password-container {
@@ -104,26 +83,6 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
-            color: #64748b;
-        }
-
-        .strength-meter {
-            height: 6px;
-            background: #e2e8f0;
-            border-radius: 3px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .strength-bar {
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease, background-color 0.3s ease;
-        }
-
-        .strength-text {
-            font-size: 12px;
-            margin-top: 4px;
             color: #64748b;
         }
 
@@ -150,29 +109,27 @@
             margin-top: 5px;
             display: none;
         }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .switch-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
     <div class="auth-card">
-        <!-- Language Selector Option -->
-        <div class="language-header">
-            <select id="languageSelect">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="zh">中文</option>
-                <option value="ja">日本語</option>
-                <option value="hi">हिन्दी</option>
-                <option value="ar">العربية</option>
-                <option value="pt">Português</option>
-                <option value="ru">Русский</option>
-                <option value="it">Italiano</option>
-                <option value="ko">한국어</option>
-            </select>
-        </div>
-
         <h2>Create Account</h2>
         <form id="signupForm">
             
@@ -183,23 +140,7 @@
 
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <div class="phone-group">
-                    <select id="countryCode">
-                        <option value="+1">🇺🇸 +1 (US)</option>
-                        <option value="+44">🇬🇧 +44 (UK)</option>
-                        <option value="+91">🇮🇳 +91 (IN)</option>
-                        <option value="+86">🇨🇳 +86 (CN)</option>
-                        <option value="+81">🇯🇵 +81 (JP)</option>
-                        <option value="+49">🇩🇪 +49 (DE)</option>
-                        <option value="+33">🇫🇷 +33 (FR)</option>
-                        <option value="+55">🇧🇷 +55 (BR)</option>
-                        <option value="+52">🇲🇽 +52 (MX)</option>
-                        <option value="+61">🇦🇺 +61 (AU)</option>
-                        <option value="+971">🇦🇪 +971 (UAE)</option>
-                        <option value="+27">🇿🇦 +27 (ZA)</option>
-                    </select>
-                    <input type="tel" id="phone" placeholder="Phone number" required>
-                </div>
+                <input type="tel" id="phone" placeholder="Enter your phone number" required>
             </div>
 
             <div class="form-group">
@@ -208,10 +149,6 @@
                     <input type="password" id="password" placeholder="Create a password" required>
                     <button type="button" id="togglePassword" class="toggle-password">👁️</button>
                 </div>
-                <div class="strength-meter">
-                    <div id="strengthBar" class="strength-bar"></div>
-                </div>
-                <div id="strengthText" class="strength-text">Password strength: Enter a password</div>
             </div>
 
             <div class="form-group">
@@ -221,6 +158,10 @@
             </div>
 
             <button type="submit" class="submit-btn">Sign Up</button>
+
+            <div class="switch-link">
+                Already have an account? <a href="login.html">Log In</a>
+            </div>
         </form>
     </div>
 
@@ -237,39 +178,7 @@
             });
         }
 
-        // Password Strength Checker
-        const strengthBar = document.getElementById('strengthBar');
-        const strengthText = document.getElementById('strengthText');
-
-        passwordInput.addEventListener('input', function() {
-            const val = passwordInput.value;
-            let strength = 0;
-
-            if (val.length >= 6) strength += 1;
-            if (val.match(/[A-Z]/)) strength += 1;
-            if (val.match(/[0-9]/)) strength += 1;
-            if (val.match(/[^a-zA-Z0-9]/)) strength += 1;
-
-            if (val.length === 0) {
-                strengthBar.style.width = '0%';
-                strengthBar.style.backgroundColor = 'transparent';
-                strengthText.textContent = 'Password strength: Enter a password';
-            } else if (strength <= 1) {
-                strengthBar.style.width = '25%';
-                strengthBar.style.backgroundColor = '#dc2626';
-                strengthText.textContent = 'Password strength: Weak';
-            } else if (strength === 2 || strength === 3) {
-                strengthBar.style.width = '65%';
-                strengthBar.style.backgroundColor = '#d97706';
-                strengthText.textContent = 'Password strength: Medium';
-            } else {
-                strengthBar.style.width = '100%';
-                strengthBar.style.backgroundColor = '#16a34a';
-                strengthText.textContent = 'Password strength: Strong';
-            }
-        });
-
-        // Signup Form Logic
+        // Signup & Invite Code Gatekeeper Logic
         const signupForm = document.getElementById('signupForm');
         signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -284,14 +193,10 @@
             
             inviteError.style.display = 'none';
 
-            const fullPhone = document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value;
-            const selectedLanguage = document.getElementById('languageSelect').value;
-
-            // Save user details along with their chosen language preference to localStorage
+            // Save user details to localStorage for the dashboard & login
             localStorage.setItem('userName', document.getElementById('username').value);
-            localStorage.setItem('userPhone', fullPhone);
-            localStorage.setItem('userPass', passwordInput.value);
-            localStorage.setItem('userLang', selectedLanguage);
+            localStorage.setItem('userPhone', document.getElementById('phone').value);
+            localStorage.setItem('userPass', document.getElementById('password').value);
 
             alert('Account created successfully!');
             window.location.href = 'login.html';
