@@ -38,358 +38,147 @@
             position: relative;
         }
 
-        /* Language Switcher Styling */
-        .lang-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 15px;
-        }
-
-        .lang-select {
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-color);
-        }
-
-        .auth-card h2 {
+        h2 {
             margin-top: 0;
-            margin-bottom: 8px;
             color: var(--primary-color);
-            font-size: 24px;
-            font-weight: 700;
+            text-align: center;
         }
 
-        .subtitle {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 24px;
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        .input-group {
-            margin-bottom: 16px;
-        }
-
-        .input-group label {
+        label {
             display: block;
-            margin-bottom: 6px;
-            color: var(--primary-color);
-            font-size: 13px;
+            margin-bottom: 8px;
             font-weight: 600;
+            font-size: 14px;
         }
 
-        .input-group input, 
-        .input-group select {
+        input {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            font-size: 14px;
             box-sizing: border-box;
-            background-color: #fff;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            font-size: 14px;
         }
 
-        .input-group input:focus, 
-        .input-group select:focus {
+        input:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
-        .phone-row {
-            display: flex;
-            gap: 8px;
+        .password-container {
+            position: relative;
         }
 
-        .phone-row select {
-            width: 130px;
-            flex-shrink: 0;
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #64748b;
         }
 
-        .phone-row input {
-            flex-grow: 1;
-        }
-
-        .submit-btn {
+        button.submit-btn {
             width: 100%;
             padding: 12px;
             background-color: var(--accent-color);
+            color: white;
             border: none;
             border-radius: 6px;
-            color: white;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s;
-            margin-top: 8px;
         }
 
-        .submit-btn:hover {
+        button.submit-btn:hover {
             background-color: var(--accent-hover);
         }
 
-        .footer-text {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #64748b;
-        }
-
-        .footer-text a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .footer-text a:hover {
-            text-decoration: underline;
+        .error-msg {
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
     <div class="auth-card">
-        <!-- Language Switcher Dropdown -->
-        <div class="lang-container">
-            <select id="languageSelect" class="lang-select">
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="sv">🇸🇪 Svenska</option>
-                <option value="it">🇮🇹 Italiano</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="no">🇳🇴 Norsk</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="hu">🇭🇺 Magyar</option>
-                <option value="pl">🇵🇱 Polski</option>
-                <option value="sk">🇸🇰 Slovenčina</option>
-            </select>
-        </div>
-
-        <h2 id="textTitle">Create Account</h2>
-        <div id="textSubtitle" class="subtitle">Fill in the details below to register</div>
-        
+        <h2>Create Account</h2>
         <form id="signupForm">
-            <div class="input-group">
-                <label id="labelUsername" for="username">Username</label>
-                <input type="text" id="username" required placeholder="Choose a unique username">
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Choose a username" required>
             </div>
 
-            <div class="input-group">
-                <label id="labelPhone" for="phone">Phone</label>
-                <div class="phone-row">
-                    <select id="countryCode">
-                        <option value="+95" selected>+95 (Myanmar)</option>
-                        <option value="+1">+1 (USA/Canada)</option>
-                        <option value="+44">+44 (UK)</option>
-                        <option value="+91">+91 (India)</option>
-                        <option value="+86">+86 (China)</option>
-                        <option value="+65">+65 (Singapore)</option>
-                        <option value="+66">+66 (Thailand)</option>
-                        <option value="+84">+84 (Vietnam)</option>
-                        <option value="+60">+60 (Malaysia)</option>
-                        <option value="+81">+81 (Japan)</option>
-                        <option value="+82">+82 (South Korea)</option>
-                        <option value="+62">+62 (Indonesia)</option>
-                        <option value="+63">+63 (Philippines)</option>
-                        <option value="+971">+971 (UAE)</option>
-                    </select>
-                    <input type="tel" id="phone" required placeholder="Phone number">
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="Enter your phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Create a password" required>
+                    <button type="button" id="togglePassword" class="toggle-password">👁️</button>
                 </div>
             </div>
 
-            <div class="input-group">
-                <label id="labelTxPassword" for="transactionPassword">Transaction Password</label>
-                <input type="password" id="transactionPassword" required placeholder="At least 6 characters">
+            <div class="form-group">
+                <label for="inviteCode">Invite Code</label>
+                <input type="text" id="inviteCode" placeholder="Enter invite code (2DI2)" required>
+                <div id="inviteError" class="error-msg">Invalid invite code. Please use 2DI2.</div>
             </div>
 
-            <div class="input-group">
-                <label id="labelLoginPassword" for="loginPassword">Login Password</label>
-                <input type="password" id="loginPassword" required placeholder="At least 6 characters">
-            </div>
-
-            <div class="input-group">
-                <label id="labelGender" for="gender">Gender</label>
-                <select id="gender" required>
-                    <option value="" disabled selected id="optSelectGender">Select gender</option>
-                    <option value="Male" id="optMale">Male</option>
-                    <option value="Female" id="optFemale">Female</option>
-                    <option value="Other" id="optOther">Other</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label id="labelInvite" for="inviteCode">Invite Code</label>
-                <input type="text" id="inviteCode" required placeholder="Enter invite code">
-            </div>
-
-            <button type="submit" id="btnSubmit" class="submit-btn">Create account</button>
+            <button type="submit" class="submit-btn">Sign Up</button>
         </form>
-
-        <div class="footer-text">
-            <span id="textFooterQuestion">Already have an account?</span><br>
-            <a href="login.html" id="textFooterLink">Login here</a>
-        </div>
     </div>
 
     <script>
-        // Translations Dictionary
-        const translations = {
-            en: {
-                title: "Create Account", subtitle: "Fill in the details below to register",
-                username: "Username", phone: "Phone", txPassword: "Transaction Password",
-                loginPassword: "Login Password", gender: "Gender", selectGender: "Select gender",
-                male: "Male", female: "Female", other: "Other", invite: "Invite Code",
-                submit: "Create account", question: "Already have an account?", link: "Login here"
-            },
-            es: {
-                title: "Crear Cuenta", subtitle: "Complete los siguientes datos para registrarse",
-                username: "Nombre de usuario", phone: "Teléfono", txPassword: "Contraseña de transacción",
-                loginPassword: "Contraseña de inicio de sesión", gender: "Género", selectGender: "Seleccione género",
-                male: "Masculino", female: "Femenino", other: "Otro", invite: "Código de invitación",
-                submit: "Crear cuenta", question: "¿Ya tienes una cuenta?", link: "Inicia sesión aquí"
-            },
-            fr: {
-                title: "Créer un Compte", subtitle: "Remplissez les informations ci-dessous pour vous inscrire",
-                username: "Nom d'utilisateur", phone: "Téléphone", txPassword: "Mot de passe de transaction",
-                loginPassword: "Mot de passe de connexion", gender: "Genre", selectGender: "Sélectionnez le genre",
-                male: "Homme", female: "Femme", other: "Autre", invite: "Code d'invitation",
-                submit: "Créer un compte", question: "Vous avez déjà un compte ?", link: "Connectez-vous ici"
-            },
-            ja: {
-                title: "アカウント作成", subtitle: "以下の情報を入力して登録してください",
-                username: "ユーザー名", phone: "電話番号", txPassword: "取引パスワード",
-                loginPassword: "ログインパスワード", gender: "性別", selectGender: "性別を選択",
-                male: "男性", female: "女性", other: "その他", invite: "招待コード",
-                submit: "アカウントを作成", question: "すでにアカウントをお持ちですか？", link: "ログインはこちら"
-            },
-            sv: {
-                title: "Skapa Konto", subtitle: "Fyll i uppgifterna nedan för att registrera dig",
-                username: "Användarnamn", phone: "Telefon", txPassword: "Transaktionslösenord",
-                loginPassword: "Inloggningslösenord", gender: "Kön", selectGender: "Välj kön",
-                male: "Man", female: "Kvinna", other: "Annat", invite: "Inbjudningskod",
-                submit: "Skapa konto", question: "Har du redan ett konto?", link: "Logga in här"
-            },
-            it: {
-                title: "Crea Account", subtitle: "Inserisci i dati sottostanti per registrarti",
-                username: "Nome utente", phone: "Telefono", txPassword: "Password di transazione",
-                loginPassword: "Password di accesso", gender: "Genere", selectGender: "Seleziona genere",
-                male: "Maschio", female: "Femmina", other: "Altro", invite: "Codice invito",
-                submit: "Crea account", question: "Hai già un account?", link: "Accedi qui"
-            },
-            de: {
-                title: "Konto Erstellen", subtitle: "Füllen Sie die folgenden Daten aus, um sich zu registrieren",
-                username: "Benutzername", phone: "Telefon", txPassword: "Transaktionspasswort",
-                loginPassword: "Anmelde-Passwort", gender: "Geschlecht", selectGender: "Geschlecht wählen",
-                male: "Männlich", female: "Weiblich", other: "Andere", invite: "Einladungscode",
-                submit: "Konto erstellen", question: "Haben Sie bereits ein Konto?", link: "Hier anmelden"
-            },
-            no: {
-                title: "Opprett Konto", subtitle: "Fyll ut detaljene nedenfor for å registrere deg",
-                username: "Brukernavn", phone: "Telefon", txPassword: "Transaksjonspassord",
-                loginPassword: "Innloggingspassord", gender: "Kjønn", selectGender: "Velg kjønn",
-                male: "Mann", female: "Kvinne", other: "Annet", invite: "Invitasjonskode",
-                submit: "Opprett konto", question: "Har du allerede en konto?", link: "Logg inn her"
-            },
-            ru: {
-                title: "Создать Аккаунт", subtitle: "Заполните данные ниже для регистрации",
-                username: "Имя пользователя", phone: "Телефон", txPassword: "Пароль транзакции",
-                loginPassword: "Пароль для входа", gender: "Пол", selectGender: "Выберите пол",
-                male: "Мужской", female: "Женский", other: "Другой", invite: "Код приглашения",
-                submit: "Создать аккаунт", question: "Уже есть аккаунт?", link: "Войти здесь"
-            },
-            hu: {
-                title: "Fiók Létrehozása", subtitle: "Töltse ki az alábbi adatokat a regisztrációhoz",
-                username: "Felhasználónév", phone: "Telefonszám", txPassword: "Tranzakciós jelszó",
-                loginPassword: "Bejelentkezési jelszó", gender: "Nem", selectGender: "Válasszon nemet",
-                male: "Férfi", female: "Nő", other: "Egyéb", invite: "Meghívó kód",
-                submit: "Fiók létrehozása", question: "Már van fiókja?", link: "Bejelentkezés itt"
-            },
-            pl: {
-                title: "Utwórz Konto", subtitle: "Wypełnij poniższe dane, aby się zarejestrować",
-                username: "Nazwa użytkownika", phone: "Telefon", txPassword: "Hasło transakcyjne",
-                loginPassword: "Hasło logowania", gender: "Płeć", selectGender: "Wybierz płeć",
-                male: "Mężczyzna", female: "Kobieta", other: "Inna", invite: "Kod zaproszenia",
-                submit: "Utwórz konto", question: "Masz już konto?", link: "Zaloguj się tutaj"
-            },
-            sk: {
-                title: "Vytvoriť Účet", subtitle: "Vyplňte nižšie uvedené údaje na registráciu",
-                username: "Používateľské meno", phone: "Telefón", txPassword: "Transakčné heslo",
-                loginPassword: "Prihlasovacie heslo", gender: "Pohlavie", selectGender: "Vyberte pohlavie",
-                male: "Muž", female: "Žena", other: "Iné", invite: "Pozvánkový kód",
-                submit: "Vytvoriť účet", question: "Už máte účet?", link: "Prihlásiť sa tu"
-            }
-        };
+        // Password Visibility Toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
 
-        // Language Switcher Function
-        const languageSelect = document.getElementById('languageSelect');
-        
-        languageSelect.addEventListener('change', function() {
-            const lang = this.value;
-            const t = translations[lang];
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🔒';
+            });
+        }
 
-            document.getElementById('textTitle').innerText = t.title;
-            document.getElementById('textSubtitle').innerText = t.subtitle;
-            document.getElementById('labelUsername').innerText = t.username;
-            document.getElementById('labelPhone').innerText = t.phone;
-            document.getElementById('labelTxPassword').innerText = t.txPassword;
-            document.getElementById('labelLoginPassword').innerText = t.loginPassword;
-            document.getElementById('labelGender').innerText = t.gender;
-            document.getElementById('optSelectGender').innerText = t.selectGender;
-            document.getElementById('optMale').innerText = t.male;
-            document.getElementById('optFemale').innerText = t.female;
-            document.getElementById('optOther').innerText = t.other;
-            document.getElementById('labelInvite').innerText = t.invite;
-            document.getElementById('btnSubmit').innerText = t.submit;
-            document.getElementById('textFooterQuestion').innerText = t.question;
-            document.getElementById('textFooterLink').innerText = t.link;
-        });
-
-        // Form Submission Logic
+        // Signup & Invite Code Gatekeeper Logic
         const signupForm = document.getElementById('signupForm');
-
-        signupForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const username = document.getElementById('username').value.trim();
-            const phone = document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value.trim();
-            const transactionPassword = document.getElementById('transactionPassword').value;
-            const loginPassword = document.getElementById('loginPassword').value;
+        signupForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
             const inviteCode = document.getElementById('inviteCode').value.trim();
-
-            if (inviteCode !== "2DI2") {
-                alert('Invalid invite code! You must use the code 2DI2 to register.');
-                return; 
-            }
-
-            const existingUsername = localStorage.getItem('userName');
-            if (existingUsername && existingUsername === username) {
-                alert('This username is already taken. Please choose a different username.');
+            const inviteError = document.getElementById('inviteError');
+            
+            if (inviteCode !== '2DI2') {
+                inviteError.style.display = 'block';
                 return;
             }
+            
+            inviteError.style.display = 'none';
 
-            if (transactionPassword.length < 6) {
-                alert('Transaction password must be at least 6 characters long.');
-                return;
-            }
+            // Save user details to localStorage for the dashboard & login
+            localStorage.setItem('userName', document.getElementById('username').value);
+            localStorage.setItem('userPhone', document.getElementById('phone').value);
+            localStorage.setItem('userPass', document.getElementById('password').value);
 
-            if (loginPassword.length < 6) {
-                alert('Login password must be at least 6 characters long.');
-                return;
-            }
-
-            localStorage.setItem('userName', username);
-            localStorage.setItem('userPhone', phone);
-            localStorage.setItem('userPassword', loginPassword);
-            localStorage.setItem('userTransactionPassword', transactionPassword);
-
-            alert('Account created successfully! Please login.');
+            alert('Account created successfully!');
             window.location.href = 'login.html';
         });
     </script>
