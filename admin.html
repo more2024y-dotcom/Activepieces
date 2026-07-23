@@ -1,96 +1,463 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activepieces Admin</title>
-    <!-- Fixed stylesheet path to point to root directory -->
-    <link rel="stylesheet" href="admin.css">
-</head>
+    <title>Dashboard</title>
+    <style>
+        :root {
+            --primary-red: #a50013;
+            --dark-red: #7a000e;
+            --bg-color: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 90px; /* Space for fixed bottom nav */
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Top Red Card (From Image 1) */
+        .user-card {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(165, 0, 19, 0.2);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .user-info-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-details h3 {
+            margin: 0 0 4px 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .credit-score-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .progress-bar {
+            width: 80px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 100%;
+            height: 100%;
+            background-color: #34d399;
+        }
+
+        .invite-row {
+            font-size: 12px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .vip-badge {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .balance-section {
+            margin-top: 10px;
+        }
+
+        .balance-label {
+            font-size: 13px;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* Action Buttons Grid inside Card or Below */
+        .card-actions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .card-action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .card-action-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background 0.2s;
+        }
+
+        .card-action-item:hover .card-action-icon {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .card-action-item span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Quick Menu Grid (From Image 2 middle section) */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            background: white;
+            padding: 20px 10px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .menu-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #fef2f2;
+            color: var(--primary-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 6px rgba(165, 0, 19, 0.08);
+        }
+
+        .menu-item span {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Bottom Navigation Bar (From Image 2 footer) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 70px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            flex: 1;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active {
+            color: #ef4444;
+        }
+
+        .nav-item span.icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        /* Center Special Action Button in Nav */
+        .nav-item.center-action {
+            position: relative;
+            top: -15px;
+        }
+
+        .center-circle {
+            width: 52px;
+            height: 52px;
+            background: #1e293b;
+            border: 4px solid #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .logout-btn-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .logout-btn {
+            background-color: #e2e8f0;
+            color: var(--text-main);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
 <body>
 
-    <div class="admin">
-
-        <h1>Admin Panel</h1>
-
-        <div class="stats">
-            <div class="box">
-                <h3>Total Users</h3>
-                <p id="totalUsers">0</p>
+    <div class="container">
+        <!-- Top Red Card User Profile & Wallet -->
+        <div class="user-card">
+            <div class="user-header">
+                <div class="user-info-left">
+                    <div class="avatar" id="userAvatarEmoji">👤</div>
+                    <div class="user-details">
+                        <h3 id="displayName">User</h3>
+                        <div class="credit-score-row">
+                            <span>Credit Score:</span>
+                            <div class="progress-bar"><div class="progress-fill"></div></div>
+                            <span>100%</span>
+                        </div>
+                        <div class="invite-row">
+                            <span>Invitation Code: <strong id="displayInviteCode">----</strong></span>
+                            <button class="copy-btn" onclick="copyCode()">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="vip-badge">
+                    💎 <br>VIP 1
+                </div>
             </div>
 
-            <div class="box">
-                <h3>Total Tasks</h3>
-                <p id="totalTasks">0</p>
+            <div class="balance-section">
+                <div class="balance-label">Total balance 👁️</div>
+                <div class="balance-amount">2,007.60 USD</div>
             </div>
 
-            <div class="box">
-                <h3>Completed Tasks</h3>
-                <p id="completedTasks">0</p>
-            </div>
-
-            <div class="box">
-                <h3>Active Tasks</h3>
-                <p id="activeTasks">0</p>
+            <!-- Red Card Bottom Quick Buttons -->
+            <div class="card-actions">
+                <a href="#" class="card-action-item">
+                    <div class="card-action-icon">+</div>
+                    <span>Add Wallet</span>
+                </a>
+                <a href="#" class="card-action-item">
+                    <div class="card-action-icon">↓</div>
+                    <span>Deposit</span>
+                </a>
+                <a href="#" class="card-action-item">
+                    <div class="card-action-icon">↑</div>
+                    <span>Withdraw</span>
+                </a>
+                <a href="#" class="card-action-item">
+                    <div class="card-action-icon">⇄</div>
+                    <span>Transaction</span>
+                </a>
             </div>
         </div>
 
-        <div class="create-task">
-            <h2>Create New Task</h2>
-
-            <label>Task Title</label>
-            <input id="taskTitle" placeholder="Task title">
-
-            <label>Product Name</label>
-            <input id="productName" placeholder="Product name">
-
-            <label>Description</label>
-            <textarea id="taskDescription" placeholder="Task description"></textarea>
-
-            <label>Priority</label>
-            <select id="taskPriority">
-                <option value="High">High</option>
-                <option value="Medium" selected>Medium</option>
-                <option value="Low">Low</option>
-            </select>
-
-            <label>Due Date</label>
-            <input type="date" id="taskDueDate">
-
-            <label>Assign User</label>
-            <select id="taskUser">
-                <option value="All Users">All Users</option>
-            </select>
-
-            <button onclick="createTask()">Create Task</button>
+        <!-- Middle Feature Grid (Image 2 Style) -->
+        <div class="menu-grid">
+            <a href="#" class="menu-item">
+                <div class="menu-icon">👑</div>
+                <span>VIP</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon">📋</div>
+                <span>Event</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon">💳</div>
+                <span>Withdrawal</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon">💰</div>
+                <span>Deposit</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon">📝</div>
+                <span>Records</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon">🛡️</div>
+                <span>Certificate</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon">❓</div>
+                <span>Support</span>
+            </a>
+            <a href="#" class="menu-item">
+                <div class="menu-icon">👤</div>
+                <span>Profile</span>
+            </a>
         </div>
 
-        <h2>Users</h2>
-        <div class="users">
-            <input id="newUser" placeholder="Username">
-            <button onclick="addUser()">Add User</button>
-            <div id="userList"></div>
+        <div class="logout-btn-container">
+            <button class="logout-btn" onclick="logoutUser()">Log Out</button>
         </div>
-
-        <h2>Task List</h2>
-        <div id="taskList"></div>
-
     </div>
 
-    <!-- Supabase Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Fixed Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <span class="icon">🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="icon">📜</span>
+            <span>Certificate</span>
+        </a>
+        <a href="#" class="nav-item center-action">
+            <div class="center-circle">⭕</div>
+            <span style="font-size: 10px; color: white; margin-top: 2px;">Starting</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="icon">📊</span>
+            <span>Records</span>
+        </a>
+        <a href="#" class="nav-item" onclick="alert('Profile section')">
+            <span class="icon">👤</span>
+            <span>My</span>
+        </a>
+    </div>
 
-    <!-- Supabase Connection -->
-    <script src="js/supabase.js"></script>
+    <script>
+        // Load logged in user details from localStorage
+        const storedName = localStorage.getItem('userName');
+        const storedCode = localStorage.getItem('myInviteCode');
+        const storedGender = localStorage.getItem('userGender');
 
-    <!-- User Management -->
-    <script src="js/users.js"></script>
+        if (storedName) {
+            document.getElementById('displayName').textContent = storedName;
+        }
 
-    <!-- Admin Logic -->
-    <script src="js/admin.js?v=4"></script>
+        if (storedCode) {
+            document.getElementById('displayInviteCode').textContent = storedCode;
+        }
 
+        // Set avatar emoji based on saved gender
+        const avatarEl = document.getElementById('userAvatarEmoji');
+        if (storedGender === 'Female') {
+            avatarEl.textContent = '👩';
+        } else if (storedGender === 'Male') {
+            avatarEl.textContent = '👨';
+        } else {
+            avatarEl.textContent = '👤';
+        }
+
+        function copyCode() {
+            if (storedCode) {
+                navigator.clipboard.writeText(storedCode);
+                alert('Invite code copied to clipboard: ' + storedCode);
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userPhone');
+            localStorage.removeItem('userGender');
+            localStorage.removeItem('myInviteCode');
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
-
 </html>
