@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>Log In to Your Account</title>
     <style>
         :root {
             --primary-color: #0f172a;
@@ -22,8 +22,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px 0;
         }
 
         .auth-card {
@@ -32,102 +33,110 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 380px;
+            max-width: 440px;
             box-sizing: border-box;
             position: relative;
         }
 
-        /* Language Switcher Styling */
-        .lang-container {
+        .language-header {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .lang-select {
+        .language-header select {
+            width: auto;
             padding: 6px 10px;
-            border-radius: 6px;
+            font-size: 12px;
             border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-color);
+            border-radius: 6px;
         }
 
-        .auth-card h2 {
+        h2 {
             margin-top: 0;
-            margin-bottom: 8px;
             color: var(--primary-color);
-            font-size: 24px;
-            font-weight: 700;
+            text-align: center;
         }
 
-        .subtitle {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 24px;
-        }
-
-        .input-group {
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .input-group label {
+        label {
             display: block;
-            margin-bottom: 6px;
-            color: var(--primary-color);
-            font-size: 13px;
+            margin-bottom: 8px;
             font-weight: 600;
+            font-size: 14px;
         }
 
-        .input-group input {
+        input {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            font-size: 14px;
             box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            font-size: 14px;
         }
 
-        .input-group input:focus {
+        input:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
-        .submit-btn {
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #64748b;
+        }
+
+        button.submit-btn {
             width: 100%;
             padding: 12px;
             background-color: var(--accent-color);
+            color: white;
             border: none;
             border-radius: 6px;
-            color: white;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s;
         }
 
-        .submit-btn:hover {
+        button.submit-btn:hover {
             background-color: var(--accent-hover);
         }
 
-        .footer-text {
+        .error-msg {
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
             text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #64748b;
         }
 
-        .footer-text a {
+        .switch-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .switch-link a {
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 600;
         }
 
-        .footer-text a:hover {
+        .switch-link a:hover {
             text-decoration: underline;
         }
     </style>
@@ -135,146 +144,82 @@
 <body>
 
     <div class="auth-card">
-        <!-- Language Switcher Dropdown -->
-        <div class="lang-container">
-            <select id="languageSelect" class="lang-select">
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="sv">🇸🇪 Svenska</option>
-                <option value="it">🇮🇹 Italiano</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="no">🇳🇴 Norsk</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="hu">🇭🇺 Magyar</option>
-                <option value="pl">🇵🇱 Polski</option>
-                <option value="sk">🇸🇰 Slovenčina</option>
+        <div class="language-header">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ja">日本語</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ar">العربية</option>
+                <option value="pt">Português</option>
+                <option value="ru">Русский</option>
+                <option value="it">Italiano</option>
+                <option value="ko">한국어</option>
             </select>
         </div>
 
-        <h2 id="textTitle">Welcome Back</h2>
-        <div id="textSubtitle" class="subtitle">Please enter your details to log in</div>
-        
+        <h2>Log In</h2>
         <form id="loginForm">
-            <div class="input-group">
-                <label id="labelUsername" for="username">Username</label>
-                <input type="text" id="username" required placeholder="Enter your username">
-            </div>
             
-            <div class="input-group">
-                <label id="labelPassword" for="password">Login Password</label>
-                <input type="password" id="password" required placeholder="Enter your password">
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" placeholder="Enter your username" required>
             </div>
 
-            <button type="submit" id="btnSubmit" class="submit-btn">Log In</button>
-        </form>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="password-container">
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+                </div>
+            </div>
 
-        <div class="footer-text">
-            <span id="textFooterQuestion">Don't have an account?</span><br>
-            <a href="signup.html" id="textFooterLink">Sign up</a>
-        </div>
+            <div id="loginError" class="error-msg">Incorrect username or password. Please try again.</div>
+
+            <button type="submit" class="submit-btn" style="margin-top: 10px;">Log In</button>
+            
+            <div class="switch-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </form>
     </div>
 
     <script>
-        // Translations Dictionary for Login Page
-        const translations = {
-            en: {
-                title: "Welcome Back", subtitle: "Please enter your details to log in",
-                username: "Username", password: "Login Password",
-                submit: "Log In", question: "Don't have an account?", link: "Sign up"
-            },
-            es: {
-                title: "Bienvenido de Nuevo", subtitle: "Por favor ingrese sus datos para iniciar sesión",
-                username: "Nombre de usuario", password: "Contraseña de inicio de sesión",
-                submit: "Iniciar Sesión", question: "¿No tienes una cuenta?", link: "Regístrate"
-            },
-            fr: {
-                title: "Bon Retour", subtitle: "Veuillez entrer vos coordonnées pour vous connecter",
-                username: "Nom d'utilisateur", password: "Mot de passe de connexion",
-                submit: "Se Connecter", question: "Vous n'avez pas de compte ?", link: "Inscrivez-vous"
-            },
-            ja: {
-                title: "おかえりなさい", subtitle: "ログイン情報を入力してください",
-                username: "ユーザー名", password: "ログインパスワード",
-                submit: "ログイン", question: "アカウントをお持ちですか？", link: "新規登録"
-            },
-            sv: {
-                title: "Välkommen Tillbaka", subtitle: "Ange dina uppgifter för att logga in",
-                username: "Användarnamn", password: "Inloggningslösenord",
-                submit: "Logga In", question: "Har du inget konto?", link: "Registrera dig"
-            },
-            it: {
-                title: "Bentornato", subtitle: "Inserisci i tuoi dati per accedere",
-                username: "Nome utente", password: "Password di accesso",
-                submit: "Accedi", question: "Non hai un account?", link: "Registrati"
-            },
-            de: {
-                title: "Willkommen Zurück", subtitle: "Bitte geben Sie Ihre Daten ein, um sich anzumelden",
-                username: "Benutzername", password: "Anmelde-Passwort",
-                submit: "Anmelden", question: "Haben Sie kein Konto?", link: "Registrieren"
-            },
-            no: {
-                title: "Velkommen Tilbake", subtitle: "Vennligst skriv inn opplysningene dine for å logge inn",
-                username: "Brukernavn", password: "Innloggingspassord",
-                submit: "Logg Inn", question: "Har du ikke en konto?", link: "Registrer deg"
-            },
-            ru: {
-                title: "С Возвращением", subtitle: "Пожалуйста, введите данные для входа",
-                username: "Имя пользователя", password: "Пароль для входа",
-                submit: "Войти", question: "Нет аккаунта?", link: "Зарегистрироваться"
-            },
-            hu: {
-                title: "Üdv Újra", subtitle: "Kérjük, adja meg adatait a bejelentkezéshez",
-                username: "Felhasználónév", password: "Bejelentkezési jelszó",
-                submit: "Bejelentkezés", question: "Nincs még fiókja?", link: "Regisztráció"
-            },
-            pl: {
-                title: "Witaj Ponownie", subtitle: "Wprowadź swoje dane, aby się zalogować",
-                username: "Nazwa użytkownika", password: "Hasło logowania",
-                submit: "Zaloguj Się", question: "Nie masz konta?", link: "Zarejestruj się"
-            },
-            sk: {
-                title: "Vitajte Späť", subtitle: "Zadajte svoje údaje na prihlásenie",
-                username: "Používateľské meno", password: "Prihlasovacie heslo",
-                submit: "Prihlásiť sa", question: "Nemáte účet?", link: "Zaregistrujte sa"
-            }
-        };
+        // Password Visibility Toggle Logic
+        const togglePassword = document.getElementById('togglePassword');
+        const loginPasswordInput = document.getElementById('loginPassword');
 
-        // Language Switcher Logic
-        const languageSelect = document.getElementById('languageSelect');
-        
-        languageSelect.addEventListener('change', function() {
-            const lang = this.value;
-            const t = translations[lang];
+        if (togglePassword && loginPasswordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPasswordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🔒';
+            });
+        }
 
-            document.getElementById('textTitle').innerText = t.title;
-            document.getElementById('textSubtitle').innerText = t.subtitle;
-            document.getElementById('labelUsername').innerText = t.username;
-            document.getElementById('labelPassword').innerText = t.password;
-            document.getElementById('btnSubmit').innerText = t.submit;
-            document.getElementById('textFooterQuestion').innerText = t.question;
-            document.getElementById('textFooterLink').innerText = t.link;
-        });
-
-        // Login Authentication Logic
+        // Login Logic matching localStorage data
         const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            const enteredUser = document.getElementById('loginUsername').value.trim();
+            const enteredPass = loginPasswordInput.value;
+            const loginError = document.getElementById('loginError');
 
-            const enteredUsername = document.getElementById('username').value.trim();
-            const enteredPassword = document.getElementById('password').value;
+            // Retrieve stored user info from signup
+            const savedUser = localStorage.getItem('userName');
+            const savedPass = localStorage.getItem('userPass');
 
-            const savedUsername = localStorage.getItem('userName');
-            const savedPassword = localStorage.getItem('userPassword');
-
-            if (enteredUsername === savedUsername && enteredPassword === savedPassword) {
-                localStorage.setItem('isLoggedIn', 'true');
-                alert('Login successful! Welcome back.');
+            // Check if entered credentials match what was saved in localStorage
+            if (enteredUser === savedUser && enteredPass === savedPass) {
+                loginError.style.display = 'none';
+                alert('Login successful!');
                 window.location.href = 'dashboard.html';
             } else {
-                alert('Invalid username or password. Please try again.');
+                loginError.style.display = 'block';
             }
         });
     </script>
