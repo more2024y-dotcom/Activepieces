@@ -152,7 +152,6 @@
 <body>
 
     <div class="auth-card">
-        <!-- Language Selector Option -->
         <div class="language-header">
             <select id="languageSelect">
                 <option value="en">English</option>
@@ -178,7 +177,6 @@
                 <input type="text" id="username" placeholder="Choose a username" required>
             </div>
 
-            <!-- Gender Option -->
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select id="gender" required>
@@ -189,7 +187,6 @@
                 </select>
             </div>
 
-            <!-- Country Phone Number Option -->
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <div class="phone-group">
@@ -211,7 +208,6 @@
                 </div>
             </div>
 
-            <!-- Login Password -->
             <div class="form-group">
                 <label for="password">Login Password</label>
                 <div class="password-container">
@@ -220,7 +216,6 @@
                 </div>
             </div>
 
-            <!-- Transaction Password -->
             <div class="form-group">
                 <label for="transPassword">Transaction Password</label>
                 <div class="password-container">
@@ -244,7 +239,6 @@
     </div>
 
     <script>
-        // Login Password Toggle
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
         if (togglePassword && passwordInput) {
@@ -255,7 +249,6 @@
             });
         }
 
-        // Transaction Password Toggle
         const toggleTransPassword = document.getElementById('toggleTransPassword');
         const transPasswordInput = document.getElementById('transPassword');
         if (toggleTransPassword && transPasswordInput) {
@@ -266,24 +259,35 @@
             });
         }
 
-        // Signup & Validation Logic
         const signupForm = document.getElementById('signupForm');
         signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
             
             const formError = document.getElementById('formError');
+            const usernameInput = document.getElementById('username').value.trim();
             const inviteCode = document.getElementById('inviteCode').value.trim();
             const passVal = passwordInput.value;
             const transPassVal = transPasswordInput.value;
 
-            // Check Login Password length (Minimum 6 characters)
+            // Retrieve existing users array from localStorage (or empty array if none exist)
+            let users = JSON.parse(localStorage.getItem('usersList')) || [];
+
+            // Check if username already exists
+            const existingUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
+            if (existingUser) {
+                formError.textContent = 'This username is already taken. Please choose another one.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            // Check Login Password length
             if (passVal.length < 6) {
                 formError.textContent = 'Login password must be at least 6 characters long.';
                 formError.style.display = 'block';
                 return;
             }
 
-            // Check Transaction Password length (Minimum 6 characters)
+            // Check Transaction Password length
             if (transPassVal.length < 6) {
                 formError.textContent = 'Transaction password must be at least 6 characters long.';
                 formError.style.display = 'block';
@@ -303,13 +307,19 @@
             const selectedGender = document.getElementById('gender').value;
             const selectedLang = document.getElementById('languageSelect').value;
 
-            // Save details to localStorage
-            localStorage.setItem('userName', document.getElementById('username').value);
-            localStorage.setItem('userGender', selectedGender);
-            localStorage.setItem('userPhone', fullPhone);
-            localStorage.setItem('userPass', passVal);
-            localStorage.setItem('userTransPass', transPassVal);
-            localStorage.setItem('userLang', selectedLang);
+            // Create new user object
+            const newUser = {
+                username: usernameInput,
+                gender: selectedGender,
+                phone: fullPhone,
+                password: passVal,
+                transPassword: transPassVal,
+                language: selectedLang
+            };
+
+            // Push to array and save back to localStorage
+            users.push(newUser);
+            localStorage.setItem('usersList', JSON.stringify(users));
 
             alert('Account created successfully!');
             window.location.href = 'login.html';
