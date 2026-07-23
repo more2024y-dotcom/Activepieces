@@ -66,6 +66,28 @@
             color: var(--primary-color);
         }
 
+        .invite-box {
+            background-color: #eff6ff;
+            border: 1px dashed var(--accent-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .invite-box p {
+            margin: 0 0 5px 0;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .invite-code-display {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+        }
+
         button.logout-btn {
             width: 100%;
             padding: 12px;
@@ -92,29 +114,45 @@
 
         <div class="info-box">
             <p><strong>Username:</strong> <span id="displayUser">Loading...</span></p>
+            <p><strong>Gender:</strong> <span id="displayGender">Loading...</span></p>
             <p><strong>Phone Number:</strong> <span id="displayPhone">Loading...</span></p>
+        </div>
+
+        <!-- Personal Referral Invite Code Box -->
+        <div class="invite-box">
+            <p>Your Personal Invitation Code to Share:</p>
+            <div class="invite-code-display" id="myInviteCode">Loading...</div>
         </div>
 
         <button type="button" class="logout-btn" id="logoutBtn">Log Out</button>
     </div>
 
     <script>
-        // Load data from localStorage
+        // Load active session data from localStorage
         const storedUser = localStorage.getItem('userName');
         const storedPhone = localStorage.getItem('userPhone');
+        const storedGender = localStorage.getItem('userGender');
 
         if (storedUser) {
             document.getElementById('welcomeUser').textContent = `Welcome back, ${storedUser}!`;
             document.getElementById('displayUser').textContent = storedUser;
+            document.getElementById('displayGender').textContent = storedGender ? storedGender : 'Not provided';
             document.getElementById('displayPhone').textContent = storedPhone ? storedPhone : 'Not provided';
+            
+            // Generate user's unique referral code using their username
+            const uniqueInvite = `REF-${storedUser.toUpperCase()}`;
+            document.getElementById('myInviteCode').textContent = uniqueInvite;
         } else {
-            // If someone tries to access dashboard without logging in, kick them back to login
+            // Kick back to login if no active session is found
             alert('Please log in first.');
             window.location.href = 'login.html';
         }
 
         // Logout functionality
         document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userPhone');
+            localStorage.removeItem('userGender');
             window.location.href = 'login.html';
         });
     </script>
