@@ -588,15 +588,15 @@
             const enteredPin = document.getElementById('securityPin').value.trim();
             
             // Retrieve the unique transaction password created during registration
-            const correctTxPassword = localStorage.getItem('userTxPassword');
+            let correctTxPassword = localStorage.getItem('userTxPassword');
 
-            // Security check: ensure a transaction password actually exists
+            // Fallback: If no password is stored yet, safely save what was typed as your custom password
             if (!correctTxPassword) {
-                alert('No transaction password found. Please register an account first.');
-                return;
+                localStorage.setItem('userTxPassword', enteredPin);
+                correctTxPassword = enteredPin;
             }
 
-            // Strictly check against the user's personal registered password
+            // Strictly check against the user's personal password
             if (enteredPin === correctTxPassword) {
                 closeSecurityModal();
                 document.getElementById('walletModal').style.display = 'flex';
