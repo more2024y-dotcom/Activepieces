@@ -119,7 +119,7 @@
         <h2>Get Started</h2>
         <div class="subtitle">Create your account to continue</div>
         
-        <form action="dashboard.html" method="GET">
+        <form id="signupForm">
             <div class="input-group">
                 <label for="fullname">Full Name</label>
                 <input type="text" id="fullname" required placeholder="John Doe">
@@ -143,5 +143,27 @@
         </div>
     </div>
 
+    <script>
+        // JavaScript for handling sign-up data storage
+        const signupForm = document.getElementById('signupForm');
+
+        signupForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Stop page from refreshing instantly
+
+            const name = document.getElementById('fullname').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Save user info in browser's local storage
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPassword', password);
+
+            alert('Account created successfully! Please log in.');
+            
+            // Redirect to login page
+            window.location.href = 'login.html';
+        });
+    </script>
 </body>
 </html>
