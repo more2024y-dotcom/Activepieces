@@ -131,8 +131,8 @@
                 <input type="password" id="regPassword" placeholder="Create a login password" required>
             </div>
             <div class="form-group">
-                <label for="regTxPassword">Transaction Password (e.g. 444444)</label>
-                <input type="password" id="regTxPassword" placeholder="Create transaction password" required>
+                <label for="regTxPassword">Transaction Password (e.g., 222222)</label>
+                <input type="password" id="regTxPassword" placeholder="Create your transaction password" required>
             </div>
             <div class="form-group">
                 <label for="regInviteCode">Invitation Code (Optional)</label>
@@ -165,12 +165,12 @@
 
             const myNewInviteCode = 'REF' + Math.floor(100000 + Math.random() * 900000);
 
-            // Save details including the transaction password they chose
+            // Save details including the custom transaction password
             localStorage.setItem('userName', name);
             localStorage.setItem('userPhone', phone);
             localStorage.setItem('userGender', gender);
             localStorage.setItem('userPassword', password);
-            localStorage.setItem('userTxPassword', txPassword); // Saves whatever they typed (e.g., 444444)
+            localStorage.setItem('userTxPassword', txPassword); 
             localStorage.setItem('myInviteCode', myNewInviteCode);
 
             if (inviteCodeUsed) {
