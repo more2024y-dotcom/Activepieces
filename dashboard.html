@@ -295,32 +295,7 @@
             font-size: 13px;
         }
 
-        .input-with-select {
-            display: flex;
-            gap: 8px;
-        }
-
-        .input-with-select select {
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            background-color: #f8fafc;
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--primary-blue);
-            cursor: pointer;
-        }
-
-        .input-with-select input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .form-group input[type="password"] {
+        .form-group input[type="text"], .form-group input[type="password"] {
             width: 100%;
             padding: 12px;
             border: 1px solid #cbd5e1;
@@ -514,7 +489,7 @@
     <div class="modal-overlay" id="securityModal">
         <div class="modal-content">
             <h3>Security Verification</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter your transaction password to continue. (Hint: <strong>111111</strong>)</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter the transaction password you created during account registration.</p>
             <form onsubmit="verifySecurityPin(event)">
                 <div class="form-group">
                     <label for="securityPin">Transaction Password</label>
@@ -528,20 +503,14 @@
         </div>
     </div>
 
-    <!-- Add Wallet Details Modal with Currency Option Selector -->
+    <!-- Add Wallet Details Modal -->
     <div class="modal-overlay" id="walletModal">
         <div class="modal-content">
-            <h3>Add Crypto Wallet Address</h3>
+            <h3>Add Wallet Address</h3>
             <form id="walletForm" onsubmit="saveWallet(event)">
                 <div class="form-group">
                     <label for="walletAddress">Wallet Address</label>
-                    <div class="input-with-select">
-                        <select id="cryptoCurrency">
-                            <option value="BTC" selected>BTC</option>
-                            <option value="ETH">ETH</option>
-                        </select>
-                        <input type="text" id="walletAddress" placeholder="Enter wallet address" required>
-                    </div>
+                    <input type="text" id="walletAddress" placeholder="Enter your wallet address" required>
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="modal-btn btn-cancel" onclick="closeWalletModal()">Cancel</button>
@@ -580,11 +549,6 @@
         const storedCode = localStorage.getItem('myInviteCode');
         const storedGender = localStorage.getItem('userGender');
 
-        // Set default transaction password strictly to 111111 if not already present
-        if (!localStorage.getItem('userTxPassword')) {
-            localStorage.setItem('userTxPassword', '111111');
-        }
-
         if (storedName) {
             document.getElementById('displayName').textContent = storedName;
         }
@@ -622,14 +586,15 @@
         function verifySecurityPin(e) {
             e.preventDefault();
             const enteredPin = document.getElementById('securityPin').value.trim();
-            const correctTxPassword = localStorage.getItem('userTxPassword') || '111111';
+            
+            // Strictly check against the transaction password saved during registration
+            const correctTxPassword = localStorage.getItem('userTxPassword');
 
-            // Strictly check if it matches 111111
             if (enteredPin === correctTxPassword) {
                 closeSecurityModal();
                 document.getElementById('walletModal').style.display = 'flex';
             } else {
-                alert('Incorrect transaction password! Please enter 111111.');
+                alert('Incorrect transaction password! Please enter the exact password you created when signing up.');
             }
         }
 
@@ -640,31 +605,23 @@
 
         function saveWallet(e) {
             e.preventDefault();
-            const currency = document.getElementById('cryptoCurrency').value;
             const address = document.getElementById('walletAddress').value.trim();
 
             if (address) {
-                localStorage.setItem('userCryptoType', currency);
                 localStorage.setItem('userWalletAddress', address);
-                alert(currency + ' wallet address successfully saved!');
+                alert('Wallet address successfully saved!');
                 closeWalletModal();
                 document.getElementById('walletForm').reset();
             }
         }
 
         function openProfileMenu() {
-            const savedCurrency = localStorage.getItem('userCryptoType') || 'BTC';
             const savedAddress = localStorage.getItem('userWalletAddress');
-            const walletInfo = savedAddress ? `\nLinked Wallet (${savedCurrency}): ${savedAddress}` : '\nNo wallet linked yet.';
+            const walletInfo = savedAddress ? `\nLinked Wallet: ${savedAddress}` : '\nNo wallet linked yet.';
             
             const action = confirm('User Profile: ' + (storedName || 'Guest') + walletInfo + '\n\nWould you like to Log Out?');
             if (action) {
-                localStorage.removeItem('userName');
-                localStorage.removeItem('userPhone');
-                localStorage.removeItem('userGender');
-                localStorage.removeItem('myInviteCode');
-                localStorage.removeItem('userCryptoType');
-                localStorage.removeItem('userWalletAddress');
+                localStorage.clear();
                 window.location.href = 'login.html';
             }
         }
