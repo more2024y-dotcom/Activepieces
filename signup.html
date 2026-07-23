@@ -35,6 +35,20 @@
             width: 100%;
             max-width: 440px;
             box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Language Selector Header Position */
+        .language-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .language-header select {
+            width: auto;
+            padding: 6px 10px;
+            font-size: 12px;
         }
 
         h2 {
@@ -93,14 +107,12 @@
             color: #64748b;
         }
 
-        /* Password Strength Meter Styling */
         .strength-meter {
             height: 6px;
             background: #e2e8f0;
             border-radius: 3px;
             margin-top: 8px;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
         .strength-bar {
@@ -143,6 +155,24 @@
 <body>
 
     <div class="auth-card">
+        <!-- Language Selector Option -->
+        <div class="language-header">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ja">日本語</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ar">العربية</option>
+                <option value="pt">Português</option>
+                <option value="ru">Русский</option>
+                <option value="it">Italiano</option>
+                <option value="ko">한국어</option>
+            </select>
+        </div>
+
         <h2>Create Account</h2>
         <form id="signupForm">
             
@@ -151,7 +181,6 @@
                 <input type="text" id="username" placeholder="Choose a username" required>
             </div>
 
-            <!-- Country Phone Number Option -->
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <div class="phone-group">
@@ -173,7 +202,6 @@
                 </div>
             </div>
 
-            <!-- Password with Eye Toggle & Strength Meter -->
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="password-container">
@@ -209,7 +237,7 @@
             });
         }
 
-        // Password Strength Checker (Training Password Logic)
+        // Password Strength Checker
         const strengthBar = document.getElementById('strengthBar');
         const strengthText = document.getElementById('strengthText');
 
@@ -228,20 +256,20 @@
                 strengthText.textContent = 'Password strength: Enter a password';
             } else if (strength <= 1) {
                 strengthBar.style.width = '25%';
-                strengthBar.style.backgroundColor = '#dc2626'; // Red (Weak)
+                strengthBar.style.backgroundColor = '#dc2626';
                 strengthText.textContent = 'Password strength: Weak';
             } else if (strength === 2 || strength === 3) {
                 strengthBar.style.width = '65%';
-                strengthBar.style.backgroundColor = '#d97706'; // Orange (Medium)
+                strengthBar.style.backgroundColor = '#d97706';
                 strengthText.textContent = 'Password strength: Medium';
             } else {
                 strengthBar.style.width = '100%';
-                strengthBar.style.backgroundColor = '#16a34a'; // Green (Strong)
+                strengthBar.style.backgroundColor = '#16a34a';
                 strengthText.textContent = 'Password strength: Strong';
             }
         });
 
-        // Signup & Invite Code Logic
+        // Signup Form Logic
         const signupForm = document.getElementById('signupForm');
         signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -256,13 +284,14 @@
             
             inviteError.style.display = 'none';
 
-            // Combine country code and phone number
             const fullPhone = document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value;
+            const selectedLanguage = document.getElementById('languageSelect').value;
 
-            // Save user details to localStorage
+            // Save user details along with their chosen language preference to localStorage
             localStorage.setItem('userName', document.getElementById('username').value);
             localStorage.setItem('userPhone', fullPhone);
             localStorage.setItem('userPass', passwordInput.value);
+            localStorage.setItem('userLang', selectedLanguage);
 
             alert('Account created successfully!');
             window.location.href = 'login.html';
