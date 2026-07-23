@@ -226,7 +226,7 @@
 
             <div class="form-group">
                 <label for="inviteCode">Invite Code</label>
-                <input type="text" id="inviteCode" placeholder="Enter invite code (2DI2)" required>
+                <input type="text" id="inviteCode" placeholder="Enter invite code (e.g. 2DI2 or user code)" required>
                 <div id="formError" class="error-msg"></div>
             </div>
 
@@ -259,6 +259,16 @@
             });
         }
 
+        // Helper function to generate a random 4-character code like BTY6
+        function generateRandomInviteCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < 4; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
         const signupForm = document.getElementById('signupForm');
         signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -266,12 +276,14 @@
             const formError = document.getElementById('formError');
             const usernameInput = document.getElementById('username').value.trim();
             const phoneInput = document.getElementById('phone').value.trim();
-            const inviteCode = document.getElementById('inviteCode').value.trim();
+            const inviteCodeInput = document.getElementById('inviteCode').value.trim().toUpperCase();
             const passVal = passwordInput.value;
             const transPassVal = transPasswordInput.value;
 
-            // Check if username already exists in multi-user storage
+            // Get existing users list from localStorage
             let users = JSON.parse(localStorage.getItem('usersList')) || [];
+
+            // 1. Check if username already exists
             const existingUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
             if (existingUser) {
                 formError.textContent = 'This username is already taken. Please choose another one.';
@@ -279,7 +291,7 @@
                 return;
             }
 
-            // Phone Number Validation: Check if it contains only numbers and has a valid length (e.g., at least 7 digits)
+            // 2. Phone Number Validation
             const phoneDigitsOnly = phoneInput.replace(/\D/g, '');
             if (phoneDigitsOnly.length < 7) {
                 formError.textContent = 'Please enter a valid phone number correctly.';
@@ -287,23 +299,25 @@
                 return;
             }
 
-            // Check Login Password length
+            // 3. Check Passwords length
             if (passVal.length < 6) {
                 formError.textContent = 'Login password must be at least 6 characters long.';
                 formError.style.display = 'block';
                 return;
             }
 
-            // Check Transaction Password length
             if (transPassVal.length < 6) {
                 formError.textContent = 'Transaction password must be at least 6 characters long.';
                 formError.style.display = 'block';
                 return;
             }
 
-            // Check Invite Code
-            if (inviteCode !== '2DI2') {
-                formError.textContent = 'Invalid invite code. Please use 2DI2.';
+            // 4. Validate Invite Code (Must be either master code '2DI2' OR an existing user's unique referral code)
+            const isMasterCode = (inviteCodeInput === '2DI2');
+            const foundReferrer = users.find(u => u.myInviteCode === inviteCodeInput);
+
+            if (!isMasterCode && !foundReferrer) {
+                formError.textContent = 'Invalid invite code. Please enter a valid referral code.';
                 formError.style.display = 'block';
                 return;
             }
@@ -314,20 +328,29 @@
             const selectedGender = document.getElementById('gender').value;
             const selectedLang = document.getElementById('languageSelect').value;
 
-            // Create new user object
+            // Generate a unique random code for this new user (e.g. BTY6)
+            let newUniqueCode = generateRandomInviteCode();
+            // Ensure no collision with existing codes
+            while (users.some(u => u.myInviteCode === newUniqueCode) || newUniqueCode === '2DI2') {
+                newUniqueCode = generateRandomInviteCode();
+            }
+
+            // Create new user object including their personal referral code
             const newUser = {
                 username: usernameInput,
                 gender: selectedGender,
                 phone: fullPhone,
                 password: passVal,
                 transPassword: transPassVal,
-                language: selectedLang
+                language: selectedLang,
+                myInviteCode: newUniqueCode
             };
 
+            // Save to array and update localStorage
             users.push(newUser);
             localStorage.setItem('usersList', JSON.stringify(users));
 
-            alert('Account created successfully!');
+            alert('Account created successfully! Your personal invite code is: ' + newUniqueCode);
             window.location.href = 'login.html';
         });
     </script>
