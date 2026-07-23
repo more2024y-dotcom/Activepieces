@@ -295,7 +295,32 @@
             font-size: 13px;
         }
 
-        .form-group input {
+        .input-with-select {
+            display: flex;
+            gap: 8px;
+        }
+
+        .input-with-select select {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        .input-with-select input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .form-group input[type="password"] {
             width: 100%;
             padding: 12px;
             border: 1px solid #cbd5e1;
@@ -503,26 +528,24 @@
         </div>
     </div>
 
-    <!-- Add Wallet Details Modal (BTC, ETH, Address) -->
+    <!-- Add Wallet Details Modal with Currency Option Selector -->
     <div class="modal-overlay" id="walletModal">
         <div class="modal-content">
-            <h3>Configure Crypto Wallet</h3>
+            <h3>Add Crypto Wallet Address</h3>
             <form id="walletForm" onsubmit="saveWallet(event)">
                 <div class="form-group">
-                    <label for="btcInput">BTC Account / Label</label>
-                    <input type="text" id="btcInput" placeholder="Enter BTC identifier or amount" required>
-                </div>
-                <div class="form-group">
-                    <label for="ethInput">ETH Account / Label</label>
-                    <input type="text" id="ethInput" placeholder="Enter ETH identifier or amount" required>
-                </div>
-                <div class="form-group">
                     <label for="walletAddress">Wallet Address</label>
-                    <input type="text" id="walletAddress" placeholder="Enter full crypto wallet address" required>
+                    <div class="input-with-select">
+                        <select id="cryptoCurrency">
+                            <option value="BTC" selected>BTC</option>
+                            <option value="ETH">ETH</option>
+                        </select>
+                        <input type="text" id="walletAddress" placeholder="Enter wallet address" required>
+                    </div>
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="modal-btn btn-cancel" onclick="closeWalletModal()">Cancel</button>
-                    <button type="submit" class="modal-btn btn-submit">Save Details</button>
+                    <button type="submit" class="modal-btn btn-submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -596,7 +619,6 @@
             const pin = document.getElementById('securityPin').value.trim();
             if (pin.length >= 4) {
                 closeSecurityModal();
-                // Open the crypto details modal after successful verification
                 document.getElementById('walletModal').style.display = 'flex';
             } else {
                 alert('Please enter a valid transaction password (at least 4 characters).');
@@ -610,23 +632,22 @@
 
         function saveWallet(e) {
             e.preventDefault();
-            const btc = document.getElementById('btcInput').value.trim();
-            const eth = document.getElementById('ethInput').value.trim();
+            const currency = document.getElementById('cryptoCurrency').value;
             const address = document.getElementById('walletAddress').value.trim();
 
-            if (btc && eth && address) {
-                localStorage.setItem('userBtc', btc);
-                localStorage.setItem('userEth', eth);
+            if (address) {
+                localStorage.setItem('userCryptoType', currency);
                 localStorage.setItem('userWalletAddress', address);
-                alert('Crypto wallet information saved successfully!');
+                alert(currency + ' wallet address successfully saved!');
                 closeWalletModal();
                 document.getElementById('walletForm').reset();
             }
         }
 
         function openProfileMenu() {
+            const savedCurrency = localStorage.getItem('userCryptoType') || 'BTC';
             const savedAddress = localStorage.getItem('userWalletAddress');
-            const walletInfo = savedAddress ? '\nWallet Address: ' + savedAddress : '\nNo wallet linked yet.';
+            const walletInfo = savedAddress ? `\nLinked Wallet (${savedCurrency}): ${savedAddress}` : '\nNo wallet linked yet.';
             
             const action = confirm('User Profile: ' + (storedName || 'Guest') + walletInfo + '\n\nWould you like to Log Out?');
             if (action) {
@@ -634,8 +655,7 @@
                 localStorage.removeItem('userPhone');
                 localStorage.removeItem('userGender');
                 localStorage.removeItem('myInviteCode');
-                localStorage.removeItem('userBtc');
-                localStorage.removeItem('userEth');
+                localStorage.removeItem('userCryptoType');
                 localStorage.removeItem('userWalletAddress');
                 window.location.href = 'login.html';
             }
