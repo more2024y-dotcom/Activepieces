@@ -1,141 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Login - Activepieces</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
+        /* CSS: This styles our page and centers the login box */
         body {
-            background-color: #0b0b0f;
-            color: #ffffff;
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
         .login-card {
-            background: #141419;
-            border: 2px solid #2a2a35;
-            border-radius: 35px;
-            padding: 50px 35px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .login-card h2 {
+            margin-bottom: 20px;
+            color: #333;
             text-align: center;
         }
 
-        .logo-container {
-            margin-bottom: 30px;
-        }
-
-        .logo-container img {
-            width: 90px;
-            height: 90px;
-            border-radius: 20px;
-            object-fit: contain;
-        }
-
-        .login-card h1 {
-            font-size: 34px;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .login-card p {
-            font-size: 20px;
-            color: #888895;
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-
         .input-group {
-            margin-bottom: 25px;
-            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 14px;
         }
 
         .input-group input {
             width: 100%;
-            background: #1e1e26;
-            border: 2px solid #333342;
-            border-radius: 20px;
-            padding: 22px 25px;
-            font-size: 20px;
-            color: #ffffff;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .input-group input:focus {
-            border-color: #ff334b;
-        }
-
-        .input-group input::placeholder {
-            color: #666675;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't overflow width */
         }
 
         .login-btn {
             width: 100%;
-            background-color: #ff334b;
-            color: white;
+            padding: 10px;
+            background-color: #007bff;
             border: none;
-            padding: 22px;
-            border-radius: 20px;
-            font-size: 22px;
-            font-weight: 900;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
             cursor: pointer;
-            margin-top: 15px;
-            box-shadow: 0 10px 25px rgba(255, 51, 75, 0.4);
-            transition: background-color 0.2s;
         }
 
         .login-btn:hover {
-            background-color: #e0283f;
-        }
-
-        .footer-links {
-            margin-top: 35px;
-            font-size: 18px;
-            color: #888895;
-        }
-
-        .footer-links a {
-            color: #ff334b;
-            text-decoration: none;
-            font-weight: 900;
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
+    <!-- HTML: The actual structure of the login box -->
     <div class="login-card">
-        <div class="logo-container">
-            <img src="assets/logo.png" alt="Logo">
-        </div>
-        <h1>Activepieces</h1>
-        <p>Login to your account</p>
-
+        <h2>Login</h2>
         <form>
             <div class="input-group">
-                <input type="text" placeholder="Username" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="Enter your email">
             </div>
+            
             <div class="input-group">
-                <input type="password" placeholder="Password" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter your password">
             </div>
-            <button type="submit" class="login-btn">Login</button>
-        </form>
 
-        <div class="footer-links">
-            Don't have an account? <a href="signup.html">Create Account</a>
-        </div>
+            <button type="submit" class="login-btn">Log In</button>
+        </form>
     </div>
 
 </body>
