@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Platform</title>
+    <style>
+        :root {
+            --primary-blue: #1d4ed8;
+            --dark-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --bg-color: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .register-container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(29, 78, 216, 0.15);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .register-container h2 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .login-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>Create Account</h2>
+        <form id="registerForm" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label for="regName">Full Name</label>
+                <input type="text" id="regName" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="regPhone">Phone Number</label>
+                <input type="tel" id="regPhone" placeholder="Enter phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="regGender">Gender</label>
+                <select id="regGender" required>
+                    <option value="" disabled selected>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" placeholder="Create a password" required>
+            </div>
+            <div class="form-group">
+                <label for="regInviteCode">Invitation Code (Optional)</label>
+                <input type="text" id="regInviteCode" placeholder="Enter friend's invitation code">
+            </div>
+            <button type="submit" class="btn-submit">Sign Up</button>
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="login.html">Log In</a>
+        </div>
+    </div>
+
+    <script>
+        // Automatically grab referral code from URL parameters if your friend used a link like register.html?ref=CODE
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            if (refCode) {
+                document.getElementById('regInviteCode').value = refCode;
+            }
+        });
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const gender = document.getElementById('regGender').value;
+            const password = document.getElementById('regPassword').value;
+            const inviteCodeUsed = document.getElementById('regInviteCode').value.trim();
+
+            // Generate a random unique invite code for this new user
+            const myNewInviteCode = 'REF' + Math.floor(100000 + Math.random() * 900000);
+
+            // Save user info to localStorage
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('userGender', gender);
+            localStorage.setItem('userPassword', password);
+            localStorage.setItem('myInviteCode', myNewInviteCode);
+
+            // If they entered an invitation code, save who referred them
+            if (inviteCodeUsed) {
+                localStorage.setItem('referredBy', inviteCodeUsed);
+            }
+
+            alert('Registration successful! Your invite code is ' + myNewInviteCode);
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
