@@ -88,10 +88,20 @@
 
     <div class="container">
         <div class="welcome-card">
-            <h1>Welcome Back! 👋</h1>
+            <h1 id="welcomeMessage">Welcome Back! 👋</h1>
             <p>You have successfully accessed your dashboard. From here, you can manage your settings, view your account info, and navigate your app.</p>
         </div>
     </div>
+
+    <script>
+        // Grab the stored user name from localStorage
+        const userName = localStorage.getItem('userName');
+
+        // If a name exists, update the welcome heading
+        if (userName) {
+            document.getElementById('welcomeMessage').innerText = `Welcome Back, ${userName}! 👋`;
+        }
+    </script>
 
 </body>
 </html>
