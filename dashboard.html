@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard - Add Wallet</title>
     <style>
         :root {
             --primary-blue: #1d4ed8;
@@ -20,7 +20,7 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 90px; /* Space for fixed bottom nav */
+            padding-bottom: 90px;
         }
 
         .container {
@@ -160,6 +160,8 @@
             cursor: pointer;
             text-decoration: none;
             color: white;
+            background: none;
+            border: none;
         }
 
         .card-action-icon {
@@ -219,7 +221,7 @@
             font-weight: 600;
         }
 
-        /* Notice Card & Promo Banner */
+        /* Notice Card */
         .notice-card {
             background: white;
             padding: 20px;
@@ -250,35 +252,82 @@
             color: var(--text-muted);
         }
 
-        .promo-banner {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: white;
-            padding: 25px;
+        /* Modal Overlay Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
             border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
         }
 
-        .promo-banner h3 {
-            margin: 0 0 8px 0;
-            font-size: 18px;
+        .modal-content h3 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 20px;
+            margin-bottom: 20px;
         }
 
-        .promo-banner p {
-            margin: 0 0 15px 0;
-            font-size: 14px;
-            color: #94a3b8;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        .promo-btn {
-            background-color: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 10px 20px;
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
+            box-sizing: border-box;
             font-size: 14px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #e2e8f0;
+            color: var(--text-main);
         }
 
         /* Fixed Bottom Navigation Bar */
@@ -311,7 +360,7 @@
         }
 
         .nav-item.active {
-            color: #3b82f6; /* Accent blue for active tab */
+            color: #3b82f6;
         }
 
         .nav-item span.icon {
@@ -371,22 +420,22 @@
             </div>
 
             <div class="card-actions">
-                <a href="#" class="card-action-item">
+                <button class="card-action-item" onclick="promptSecurityPin()">
                     <div class="card-action-icon">+</div>
                     <span>Add Wallet</span>
-                </a>
-                <a href="#" class="card-action-item">
+                </button>
+                <button class="card-action-item" onclick="alert('Deposit feature coming soon!')">
                     <div class="card-action-icon">↓</div>
                     <span>Deposit</span>
-                </a>
-                <a href="#" class="card-action-item">
+                </button>
+                <button class="card-action-item" onclick="alert('Withdraw feature coming soon!')">
                     <div class="card-action-icon">↑</div>
                     <span>Withdraw</span>
-                </a>
-                <a href="#" class="card-action-item">
+                </button>
+                <button class="card-action-item" onclick="alert('Transaction history opening...')">
                     <div class="card-action-icon">⇄</div>
                     <span>Transaction</span>
-                </a>
+                </button>
             </div>
         </div>
 
@@ -426,7 +475,7 @@
             </a>
         </div>
 
-        <!-- Bottom Fill Section 1: System Notice -->
+        <!-- Bottom Fill Section: System Notice -->
         <div class="notice-card">
             <div class="notice-icon">📢</div>
             <div class="notice-content">
@@ -434,12 +483,48 @@
                 <p>Welcome to the platform! Invite friends using your referral code to unlock higher rewards.</p>
             </div>
         </div>
+    </div>
 
-        <!-- Bottom Fill Section 2: Promo Banner -->
-        <div class="promo-banner">
-            <h3>Upgrade to VIP 2</h3>
-            <p>Unlock higher daily earnings and exclusive referral bonuses instantly.</p>
-            <button class="promo-btn" onclick="alert('VIP upgrade feature coming soon!')">Upgrade Now</button>
+    <!-- Security PIN Prompt Modal -->
+    <div class="modal-overlay" id="securityModal">
+        <div class="modal-content">
+            <h3>Security Verification</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter your transaction password/PIN to continue (Hint: default can be any 4-6 digits or '1234').</p>
+            <form onsubmit="verifySecurityPin(event)">
+                <div class="form-group">
+                    <label for="securityPin">Transaction Password</label>
+                    <input type="password" id="securityPin" placeholder="Enter transaction password" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn btn-cancel" onclick="closeSecurityModal()">Cancel</button>
+                    <button type="submit" class="modal-btn btn-submit">Verify</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Wallet Details Modal (BTC, ETH, Address) -->
+    <div class="modal-overlay" id="walletModal">
+        <div class="modal-content">
+            <h3>Configure Crypto Wallet</h3>
+            <form id="walletForm" onsubmit="saveWallet(event)">
+                <div class="form-group">
+                    <label for="btcInput">BTC Account / Label</label>
+                    <input type="text" id="btcInput" placeholder="Enter BTC identifier or amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="ethInput">ETH Account / Label</label>
+                    <input type="text" id="ethInput" placeholder="Enter ETH identifier or amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="walletAddress">Wallet Address</label>
+                    <input type="text" id="walletAddress" placeholder="Enter full crypto wallet address" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn btn-cancel" onclick="closeWalletModal()">Cancel</button>
+                    <button type="submit" class="modal-btn btn-submit">Save Details</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -496,13 +581,62 @@
             }
         }
 
+        // Security PIN Prompt Flow
+        function promptSecurityPin() {
+            document.getElementById('securityModal').style.display = 'flex';
+        }
+
+        function closeSecurityModal() {
+            document.getElementById('securityModal').style.display = 'none';
+            document.getElementById('securityPin').value = '';
+        }
+
+        function verifySecurityPin(e) {
+            e.preventDefault();
+            const pin = document.getElementById('securityPin').value.trim();
+            if (pin.length >= 4) {
+                closeSecurityModal();
+                // Open the crypto details modal after successful verification
+                document.getElementById('walletModal').style.display = 'flex';
+            } else {
+                alert('Please enter a valid transaction password (at least 4 characters).');
+            }
+        }
+
+        // Wallet Modal Functions
+        function closeWalletModal() {
+            document.getElementById('walletModal').style.display = 'none';
+        }
+
+        function saveWallet(e) {
+            e.preventDefault();
+            const btc = document.getElementById('btcInput').value.trim();
+            const eth = document.getElementById('ethInput').value.trim();
+            const address = document.getElementById('walletAddress').value.trim();
+
+            if (btc && eth && address) {
+                localStorage.setItem('userBtc', btc);
+                localStorage.setItem('userEth', eth);
+                localStorage.setItem('userWalletAddress', address);
+                alert('Crypto wallet information saved successfully!');
+                closeWalletModal();
+                document.getElementById('walletForm').reset();
+            }
+        }
+
         function openProfileMenu() {
-            const action = confirm('User Profile: ' + (storedName || 'Guest') + '\n\nWould you like to Log Out?');
+            const savedAddress = localStorage.getItem('userWalletAddress');
+            const walletInfo = savedAddress ? '\nWallet Address: ' + savedAddress : '\nNo wallet linked yet.';
+            
+            const action = confirm('User Profile: ' + (storedName || 'Guest') + walletInfo + '\n\nWould you like to Log Out?');
             if (action) {
                 localStorage.removeItem('userName');
                 localStorage.removeItem('userPhone');
                 localStorage.removeItem('userGender');
                 localStorage.removeItem('myInviteCode');
+                localStorage.removeItem('userBtc');
+                localStorage.removeItem('userEth');
+                localStorage.removeItem('userWalletAddress');
                 window.location.href = 'login.html';
             }
         }
