@@ -514,7 +514,7 @@
     <div class="modal-overlay" id="securityModal">
         <div class="modal-content">
             <h3>Security Verification</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter your transaction password/PIN to continue (Hint: default can be any 4-6 digits or '1234').</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter your transaction password. (Default security password for testing is set to: <strong>123456</strong>)</p>
             <form onsubmit="verifySecurityPin(event)">
                 <div class="form-group">
                     <label for="securityPin">Transaction Password</label>
@@ -580,6 +580,11 @@
         const storedCode = localStorage.getItem('myInviteCode');
         const storedGender = localStorage.getItem('userGender');
 
+        // Set a default secure transaction password if it hasn't been created yet
+        if (!localStorage.getItem('userTxPassword')) {
+            localStorage.setItem('userTxPassword', '123456');
+        }
+
         if (storedName) {
             document.getElementById('displayName').textContent = storedName;
         }
@@ -616,12 +621,15 @@
 
         function verifySecurityPin(e) {
             e.preventDefault();
-            const pin = document.getElementById('securityPin').value.trim();
-            if (pin.length >= 4) {
+            const enteredPin = document.getElementById('securityPin').value.trim();
+            const correctTxPassword = localStorage.getItem('userTxPassword') || '123456';
+
+            // Strict match check against the actual saved security password
+            if (enteredPin === correctTxPassword) {
                 closeSecurityModal();
                 document.getElementById('walletModal').style.display = 'flex';
             } else {
-                alert('Please enter a valid transaction password (at least 4 characters).');
+                alert('Incorrect transaction password! Access denied.');
             }
         }
 
