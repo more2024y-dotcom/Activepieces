@@ -514,7 +514,7 @@
     <div class="modal-overlay" id="securityModal">
         <div class="modal-content">
             <h3>Security Verification</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter your transaction password. (Default security password for testing is set to: <strong>123456</strong>)</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter your transaction password to continue. (Hint: <strong>111111</strong>)</p>
             <form onsubmit="verifySecurityPin(event)">
                 <div class="form-group">
                     <label for="securityPin">Transaction Password</label>
@@ -580,9 +580,9 @@
         const storedCode = localStorage.getItem('myInviteCode');
         const storedGender = localStorage.getItem('userGender');
 
-        // Set a default secure transaction password if it hasn't been created yet
+        // Set default transaction password strictly to 111111 if not already present
         if (!localStorage.getItem('userTxPassword')) {
-            localStorage.setItem('userTxPassword', '123456');
+            localStorage.setItem('userTxPassword', '111111');
         }
 
         if (storedName) {
@@ -622,14 +622,14 @@
         function verifySecurityPin(e) {
             e.preventDefault();
             const enteredPin = document.getElementById('securityPin').value.trim();
-            const correctTxPassword = localStorage.getItem('userTxPassword') || '123456';
+            const correctTxPassword = localStorage.getItem('userTxPassword') || '111111';
 
-            // Strict match check against the actual saved security password
+            // Strictly check if it matches 111111
             if (enteredPin === correctTxPassword) {
                 closeSecurityModal();
                 document.getElementById('walletModal').style.display = 'flex';
             } else {
-                alert('Incorrect transaction password! Access denied.');
+                alert('Incorrect transaction password! Please enter 111111.');
             }
         }
 
