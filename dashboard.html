@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>User Dashboard</title>
     <style>
         :root {
             --primary-color: #0f172a;
             --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #334155;
@@ -18,267 +19,104 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0;
-        }
-
-        .navbar {
-            background-color: var(--card-bg);
-            padding: 15px 30px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-
-        .navbar h2 {
+            min-height: 100vh;
             margin: 0;
-            color: var(--primary-color);
-            font-size: 20px;
+            padding: 20px;
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .lang-select {
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-color);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-color);
-        }
-
-        .logout-btn {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background-color 0.2s;
-        }
-
-        .logout-btn:hover {
-            background-color: #dc2626;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .welcome-card {
+        .dashboard-card {
             background-color: var(--card-bg);
-            padding: 30px;
+            padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 480px;
+            box-sizing: border-box;
         }
 
-        .welcome-card h1 {
+        h2 {
             margin-top: 0;
             color: var(--primary-color);
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
+        .welcome-msg {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-color);
         }
 
-        .info-item {
-            background-color: var(--bg-color);
+        .info-box {
+            background-color: #f1f5f9;
             padding: 15px;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
 
-        .info-item label {
-            display: block;
-            font-size: 12px;
-            color: #64748b;
+        .info-box p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .info-box span {
             font-weight: 600;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-
-        .info-item span {
-            font-size: 15px;
             color: var(--primary-color);
+        }
+
+        button.logout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
             font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button.logout-btn:hover {
+            background-color: #b91c1c;
         }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <h2 id="navTitle">My Platform</h2>
-        <div class="nav-right">
-            <select id="languageSelect" class="lang-select">
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="sv">🇸🇪 Svenska</option>
-                <option value="it">🇮🇹 Italiano</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="no">🇳🇴 Norsk</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="hu">🇭🇺 Magyar</option>
-                <option value="pl">🇵🇱 Polski</option>
-                <option value="sk">🇸🇰 Slovenčina</option>
-            </select>
-            <button id="logoutBtn" class="logout-btn">Log Out</button>
-        </div>
-    </div>
+    <div class="dashboard-card">
+        <h2>Dashboard</h2>
+        <div class="welcome-msg" id="welcomeUser">Welcome back!</div>
 
-    <div class="container">
-        <div class="welcome-card">
-            <h1 id="welcomeHeading">Welcome Back! 👋</h1>
-            <p id="welcomeSub">Here is your account overview and details.</p>
-
-            <div class="info-grid">
-                <div class="info-item">
-                    <label id="labelUsername">Username</label>
-                    <span id="displayUsername">-</span>
-                </div>
-                <div class="info-item">
-                    <label id="labelPhone">Phone Number</label>
-                    <span id="displayPhone">-</span>
-                </div>
-            </div>
+        <div class="info-box">
+            <p><strong>Username:</strong> <span id="displayUser">Loading...</span></p>
+            <p><strong>Phone Number:</strong> <span id="displayPhone">Loading...</span></p>
         </div>
+
+        <button type="button" class="logout-btn" id="logoutBtn">Log Out</button>
     </div>
 
     <script>
-        // Check authentication
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-        if (!isLoggedIn) {
+        // Load data from localStorage
+        const storedUser = localStorage.getItem('userName');
+        const storedPhone = localStorage.getItem('userPhone');
+
+        if (storedUser) {
+            document.getElementById('welcomeUser').textContent = `Welcome back, ${storedUser}!`;
+            document.getElementById('displayUser').textContent = storedUser;
+            document.getElementById('displayPhone').textContent = storedPhone ? storedPhone : 'Not provided';
+        } else {
+            // If someone tries to access dashboard without logging in, kick them back to login
             alert('Please log in first.');
             window.location.href = 'login.html';
         }
 
-        // Translations Dictionary for Dashboard
-        const translations = {
-            en: {
-                nav: "My Platform", subText: "Here is your account overview and details.",
-                usernameLabel: "Username", phoneLabel: "Phone Number", logout: "Log Out"
-            },
-            es: {
-                nav: "Mi Plataforma", subText: "Aquí está su resumen y detalles de la cuenta.",
-                usernameLabel: "Nombre de usuario", phoneLabel: "Número de teléfono", logout: "Cerrar Sesión"
-            },
-            fr: {
-                nav: "Ma Plateforme", subText: "Voici un aperçu et les détails de votre compte.",
-                usernameLabel: "Nom d'utilisateur", phoneLabel: "Numéro de téléphone", logout: "Se Déconnecter"
-            },
-            ja: {
-                nav: "マイプラットフォーム", subText: "アカウントの概要と詳細はこちらです。",
-                usernameLabel: "ユーザー名", phoneLabel: "電話番号", logout: "ログアウト"
-            },
-            sv: {
-                nav: "Min Plattform", subText: "Här är din kontoöversikt och uppgifter.",
-                usernameLabel: "Användarnamn", phoneLabel: "Telefonnummer", logout: "Logga Ut"
-            },
-            it: {
-                nav: "La Mia Piattaforma", subText: "Ecco una panoramica e i dettagli del tuo account.",
-                usernameLabel: "Nome utente", phoneLabel: "Numero di telefono", logout: "Esci"
-            },
-            de: {
-                nav: "Meine Plattform", subText: "Hier ist Ihre Kontoübersicht und Details.",
-                usernameLabel: "Benutzername", phoneLabel: "Telefonnummer", logout: "Abmelden"
-            },
-            no: {
-                nav: "Min Plattform", subText: "Her er din kontooversikt og detaljer.",
-                usernameLabel: "Brukernavn", phoneLabel: "Telefonnummer", logout: "Logg Ut"
-            },
-            ru: {
-                nav: "Моя Платформа", subText: "Здесь представлен обзор вашей учетной записи и детали.",
-                usernameLabel: "Имя пользователя", phoneLabel: "Номер телефона", logout: "Выйти"
-            },
-            hu: {
-                nav: "Platformom", subText: "Itt található a fiókja áttekintése és részletei.",
-                usernameLabel: "Felhasználónév", phoneLabel: "Telefonszám", logout: "Kijelentkezés"
-            },
-            pl: {
-                nav: "Moja Platforma", subText: "Oto podsumowanie i szczegóły Twojego konta.",
-                usernameLabel: "Nazwa użytkownika", phoneLabel: "Numer telefonu", logout: "Wyloguj Się"
-            },
-            sk: {
-                nav: "Moja Platforma", subText: "Tu je prehľad a podrobnosti vášho účtu.",
-                usernameLabel: "Používateľské meno", phoneLabel: "Telefónne číslo", logout: "Odhlásiť sa"
-            }
-        };
-
-        function setLanguage(lang) {
-            localStorage.setItem('preferredLanguage', lang);
-            document.getElementById('languageSelect').value = lang;
-            const t = translations[lang];
-            if (!t) return;
-
-            document.getElementById('navTitle').innerText = t.nav;
-            document.getElementById('welcomeSub').innerText = t.subText;
-            document.getElementById('labelUsername').innerText = t.usernameLabel;
-            document.getElementById('labelPhone').innerText = t.phoneLabel;
-            document.getElementById('logoutBtn').innerText = t.logout;
-
-            // Update welcome message dynamically with username
-            const userName = localStorage.getItem('userName') || '';
-            if (lang === 'es') {
-                document.getElementById('welcomeHeading').innerText = `¡Bienvenido de nuevo, ${userName}! 👋`;
-            } else if (lang === 'fr') {
-                document.getElementById('welcomeHeading').innerText = `Bon retour, ${userName} ! 👋`;
-            } else if (lang === 'ja') {
-                document.getElementById('welcomeHeading').innerText = `おかえりなさい、${userName}さん！ 👋`;
-            } else if (lang === 'de') {
-                document.getElementById('welcomeHeading').innerText = `Willkommen zurück, ${userName}! 👋`;
-            } else if (lang === 'ru') {
-                document.getElementById('welcomeHeading').innerText = `С возвращением, ${userName}! 👋`;
-            } else {
-                document.getElementById('welcomeHeading').innerText = `Welcome Back, ${userName}! 👋`;
-            }
-        }
-
-        // Load saved language on start
-        const savedLang = localStorage.getItem('preferredLanguage') || 'en';
-        setLanguage(savedLang);
-
-        document.getElementById('languageSelect').addEventListener('change', function() {
-            setLanguage(this.value);
-        });
-
-        // Load user info
-        const userName = localStorage.getItem('userName');
-        const userPhone = localStorage.getItem('userPhone');
-
-        if (userName) {
-            document.getElementById('displayUsername').innerText = userName;
-            // Re-trigger language setting to correctly format the customized welcome title
-            setLanguage(localStorage.getItem('preferredLanguage') || 'en');
-        }
-
-        if (userPhone) {
-            document.getElementById('displayPhone').innerText = userPhone;
-        }
-
-        // Logout
+        // Logout functionality
         document.getElementById('logoutBtn').addEventListener('click', function() {
-            localStorage.removeItem('isLoggedIn');
             window.location.href = 'login.html';
         });
     </script>
-
 </body>
 </html>
