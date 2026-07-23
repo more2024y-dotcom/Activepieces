@@ -82,10 +82,10 @@
         }
 
         .invite-code-display {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--accent-color);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         button.logout-btn {
@@ -132,18 +132,16 @@
         const storedUser = localStorage.getItem('userName');
         const storedPhone = localStorage.getItem('userPhone');
         const storedGender = localStorage.getItem('userGender');
+        const storedInviteCode = localStorage.getItem('myInviteCode');
 
         if (storedUser) {
             document.getElementById('welcomeUser').textContent = `Welcome back, ${storedUser}!`;
             document.getElementById('displayUser').textContent = storedUser;
             document.getElementById('displayGender').textContent = storedGender ? storedGender : 'Not provided';
             document.getElementById('displayPhone').textContent = storedPhone ? storedPhone : 'Not provided';
-            
-            // Generate user's unique referral code using their username
-            const uniqueInvite = `REF-${storedUser.toUpperCase()}`;
-            document.getElementById('myInviteCode').textContent = uniqueInvite;
+            document.getElementById('myInviteCode').textContent = storedInviteCode ? storedInviteCode : 'N/A';
         } else {
-            // Kick back to login if no active session is found
+            // Redirect back to login if no active session is found
             alert('Please log in first.');
             window.location.href = 'login.html';
         }
@@ -153,6 +151,7 @@
             localStorage.removeItem('userName');
             localStorage.removeItem('userPhone');
             localStorage.removeItem('userGender');
+            localStorage.removeItem('myInviteCode');
             window.location.href = 'login.html';
         });
     </script>
