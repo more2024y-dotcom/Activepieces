@@ -3,67 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdrawal & History - Reset</title>
+    <title>Deposit & History - Blue Theme</title>
     <style>
         :root {
             --primary-blue: #1d4ed8;
-            --bg-color: #f1f5f9;
+            --blue-gradient-start: #1e40af;
+            --blue-gradient-end: #3b82f6;
+            --bg-color: #f8fafc;
             --text-main: #1e293b;
+            --text-muted: #64748b;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 0;
+        }
+        /* Top Navigation Header */
+        .top-header {
+            background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end));
+            color: white;
+            padding: 16px 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
+        }
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        /* Sub-Tabs Navigation (Deposit & History options) */
+        .sub-nav-tabs {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            box-sizing: border-box;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 20px;
+        }
+        .sub-tab {
+            flex: 1;
+            text-align: center;
+            padding: 14px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            position: relative;
+            cursor: pointer;
+        }
+        .sub-tab.active {
+            color: var(--primary-blue);
+        }
+        .sub-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary-blue);
+            border-radius: 3px 3px 0 0;
+        }
+        /* Container & Cards */
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
         }
         .card {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
         }
-        h2 {
-            margin-top: 0;
-            color: var(--primary-blue);
-        }
-        p {
-            color: #64748b;
+        .account-amount-title {
             font-size: 14px;
-            margin-bottom: 24px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
         }
-        .btn-home {
-            display: inline-block;
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 14px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .btn-home:hover {
-            background-color: #1e3a8a;
+        .account-amount-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-main);
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h2>Navigation Reset</h2>
-        <p>If your browser was trapped on the old withdrawal view, click below to cleanly exit back to your main application dashboard.</p>
-        <a href="https://activepieces-beta.vercel.app/dashboard.html" class="btn-home">Return to Dashboard</a>
+    <div class="top-header">
+        <a href="dashboard.html" class="back-btn">&lt;</a>
+        <span id="pageTitle">Deposit</span>
     </div>
+
+    <!-- Two Options Sub-Navbar -->
+    <div class="sub-nav-tabs">
+        <div class="sub-tab active" onclick="switchView('deposit')" id="tabDeposit">Deposit</div>
+        <div class="sub-tab" onclick="switchView('history')" id="tabHistory">History</div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="account-amount-title">Account Amount</div>
+            <div class="account-amount-value" id="balanceDisplay">-532.99 USD</div>
+        </div>
+    </div>
+
+    <script>
+        // Load stored balance
+        const storedBalance = localStorage.getItem('userBalance');
+        if (storedBalance !== null) {
+            document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
+        }
+
+        function switchView(type) {
+            document.getElementById('tabDeposit').classList.remove('active');
+            document.getElementById('tabHistory').classList.remove('active');
+
+            if(type === 'deposit') {
+                document.getElementById('tabDeposit').classList.add('active');
+                document.getElementById('pageTitle').textContent = 'Deposit';
+            } else {
+                document.getElementById('tabHistory').classList.add('active');
+                document.getElementById('pageTitle').textContent = 'History';
+            }
+        }
+    </script>
 
 </body>
 </html>
