@@ -75,6 +75,30 @@
             background-color: var(--primary-blue);
             border-radius: 2px;
         }
+        /* History Sub-Tabs */
+        .sub-tab-nav {
+            display: flex;
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 10px;
+            gap: 5px;
+        }
+        .sub-tab-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+        }
+        .sub-tab-item.active {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
         .container {
             width: 100%;
             padding: 20px;
@@ -207,10 +231,24 @@
             color: var(--primary-blue);
             font-size: 15px;
         }
+        .status-badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 4px;
+            display: inline-block;
+        }
+        .status-pending { background: #fef9c3; color: #ca8a04; }
+        .status-reviewing { background: #e0f2fe; color: #0284c7; }
+        .status-success { background: #dcfce7; color: #16a34a; }
+        .status-reject { background: #fee2e2; color: #dc2626; }
+
         .empty-history {
             text-align: center;
             color: var(--text-muted);
-            padding: 30px;
+            padding: 40px 20px;
             background: white;
             border-radius: 10px;
             border: 1px dashed #cbd5e1;
@@ -265,10 +303,18 @@
         <button class="tab-item" onclick="switchTab('history')">History</button>
     </div>
 
+    <!-- History Sub-Tabs (Visible only under History tab) -->
+    <div class="sub-tab-nav" id="historySubNav" style="display: none;">
+        <button class="sub-tab-item active" onclick="switchSubTab('Pending')">Pending</button>
+        <button class="sub-tab-item" onclick="switchSubTab('Reviewing')">Reviewing</button>
+        <button class="sub-tab-item" onclick="switchSubTab('Success')">Success</button>
+        <button class="sub-tab-item" onclick="switchSubTab('Reject')">Reject</button>
+    </div>
+
     <div class="container">
         
         <!-- Account Amount Display Card -->
-        <div class="account-card">
+        <div class="account-card" id="accountCardContainer">
             <div class="account-card-label">Account Amount</div>
             <div class="account-card-amount" id="displayBalance">-532.99 <span>USD</span></div>
             <div class="account-card-note">You will receive your withdrawal within an hour</div>
@@ -325,7 +371,6 @@
     </div>
 
     <script>
-        // Load balance and wallet info from localStorage
         let currentBalance = parseFloat(localStorage.getItem('userBalance')) || -532.99;
         document.getElementById('displayBalance').innerHTML = currentBalance.toFixed(2) + ' <span>USD</span>';
 
@@ -335,14 +380,18 @@
             document.getElementById('displayWalletAccount').style.color = '#1e293b';
         }
 
+        let currentSubStatus = 'Pending';
+
         function goBack() {
             window.location.href = 'dashboard.html';
         }
 
-        // Tab Switching Logic
+        // Main Tab Switching Logic
         function switchTab(tabName) {
             const withdrawTab = document.getElementById('withdrawTabContent');
             const historyTab = document.getElementById('historyTabContent');
+            const historySubNav = document.getElementById('historySubNav');
+            const accountCardContainer = document.getElementById('accountCardContainer');
             const tabButtons = document.querySelectorAll('.tab-item');
 
             tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -350,13 +399,30 @@
             if (tabName === 'withdraw') {
                 withdrawTab.classList.add('active');
                 historyTab.classList.remove('active');
+                historySubNav.style.display = 'none';
+                accountCardContainer.style.display = 'block';
                 tabButtons[0].classList.add('active');
             } else if (tabName === 'history') {
                 historyTab.classList.add('active');
                 withdrawTab.classList.remove('active');
+                historySubNav.style.display = 'flex';
+                accountCardContainer.style.display = 'none'; // Hide balance card in history view like standard app design
                 tabButtons[1].classList.add('active');
-                loadHistoryData();
+                loadHistoryData(currentSubStatus);
             }
+        }
+
+        // Sub-Tab Switching Logic for History Filters
+        function switchSubTab(status) {
+            currentSubStatus = status;
+            const subTabButtons = document.querySelectorAll('.sub-tab-item');
+            subTabButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase() === status.toLowerCase()) {
+                    btn.classList.add('active');
+                }
+            });
+            loadHistoryData(status);
         }
 
         function checkWallet() {
@@ -403,34 +469,50 @@
             let history = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
             const newRecord = {
                 amount: amount.toFixed(2),
-                date: new Date().toLocaleString()
+                date: new Date().toLocaleString(),
+                status: 'Pending' // Default new submission status
             };
             history.unshift(newRecord);
             localStorage.setItem('withdrawHistory', JSON.stringify(history));
 
-            alert('Withdrawal request of $' + amount.toFixed(2) + ' submitted successfully! You will receive your withdrawal within an hour.');
+            alert('Withdrawal request submitted successfully!');
             document.getElementById('withdrawForm').reset();
             
+            // Switch to history tab and filter by Pending
             switchTab('history');
+            switchSubTab('Pending');
         }
 
-        // Load History Items
-        function loadHistoryData() {
+        // Load and Filter History Items
+        function loadHistoryData(statusFilter) {
             const historyListEl = document.getElementById('withdrawHistoryList');
             historyListEl.innerHTML = '';
 
             let history = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
 
-            if (history.length === 0) {
-                historyListEl.innerHTML = '<div class="empty-history">No withdrawal history found.</div>';
+            // Filter items based on the active status tab
+            const filteredHistory = history.filter(item => {
+                const itemStatus = item.status || 'Pending';
+                return itemStatus.toLowerCase() === statusFilter.toLowerCase();
+            });
+
+            if (filteredHistory.length === 0) {
+                historyListEl.innerHTML = '<div class="empty-history">No more data</div>';
             } else {
-                history.forEach(item => {
+                filteredHistory.forEach(item => {
+                    const itemStatus = item.status || 'Pending';
+                    let badgeClass = 'status-pending';
+                    if (itemStatus === 'Reviewing') badgeClass = 'status-reviewing';
+                    if (itemStatus === 'Success') badgeClass = 'status-success';
+                    if (itemStatus === 'Reject') badgeClass = 'status-reject';
+
                     const li = document.createElement('li');
                     li.className = 'history-item';
                     li.innerHTML = `
                         <div>
-                            <strong>Withdrawal Submitted</strong><br>
-                            <small style="color: var(--text-muted);">${item.date}</small>
+                            <strong>Withdrawal</strong><br>
+                            <small style="color: var(--text-muted);">${item.date}</small><br>
+                            <span class="status-badge ${badgeClass}">${itemStatus}</span>
                         </div>
                         <span class="amount">-${item.amount} USD</span>
                     `;
