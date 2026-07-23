@@ -38,6 +38,20 @@
             position: relative;
         }
 
+        .language-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .language-header select {
+            width: auto;
+            padding: 6px 10px;
+            font-size: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
         h2 {
             margin-top: 0;
             color: var(--primary-color);
@@ -138,12 +152,41 @@
 <body>
 
     <div class="auth-card">
+        <!-- Language Selector Option -->
+        <div class="language-header">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ja">日本語</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ar">العربية</option>
+                <option value="pt">Português</option>
+                <option value="ru">Русский</option>
+                <option value="it">Italiano</option>
+                <option value="ko">한국어</option>
+            </select>
+        </div>
+
         <h2>Create Account</h2>
         <form id="signupForm">
             
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" placeholder="Choose a username" required>
+            </div>
+
+            <!-- Gender Option (Male / Female) -->
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="" disabled selected>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
             </div>
 
             <!-- Country Phone Number Option -->
@@ -177,7 +220,7 @@
                 </div>
             </div>
 
-            <!-- Transaction Password -->
+            <!-- Transaction Password with Eye Toggle -->
             <div class="form-group">
                 <label for="transPassword">Transaction Password</label>
                 <div class="password-container">
@@ -201,7 +244,7 @@
     </div>
 
     <script>
-        // Login Password Visibility Toggle
+        // Login Password Toggle
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
         if (togglePassword && passwordInput) {
@@ -212,7 +255,7 @@
             });
         }
 
-        // Transaction Password Visibility Toggle
+        // Transaction Password Toggle
         const toggleTransPassword = document.getElementById('toggleTransPassword');
         const transPasswordInput = document.getElementById('transPassword');
         if (toggleTransPassword && transPasswordInput) {
@@ -223,7 +266,7 @@
             });
         }
 
-        // Signup & Invite Code Gatekeeper Logic
+        // Signup & Invite Code Logic
         const signupForm = document.getElementById('signupForm');
         signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -238,14 +281,17 @@
             
             inviteError.style.display = 'none';
 
-            // Combine country code and phone number
             const fullPhone = document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value;
+            const selectedGender = document.getElementById('gender').value;
+            const selectedLang = document.getElementById('languageSelect').value;
 
-            // Save user details including transaction password to localStorage
+            // Save details to localStorage
             localStorage.setItem('userName', document.getElementById('username').value);
+            localStorage.setItem('userGender', selectedGender);
             localStorage.setItem('userPhone', fullPhone);
             localStorage.setItem('userPass', passwordInput.value);
             localStorage.setItem('userTransPass', transPasswordInput.value);
+            localStorage.setItem('userLang', selectedLang);
 
             alert('Account created successfully!');
             window.location.href = 'login.html';
