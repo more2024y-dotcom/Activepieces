@@ -299,8 +299,8 @@
 
     <!-- Tab Navigation Switching Between Withdraw and History -->
     <div class="tab-nav">
-        <button class="tab-item active" onclick="switchTab('withdraw')">Withdraw</button>
-        <button class="tab-item" onclick="switchTab('history')">History</button>
+        <button class="tab-item active" onclick="switchMainTab('withdraw')">Withdraw</button>
+        <button class="tab-item" onclick="switchMainTab('history')">History</button>
     </div>
 
     <!-- History Sub-Tabs (Visible only under History tab) -->
@@ -363,11 +363,11 @@
 
     <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span>Home</span></a>
+        <a href="dashboard.html" class="nav-item active"><span class="icon">🏠</span><span>Home</span></a>
         <a href="#" class="nav-item" onclick="alert('Certificate page')"><span class="icon">📜</span><span>Certificate</span></a>
-        <button class="nav-item active" onclick="switchTab('withdraw')"><span class="icon">💳</span><span>Withdraw</span></button>
-        <button class="nav-item" onclick="switchTab('history')"><span class="icon">📝</span><span>History</span></button>
-        <a href="#" class="nav-item" onclick="alert('Profile page')"><span class="icon">👤</span><span>My</span></a>
+        <button class="nav-item" onclick="switchMainTab('withdraw')"><span class="icon">💳</span><span>Withdraw</span></button>
+        <button class="nav-item" onclick="switchMainTab('history')"><span class="icon">📝</span><span>History</span></button>
+        <a href="dashboard.html" class="nav-item"><span class="icon">👤</span><span>My</span></a>
     </div>
 
     <script>
@@ -386,8 +386,8 @@
             window.location.href = 'dashboard.html';
         }
 
-        // Main Tab Switching Logic
-        function switchTab(tabName) {
+        // Main Tab Switching Logic (renamed to avoid conflicts)
+        function switchMainTab(tabName) {
             const withdrawTab = document.getElementById('withdrawTabContent');
             const historyTab = document.getElementById('historyTabContent');
             const historySubNav = document.getElementById('historySubNav');
@@ -406,7 +406,7 @@
                 historyTab.classList.add('active');
                 withdrawTab.classList.remove('active');
                 historySubNav.style.display = 'flex';
-                accountCardContainer.style.display = 'none'; // Hide balance card in history view like standard app design
+                accountCardContainer.style.display = 'none';
                 tabButtons[1].classList.add('active');
                 loadHistoryData(currentSubStatus);
             }
@@ -470,7 +470,7 @@
             const newRecord = {
                 amount: amount.toFixed(2),
                 date: new Date().toLocaleString(),
-                status: 'Pending' // Default new submission status
+                status: 'Pending'
             };
             history.unshift(newRecord);
             localStorage.setItem('withdrawHistory', JSON.stringify(history));
@@ -478,8 +478,7 @@
             alert('Withdrawal request submitted successfully!');
             document.getElementById('withdrawForm').reset();
             
-            // Switch to history tab and filter by Pending
-            switchTab('history');
+            switchMainTab('history');
             switchSubTab('Pending');
         }
 
@@ -490,7 +489,6 @@
 
             let history = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
 
-            // Filter items based on the active status tab
             const filteredHistory = history.filter(item => {
                 const itemStatus = item.status || 'Pending';
                 return itemStatus.toLowerCase() === statusFilter.toLowerCase();
