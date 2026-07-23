@@ -34,6 +34,25 @@
             width: 100%;
             max-width: 380px;
             box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Language Switcher Styling */
+        .lang-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .lang-select {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-color);
         }
 
         .auth-card h2 {
@@ -116,30 +135,129 @@
 <body>
 
     <div class="auth-card">
-        <h2>Welcome Back</h2>
-        <div class="subtitle">Please enter your details to log in</div>
+        <!-- Language Switcher Dropdown -->
+        <div class="lang-container">
+            <select id="languageSelect" class="lang-select">
+                <option value="en">🇺🇸 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="sv">🇸🇪 Svenska</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="no">🇳🇴 Norsk</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="hu">🇭🇺 Magyar</option>
+                <option value="pl">🇵🇱 Polski</option>
+                <option value="sk">🇸🇰 Slovenčina</option>
+            </select>
+        </div>
+
+        <h2 id="textTitle">Welcome Back</h2>
+        <div id="textSubtitle" class="subtitle">Please enter your details to log in</div>
         
         <form id="loginForm">
             <div class="input-group">
-                <label for="username">Username</label>
+                <label id="labelUsername" for="username">Username</label>
                 <input type="text" id="username" required placeholder="Enter your username">
             </div>
             
             <div class="input-group">
-                <label for="password">Login Password</label>
+                <label id="labelPassword" for="password">Login Password</label>
                 <input type="password" id="password" required placeholder="Enter your password">
             </div>
 
-            <button type="submit" class="submit-btn">Log In</button>
+            <button type="submit" id="btnSubmit" class="submit-btn">Log In</button>
         </form>
 
         <div class="footer-text">
-            Don't have an account?<br>
-            <a href="signup.html">Sign up</a>
+            <span id="textFooterQuestion">Don't have an account?</span><br>
+            <a href="signup.html" id="textFooterLink">Sign up</a>
         </div>
     </div>
 
     <script>
+        // Translations Dictionary for Login Page
+        const translations = {
+            en: {
+                title: "Welcome Back", subtitle: "Please enter your details to log in",
+                username: "Username", password: "Login Password",
+                submit: "Log In", question: "Don't have an account?", link: "Sign up"
+            },
+            es: {
+                title: "Bienvenido de Nuevo", subtitle: "Por favor ingrese sus datos para iniciar sesión",
+                username: "Nombre de usuario", password: "Contraseña de inicio de sesión",
+                submit: "Iniciar Sesión", question: "¿No tienes una cuenta?", link: "Regístrate"
+            },
+            fr: {
+                title: "Bon Retour", subtitle: "Veuillez entrer vos coordonnées pour vous connecter",
+                username: "Nom d'utilisateur", password: "Mot de passe de connexion",
+                submit: "Se Connecter", question: "Vous n'avez pas de compte ?", link: "Inscrivez-vous"
+            },
+            ja: {
+                title: "おかえりなさい", subtitle: "ログイン情報を入力してください",
+                username: "ユーザー名", password: "ログインパスワード",
+                submit: "ログイン", question: "アカウントをお持ちですか？", link: "新規登録"
+            },
+            sv: {
+                title: "Välkommen Tillbaka", subtitle: "Ange dina uppgifter för att logga in",
+                username: "Användarnamn", password: "Inloggningslösenord",
+                submit: "Logga In", question: "Har du inget konto?", link: "Registrera dig"
+            },
+            it: {
+                title: "Bentornato", subtitle: "Inserisci i tuoi dati per accedere",
+                username: "Nome utente", password: "Password di accesso",
+                submit: "Accedi", question: "Non hai un account?", link: "Registrati"
+            },
+            de: {
+                title: "Willkommen Zurück", subtitle: "Bitte geben Sie Ihre Daten ein, um sich anzumelden",
+                username: "Benutzername", password: "Anmelde-Passwort",
+                submit: "Anmelden", question: "Haben Sie kein Konto?", link: "Registrieren"
+            },
+            no: {
+                title: "Velkommen Tilbake", subtitle: "Vennligst skriv inn opplysningene dine for å logge inn",
+                username: "Brukernavn", password: "Innloggingspassord",
+                submit: "Logg Inn", question: "Har du ikke en konto?", link: "Registrer deg"
+            },
+            ru: {
+                title: "С Возвращением", subtitle: "Пожалуйста, введите данные для входа",
+                username: "Имя пользователя", password: "Пароль для входа",
+                submit: "Войти", question: "Нет аккаунта?", link: "Зарегистрироваться"
+            },
+            hu: {
+                title: "Üdv Újra", subtitle: "Kérjük, adja meg adatait a bejelentkezéshez",
+                username: "Felhasználónév", password: "Bejelentkezési jelszó",
+                submit: "Bejelentkezés", question: "Nincs még fiókja?", link: "Regisztráció"
+            },
+            pl: {
+                title: "Witaj Ponownie", subtitle: "Wprowadź swoje dane, aby się zalogować",
+                username: "Nazwa użytkownika", password: "Hasło logowania",
+                submit: "Zaloguj Się", question: "Nie masz konta?", link: "Zarejestruj się"
+            },
+            sk: {
+                title: "Vitajte Späť", subtitle: "Zadajte svoje údaje na prihlásenie",
+                username: "Používateľské meno", password: "Prihlasovacie heslo",
+                submit: "Prihlásiť sa", question: "Nemáte účet?", link: "Zaregistrujte sa"
+            }
+        };
+
+        // Language Switcher Logic
+        const languageSelect = document.getElementById('languageSelect');
+        
+        languageSelect.addEventListener('change', function() {
+            const lang = this.value;
+            const t = translations[lang];
+
+            document.getElementById('textTitle').innerText = t.title;
+            document.getElementById('textSubtitle').innerText = t.subtitle;
+            document.getElementById('labelUsername').innerText = t.username;
+            document.getElementById('labelPassword').innerText = t.password;
+            document.getElementById('btnSubmit').innerText = t.submit;
+            document.getElementById('textFooterQuestion').innerText = t.question;
+            document.getElementById('textFooterLink').innerText = t.link;
+        });
+
+        // Login Authentication Logic
         const loginForm = document.getElementById('loginForm');
 
         loginForm.addEventListener('submit', function(event) {
@@ -148,13 +266,10 @@
             const enteredUsername = document.getElementById('username').value.trim();
             const enteredPassword = document.getElementById('password').value;
 
-            // Retrieve stored data from registration
             const savedUsername = localStorage.getItem('userName');
             const savedPassword = localStorage.getItem('userPassword');
 
-            // Check if credentials match
             if (enteredUsername === savedUsername && enteredPassword === savedPassword) {
-                // Set an active session flag
                 localStorage.setItem('isLoggedIn', 'true');
                 alert('Login successful! Welcome back.');
                 window.location.href = 'dashboard.html';
