@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Blue Theme</title>
+    <title>Withdrawal & History</title>
     <style>
         :root {
-            --primary-blue: #1d4ed8;
-            --blue-gradient-start: #1e40af;
-            --blue-gradient-end: #3b82f6;
-            --bg-color: #f8fafc;
+            --primary-red: #e11d48;
+            --dark-red: #be123c;
+            --bg-color: #fff1f2;
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
@@ -21,161 +20,200 @@
             padding: 0;
             padding-bottom: 90px;
         }
-        .container {
-            padding: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        /* Top Hero Card */
-        .hero-card {
-            background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end));
+        /* Top Navigation Bar */
+        .top-bar {
+            background-color: var(--primary-red);
             color: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(29, 78, 216, 0.2);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-        .user-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: var(--primary-blue);
+            padding: 16px 20px;
             font-size: 18px;
-            border: 2px solid rgba(255,255,255,0.8);
-        }
-        .user-details h3 {
-            margin: 0 0 4px 0;
-            font-size: 18px;
-        }
-        .credit-score-wrap {
-            font-size: 12px;
-            opacity: 0.9;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .progress-bar-bg {
-            width: 80px;
-            height: 6px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 3px;
-            overflow: hidden;
-            display: inline-block;
-        }
-        .progress-bar-fill {
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-        }
-        .invite-text {
-            font-size: 12px;
-            opacity: 0.9;
-            margin-top: 4px;
-        }
-        .vip-badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        .balance-section {
-            margin-bottom: 20px;
-        }
-        .balance-title {
-            font-size: 13px;
-            opacity: 0.85;
-            margin-bottom: 4px;
-        }
-        .balance-amount {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-        /* Action Grid inside Hero */
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 15px;
-        }
-        .action-item {
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        .action-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 6px auto;
-            font-size: 16px;
-            backdrop-filter: blur(4px);
-        }
-        /* Profit Tabs Section */
-        .profit-card {
-            background: white;
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            margin-bottom: 20px;
-        }
-        .profit-tabs {
-            display: flex;
-            background: #f1f5f9;
-            border-radius: 10px;
-            padding: 4px;
-            margin-bottom: 12px;
-        }
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
             font-weight: 600;
-            color: var(--text-muted);
-            border-radius: 8px;
+            position: relative;
+        }
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
             cursor: pointer;
         }
-        .tab.active {
-            background: var(--primary-blue);
-            color: white;
-            box-shadow: 0 2px 6px rgba(29, 78, 216, 0.3);
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
         }
-        .profit-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--text-main);
+        .tab-item {
+            flex: 1;
             text-align: center;
-            padding: 10px 0;
+            padding: 14px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            position: relative;
+        }
+        .tab-item.active {
+            color: var(--primary-red);
+        }
+        .tab-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-red);
+            border-radius: 2px;
+        }
+        .container {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        /* Account Amount Card */
+        .account-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+            border: 1px solid #f1f5f9;
+        }
+        .account-card-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        .account-card-amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: #000;
+            margin-bottom: 8px;
+        }
+        .account-card-amount span {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-left: 4px;
+        }
+        .account-card-note {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        /* Content Sections for Tabs */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Form & Inputs */
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background: #fff;
+        }
+        .account-input-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 0 12px;
+            cursor: pointer;
+            height: 46px;
+        }
+        .account-input-box span {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .all-btn-wrapper {
+            position: absolute;
+            right: 8px;
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-submit {
+            background-color: var(--primary-red);
+            color: white;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            background-color: var(--dark-red);
+        }
+        /* History List Styles */
+        .history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .history-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .history-item span.amount {
+            font-weight: 700;
+            color: var(--primary-red);
+            font-size: 15px;
+        }
+        .empty-history {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            border: 1px dashed #cbd5e1;
         }
         /* Bottom Navigation Bar */
         .bottom-nav {
@@ -197,141 +235,213 @@
             align-items: center;
             color: #94a3b8;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 500;
             flex: 1;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
         .nav-item.active {
             color: #3b82f6;
         }
         .nav-item span.icon {
-            font-size: 20px;
+            font-size: 22px;
             margin-bottom: 3px;
-        }
-        /* Special Center Action Button in Nav */
-        .nav-center-btn {
-            width: 50px;
-            height: 50px;
-            background: #1e293b;
-            border: 4px solid #000000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            margin-top: -25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body>
 
+    <!-- Top Header Bar -->
+    <div class="top-bar">
+        <button class="back-btn" onclick="goBack()">&#10094;</button>
+        Withdrawal
+    </div>
+
+    <!-- Tab Navigation Switching Between Withdraw and History -->
+    <div class="tab-nav">
+        <button class="tab-item active" onclick="switchTab('withdraw')">Withdraw</button>
+        <button class="tab-item" onclick="switchTab('history')">History</button>
+    </div>
+
     <div class="container">
-        <!-- Blue Hero Card -->
-        <div class="hero-card">
-            <div class="user-header">
-                <div class="user-info">
-                    <div class="avatar" id="avatarLetter">E</div>
-                    <div class="user-details">
-                        <h3 id="usernameDisplay">Emma730</h3>
-                        <div class="credit-score-wrap">
-                            <span>Credit Score:</span>
-                            <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
-                            <span>100%</span>
+        
+        <!-- Account Amount Display Card -->
+        <div class="account-card">
+            <div class="account-card-label">Account Amount</div>
+            <div class="account-card-amount" id="displayBalance">-532.99 <span>USD</span></div>
+            <div class="account-card-note">You will receive your withdrawal within an hour</div>
+        </div>
+
+        <!-- TAB 1: WITHDRAW SECTION -->
+        <div id="withdrawTabContent" class="tab-content active">
+            <div class="account-card">
+                <form id="withdrawForm" onsubmit="processWithdrawal(event)">
+                    <div class="form-group">
+                        <label>Withdraw Account</label>
+                        <div class="account-input-box" onclick="checkWallet()">
+                            <span id="displayWalletAccount">Withdraw Account</span>
+                            <span style="font-size: 16px;">&#10095;</span>
                         </div>
-                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
                     </div>
-                </div>
-                <div class="vip-badge">VIP1</div>
-            </div>
 
-            <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">-532.99 USD</div>
-            </div>
+                    <div class="form-group">
+                        <label for="withdrawAmount">Withdraw Amount</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="withdrawAmount" placeholder="0" min="1" step="0.01" required>
+                            <button type="button" class="all-btn-wrapper" onclick="setAllAmount()">ALL</button>
+                        </div>
+                    </div>
 
-            <div class="action-grid">
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">➕</div>
-                    <span>Add Wallet</span>
-                </a>
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">⬇️</div>
-                    <span>Deposit</span>
-                </a>
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">⬆️</div>
-                    <span>Withdraw</span>
-                </a>
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">🔄</div>
-                    <span>Transaction</span>
-                </a>
+                    <div class="form-group">
+                        <label for="txPassword">Transaction Password</label>
+                        <input type="password" id="txPassword" placeholder="Transaction Password" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
             </div>
         </div>
 
-        <!-- Profit Analysis Card -->
-        <div class="profit-card">
-            <div class="profit-tabs">
-                <div class="tab active" onclick="switchTab('today')">Today's Profit</div>
-                <div class="tab" onclick="switchTab('total')">Total Profit</div>
+        <!-- TAB 2: HISTORY SECTION -->
+        <div id="historyTabContent" class="tab-content">
+            <div id="historyContainer">
+                <ul class="history-list" id="withdrawHistoryList">
+                    <!-- Populated dynamically via JavaScript -->
+                </ul>
             </div>
-            <div class="profit-value" id="profitDisplay">0.00 USD</div>
         </div>
+
     </div>
 
     <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item active">
-            <span class="icon">🏠</span><span>Home</span>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">🛡️</span><span>Certificate</span>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <div class="nav-center-btn">⚡</div>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">📝</span><span>Records</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <span class="icon">👤</span><span>My</span>
-        </a>
+        <a href="dashboard.html" class="nav-item"><span class="icon">🏠</span><span>Home</span></a>
+        <a href="#" class="nav-item" onclick="alert('Certificate page')"><span class="icon">📜</span><span>Certificate</span></a>
+        <button class="nav-item active" onclick="switchTab('withdraw')"><span class="icon">💳</span><span>Withdraw</span></button>
+        <button class="nav-item" onclick="switchTab('history')"><span class="icon">📝</span><span>History</span></button>
+        <a href="#" class="nav-item" onclick="alert('Profile page')"><span class="icon">👤</span><span>My</span></a>
     </div>
 
     <script>
-        // Load stored balance
-        const storedBalance = localStorage.getItem('userBalance');
-        if (storedBalance !== null) {
-            document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
+        // Load balance and wallet info from localStorage
+        let currentBalance = parseFloat(localStorage.getItem('userBalance')) || -532.99;
+        document.getElementById('displayBalance').innerHTML = currentBalance.toFixed(2) + ' <span>USD</span>';
+
+        const savedWallet = localStorage.getItem('userWalletAddress');
+        if (savedWallet) {
+            document.getElementById('displayWalletAccount').textContent = savedWallet;
+            document.getElementById('displayWalletAccount').style.color = '#1e293b';
         }
 
-        // Load profile info if saved
-        const storedUser = localStorage.getItem('username');
-        if (storedUser) {
-            document.getElementById('usernameDisplay').textContent = storedUser;
-            document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
+        function goBack() {
+            window.location.href = 'dashboard.html';
         }
 
-        const storedInvite = localStorage.getItem('inviteCode');
-        if (storedInvite) {
-            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            const withdrawTab = document.getElementById('withdrawTabContent');
+            const historyTab = document.getElementById('historyTabContent');
+            const tabButtons = document.querySelectorAll('.tab-item');
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            if (tabName === 'withdraw') {
+                withdrawTab.classList.add('active');
+                historyTab.classList.remove('active');
+                tabButtons[0].classList.add('active');
+            } else if (tabName === 'history') {
+                historyTab.classList.add('active');
+                withdrawTab.classList.remove('active');
+                tabButtons[1].classList.add('active');
+                loadHistoryData();
+            }
         }
 
-        function switchTab(type) {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(t => t.classList.remove('active'));
-            
-            if(type === 'today') {
-                event.target.classList.add('active');
-                document.getElementById('profitDisplay').textContent = '0.00 USD';
+        function checkWallet() {
+            const wallet = localStorage.getItem('userWalletAddress');
+            if (!wallet) {
+                alert('No wallet address linked yet. Please add a wallet first.');
             } else {
-                event.target.classList.add('active');
-                document.getElementById('profitDisplay').textContent = '1,268.01 USD';
+                alert('Linked Withdrawal Account: ' + wallet);
+            }
+        }
+
+        function setAllAmount() {
+            // Fills input with current balance absolute value or amount
+            document.getElementById('withdrawAmount').value = Math.abs(currentBalance).toFixed(2);
+        }
+
+        // Handle Withdrawal Process
+        function processWithdrawal(e) {
+            e.preventDefault();
+            const wallet = localStorage.getItem('userWalletAddress');
+            if (!wallet) {
+                alert('Please link a withdraw account/wallet first.');
+                return;
+            }
+
+            const amountInput = document.getElementById('withdrawAmount').value;
+            const amount = parseFloat(amountInput);
+            const enteredPassword = document.getElementById('txPassword').value.trim();
+            const correctTxPassword = localStorage.getItem('userTxPassword');
+
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid withdrawal amount.');
+                return;
+            }
+
+            if (correctTxPassword && enteredPassword !== correctTxPassword) {
+                alert('Incorrect transaction password!');
+                return;
+            }
+
+            // Deduct or subtract balance based on logic
+            currentBalance -= amount;
+            localStorage.setItem('userBalance', currentBalance.toFixed(2));
+            document.getElementById('displayBalance').innerHTML = currentBalance.toFixed(2) + ' <span>USD</span>';
+
+            // Save to Withdrawal History LocalStorage
+            let history = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
+            const newRecord = {
+                amount: amount.toFixed(2),
+                date: new Date().toLocaleString()
+            };
+            history.unshift(newRecord);
+            localStorage.setItem('withdrawHistory', JSON.stringify(history));
+
+            alert('Withdrawal request of $' + amount.toFixed(2) + ' submitted successfully! You will receive your withdrawal within an hour.');
+            document.getElementById('withdrawForm').reset();
+            
+            // Switch to history tab to view entry
+            switchTab('history');
+        }
+
+        // Load History Items
+        function loadHistoryData() {
+            const historyListEl = document.getElementById('withdrawHistoryList');
+            historyListEl.innerHTML = '';
+
+            let history = JSON.parse(localStorage.getItem('withdrawHistory')) || [];
+
+            if (history.length === 0) {
+                historyListEl.innerHTML = '<div class="empty-history">No withdrawal history found.</div>';
+            } else {
+                history.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'history-item';
+                    li.innerHTML = `
+                        <div>
+                            <strong>Withdrawal Submitted</strong><br>
+                            <small style="color: var(--text-muted);">${item.date}</small>
+                        </div>
+                        <span class="amount">-${item.amount} USD</span>
+                    `;
+                    historyListEl.appendChild(li);
+                });
             }
         }
     </script>
-
 </body>
 </html>
