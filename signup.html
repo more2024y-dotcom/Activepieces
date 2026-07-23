@@ -259,7 +259,7 @@
             });
         }
 
-        // Helper function to generate a random 4-character code like BTY6
+        // Helper function to generate a random 4-character code
         function generateRandomInviteCode() {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             let result = '';
@@ -328,9 +328,8 @@
             const selectedGender = document.getElementById('gender').value;
             const selectedLang = document.getElementById('languageSelect').value;
 
-            // Generate a unique random code for this new user (e.g. BTY6)
+            // Generate a unique random code for this new user
             let newUniqueCode = generateRandomInviteCode();
-            // Ensure no collision with existing codes
             while (users.some(u => u.myInviteCode === newUniqueCode) || newUniqueCode === '2DI2') {
                 newUniqueCode = generateRandomInviteCode();
             }
