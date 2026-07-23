@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Add Wallet</title>
+    <title>Dashboard - Add Wallet & Deposit</title>
     <style>
         :root {
             --primary-blue: #1d4ed8;
@@ -13,7 +13,6 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
@@ -22,14 +21,11 @@
             padding: 0;
             padding-bottom: 90px;
         }
-
         .container {
             width: 100%;
             padding: 20px;
             box-sizing: border-box;
         }
-
-        /* Top Blue Card */
         .user-card {
             background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
             color: white;
@@ -40,20 +36,17 @@
             overflow: hidden;
             margin-bottom: 25px;
         }
-
         .user-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 25px;
         }
-
         .user-info-left {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
         .avatar {
             width: 60px;
             height: 60px;
@@ -66,13 +59,11 @@
             border: 2px solid rgba(255, 255, 255, 0.6);
             overflow: hidden;
         }
-
         .user-details h3 {
             margin: 0 0 6px 0;
             font-size: 20px;
             font-weight: 700;
         }
-
         .credit-score-row {
             display: flex;
             align-items: center;
@@ -81,7 +72,6 @@
             opacity: 0.9;
             margin-bottom: 6px;
         }
-
         .progress-bar {
             width: 100px;
             height: 6px;
@@ -89,13 +79,11 @@
             border-radius: 3px;
             overflow: hidden;
         }
-
         .progress-fill {
             width: 100%;
             height: 100%;
             background-color: #34d399;
         }
-
         .invite-row {
             font-size: 13px;
             opacity: 0.9;
@@ -103,7 +91,6 @@
             align-items: center;
             gap: 6px;
         }
-
         .copy-btn {
             background: rgba(255, 255, 255, 0.25);
             border: none;
@@ -113,7 +100,6 @@
             cursor: pointer;
             font-size: 11px;
         }
-
         .vip-badge {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             padding: 8px 16px;
@@ -124,11 +110,9 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             border: 1px solid rgba(255,255,255,0.4);
         }
-
         .balance-section {
             margin-top: 15px;
         }
-
         .balance-label {
             font-size: 14px;
             opacity: 0.8;
@@ -137,13 +121,11 @@
             gap: 6px;
             margin-bottom: 6px;
         }
-
         .balance-amount {
             font-size: 32px;
             font-weight: 800;
             letter-spacing: 0.5px;
         }
-
         .card-actions {
             display: flex;
             justify-content: space-around;
@@ -151,7 +133,6 @@
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
-
         .card-action-item {
             display: flex;
             flex-direction: column;
@@ -163,7 +144,6 @@
             background: none;
             border: none;
         }
-
         .card-action-icon {
             width: 50px;
             height: 50px;
@@ -174,13 +154,10 @@
             justify-content: center;
             font-size: 20px;
         }
-
         .card-action-item span {
             font-size: 13px;
             font-weight: 500;
         }
-
-        /* Menu Grid */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -191,7 +168,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             margin-bottom: 25px;
         }
-
         .menu-item {
             display: flex;
             flex-direction: column;
@@ -200,8 +176,9 @@
             cursor: pointer;
             text-decoration: none;
             color: var(--text-main);
+            background: none;
+            border: none;
         }
-
         .menu-icon {
             width: 54px;
             height: 54px;
@@ -215,13 +192,10 @@
             margin-bottom: 10px;
             box-shadow: 0 2px 6px rgba(29, 78, 216, 0.08);
         }
-
         .menu-item span {
             font-size: 13px;
             font-weight: 600;
         }
-
-        /* Notice Card */
         .notice-card {
             background: white;
             padding: 20px;
@@ -232,27 +206,22 @@
             align-items: center;
             gap: 15px;
         }
-
         .notice-icon {
             font-size: 24px;
             background: #eff6ff;
             padding: 12px;
             border-radius: 12px;
         }
-
         .notice-content h4 {
             margin: 0 0 4px 0;
             font-size: 15px;
             color: var(--text-main);
         }
-
         .notice-content p {
             margin: 0;
             font-size: 13px;
             color: var(--text-muted);
         }
-
-        /* Modal Overlay Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -265,7 +234,6 @@
             align-items: center;
             z-index: 2000;
         }
-
         .modal-content {
             background: white;
             padding: 30px;
@@ -275,27 +243,25 @@
             box-sizing: border-box;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
         }
-
         .modal-content h3 {
             margin-top: 0;
             color: var(--dark-blue);
             font-size: 20px;
             margin-bottom: 20px;
         }
-
         .form-group {
             margin-bottom: 15px;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
             font-size: 13px;
         }
-
-        .form-group input[type="text"], .form-group input[type="password"] {
+        .form-group input[type="text"], .form-group input[type="password"], .form-group input[type="number"] {
             width: 100%;
             padding: 12px;
             border: 1px solid #cbd5e1;
@@ -303,13 +269,11 @@
             box-sizing: border-box;
             font-size: 14px;
         }
-
         .modal-buttons {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-
         .modal-btn {
             flex: 1;
             padding: 12px;
@@ -319,18 +283,35 @@
             cursor: pointer;
             font-size: 14px;
         }
-
         .btn-submit {
             background-color: var(--primary-blue);
             color: white;
         }
-
         .btn-cancel {
             background-color: #e2e8f0;
             color: var(--text-main);
         }
-
-        /* Fixed Bottom Navigation Bar */
+        /* History list style */
+        .history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .history-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-item span.amount {
+            font-weight: bold;
+            color: #16a34a;
+        }
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -344,7 +325,6 @@
             box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
             z-index: 1000;
         }
-
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -358,21 +338,17 @@
             background: none;
             border: none;
         }
-
         .nav-item.active {
             color: #3b82f6;
         }
-
         .nav-item span.icon {
             font-size: 22px;
             margin-bottom: 3px;
         }
-
         .nav-item.center-action {
             position: relative;
             top: -15px;
         }
-
         .center-circle {
             width: 56px;
             height: 56px;
@@ -389,9 +365,7 @@
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- Top Blue Card User Profile & Wallet -->
         <div class="user-card">
             <div class="user-header">
                 <div class="user-info-left">
@@ -409,22 +383,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="vip-badge">
-                    💎 <br>VIP 1
-                </div>
+                <div class="vip-badge">💎 <br>VIP 1</div>
             </div>
-
             <div class="balance-section">
                 <div class="balance-label">Total balance 👁️</div>
-                <div class="balance-amount">2,007.60 USD</div>
+                <div class="balance-amount" id="displayBalance">2,007.60 USD</div>
             </div>
-
             <div class="card-actions">
                 <button class="card-action-item" onclick="promptSecurityPin()">
                     <div class="card-action-icon">+</div>
                     <span>Add Wallet</span>
                 </button>
-                <button class="card-action-item" onclick="alert('Deposit feature coming soon!')">
+                <button class="card-action-item" onclick="openDepositModal()">
                     <div class="card-action-icon">↓</div>
                     <span>Deposit</span>
                 </button>
@@ -432,50 +402,24 @@
                     <div class="card-action-icon">↑</div>
                     <span>Withdraw</span>
                 </button>
-                <button class="card-action-item" onclick="alert('Transaction history opening...')">
+                <button class="card-action-item" onclick="openDepositHistoryModal()">
                     <div class="card-action-icon">⇄</div>
                     <span>Transaction</span>
                 </button>
             </div>
         </div>
 
-        <!-- Middle Feature Grid -->
         <div class="menu-grid">
-            <a href="#" class="menu-item">
-                <div class="menu-icon">👑</div>
-                <span>VIP</span>
-            </a>
-            <a href="#" class="menu-item">
-                <div class="menu-icon">📋</div>
-                <span>Event</span>
-            </a>
-            <a href="#" class="menu-item">
-                <div class="menu-icon">💳</div>
-                <span>Withdrawal</span>
-            </a>
-            <a href="#" class="menu-item">
-                <div class="menu-icon">💰</div>
-                <span>Deposit</span>
-            </a>
-            <a href="#" class="menu-item">
-                <div class="menu-icon">📝</div>
-                <span>Records</span>
-            </a>
-            <a href="#" class="menu-item">
-                <div class="menu-icon">🛡️</div>
-                <span>Certificate</span>
-            </a>
-            <a href="#" class="menu-item">
-                <div class="menu-icon">❓</div>
-                <span>Support</span>
-            </a>
-            <a href="#" class="menu-item">
-                <div class="menu-icon">👤</div>
-                <span>Profile</span>
-            </a>
+            <a href="#" class="menu-item"><div class="menu-icon">👑</div><span>VIP</span></a>
+            <a href="#" class="menu-item"><div class="menu-icon">📋</div><span>Event</span></a>
+            <a href="#" class="menu-item"><div class="menu-icon">💳</div><span>Withdrawal</span></a>
+            <button class="menu-item" onclick="openDepositModal()"><div class="menu-icon">💰</div><span>Deposit</span></button>
+            <button class="menu-item" onclick="openDepositHistoryModal()"><div class="menu-icon">📝</div><span>Records</span></button>
+            <a href="#" class="menu-item"><div class="menu-icon">🛡️</div><span>Certificate</span></a>
+            <a href="#" class="menu-item"><div class="menu-icon">❓</div><span>Support</span></a>
+            <a href="#" class="menu-item"><div class="menu-icon">👤</div><span>Profile</span></a>
         </div>
 
-        <!-- Bottom Fill Section: System Notice -->
         <div class="notice-card">
             <div class="notice-icon">📢</div>
             <div class="notice-content">
@@ -520,39 +464,57 @@
         </div>
     </div>
 
-    <!-- Fixed Bottom Navigation Bar -->
+    <!-- Deposit Modal -->
+    <div class="modal-overlay" id="depositModal">
+        <div class="modal-content">
+            <h3>Deposit Funds</h3>
+            <form id="depositForm" onsubmit="processDeposit(event)">
+                <div class="form-group">
+                    <label for="depositAmount">Amount (USD)</label>
+                    <input type="number" id="depositAmount" placeholder="Enter amount to deposit" min="1" step="0.01" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn btn-cancel" onclick="closeDepositModal()">Cancel</button>
+                    <button type="submit" class="modal-btn btn-submit">Confirm Deposit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Deposit History Modal -->
+    <div class="modal-overlay" id="depositHistoryModal">
+        <div class="modal-content">
+            <h3>Deposit History</h3>
+            <div id="historyContainer">
+                <ul class="history-list" id="depositHistoryList">
+                    <!-- Populated dynamically -->
+                </ul>
+            </div>
+            <div class="modal-buttons" style="margin-top: 20px;">
+                <button type="button" class="modal-btn btn-cancel" onclick="closeDepositHistoryModal()" style="width: 100%;">Close</button>
+            </div>
+        </div>
+    </div>
+
     <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item active">
-            <span class="icon">🏠</span>
-            <span>Home</span>
-        </a>
-        <a href="#" class="nav-item" onclick="alert('Certificate page')">
-            <span class="icon">📜</span>
-            <span>Certificate</span>
-        </a>
-        <a href="#" class="nav-item center-action" onclick="alert('Starting task')">
-            <div class="center-circle">⭕</div>
-            <span style="font-size: 11px; color: white; margin-top: 2px;">Starting</span>
-        </a>
-        <a href="#" class="nav-item" onclick="alert('Records page')">
-            <span class="icon">📊</span>
-            <span>Records</span>
-        </a>
-        <button class="nav-item" onclick="openProfileMenu()">
-            <span class="icon">👤</span>
-            <span>My</span>
-        </button>
+        <a href="dashboard.html" class="nav-item active"><span class="icon">🏠</span><span>Home</span></a>
+        <a href="#" class="nav-item" onclick="alert('Certificate page')"><span class="icon">📜</span><span>Certificate</span></a>
+        <a href="#" class="nav-item center-action" onclick="alert('Starting task')"><div class="center-circle">⭕</div><span style="font-size: 11px; color: white; margin-top: 2px;">Starting</span></a>
+        <button class="nav-item" onclick="openDepositHistoryModal()"><span class="icon">📊</span><span>Records</span></button>
+        <button class="nav-item" onclick="openProfileMenu()"><span class="icon">👤</span><span>My</span></button>
     </div>
 
     <script>
         const storedName = localStorage.getItem('userName');
         const storedCode = localStorage.getItem('myInviteCode');
         const storedGender = localStorage.getItem('userGender');
+        
+        let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 2007.60;
+        document.getElementById('displayBalance').textContent = currentBalance.toFixed(2) + ' USD';
 
         if (storedName) {
             document.getElementById('displayName').textContent = storedName;
         }
-
         if (storedCode) {
             document.getElementById('displayInviteCode').textContent = storedCode;
         }
@@ -573,7 +535,6 @@
             }
         }
 
-        // Security PIN Prompt Flow
         function promptSecurityPin() {
             document.getElementById('securityModal').style.display = 'flex';
         }
@@ -586,17 +547,13 @@
         function verifySecurityPin(e) {
             e.preventDefault();
             const enteredPin = document.getElementById('securityPin').value.trim();
-            
-            // Retrieve the unique transaction password created during registration
-            let correctTxPassword = localStorage.getItem('userTxPassword');
+            const correctTxPassword = localStorage.getItem('userTxPassword');
 
-            // Fallback: If no password is stored yet, safely save what was typed as your custom password
             if (!correctTxPassword) {
-                localStorage.setItem('userTxPassword', enteredPin);
-                correctTxPassword = enteredPin;
+                alert('No transaction password found. Please register an account first.');
+                return;
             }
 
-            // Strictly check against the user's personal password
             if (enteredPin === correctTxPassword) {
                 closeSecurityModal();
                 document.getElementById('walletModal').style.display = 'flex';
@@ -605,7 +562,6 @@
             }
         }
 
-        // Wallet Modal Functions
         function closeWalletModal() {
             document.getElementById('walletModal').style.display = 'none';
         }
@@ -622,10 +578,78 @@
             }
         }
 
+        // Deposit Functions
+        function openDepositModal() {
+            document.getElementById('depositModal').style.display = 'flex';
+        }
+
+        function closeDepositModal() {
+            document.getElementById('depositModal').style.display = 'none';
+            document.getElementById('depositForm').reset();
+        }
+
+        function processDeposit(e) {
+            e.preventDefault();
+            const amountInput = document.getElementById('depositAmount').value;
+            const amount = parseFloat(amountInput);
+
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid deposit amount.');
+                return;
+            }
+
+            // Update balance
+            currentBalance += amount;
+            localStorage.setItem('userBalance', currentBalance.toFixed(2));
+            document.getElementById('displayBalance').textContent = currentBalance.toFixed(2) + ' USD';
+
+            // Save to Deposit History Array in localStorage
+            let history = JSON.parse(localStorage.getItem('depositHistory')) || [];
+            const newRecord = {
+                amount: amount.toFixed(2),
+                date: new Date().toLocaleString()
+            };
+            history.unshift(newRecord); // Add to beginning
+            localStorage.setItem('depositHistory', JSON.stringify(history));
+
+            alert('Deposit of $' + amount.toFixed(2) + ' successful!');
+            closeDepositModal();
+        }
+
+        // Deposit History Functions
+        function openDepositHistoryModal() {
+            const historyListEl = document.getElementById('depositHistoryList');
+            historyListEl.innerHTML = '';
+
+            let history = JSON.parse(localStorage.getItem('depositHistory')) || [];
+
+            if (history.length === 0) {
+                historyListEl.innerHTML = '<li style="text-align: center; color: var(--text-muted); padding: 20px;">No deposit records found.</li>';
+            } else {
+                history.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = 'history-item';
+                    li.innerHTML = `
+                        <div>
+                            <strong>Deposit</strong><br>
+                            <small style="color: var(--text-muted);">${item.date}</small>
+                        </div>
+                        <span class="amount">+${item.amount} USD</span>
+                    `;
+                    historyListEl.appendChild(li);
+                });
+            }
+
+            document.getElementById('depositHistoryModal').style.display = 'flex';
+        }
+
+        function closeDepositHistoryModal() {
+            document.getElementById('depositHistoryModal').style.display = 'none';
+        }
+
         function openProfileMenu() {
             const savedAddress = localStorage.getItem('userWalletAddress');
             const walletInfo = savedAddress ? `\nLinked Wallet: ${savedAddress}` : '\nNo wallet linked yet.';
-            
             const action = confirm('User Profile: ' + (storedName || 'Guest') + walletInfo + '\n\nWould you like to Log Out?');
             if (action) {
                 localStorage.clear();
