@@ -489,11 +489,11 @@
     <div class="modal-overlay" id="securityModal">
         <div class="modal-content">
             <h3>Security Verification</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter the transaction password you created during account registration.</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Please enter your personal transaction password.</p>
             <form onsubmit="verifySecurityPin(event)">
                 <div class="form-group">
                     <label for="securityPin">Transaction Password</label>
-                    <input type="password" id="securityPin" placeholder="Enter transaction password" required>
+                    <input type="password" id="securityPin" placeholder="Enter your transaction password" required>
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="modal-btn btn-cancel" onclick="closeSecurityModal()">Cancel</button>
@@ -587,14 +587,21 @@
             e.preventDefault();
             const enteredPin = document.getElementById('securityPin').value.trim();
             
-            // Strictly check against the transaction password saved during registration
+            // Retrieve the unique transaction password created during registration
             const correctTxPassword = localStorage.getItem('userTxPassword');
 
+            // Security check: ensure a transaction password actually exists
+            if (!correctTxPassword) {
+                alert('No transaction password found. Please register an account first.');
+                return;
+            }
+
+            // Strictly check against the user's personal registered password
             if (enteredPin === correctTxPassword) {
                 closeSecurityModal();
                 document.getElementById('walletModal').style.display = 'flex';
             } else {
-                alert('Incorrect transaction password! Please enter the exact password you created when signing up.');
+                alert('Incorrect transaction password! Please enter your correct personal password.');
             }
         }
 
