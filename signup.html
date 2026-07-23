@@ -33,9 +33,8 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             box-sizing: border-box;
-            position: relative;
         }
 
         h2 {
@@ -46,7 +45,6 @@
 
         .form-group {
             margin-bottom: 20px;
-            position: relative;
         }
 
         label {
@@ -56,7 +54,7 @@
             font-size: 14px;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
@@ -65,9 +63,18 @@
             font-size: 14px;
         }
 
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
+        }
+
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-group select {
+            width: 130px;
         }
 
         .password-container {
@@ -83,6 +90,28 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
+            color: #64748b;
+        }
+
+        /* Password Strength Meter Styling */
+        .strength-meter {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 12px;
+            margin-top: 4px;
             color: #64748b;
         }
 
@@ -122,17 +151,39 @@
                 <input type="text" id="username" placeholder="Choose a username" required>
             </div>
 
+            <!-- Country Phone Number Option -->
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                <div class="phone-group">
+                    <select id="countryCode">
+                        <option value="+1">🇺🇸 +1 (US)</option>
+                        <option value="+44">🇬🇧 +44 (UK)</option>
+                        <option value="+91">🇮🇳 +91 (IN)</option>
+                        <option value="+86">🇨🇳 +86 (CN)</option>
+                        <option value="+81">🇯🇵 +81 (JP)</option>
+                        <option value="+49">🇩🇪 +49 (DE)</option>
+                        <option value="+33">🇫🇷 +33 (FR)</option>
+                        <option value="+55">🇧🇷 +55 (BR)</option>
+                        <option value="+52">🇲🇽 +52 (MX)</option>
+                        <option value="+61">🇦🇺 +61 (AU)</option>
+                        <option value="+971">🇦🇪 +971 (UAE)</option>
+                        <option value="+27">🇿🇦 +27 (ZA)</option>
+                    </select>
+                    <input type="tel" id="phone" placeholder="Phone number" required>
+                </div>
             </div>
 
+            <!-- Password with Eye Toggle & Strength Meter -->
             <div class="form-group">
                 <label for="password">Password</label>
                 <div class="password-container">
                     <input type="password" id="password" placeholder="Create a password" required>
                     <button type="button" id="togglePassword" class="toggle-password">👁️</button>
                 </div>
+                <div class="strength-meter">
+                    <div id="strengthBar" class="strength-bar"></div>
+                </div>
+                <div id="strengthText" class="strength-text">Password strength: Enter a password</div>
             </div>
 
             <div class="form-group">
@@ -158,7 +209,39 @@
             });
         }
 
-        // Signup & Invite Code Gatekeeper Logic
+        // Password Strength Checker (Training Password Logic)
+        const strengthBar = document.getElementById('strengthBar');
+        const strengthText = document.getElementById('strengthText');
+
+        passwordInput.addEventListener('input', function() {
+            const val = passwordInput.value;
+            let strength = 0;
+
+            if (val.length >= 6) strength += 1;
+            if (val.match(/[A-Z]/)) strength += 1;
+            if (val.match(/[0-9]/)) strength += 1;
+            if (val.match(/[^a-zA-Z0-9]/)) strength += 1;
+
+            if (val.length === 0) {
+                strengthBar.style.width = '0%';
+                strengthBar.style.backgroundColor = 'transparent';
+                strengthText.textContent = 'Password strength: Enter a password';
+            } else if (strength <= 1) {
+                strengthBar.style.width = '25%';
+                strengthBar.style.backgroundColor = '#dc2626'; // Red (Weak)
+                strengthText.textContent = 'Password strength: Weak';
+            } else if (strength === 2 || strength === 3) {
+                strengthBar.style.width = '65%';
+                strengthBar.style.backgroundColor = '#d97706'; // Orange (Medium)
+                strengthText.textContent = 'Password strength: Medium';
+            } else {
+                strengthBar.style.width = '100%';
+                strengthBar.style.backgroundColor = '#16a34a'; // Green (Strong)
+                strengthText.textContent = 'Password strength: Strong';
+            }
+        });
+
+        // Signup & Invite Code Logic
         const signupForm = document.getElementById('signupForm');
         signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -173,10 +256,13 @@
             
             inviteError.style.display = 'none';
 
-            // Save user details to localStorage for the dashboard & login
+            // Combine country code and phone number
+            const fullPhone = document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value;
+
+            // Save user details to localStorage
             localStorage.setItem('userName', document.getElementById('username').value);
-            localStorage.setItem('userPhone', document.getElementById('phone').value);
-            localStorage.setItem('userPass', document.getElementById('password').value);
+            localStorage.setItem('userPhone', fullPhone);
+            localStorage.setItem('userPass', passwordInput.value);
 
             alert('Account created successfully!');
             window.location.href = 'login.html';
