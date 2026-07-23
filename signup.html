@@ -204,7 +204,7 @@
                         <option value="+971">🇦🇪 +971 (UAE)</option>
                         <option value="+27">🇿🇦 +27 (ZA)</option>
                     </select>
-                    <input type="tel" id="phone" placeholder="Phone number" required>
+                    <input type="tel" id="phone" placeholder="Enter phone number" required>
                 </div>
             </div>
 
@@ -265,17 +265,24 @@
             
             const formError = document.getElementById('formError');
             const usernameInput = document.getElementById('username').value.trim();
+            const phoneInput = document.getElementById('phone').value.trim();
             const inviteCode = document.getElementById('inviteCode').value.trim();
             const passVal = passwordInput.value;
             const transPassVal = transPasswordInput.value;
 
-            // Retrieve existing users array from localStorage (or empty array if none exist)
+            // Check if username already exists in multi-user storage
             let users = JSON.parse(localStorage.getItem('usersList')) || [];
-
-            // Check if username already exists
             const existingUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
             if (existingUser) {
                 formError.textContent = 'This username is already taken. Please choose another one.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            // Phone Number Validation: Check if it contains only numbers and has a valid length (e.g., at least 7 digits)
+            const phoneDigitsOnly = phoneInput.replace(/\D/g, '');
+            if (phoneDigitsOnly.length < 7) {
+                formError.textContent = 'Please enter a valid phone number correctly.';
                 formError.style.display = 'block';
                 return;
             }
@@ -303,7 +310,7 @@
             
             formError.style.display = 'none';
 
-            const fullPhone = document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value;
+            const fullPhone = document.getElementById('countryCode').value + ' ' + phoneInput;
             const selectedGender = document.getElementById('gender').value;
             const selectedLang = document.getElementById('languageSelect').value;
 
@@ -317,7 +324,6 @@
                 language: selectedLang
             };
 
-            // Push to array and save back to localStorage
             users.push(newUser);
             localStorage.setItem('usersList', JSON.stringify(users));
 
