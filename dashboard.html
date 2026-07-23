@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdrawal & History</title>
+    <title>Dashboard</title>
     <style>
         :root {
             --primary-blue: #1d4ed8;
             --bg-color: #f1f5f9;
             --text-main: #1e293b;
+            --text-muted: #64748b;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,31 +22,54 @@
         .top-bar {
             background-color: var(--primary-blue);
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
+            text-align: center;
+            padding: 18px 20px;
             font-size: 18px;
             font-weight: 600;
-        }
-        .back-btn {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            background: rgba(255,255,255,0.2);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
         }
         .container {
             padding: 20px;
         }
         .card {
             background: white;
+            border-radius: 12px;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .balance-title {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: #000;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .menu-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            display: block;
+        }
+        .menu-btn:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
         }
         .bottom-nav {
             position: fixed;
@@ -82,22 +106,26 @@
 <body>
 
     <div class="top-bar">
-        <a href="dashboard.html" class="back-btn">&larr; Back to Dashboard</a>
-        <span>Withdrawal</span>
+        Dashboard
     </div>
 
     <div class="container">
         <div class="card">
-            <h2>Withdrawal Section</h2>
-            <p>You can safely navigate using the options below or the top bar at any time.</p>
+            <div class="balance-title">Total Balance</div>
+            <div class="balance-amount" id="homeBalance">-532.99 USD</div>
+        </div>
+
+        <div class="menu-grid">
+            <a href="withdraw.html" class="menu-btn">💳 Withdraw</a>
+            <a href="withdraw.html" class="menu-btn">📝 History</a>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item">
+        <a href="dashboard.html" class="nav-item active">
             <span class="icon">🏠</span><span>Home</span>
         </a>
-        <a href="withdraw.html" class="nav-item active">
+        <a href="withdraw.html" class="nav-item">
             <span class="icon">💳</span><span>Withdraw</span>
         </a>
         <a href="withdraw.html" class="nav-item">
@@ -105,5 +133,11 @@
         </a>
     </div>
 
+    <script>
+        const savedBalance = localStorage.getItem('userBalance');
+        if (savedBalance !== null) {
+            document.getElementById('homeBalance').textContent = parseFloat(savedBalance).toFixed(2) + ' USD';
+        }
+    </script>
 </body>
 </html>
