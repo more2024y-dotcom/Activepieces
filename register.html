@@ -131,8 +131,8 @@
                 <input type="password" id="regPassword" placeholder="Create a login password" required>
             </div>
             <div class="form-group">
-                <label for="regTxPassword">Transaction Password (e.g., 222222)</label>
-                <input type="password" id="regTxPassword" placeholder="Create your transaction password" required>
+                <label for="regTxPassword">Transaction Password</label>
+                <input type="password" id="regTxPassword" placeholder="Create your unique transaction password" required>
             </div>
             <div class="form-group">
                 <label for="regInviteCode">Invitation Code (Optional)</label>
@@ -160,24 +160,24 @@
             const phone = document.getElementById('regPhone').value.trim();
             const gender = document.getElementById('regGender').value;
             const password = document.getElementById('regPassword').value;
-            const txPassword = document.getElementById('regTxPassword').value.trim();
+            const txPassword = document.getElementById('regTxPassword').value.trim(); // Captures the user's personal password
             const inviteCodeUsed = document.getElementById('regInviteCode').value.trim();
 
             const myNewInviteCode = 'REF' + Math.floor(100000 + Math.random() * 900000);
 
-            // Save details including the custom transaction password
+            // Save user data securely to local storage
             localStorage.setItem('userName', name);
             localStorage.setItem('userPhone', phone);
             localStorage.setItem('userGender', gender);
             localStorage.setItem('userPassword', password);
-            localStorage.setItem('userTxPassword', txPassword); 
+            localStorage.setItem('userTxPassword', txPassword); // Stores their unique transaction password
             localStorage.setItem('myInviteCode', myNewInviteCode);
 
             if (inviteCodeUsed) {
                 localStorage.setItem('referredBy', inviteCodeUsed);
             }
 
-            alert('Registration successful! Your invite code is ' + myNewInviteCode);
+            alert('Registration successful!');
             window.location.href = 'login.html';
         }
     </script>
