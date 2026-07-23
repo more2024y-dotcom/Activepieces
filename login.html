@@ -188,7 +188,6 @@
     </div>
 
     <script>
-        // Password Visibility Toggle Logic
         const togglePassword = document.getElementById('togglePassword');
         const loginPasswordInput = document.getElementById('loginPassword');
 
@@ -200,7 +199,6 @@
             });
         }
 
-        // Login Logic matching localStorage data
         const loginForm = document.getElementById('loginForm');
         loginForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -209,13 +207,20 @@
             const enteredPass = loginPasswordInput.value;
             const loginError = document.getElementById('loginError');
 
-            // Retrieve stored user info from signup
-            const savedUser = localStorage.getItem('userName');
-            const savedPass = localStorage.getItem('userPass');
+            // Get users list from localStorage
+            const users = JSON.parse(localStorage.getItem('usersList')) || [];
 
-            // Check if entered credentials match what was saved in localStorage
-            if (enteredUser === savedUser && enteredPass === savedPass) {
+            // Find matching user
+            const foundUser = users.find(u => u.username === enteredUser && u.password === enteredPass);
+
+            if (foundUser) {
                 loginError.style.display = 'none';
+                
+                // Save currently logged-in user details separately for the dashboard
+                localStorage.setItem('userName', foundUser.username);
+                localStorage.setItem('userPhone', foundUser.phone);
+                localStorage.setItem('userGender', foundUser.gender);
+
                 alert('Login successful!');
                 window.location.href = 'dashboard.html';
             } else {
