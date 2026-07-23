@@ -40,6 +40,7 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
+            text-decoration: none;
         }
         /* Tab Navigation */
         .tab-nav {
@@ -293,7 +294,7 @@
 
     <!-- Top Header Bar -->
     <div class="top-bar">
-        <button class="back-btn" onclick="goBack()">&#10094;</button>
+        <a href="dashboard.html" class="back-btn">&#10094;</a>
         Withdrawal
     </div>
 
@@ -363,13 +364,13 @@
 
     <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
-        <a href="dashboard.html" onclick="event.preventDefault(); window.location.replace('dashboard.html');" class="nav-item">
+        <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
         </a>
         <a href="#" class="nav-item" onclick="alert('Certificate page')"><span class="icon">📜</span><span>Certificate</span></a>
         <button class="nav-item" onclick="switchMainTab('withdraw')"><span class="icon">💳</span><span>Withdraw</span></button>
         <button class="nav-item" onclick="switchMainTab('history')"><span class="icon">📝</span><span>History</span></button>
-        <a href="dashboard.html" onclick="event.preventDefault(); window.location.replace('dashboard.html');" class="nav-item">
+        <a href="dashboard.html" class="nav-item">
             <span class="icon">👤</span><span>My</span>
         </a>
     </div>
@@ -385,11 +386,6 @@
         }
 
         let currentSubStatus = 'Pending';
-
-        function goBack() {
-            // Replaces history state so the page won't trap you in a back-button loop
-            window.location.replace('dashboard.html');
-        }
 
         // Main Tab Switching Logic
         function switchMainTab(tabName) {
