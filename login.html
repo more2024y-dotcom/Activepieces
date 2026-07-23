@@ -1,3 +1,8 @@
+The reason your invite code displayed as **N/A** and didn't work is because your **`login.html`** file wasn't updated yet to save the new user code (`myInviteCode`) into `localStorage` when you logged in. Because it wasn't saved during login, the dashboard couldn't load it.
+
+Here is the complete, updated **`login.html`** file. It now correctly grabs `foundUser.myInviteCode` and saves it to `localStorage` upon login, fixing the "N/A" issue so you can copy it and use it to register new users successfully.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -216,10 +221,11 @@
             if (foundUser) {
                 loginError.style.display = 'none';
                 
-                // Save currently logged-in user details separately for the dashboard
+                // Save active user details and their personal referral code into localStorage
                 localStorage.setItem('userName', foundUser.username);
                 localStorage.setItem('userPhone', foundUser.phone);
                 localStorage.setItem('userGender', foundUser.gender);
+                localStorage.setItem('myInviteCode', foundUser.myInviteCode || '');
 
                 alert('Login successful!');
                 window.location.href = 'dashboard.html';
@@ -230,3 +236,5 @@
     </script>
 </body>
 </html>
+
+```
