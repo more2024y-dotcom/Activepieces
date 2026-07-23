@@ -1,291 +1,147 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --border-color: #cbd5e1;
+        }
 
-<title>Activepieces Create Account</title>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-<link rel="stylesheet" href="css/signup.css">
+        .auth-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 380px;
+            box-sizing: border-box;
+        }
 
+        .auth-card h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .footer-text a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-
-
 <body>
 
-
-<div class="signup-container">
-
-
-<div class="signup-card">
-
-
-<img src="assets/logo.png" class="logo">
-
-
-<h1>
-Activepieces
-</h1>
-
-
-<p class="subtitle">
-Create Account
-</p>
-
-
-
-
-<label>
-Username
-</label>
-
-<input type="text" id="username" placeholder="Username">
-
-<p id="usernameError" class="error">
-Username is required
-</p>
-
-
-
-
-
-<label>
-Phone
-</label>
-
-
-<div class="phone-box">
-
-
-<select id="country">
-
-<option>
-+66
-</option>
-
-<option>
-+95
-</option>
-
-<option>
-+1
-</option>
-
-<option>
-+44
-</option>
-
-</select>
-
-
-<input 
-type="text" 
-id="phone"
-placeholder="Enter a phone number"
->
-
-
-</div>
-
-
-
-
-
-<label>
-Transaction Password
-</label>
-
-
-<input 
-type="password" 
-id="transactionPassword"
-placeholder="Transaction Password"
->
-
-
-<p id="transactionError" class="error">
-Transaction Password is required
-</p>
-
-
-
-
-
-
-<label>
-Login Password
-</label>
-
-
-<input 
-type="password" 
-id="loginPassword"
-placeholder="Login Password"
->
-
-
-
-
-
-
-<label>
-Gender
-</label>
-
-
-<select id="gender">
-
-
-<option value="">
-Select Gender
-</option>
-
-
-<option>
-Male
-</option>
-
-
-<option>
-Female
-</option>
-
-
-<option>
-Other
-</option>
-
-
-</select>
-
-
-
-
-
-
-<label>
-Invite Code
-</label>
-
-
-<input 
-type="text" 
-id="invite"
-placeholder="Invite Code"
->
-
-
-
-
-
-
-<button onclick="createAccount()">
-
-Create account
-
-</button>
-
-
-
-
-
-
-<p class="login-link">
-
-Already have an account?
-
-<br>
-
-<a href="login.html">
-Login here
-</a>
-
-</p>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<script>
-
-
-function createAccount(){
-
-
-let username=document.getElementById("username").value;
-
-let phone=document.getElementById("phone").value;
-
-let transaction=document.getElementById("transactionPassword").value;
-
-let password=document.getElementById("loginPassword").value;
-
-let gender=document.getElementById("gender").value;
-
-
-
-
-
-if(username==""){
-
-alert("Username is required");
-
-return;
-
-}
-
-
-
-if(transaction==""){
-
-alert("Transaction Password is required");
-
-return;
-
-}
-
-
-
-
-
-localStorage.setItem("username",username);
-
-localStorage.setItem("phone",phone);
-
-localStorage.setItem("transactionPassword",transaction);
-
-localStorage.setItem("password",password);
-
-localStorage.setItem("gender",gender);
-
-
-
-
-
-alert("Account created successfully!");
-
-
-// Go to dashboard after account creation
-
-window.location.href="dashboard.html";
-
-
-}
-
-
-
-</script>
-
-
+    <div class="auth-card">
+        <h2>Get Started</h2>
+        <div class="subtitle">Create your account to continue</div>
+        
+        <form>
+            <div class="input-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" required placeholder="John Doe">
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required placeholder="name@example.com">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="At least 6 characters">
+            </div>
+
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+
+        <div class="footer-text">
+            Already have an account? <a href="login.html">Log in</a>
+        </div>
+    </div>
 
 </body>
-
 </html>
