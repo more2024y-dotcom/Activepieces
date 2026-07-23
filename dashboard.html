@@ -29,7 +29,7 @@
             box-sizing: border-box;
         }
 
-        /* Top Red Card (From Image 1) */
+        /* Top Red Card */
         .user-card {
             background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
             color: white;
@@ -65,12 +65,6 @@
             font-size: 24px;
             border: 2px solid rgba(255, 255, 255, 0.6);
             overflow: hidden;
-        }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .user-details h3 {
@@ -150,7 +144,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Action Buttons Grid inside Card or Below */
         .card-actions {
             display: flex;
             justify-content: space-around;
@@ -178,11 +171,6 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
-            transition: background 0.2s;
-        }
-
-        .card-action-item:hover .card-action-icon {
-            background: rgba(255, 255, 255, 0.3);
         }
 
         .card-action-item span {
@@ -190,7 +178,7 @@
             font-weight: 500;
         }
 
-        /* Quick Menu Grid (From Image 2 middle section) */
+        /* Menu Grid */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -231,7 +219,69 @@
             font-weight: 600;
         }
 
-        /* Bottom Navigation Bar (From Image 2 footer) */
+        /* Extra Bottom Fill Sections */
+        .notice-card {
+            background: white;
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notice-icon {
+            font-size: 22px;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .notice-content h4 {
+            margin: 0 0 4px 0;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .notice-content p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .promo-banner h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+        }
+
+        .promo-banner p {
+            margin: 0 0 15px 0;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .promo-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Fixed Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -255,7 +305,9 @@
             font-size: 11px;
             font-weight: 500;
             flex: 1;
-            transition: color 0.2s;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
 
         .nav-item.active {
@@ -267,7 +319,6 @@
             margin-bottom: 3px;
         }
 
-        /* Center Special Action Button in Nav */
         .nav-item.center-action {
             position: relative;
             top: -15px;
@@ -285,21 +336,6 @@
             color: white;
             font-size: 18px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .logout-btn-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .logout-btn {
-            background-color: #e2e8f0;
-            color: var(--text-main);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -334,7 +370,6 @@
                 <div class="balance-amount">2,007.60 USD</div>
             </div>
 
-            <!-- Red Card Bottom Quick Buttons -->
             <div class="card-actions">
                 <a href="#" class="card-action-item">
                     <div class="card-action-icon">+</div>
@@ -355,7 +390,7 @@
             </div>
         </div>
 
-        <!-- Middle Feature Grid (Image 2 Style) -->
+        <!-- Middle Feature Grid -->
         <div class="menu-grid">
             <a href="#" class="menu-item">
                 <div class="menu-icon">👑</div>
@@ -391,8 +426,20 @@
             </a>
         </div>
 
-        <div class="logout-btn-container">
-            <button class="logout-btn" onclick="logoutUser()">Log Out</button>
+        <!-- Bottom Fill Section 1: System Notice -->
+        <div class="notice-card">
+            <div class="notice-icon">📢</div>
+            <div class="notice-content">
+                <h4>System Announcement</h4>
+                <p>Welcome to the platform! Invite friends using your referral code to unlock higher rewards.</p>
+            </div>
+        </div>
+
+        <!-- Bottom Fill Section 2: Promo Banner -->
+        <div class="promo-banner">
+            <h3>Upgrade to VIP 2</h3>
+            <p>Unlock higher daily earnings and exclusive referral bonuses instantly.</p>
+            <button class="promo-btn" onclick="alert('VIP upgrade feature coming soon!')">Upgrade Now</button>
         </div>
     </div>
 
@@ -402,26 +449,26 @@
             <span class="icon">🏠</span>
             <span>Home</span>
         </a>
-        <a href="#" class="nav-item">
+        <a href="#" class="nav-item" onclick="alert('Certificate page')">
             <span class="icon">📜</span>
             <span>Certificate</span>
         </a>
-        <a href="#" class="nav-item center-action">
+        <a href="#" class="nav-item center-action" onclick="alert('Starting task')">
             <div class="center-circle">⭕</div>
             <span style="font-size: 10px; color: white; margin-top: 2px;">Starting</span>
         </a>
-        <a href="#" class="nav-item">
+        <a href="#" class="nav-item" onclick="alert('Records page')">
             <span class="icon">📊</span>
             <span>Records</span>
         </a>
-        <a href="#" class="nav-item" onclick="alert('Profile section')">
+        <!-- "My" button now handles account options / logout -->
+        <button class="nav-item" onclick="openProfileMenu()">
             <span class="icon">👤</span>
             <span>My</span>
-        </a>
+        </button>
     </div>
 
     <script>
-        // Load logged in user details from localStorage
         const storedName = localStorage.getItem('userName');
         const storedCode = localStorage.getItem('myInviteCode');
         const storedGender = localStorage.getItem('userGender');
@@ -434,7 +481,6 @@
             document.getElementById('displayInviteCode').textContent = storedCode;
         }
 
-        // Set avatar emoji based on saved gender
         const avatarEl = document.getElementById('userAvatarEmoji');
         if (storedGender === 'Female') {
             avatarEl.textContent = '👩';
@@ -451,12 +497,16 @@
             }
         }
 
-        function logoutUser() {
-            localStorage.removeItem('userName');
-            localStorage.removeItem('userPhone');
-            localStorage.removeItem('userGender');
-            localStorage.removeItem('myInviteCode');
-            window.location.href = 'login.html';
+        // Profile menu triggered when clicking "My" at the bottom
+        function openProfileMenu() {
+            const action = confirm('User Profile: ' + (storedName || 'Guest') + '\n\nWould you like to Log Out?');
+            if (action) {
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userPhone');
+                localStorage.removeItem('userGender');
+                localStorage.removeItem('myInviteCode');
+                window.location.href = 'login.html';
+            }
         }
     </script>
 </body>
