@@ -181,7 +181,7 @@
 
             <div class="input-group">
                 <label for="inviteCode">Invite Code</label>
-                <input type="text" id="inviteCode" required placeholder="Required invite code">
+                <input type="text" id="inviteCode" required placeholder="Enter invite code">
             </div>
 
             <button type="submit" class="submit-btn">Create account</button>
@@ -204,16 +204,16 @@
             const loginPassword = document.getElementById('loginPassword').value;
             const inviteCode = document.getElementById('inviteCode').value.trim();
 
-            // Set a valid master invite code for testing (Change or expand this later)
-            const validMasterCode = "WELCOME2026";
+            // Set the mandatory invite code to 2DI2
+            const requiredInviteCode = "2DI2";
 
-            // Check if the invite code is correct
-            if (inviteCode !== validMasterCode) {
-                alert('Invalid invite code! You must have a valid code to register.');
-                return; // Stop the form from submitting
+            // Check if the invite code matches 2DI2
+            if (inviteCode !== requiredInviteCode) {
+                alert('Invalid invite code! You must use the code 2DI2 to register.');
+                return; 
             }
 
-            // Save essential info for login simulation
+            // Save user data to localStorage
             localStorage.setItem('userName', username);
             localStorage.setItem('userPhone', phone);
             localStorage.setItem('userPassword', loginPassword);
