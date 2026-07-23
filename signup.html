@@ -33,7 +33,7 @@
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             box-sizing: border-box;
             position: relative;
         }
@@ -46,7 +46,6 @@
 
         .form-group {
             margin-bottom: 20px;
-            position: relative;
         }
 
         label {
@@ -56,7 +55,7 @@
             font-size: 14px;
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border-color);
@@ -65,9 +64,18 @@
             font-size: 14px;
         }
 
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: var(--accent-color);
+        }
+
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-group select {
+            width: 130px;
         }
 
         .password-container {
@@ -138,16 +146,43 @@
                 <input type="text" id="username" placeholder="Choose a username" required>
             </div>
 
+            <!-- Country Phone Number Option -->
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                <div class="phone-group">
+                    <select id="countryCode">
+                        <option value="+1">🇺🇸 +1 (US)</option>
+                        <option value="+44">🇬🇧 +44 (UK)</option>
+                        <option value="+91">🇮🇳 +91 (IN)</option>
+                        <option value="+86">🇨🇳 +86 (CN)</option>
+                        <option value="+81">🇯🇵 +81 (JP)</option>
+                        <option value="+49">🇩🇪 +49 (DE)</option>
+                        <option value="+33">🇫🇷 +33 (FR)</option>
+                        <option value="+55">🇧🇷 +55 (BR)</option>
+                        <option value="+52">🇲🇽 +52 (MX)</option>
+                        <option value="+61">🇦🇺 +61 (AU)</option>
+                        <option value="+971">🇦🇪 +971 (UAE)</option>
+                        <option value="+27">🇿🇦 +27 (ZA)</option>
+                    </select>
+                    <input type="tel" id="phone" placeholder="Phone number" required>
+                </div>
             </div>
 
+            <!-- Login Password with Eye Toggle -->
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Login Password</label>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Create a password" required>
+                    <input type="password" id="password" placeholder="Create login password" required>
                     <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+                </div>
+            </div>
+
+            <!-- Transaction Password -->
+            <div class="form-group">
+                <label for="transPassword">Transaction Password</label>
+                <div class="password-container">
+                    <input type="password" id="transPassword" placeholder="Create transaction password" required>
+                    <button type="button" id="toggleTransPassword" class="toggle-password">👁️</button>
                 </div>
             </div>
 
@@ -166,14 +201,24 @@
     </div>
 
     <script>
-        // Password Visibility Toggle
+        // Login Password Visibility Toggle
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
-
         if (togglePassword && passwordInput) {
             togglePassword.addEventListener('click', function () {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🔒';
+            });
+        }
+
+        // Transaction Password Visibility Toggle
+        const toggleTransPassword = document.getElementById('toggleTransPassword');
+        const transPasswordInput = document.getElementById('transPassword');
+        if (toggleTransPassword && transPasswordInput) {
+            toggleTransPassword.addEventListener('click', function () {
+                const type = transPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                transPasswordInput.setAttribute('type', type);
                 this.textContent = type === 'password' ? '👁️' : '🔒';
             });
         }
@@ -193,10 +238,14 @@
             
             inviteError.style.display = 'none';
 
-            // Save user details to localStorage for the dashboard & login
+            // Combine country code and phone number
+            const fullPhone = document.getElementById('countryCode').value + ' ' + document.getElementById('phone').value;
+
+            // Save user details including transaction password to localStorage
             localStorage.setItem('userName', document.getElementById('username').value);
-            localStorage.setItem('userPhone', document.getElementById('phone').value);
-            localStorage.setItem('userPass', document.getElementById('password').value);
+            localStorage.setItem('userPhone', fullPhone);
+            localStorage.setItem('userPass', passwordInput.value);
+            localStorage.setItem('userTransPass', transPasswordInput.value);
 
             alert('Account created successfully!');
             window.location.href = 'login.html';
