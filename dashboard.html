@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             color: #333;
+            padding-bottom: 80px;
         }
         .header {
             background-color: #dc2626;
@@ -32,6 +33,23 @@
         }
         .balance {
             font-size: 24px;
+            font-weight: bold;
+            color: #dc2626;
+        }
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+        .invite-box {
+            background: #fef2f2;
+            border: 1px dashed #dc2626;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            text-align: center;
             font-weight: bold;
             color: #dc2626;
         }
@@ -62,14 +80,16 @@
             background: white;
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            padding: 12px 0;
             box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
         .nav-item {
             text-decoration: none;
             color: #666;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
+            text-align: center;
         }
         .nav-item.active {
             color: #dc2626;
@@ -83,11 +103,24 @@
     </div>
 
     <div class="container">
+        <!-- Profile & Invitation Section -->
+        <div class="card">
+            <div class="profile-info">
+                <span><strong>User:</strong> <span id="usernameDisplay">Member</span></span>
+                <span><strong>Credit Score:</strong> 100</span>
+            </div>
+            <div class="invite-box">
+                Invitation Code: <span id="inviteCodeDisplay">REF-8892</span>
+            </div>
+        </div>
+
+        <!-- Balance Section -->
         <div class="card">
             <h3>Account Balance</h3>
             <div class="balance" id="balanceDisplay">-532.99 USD</div>
         </div>
 
+        <!-- Quick Actions -->
         <div class="card">
             <h3>Quick Actions</h3>
             <div class="btn-grid">
@@ -97,16 +130,30 @@
         </div>
     </div>
 
+    <!-- Bottom Navigation -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item active">Home</a>
         <a href="withdraw.html" class="nav-item">Withdraw</a>
         <a href="withdraw.html" class="nav-item">History</a>
+        <a href="profile.html" class="nav-item">Profile</a>
     </div>
 
     <script>
+        // Load balance
         const storedBalance = localStorage.getItem('userBalance');
         if (storedBalance !== null) {
             document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
+        }
+
+        // Load username / profile data if saved
+        const storedUser = localStorage.getItem('username');
+        if (storedUser) {
+            document.getElementById('usernameDisplay').textContent = storedUser;
+        }
+
+        const storedInvite = localStorage.getItem('inviteCode');
+        if (storedInvite) {
+            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
     </script>
 
