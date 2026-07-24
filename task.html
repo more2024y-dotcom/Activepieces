@@ -360,7 +360,6 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        // Initialize default balance to 2000 if not set yet
         let currentBalance = parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
             currentBalance = 2000.00;
@@ -368,23 +367,48 @@
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
+        // Load and display current task progress (defaulting to 17)
+        let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
+        if (isNaN(completedTasksCount)) {
+            completedTasksCount = 17;
+            localStorage.setItem('completedTasksCount', completedTasksCount);
+        }
+        
+        const totalTasksMax = 40;
+        document.getElementById('optStatusLabel').textContent = `Start Optimization (${completedTasksCount} / ${totalTasksMax})`;
+        document.getElementById('startingBtn').textContent = `Starting (${completedTasksCount}/${totalTasksMax})`;
+
+        // Diverse product catalog pool so orders change every time
+        const productCatalog = [
+            { name: "CD button skirt pants", img: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" },
+            { name: "Classic Casual Leather Shoes", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" },
+            { name: "Wireless Noise-Canceling Headphones", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" },
+            { name: "Minimalist Smart Watch Series", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" },
+            { name: "Professional DSLR Camera Body", img: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" },
+            { name: "Designer Summer Sun Hat", img: "https://images.unsplash.com/photo-1534215754734-18e55d134347?auto=format&fit=crop&w=400&q=80" },
+            { name: "Luxury Silk Evening Scarf", img: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=400&q=80" }
+        ];
+
         function startTaskOptimization() {
-            // Randomly generate order price between 1000 and 3000 to match your examples
-            const possiblePrices = [1000, 1500, 2000, 2500, 3000];
-            const randomOrderPrice = possiblePrices[Math.floor(Math.random() * possiblePrices.length)];
-            const commissionRate = 0.005; // 0.5%
+            // Pick a random product from the list
+            const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
+            
+            // Random order price between 800 and 2800
+            const randomOrderPrice = Math.floor(800 + Math.random() * 2000);
+            const commissionRate = 0.005; // 0.5% commission
             const earnings = randomOrderPrice * commissionRate;
 
-            // Temporarily subtract order price from current balance (can go negative if price > balance)
+            // Temporarily deduct order amount from balance
             currentBalance -= randomOrderPrice;
 
-            // Save active task details into localStorage for submit.html to use
+            // Save state for submit page
             localStorage.setItem('userBalance', currentBalance);
-            localStorage.setItem('activeOrderPrice', randomOrderPrice);
-            localStorage.setItem('activeEarnings', earnings);
-            localStorage.setItem('taskPending', 'true');
+            localStorage.setItem('currentOrderName', randomProduct.name);
+            localStorage.setItem('currentOrderImg', randomProduct.img);
+            localStorage.setItem('currentOrderPrice', randomOrderPrice);
+            localStorage.setItem('currentOrderEarnings', earnings);
 
-            // Navigate to submission/review page
+            // Navigate to submission page
             window.location.href = 'submit.html';
         }
     </script>
