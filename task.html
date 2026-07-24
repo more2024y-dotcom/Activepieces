@@ -121,7 +121,7 @@
             font-weight: 800;
             letter-spacing: 0.5px;
         }
-        /* Top Navigation Buttons */
+        /* Top Info Buttons */
         .info-buttons-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -140,7 +140,7 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
             cursor: pointer;
         }
-        /* VIP Banner Row */
+        /* VIP Status Banner */
         .vip-banner {
             background: linear-gradient(90deg, #eff6ff, #dbeafe);
             border: 1px solid #bfdbfe;
@@ -321,7 +321,7 @@
 
         <!-- Optimization Status & Action -->
         <div class="optimization-header" id="optStatusLabel">Start Optimization (0 / 2)</div>
-        <div class="starting-action-bar" id="startingBtn" onclick="runOptimization()">Starting (17/40)</div>
+        <div class="starting-action-bar" id="startingBtn" onclick="goToSubmitPage()">Starting (17/40)</div>
 
         <!-- Product Slots Grid -->
         <div class="product-grid">
@@ -344,7 +344,7 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar (Lightning Button points to task page) -->
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
@@ -382,27 +382,8 @@
             document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
         }
 
-        // Interactive Simulation for the Lightning / Starting Action Button
-        let currentTaskCount = 17;
-        const maxTasks = 40;
-
-        function runOptimization() {
-            const btn = document.getElementById('startingBtn');
-            const statusLabel = document.getElementById('optStatusLabel');
-            
-            if (currentTaskCount < maxTasks) {
-                currentTaskCount++;
-                btn.textContent = `Processing (${currentTaskCount}/${maxTasks})...`;
-                btn.style.background = '#2563eb';
-
-                setTimeout(() => {
-                    btn.textContent = `Starting (${currentTaskCount}/${maxTasks})`;
-                    btn.style.background = 'var(--primary-blue)';
-                    statusLabel.textContent = `Start Optimization (1 / 2)`;
-                }, 800);
-            } else {
-                alert('Daily optimization limit reached!');
-            }
+        function goToSubmitPage() {
+            window.location.href = 'submit.html';
         }
     </script>
 
