@@ -51,7 +51,8 @@
         }
         .image-card img {
             max-width: 200px;
-            height: auto;
+            height: 200px;
+            object-fit: cover;
             border-radius: 8px;
         }
         .dots {
@@ -193,15 +194,15 @@
     </div>
 
     <div class="container">
-        <div class="product-title">CD button skirt pants</div>
+        <div class="product-title" id="productTitleDisplay">CD button skirt pants</div>
 
         <div class="image-card">
-            <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" alt="Skirt pants">
+            <img id="productImg" src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" alt="Product">
             <div class="dots">•</div>
         </div>
 
         <div class="price-section">USD</div>
-        <div class="price-amount">901.00 x1</div>
+        <div class="price-amount" id="priceDisplay">901.00 x1</div>
 
         <div class="comment-label-row">
             <span>Click to write a comment:</span>
@@ -224,9 +225,9 @@
                 <span>Earnings</span>
             </div>
             <div class="stats-row stats-val" style="color: var(--text-main); font-size: 13px; margin-top: 4px;">
-                <span>901.00(USD)</span>
-                <span>5%</span>
-                <span>45.05(USD)</span>
+                <span id="statAmount">901.00(USD)</span>
+                <span>0.5%</span>
+                <span id="statEarnings">45.05(USD)</span>
             </div>
         </div>
 
@@ -245,35 +246,66 @@
     </div>
 
     <script>
-        function generateOrderDetails() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            
-            const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-            document.getElementById('dateCreated').textContent = formattedDate;
+        // Load active order details passed from task.html
+        const orderName = localStorage.getItem('currentOrderName') || "CD button skirt pants";
+        const orderImg = localStorage.getItem('currentOrderImg') || "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80";
+        const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 901.00;
+        const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 4.51;
 
-            const randomCode = `${year}${month}${day}${hours}${minutes}${Math.floor(10000 + Math.random() * 90000)}`;
-            document.getElementById('orderCode').textContent = randomCode;
-        }
-        generateOrderDetails();
+        document.getElementById('productTitleDisplay').textContent = orderName;
+        document.getElementById('productImg').src = orderImg;
+        document.getElementById('priceDisplay').textContent = orderPrice.toFixed(2) + ' x1';
+        document.getElementById('statAmount').textContent = orderPrice.toFixed(2) + '(USD)';
+        document.getElementById('statEarnings').textContent = orderEarnings.toFixed(2) + '(USD)';
 
-        const reviews = [
-            "Very good quality, highly recommended!",
-            "Exceeded my expectations, fast and smooth.",
-            "Absolutely love this item! Perfect fit.",
-            "Great product, very satisfied with the purchase.",
-            "Superb craftsmanship and fast delivery."
-        ];
+        // Timestamp generator
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        document.getElementById('dateCreated').textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        document.getElementById('orderCode').textContent = `${year}${month}${day}${hours}${minutes}${Math.floor(10000 + Math.random() * 90000)}`;
+
+        // Dynamic distinct review banks for different product types
+        const reviewPools = {
+            clothing: [
+                "The fabric feels amazing and fits wonderfully!",
+                "Stitching is neat and high quality. Very pleased.",
+                "Beautiful color and true to size. Highly recommended!",
+                "Comfortable to wear all day long. Great style."
+            ],
+            gadgets: [
+                "Works seamlessly right out of the box. Super fast!",
+                "Excellent build quality and great battery life.",
+                "Very practical design, completely met my expectations.",
+                "Top-tier performance, worth every penny."
+            ],
+            general: [
+                "Fast shipping and item matched the description perfectly.",
+                "Extremely satisfied with this purchase experience.",
+                "Exceeded expectations, will definitely buy again.",
+                "Wonderful product quality and lovely packaging."
+            ]
+        };
 
         function fillRandomComment() {
             document.getElementById('starContainer').classList.add('active');
-            const randomIndex = Math.floor(Math.random() * reviews.length);
-            document.getElementById('commentInput').value = reviews[randomIndex];
+            
+            // Pick review based on item name keywords
+            let selectedPool = reviewPools.general;
+            const lowerName = orderName.toLowerCase();
+            if(lowerName.includes('shirt') || lowerName.includes('skirt') || lowerName.includes('pants') || lowerName.includes('shoes') || lowerName.includes('jacket')) {
+                selectedPool = reviewPools.clothing;
+            } else if(lowerName.includes('phone') || lowerName.includes('camera') || lowerName.includes('watch') || lowerName.includes('headphone')) {
+                selectedPool = reviewPools.gadgets;
+            }
+
+            const randomReview = selectedPool[Math.floor(Math.random() * selectedPool.length)];
+            document.getElementById('commentInput').value = randomReview;
         }
 
         function submitOrder() {
@@ -283,27 +315,22 @@
                 return;
             }
 
-            // Retrieve current balance and task count from localStorage (or set defaults)
-            let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 1268.01;
-            let currentTaskCount = parseInt(localStorage.getItem('taskCount')) || 17;
-
-            // Order price and commission earnings
-            const orderAmount = 901.00;
-            const earnings = 45.05;
-
-            // Return order amount plus the commission/earnings back to the balance
-            currentBalance += (orderAmount + earnings);
-            
-            // Increment task count (e.g. from 17/40 to 18/40)
-            currentTaskCount += 1;
-            if (currentTaskCount > 40) currentTaskCount = 40;
-
-            // Save updated values to localStorage
+            // 1. Return principal order price + 0.5% commission earnings back to user balance
+            let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 2000.00;
+            currentBalance += (orderPrice + orderEarnings);
             localStorage.setItem('userBalance', currentBalance);
-            localStorage.setItem('taskCount', currentTaskCount);
 
-            alert('Order submitted successfully! Commission added to balance.');
-            window.location.href = 'dashboard.html';
+            // 2. Increment completed task count (e.g., from 17 to 18 out of 40)
+            let completedTasks = parseInt(localStorage.getItem('completedTasksCount')) || 17;
+            completedTasks += 1;
+            if (completedTasks > 40) completedTasks = 40;
+            localStorage.setItem('completedTasksCount', completedTasks);
+
+            // Clear temporary pending flag
+            localStorage.removeItem('taskPending');
+
+            alert('Order submitted successfully! Commission credited to account.');
+            window.location.href = 'task.html';
         }
     </script>
 
