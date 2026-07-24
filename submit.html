@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Task - Blue Theme</title>
+    <style>
+        :root {
+            --primary-blue: #1d4ed8;
+            --blue-gradient-start: #1e40af;
+            --blue-gradient-end: #3b82f6;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 50px;
+        }
+        .top-bar {
+            background-color: #e11d48;
+            color: white;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .product-title {
+            font-size: 13px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        .image-card {
+            background: #fff5f5;
+            border: 1px solid #fee2e2;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .image-card img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+        }
+        .dots {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 10px;
+            color: #cbd5e1;
+        }
+        .price-section {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+        .price-amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        .comment-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .stars {
+            color: #000000;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .stars.active {
+            color: #eab308;
+        }
+        .comment-box {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 12px;
+            min-height: 90px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .comment-text {
+            font-size: 13px;
+            color: var(--text-main);
+            outline: none;
+            border: none;
+            width: 100%;
+            background: transparent;
+            resize: none;
+        }
+        .auto-comment-btn {
+            background: #eab308;
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            cursor: pointer;
+            border: none;
+        }
+        .vip-banner-box {
+            background: #fef08a;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: #854d0e;
+        }
+        .stats-table {
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .stats-row:last-child {
+            margin-bottom: 0;
+        }
+        .stats-val {
+            font-weight: 700;
+        }
+        .meta-card {
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .meta-row:last-child {
+            margin-bottom: 0;
+        }
+        .btn-submit {
+            width: 100%;
+            background: #e11d48;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+        }
+        .btn-submit:hover {
+            background: #be123c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar" onclick="history.back()">
+        &lt;
+    </div>
+
+    <div class="container">
+        <div class="product-title">CD button skirt pants</div>
+
+        <div class="image-card">
+            <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" alt="Skirt pants">
+            <div class="dots">•</div>
+        </div>
+
+        <div class="price-section">USD</div>
+        <div class="price-amount">901.00 x1</div>
+
+        <div class="comment-label-row">
+            <span>Click to write a comment:</span>
+            <div class="stars" id="starContainer" onclick="fillRandomComment()">★★★★★</div>
+        </div>
+
+        <div class="comment-box">
+            <textarea class="comment-text" id="commentInput" placeholder="Click automatic comment or type here..."></textarea>
+            <button class="auto-comment-btn" onclick="fillRandomComment()">Automatic Comment</button>
+        </div>
+
+        <div class="vip-banner-box">
+            <span>🛡️</span> VIP 1
+        </div>
+
+        <div class="stats-table">
+            <div class="stats-row">
+                <span>Total Amount</span>
+                <span>Reward</span>
+                <span>Earnings</span>
+            </div>
+            <div class="stats-row stats-val" style="color: var(--text-main); font-size: 13px; margin-top: 4px;">
+                <span>901.00(USD)</span>
+                <span>5%</span>
+                <span>45.05(USD)</span>
+            </div>
+        </div>
+
+        <div class="meta-card">
+            <div class="meta-row">
+                <span>Date Created</span>
+                <span id="dateCreated">2026-07-17 17:27:34</span>
+            </div>
+            <div class="meta-row">
+                <span>Order Code</span>
+                <span id="orderCode">2026071717270000034</span>
+            </div>
+        </div>
+
+        <button class="btn-submit" onclick="submitOrder()">Submit</button>
+    </div>
+
+    <script>
+        function generateOrderDetails() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            document.getElementById('dateCreated').textContent = formattedDate;
+
+            const randomCode = `${year}${month}${day}${hours}${minutes}${Math.floor(10000 + Math.random() * 90000)}`;
+            document.getElementById('orderCode').textContent = randomCode;
+        }
+        generateOrderDetails();
+
+        const reviews = [
+            "Very good quality, highly recommended!",
+            "Exceeded my expectations, fast and smooth.",
+            "Absolutely love this item! Perfect fit.",
+            "Great product, very satisfied with the purchase.",
+            "Superb craftsmanship and fast delivery."
+        ];
+
+        function fillRandomComment() {
+            document.getElementById('starContainer').classList.add('active');
+            const randomIndex = Math.floor(Math.random() * reviews.length);
+            document.getElementById('commentInput').value = reviews[randomIndex];
+        }
+
+        function submitOrder() {
+            const comment = document.getElementById('commentInput').value;
+            if (!comment) {
+                alert('Please select an automatic comment or write a review first!');
+                return;
+            }
+            alert('Order submitted successfully!');
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+
+</body>
+</html>
