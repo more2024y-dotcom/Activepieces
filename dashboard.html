@@ -327,15 +327,15 @@
     <div class="container">
         <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">Guest</span> , welcome back 👏
+            Hi <span id="welcomeName">Client</span> , welcome back 👏
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">G</div>
+                    <div class="avatar" id="avatarLetter">C</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">Guest</h3>
+                        <h3 id="usernameDisplay">Client</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -439,9 +439,12 @@
     </div>
 
     <script>
-        // Dynamically fetch the actual username from localStorage 
-        // Checks both 'username' and 'loggedInUser' keys to be fully compatible with your registration page
-        const storedUser = localStorage.getItem('username') || localStorage.getItem('loggedInUser');
+        // Dynamically fetch the exact client username from localStorage created during registration
+        const storedUser = localStorage.getItem('username') || 
+                           localStorage.getItem('loggedInUser') || 
+                           localStorage.getItem('currentUser') || 
+                           localStorage.getItem('accountName');
+
         if (storedUser) {
             document.getElementById('usernameDisplay').textContent = storedUser;
             document.getElementById('welcomeName').textContent = storedUser;
@@ -453,8 +456,7 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        // Initialize user balance to the 10.00 USD registration bonus if none exists,
-        // and dynamically reflect updates as tasks are completed.
+        // Initialize balance to 10.00 USD registration bonus, increasing as tasks are completed
         let currentBalance = parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
             currentBalance = 10.00;
