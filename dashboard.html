@@ -327,15 +327,15 @@
     <div class="container">
         <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">A</span> , welcome back 👏
+            Hi <span id="welcomeName">User</span> , welcome back 👏
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">A</div>
+                    <div class="avatar" id="avatarLetter">U</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">A</h3>
+                        <h3 id="usernameDisplay">User</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -438,18 +438,23 @@
     </div>
 
     <script>
-        // Automatically set a default username 'A' if none is found so it never displays placeholders like Member/Client
-        if (!localStorage.getItem('username')) {
-            localStorage.setItem('username', 'A');
+        // Force override any lingering old localStorage values or hardcoded states to a dynamic test value (e.g., 'A') if none exists,
+        // or ensure it directly pulls whatever custom username is stored across all possible storage keys.
+        let currentUsername = localStorage.getItem('username') || 
+                              localStorage.getItem('loggedInUser') || 
+                              localStorage.getItem('currentUser') || 
+                              localStorage.getItem('accountName');
+
+        // If no user name has ever been set, default it to 'A' so it never says 'Member'
+        if (!currentUsername || currentUsername === 'Member' || currentUsername === 'Client') {
+            currentUsername = 'A';
+            localStorage.setItem('username', currentUsername);
         }
 
-        // Dynamically fetch and display the exact username from localStorage
-        const currentUsername = localStorage.getItem('username');
-        if (currentUsername) {
-            document.getElementById('usernameDisplay').textContent = currentUsername;
-            document.getElementById('welcomeName').textContent = currentUsername;
-            document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
-        }
+        // Apply the dynamic username straight into the elements
+        document.getElementById('usernameDisplay').textContent = currentUsername;
+        document.getElementById('welcomeName').textContent = currentUsername;
+        document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
 
         const storedInvite = localStorage.getItem('inviteCode');
         if (storedInvite) {
