@@ -348,7 +348,8 @@
     </div>
 
     <script>
-        const storedUser = localStorage.getItem('username');
+        // Updated to check 'userName' first (matching registration code)
+        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username');
         if (storedUser) {
             document.getElementById('usernameDisplay').textContent = storedUser;
             document.getElementById('welcomeName').textContent = storedUser;
@@ -360,7 +361,6 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        // Initialize default balance to 10.00 USD for brand new users (Register Bonus)
         let currentBalance = parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
             currentBalance = 10.00;
@@ -368,7 +368,6 @@
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        // Load and display current task progress
         let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
         if (isNaN(completedTasksCount)) {
             completedTasksCount = 17;
@@ -379,7 +378,6 @@
         document.getElementById('optStatusLabel').textContent = `Start Optimization (${completedTasksCount} / ${totalTasksMax})`;
         document.getElementById('startingBtn').textContent = `Starting (${completedTasksCount}/${totalTasksMax})`;
 
-        // Diverse product catalog pool so orders change every time
         const productCatalog = [
             { name: "CD button skirt pants", img: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" },
             { name: "Classic Casual Leather Shoes", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" },
@@ -391,34 +389,28 @@
         ];
 
         function startTaskOptimization() {
-            // Pick a random product from the list
             const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
             
-            // Dynamic Order Pricing matching the user's current balance tier:
-            // If balance is around 10, order price hovers around 8 to 15. If higher, it scales up.
             let randomOrderPrice;
             if (currentBalance <= 20) {
-                randomOrderPrice = parseFloat((8 + Math.random() * 7).toFixed(2)); // e.g. 8 to 15 USD
+                randomOrderPrice = parseFloat((8 + Math.random() * 7).toFixed(2));
             } else if (currentBalance <= 200) {
                 randomOrderPrice = parseFloat((50 + Math.random() * 150).toFixed(2));
             } else {
                 randomOrderPrice = Math.floor(800 + Math.random() * 2000);
             }
 
-            const commissionRate = 0.005; // 0.5% commission
+            const commissionRate = 0.005;
             const earnings = randomOrderPrice * commissionRate;
 
-            // Temporarily deduct order amount from balance (supports negative balance drops)
             currentBalance -= randomOrderPrice;
 
-            // Save state for submit page
             localStorage.setItem('userBalance', currentBalance);
             localStorage.setItem('currentOrderName', randomProduct.name);
             localStorage.setItem('currentOrderImg', randomProduct.img);
             localStorage.setItem('currentOrderPrice', randomOrderPrice);
             localStorage.setItem('currentOrderEarnings', earnings);
 
-            // Navigate to submission page
             window.location.href = 'submit.html';
         }
     </script>
