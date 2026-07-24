@@ -439,13 +439,14 @@
 
     <script>
         // AUTOMATIC RESET: If the stored name is "Bob", wipe it out immediately
-        if (localStorage.getItem('username') === 'Bob') {
+        if (localStorage.getItem('userName') === 'Bob' || localStorage.getItem('username') === 'Bob') {
+            localStorage.removeItem('userName');
             localStorage.removeItem('username');
-            localStorage.removeItem('loggedInUser');
         }
 
-        // Retrieve username cleanly from storage without fallback to Bob
-        const currentUsername = localStorage.getItem('username') || 
+        // Retrieve username cleanly, prioritizing 'userName' which is what your registration form uses
+        const currentUsername = localStorage.getItem('userName') || 
+                                localStorage.getItem('username') || 
                                 localStorage.getItem('loggedInUser') || 
                                 localStorage.getItem('currentUser') || 
                                 localStorage.getItem('accountName');
@@ -460,7 +461,7 @@
             document.getElementById('avatarLetter').textContent = "G";
         }
 
-        const storedInvite = localStorage.getItem('inviteCode');
+        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
         if (storedInvite) {
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
