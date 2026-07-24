@@ -160,17 +160,18 @@
             const phone = document.getElementById('regPhone').value.trim();
             const gender = document.getElementById('regGender').value;
             const password = document.getElementById('regPassword').value;
-            const txPassword = document.getElementById('regTxPassword').value.trim(); // Captures the user's personal password
+            const txPassword = document.getElementById('regTxPassword').value.trim();
             const inviteCodeUsed = document.getElementById('regInviteCode').value.trim();
 
             const myNewInviteCode = 'REF' + Math.floor(100000 + Math.random() * 900000);
 
-            // Save user data securely to local storage
+            // Save user data securely to local storage (both keys included for safety)
             localStorage.setItem('userName', name);
+            localStorage.setItem('username', name);
             localStorage.setItem('userPhone', phone);
             localStorage.setItem('userGender', gender);
             localStorage.setItem('userPassword', password);
-            localStorage.setItem('userTxPassword', txPassword); // Stores their unique transaction password
+            localStorage.setItem('userTxPassword', txPassword);
             localStorage.setItem('myInviteCode', myNewInviteCode);
 
             if (inviteCodeUsed) {
@@ -178,7 +179,9 @@
             }
 
             alert('Registration successful!');
-            window.location.href = 'login.html';
+            
+            // Redirect straight to dashboard.html so it loads your new username immediately
+            window.location.href = 'dashboard.html';
         }
     </script>
 </body>
