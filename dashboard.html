@@ -155,6 +155,7 @@
             padding: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
         }
         .profit-tabs {
             display: flex;
@@ -195,6 +196,7 @@
             align-items: center;
             gap: 12px;
             border: 1px solid #e2e8f0;
+            margin-bottom: 20px;
         }
         .notice-icon {
             font-size: 20px;
@@ -220,6 +222,64 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        /* Optimization Analytics Heatmap Section */
+        .analytics-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .analytics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+        .chart-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .line-chart {
+            width: 100%;
+            height: 110px;
+            display: block;
+        }
+        .chart-days {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            padding: 6px 4px 0 4px;
+            border-top: 1px dashed #e2e8f0;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .metric-box {
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #f1f5f9;
+        }
+        .metric-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .metric-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-main);
         }
         /* Bottom Navigation Bar */
         .bottom-nav {
@@ -333,6 +393,41 @@
                 <div class="notice-ticker" id="announcementText">Welcome to the platform! Complete daily tasks to increase your tier rewards.</div>
             </div>
         </div>
+
+        <!-- Optimization Needs Heatmap Card -->
+        <div class="analytics-card">
+            <div class="analytics-header">
+                <span>Optimization Needs Heatmap</span>
+                <span style="font-size: 12px; color: var(--text-muted); cursor: pointer;">▼</span>
+            </div>
+            
+            <div class="chart-container">
+                <svg viewBox="0 0 500 120" class="line-chart">
+                    <defs>
+                        <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.25"/>
+                            <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.0"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M 0,60 Q 70,10 130,20 T 230,100 T 350,30 L 500,20" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M 0,60 Q 70,10 130,20 T 230,100 T 350,30 L 500,20 L 500,120 L 0,120 Z" fill="url(#blueGrad)"/>
+                </svg>
+                <div class="chart-days">
+                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <div class="metric-label">Total Online Users</div>
+                    <div class="metric-value">111.77K</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Avg User Optimization Volume</div>
+                    <div class="metric-value">58.95K</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Navigation Bar -->
@@ -404,7 +499,7 @@
             }
         }
 
-        // Optional: Simple rotation for announcements
+        // Rotating announcements ticker
         const announcements = [
             "Welcome to the platform! Complete daily tasks to increase your tier rewards.",
             "New VIP tier features are now live. Check your membership status for details.",
