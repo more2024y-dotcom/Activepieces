@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimization Task - Blue Theme</title>
+    <title>Withdraw / Task - Blue Theme</title>
     <style>
         :root {
             --primary-blue: #1d4ed8;
@@ -19,214 +19,61 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 100px;
+            padding-bottom: 90px;
         }
         .container {
             padding: 15px;
             max-width: 600px;
             margin: 0 auto;
         }
-        /* Welcome Header */
-        .welcome-header {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .welcome-header span {
-            color: var(--primary-blue);
-        }
-        /* Top Hero Card */
-        .hero-card {
-            background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end));
-            color: white;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(29, 78, 216, 0.2);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-        .user-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--primary-blue);
-            font-size: 16px;
-            border: 2px solid rgba(255,255,255,0.8);
-        }
-        .user-details h3 {
-            margin: 0 0 3px 0;
-            font-size: 16px;
-        }
-        .credit-score-wrap {
-            font-size: 11px;
-            opacity: 0.9;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .progress-bar-bg {
-            width: 70px;
-            height: 5px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 3px;
-            overflow: hidden;
-            display: inline-block;
-        }
-        .progress-bar-fill {
-            width: 100%;
-            height: 100%;
-            background: #ffffff;
-        }
-        .invite-text {
-            font-size: 11px;
-            opacity: 0.9;
-            margin-top: 3px;
-        }
-        .vip-badge-top {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 10px;
-            border-radius: 50%;
-            font-size: 14px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        .balance-title {
-            font-size: 12px;
-            opacity: 0.85;
-            margin-bottom: 2px;
-        }
-        .balance-amount {
-            font-size: 24px;
+        .header-title {
+            font-size: 20px;
             font-weight: 800;
-            letter-spacing: 0.5px;
+            color: var(--text-main);
+            margin-bottom: 20px;
         }
-        /* Top Navigation Buttons */
-        .info-buttons-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .form-group {
             margin-bottom: 15px;
         }
-        .info-btn {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
+        .form-label {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-main);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            cursor: pointer;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
         }
-        /* VIP Banner Row */
-        .vip-banner {
-            background: linear-gradient(90deg, #eff6ff, #dbeafe);
-            border: 1px solid #bfdbfe;
-            border-radius: 12px;
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--primary-blue);
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
         }
-        .profit-tag {
-            background: var(--primary-blue);
+        .form-input:focus {
+            border-color: var(--primary-blue);
+        }
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end));
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        /* Optimization Status Bar */
-        .optimization-header {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-        .starting-action-bar {
-            background: var(--primary-blue);
-            color: white;
-            text-align: center;
             padding: 14px;
+            border: none;
             border-radius: 12px;
             font-size: 16px;
             font-weight: 700;
-            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
-            margin-bottom: 15px;
             cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
-        }
-        .starting-action-bar:hover {
-            background: #1e40af;
-        }
-        /* Product Grid Container */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .product-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            height: 85px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            font-size: 22px;
-        }
-        /* Notice Board */
-        .notice-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .notice-title {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-        .notice-divider {
-            border: none;
-            border-top: 1px dashed #cbd5e1;
-            margin: 8px 0;
-        }
-        .notice-body {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
         }
         /* Bottom Navigation Bar */
         .bottom-nav {
@@ -262,7 +109,7 @@
         .nav-center-btn {
             width: 50px;
             height: 50px;
-            background: var(--primary-blue);
+            background: #1e293b;
             border: 4px solid #000000;
             border-radius: 50%;
             display: flex;
@@ -271,76 +118,32 @@
             color: white;
             font-size: 18px;
             margin-top: -25px;
-            box-shadow: 0 4px 10px rgba(29, 78, 216, 0.4);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Welcome Greeting -->
-        <div class="welcome-header">
-            Hi <span id="welcomeName">Emma730</span> , welcome back 👏
-        </div>
-
-        <!-- Blue Hero Card -->
-        <div class="hero-card">
-            <div class="user-header">
-                <div class="user-info">
-                    <div class="avatar" id="avatarLetter">E</div>
-                    <div class="user-details">
-                        <h3 id="usernameDisplay">Emma730</h3>
-                        <div class="credit-score-wrap">
-                            <span>Credit Score:</span>
-                            <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
-                    </div>
-                </div>
-                <div class="vip-badge-top">🛡️</div>
+        <div class="header-title">Withdraw Funds</div>
+        
+        <div class="card">
+            <div class="form-group">
+                <label class="form-label">Available Balance</label>
+                <div id="withdrawBalance" style="font-size: 22px; font-weight: 800; color: var(--primary-blue);">1,268.01 USD</div>
             </div>
 
-            <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">1,268.01 USD</div>
+            <div class="form-group">
+                <label class="form-label">Withdrawal Amount (USD)</label>
+                <input type="number" class="form-input" id="amountInput" placeholder="Enter amount to withdraw">
             </div>
-        </div>
 
-        <!-- Top Info Buttons -->
-        <div class="info-buttons-grid">
-            <div class="info-btn">📦 Order description</div>
-            <div class="info-btn">📄 Please note</div>
-        </div>
-
-        <!-- VIP Status Banner -->
-        <div class="vip-banner">
-            <span>🛡️ VIP 1</span>
-            <span class="profit-tag">Profit 0.6% &gt;</span>
-        </div>
-
-        <!-- Optimization Status & Action -->
-        <div class="optimization-header" id="optStatusLabel">Start Optimization (0 / 2)</div>
-        <div class="starting-action-bar" id="startingBtn" onclick="runOptimization()">Starting (17/40)</div>
-
-        <!-- Product Slots Grid -->
-        <div class="product-grid">
-            <div class="product-card">🪒</div>
-            <div class="product-card">👠</div>
-            <div class="product-card">📦</div>
-            <div class="product-card">📷</div>
-            <div class="product-card">📱</div>
-            <div class="product-card">📷</div>
-        </div>
-
-        <!-- Notice Section -->
-        <div class="notice-card">
-            <div class="notice-title">Notice</div>
-            <hr class="notice-divider">
-            <div class="notice-body">
-                Online Support Hours 10:00 - 23:00<br>
-                Please contact online support for your assistance
+            <div class="form-group">
+                <label class="form-label">Wallet Address</label>
+                <input type="text" class="form-input" id="walletInput" placeholder="Enter TRC20 / ERC20 address">
             </div>
+
+            <button class="btn-primary" onclick="handleWithdraw()">Submit Withdrawal</button>
         </div>
     </div>
 
@@ -358,51 +161,25 @@
         <a href="withdraw.html" class="nav-item">
             <span class="icon">📝</span><span>Records</span>
         </a>
-        <a href="profile.html" class="nav-item active">
+        <a href="profile.html" class="nav-item">
             <span class="icon">👤</span><span>My</span>
         </a>
     </div>
 
     <script>
-        // Load stored profile details & balance dynamically
-        const storedUser = localStorage.getItem('username');
-        if (storedUser) {
-            document.getElementById('usernameDisplay').textContent = storedUser;
-            document.getElementById('welcomeName').textContent = storedUser;
-            document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
-        }
-
-        const storedInvite = localStorage.getItem('inviteCode');
-        if (storedInvite) {
-            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
-        }
-
         const storedBalance = localStorage.getItem('userBalance');
         if (storedBalance !== null) {
-            document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
+            document.getElementById('withdrawBalance').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
         }
 
-        // Interactive Simulation for the Lightning / Starting Action Button
-        let currentTaskCount = 17;
-        const maxTasks = 40;
-
-        function runOptimization() {
-            const btn = document.getElementById('startingBtn');
-            const statusLabel = document.getElementById('optStatusLabel');
-            
-            if (currentTaskCount < maxTasks) {
-                currentTaskCount++;
-                btn.textContent = `Processing (${currentTaskCount}/${maxTasks})...`;
-                btn.style.background = '#2563eb';
-
-                setTimeout(() => {
-                    btn.textContent = `Starting (${currentTaskCount}/${maxTasks})`;
-                    btn.style.background = 'var(--primary-blue)';
-                    statusLabel.textContent = `Start Optimization (1 / 2)`;
-                }, 800);
-            } else {
-                alert('Daily optimization limit reached!');
+        function handleWithdraw() {
+            const amt = document.getElementById('amountInput').value;
+            const wallet = document.getElementById('walletInput').value;
+            if(!amt || !wallet) {
+                alert('Please fill in all fields');
+                return;
             }
+            alert('Withdrawal request submitted successfully!');
         }
     </script>
 
