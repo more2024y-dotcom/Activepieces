@@ -293,7 +293,7 @@
 
             <div class="balance-section">
                 <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">2000.00 USD</div>
+                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
             </div>
         </div>
 
@@ -360,14 +360,15 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
+        // Initialize default balance to 10.00 USD for brand new users (Register Bonus)
         let currentBalance = parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
-            currentBalance = 2000.00;
+            currentBalance = 10.00;
             localStorage.setItem('userBalance', currentBalance);
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        // Load and display current task progress (defaulting to 17)
+        // Load and display current task progress
         let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
         if (isNaN(completedTasksCount)) {
             completedTasksCount = 17;
@@ -393,12 +394,21 @@
             // Pick a random product from the list
             const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
             
-            // Random order price between 800 and 2800
-            const randomOrderPrice = Math.floor(800 + Math.random() * 2000);
+            // Dynamic Order Pricing matching the user's current balance tier:
+            // If balance is around 10, order price hovers around 8 to 15. If higher, it scales up.
+            let randomOrderPrice;
+            if (currentBalance <= 20) {
+                randomOrderPrice = parseFloat((8 + Math.random() * 7).toFixed(2)); // e.g. 8 to 15 USD
+            } else if (currentBalance <= 200) {
+                randomOrderPrice = parseFloat((50 + Math.random() * 150).toFixed(2));
+            } else {
+                randomOrderPrice = Math.floor(800 + Math.random() * 2000);
+            }
+
             const commissionRate = 0.005; // 0.5% commission
             const earnings = randomOrderPrice * commissionRate;
 
-            // Temporarily deduct order amount from balance
+            // Temporarily deduct order amount from balance (supports negative balance drops)
             currentBalance -= randomOrderPrice;
 
             // Save state for submit page
