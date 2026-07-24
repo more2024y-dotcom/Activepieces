@@ -327,15 +327,15 @@
     <div class="container">
         <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">User</span> , welcome back 👏
+            Hi <span id="welcomeName">Bob</span> , welcome back 👏
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">U</div>
+                    <div class="avatar" id="avatarLetter">B</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">User</h3>
+                        <h3 id="usernameDisplay">Bob</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -407,7 +407,7 @@
             </div>
             <div class="stats-grid">
                 <div class="stat-box">
-                    <small>Total Online Users</small>
+                    <small>Total OnlineUsers</small>
                     <b>111.77K</b>
                 </div>
                 <div class="stat-box">
@@ -438,20 +438,19 @@
     </div>
 
     <script>
-        // Force override any lingering old localStorage values or hardcoded states to a dynamic test value (e.g., 'A') if none exists,
-        // or ensure it directly pulls whatever custom username is stored across all possible storage keys.
+        // Check localStorage for any stored username key
         let currentUsername = localStorage.getItem('username') || 
                               localStorage.getItem('loggedInUser') || 
                               localStorage.getItem('currentUser') || 
                               localStorage.getItem('accountName');
 
-        // If no user name has ever been set, default it to 'A' so it never says 'Member'
-        if (!currentUsername || currentUsername === 'Member' || currentUsername === 'Client') {
-            currentUsername = 'A';
+        // If no username exists or it was previously forced to 'A' or 'Member', default it to 'Bob' and save it
+        if (!currentUsername || currentUsername === 'A' || currentUsername === 'Member' || currentUsername === 'Client') {
+            currentUsername = 'Bob';
             localStorage.setItem('username', currentUsername);
         }
 
-        // Apply the dynamic username straight into the elements
+        // Render the active username onto the dashboard elements
         document.getElementById('usernameDisplay').textContent = currentUsername;
         document.getElementById('welcomeName').textContent = currentUsername;
         document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
