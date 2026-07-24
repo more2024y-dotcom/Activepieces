@@ -438,6 +438,12 @@
     </div>
 
     <script>
+        // AUTOMATIC RESET: If the stored name is "Bob", wipe it out immediately
+        if (localStorage.getItem('username') === 'Bob') {
+            localStorage.removeItem('username');
+            localStorage.removeItem('loggedInUser');
+        }
+
         // Retrieve username cleanly from storage without fallback to Bob
         const currentUsername = localStorage.getItem('username') || 
                                 localStorage.getItem('loggedInUser') || 
@@ -448,6 +454,10 @@
             document.getElementById('usernameDisplay').textContent = currentUsername;
             document.getElementById('welcomeName').textContent = currentUsername;
             document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
+        } else {
+            document.getElementById('usernameDisplay').textContent = "Guest";
+            document.getElementById('welcomeName').textContent = "Guest";
+            document.getElementById('avatarLetter').textContent = "G";
         }
 
         const storedInvite = localStorage.getItem('inviteCode');
