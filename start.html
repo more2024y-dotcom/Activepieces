@@ -121,7 +121,7 @@
             font-weight: 800;
             letter-spacing: 0.5px;
         }
-        /* Top Navigation Buttons */
+        /* Top Navigation Buttons (Order description / Please note) */
         .info-buttons-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -180,10 +180,6 @@
             margin-bottom: 15px;
             cursor: pointer;
             letter-spacing: 0.5px;
-            transition: background 0.2s;
-        }
-        .starting-action-bar:hover {
-            background: #1e40af;
         }
         /* Product Grid Container */
         .product-grid {
@@ -228,7 +224,7 @@
             color: var(--text-muted);
             line-height: 1.4;
         }
-        /* Bottom Navigation Bar */
+        /* Bottom Navigation Bar (Blue Theme active indicator) */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -320,8 +316,8 @@
         </div>
 
         <!-- Optimization Status & Action -->
-        <div class="optimization-header" id="optStatusLabel">Start Optimization (0 / 2)</div>
-        <div class="starting-action-bar" id="startingBtn" onclick="runOptimization()">Starting (17/40)</div>
+        <div class="optimization-header">Start Optimization (0 / 2)</div>
+        <div class="starting-action-bar" onclick="runOptimization()">Starting (17/40)</div>
 
         <!-- Product Slots Grid -->
         <div class="product-grid">
@@ -382,27 +378,8 @@
             document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
         }
 
-        // Interactive Simulation for the Lightning / Starting Action Button
-        let currentTaskCount = 17;
-        const maxTasks = 40;
-
         function runOptimization() {
-            const btn = document.getElementById('startingBtn');
-            const statusLabel = document.getElementById('optStatusLabel');
-            
-            if (currentTaskCount < maxTasks) {
-                currentTaskCount++;
-                btn.textContent = `Processing (${currentTaskCount}/${maxTasks})...`;
-                btn.style.background = '#2563eb';
-
-                setTimeout(() => {
-                    btn.textContent = `Starting (${currentTaskCount}/${maxTasks})`;
-                    btn.style.background = 'var(--primary-blue)';
-                    statusLabel.textContent = `Start Optimization (1 / 2)`;
-                }, 800);
-            } else {
-                alert('Daily optimization limit reached!');
-            }
+            alert('Optimization task session active!');
         }
     </script>
 
