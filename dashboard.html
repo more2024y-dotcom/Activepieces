@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Blue Theme</title>
+    <title>Dashboard - ActivePieces</title>
     <style>
         :root {
-            --primary-blue: #1d4ed8;
-            --blue-gradient-start: #1e40af;
+            --primary-blue: #2563eb;
+            --blue-gradient-start: #1d4ed8;
             --blue-gradient-end: #3b82f6;
-            --bg-color: #f8fafc;
-            --text-main: #1e293b;
+            --bg-color: #f1f5f9;
+            --text-main: #0f172a;
             --text-muted: #64748b;
         }
         body {
@@ -19,14 +19,25 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 90px;
+            padding-bottom: 100px;
         }
         .container {
             padding: 15px;
             max-width: 600px;
             margin: 0 auto;
         }
-        /* Top Hero Card */
+        .welcome-header {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .welcome-header span {
+            color: var(--primary-blue);
+        }
         .hero-card {
             background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end));
             color: white;
@@ -35,7 +46,7 @@
             box-shadow: 0 10px 20px rgba(29, 78, 216, 0.2);
             position: relative;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .user-header {
             display: flex;
@@ -49,8 +60,8 @@
             gap: 12px;
         }
         .avatar {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: #ffffff;
             display: flex;
@@ -63,18 +74,20 @@
         }
         .user-details h3 {
             margin: 0 0 4px 0;
-            font-size: 18px;
+            font-size: 16px;
+            font-weight: 700;
         }
         .credit-score-wrap {
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            margin-bottom: 3px;
         }
         .progress-bar-bg {
-            width: 80px;
-            height: 6px;
+            width: 70px;
+            height: 5px;
             background: rgba(255,255,255,0.3);
             border-radius: 3px;
             overflow: hidden;
@@ -86,202 +99,183 @@
             background: #ffffff;
         }
         .invite-text {
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.9;
-            margin-top: 4px;
         }
-        .vip-badge {
+        .vip-badge-top {
             background: rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.3);
         }
-        .balance-section {
-            margin-bottom: 20px;
-        }
         .balance-title {
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.85;
             margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .toggle-eye {
-            cursor: pointer;
-            font-size: 15px;
-            user-select: none;
         }
         .balance-amount {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
             letter-spacing: 0.5px;
+            margin-bottom: 20px;
         }
-        /* Action Grid inside Hero */
-        .action-grid {
+        .action-buttons-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 15px;
         }
-        .action-item {
+        .action-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            padding: 12px 5px;
             text-align: center;
-            text-decoration: none;
             color: white;
-            font-size: 12px;
-            font-weight: 500;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            transition: background 0.2s;
         }
-        .action-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 6px auto;
-            font-size: 16px;
-            backdrop-filter: blur(4px);
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
-        /* Profit Tabs Section */
+        .action-btn span {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .action-btn small {
+            font-size: 11px;
+            font-weight: 600;
+        }
         .profit-card {
             background: white;
-            border-radius: 14px;
-            padding: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            margin-bottom: 20px;
             border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            text-align: center;
         }
         .profit-tabs {
             display: flex;
             background: #f1f5f9;
             border-radius: 10px;
-            padding: 4px;
+            padding: 3px;
             margin-bottom: 12px;
         }
-        .tab {
+        .profit-tab {
             flex: 1;
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
+            padding: 8px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-muted);
             border-radius: 8px;
             cursor: pointer;
+            text-align: center;
         }
-        .tab.active {
+        .profit-tab.active {
             background: var(--primary-blue);
             color: white;
-            box-shadow: 0 2px 6px rgba(29, 78, 216, 0.3);
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
         }
         .profit-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--text-main);
-            text-align: center;
-            padding: 10px 0;
-        }
-        /* Announcement Notice Board */
-        .notice-card {
-            background: white;
-            border-radius: 14px;
-            padding: 14px 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 20px;
-        }
-        .notice-icon {
-            font-size: 20px;
-            background: #eff6ff;
-            padding: 8px;
-            border-radius: 50%;
-        }
-        .notice-content {
-            flex: 1;
-            overflow: hidden;
-        }
-        .notice-title {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 2px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .notice-ticker {
-            font-size: 13px;
-            color: var(--text-main);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        /* Optimization Analytics Heatmap Section */
-        .analytics-card {
-            background: white;
-            border-radius: 14px;
-            padding: 18px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            margin-bottom: 20px;
-            border: 1px solid #e2e8f0;
-        }
-        .analytics-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 15px;
-        }
-        .chart-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        .line-chart {
-            width: 100%;
-            height: 110px;
-            display: block;
-        }
-        .chart-days {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--text-muted);
-            padding: 6px 4px 0 4px;
-            border-top: 1px dashed #e2e8f0;
-        }
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 15px;
-        }
-        .metric-box {
-            background: #f8fafc;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid #f1f5f9;
-        }
-        .metric-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-        .metric-value {
             font-size: 20px;
             font-weight: 800;
             color: var(--text-main);
         }
-        /* Bottom Navigation Bar */
+        .announcement-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .announcement-icon {
+            font-size: 22px;
+            background: #eff6ff;
+            padding: 10px;
+            border-radius: 12px;
+        }
+        .announcement-content h4 {
+            margin: 0 0 3px 0;
+            font-size: 13px;
+            color: var(--primary-blue);
+        }
+        .announcement-content p {
+            margin: 0;
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+        .heatmap-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            margin-bottom: 15px;
+        }
+        .heatmap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .heatmap-graph {
+            height: 90px;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(37,99,235,0.08) 0%, rgba(255,255,255,0) 100%);
+            border-bottom: 1px dashed #cbd5e1;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .curve-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: radial-gradient(ellipse at bottom, var(--primary-blue) 0%, transparent 70%);
+            clip-path: polygon(0% 100%, 0% 60%, 25% 15%, 50% 90%, 75% 20%, 100% 10%, 100% 100%);
+            opacity: 0.6;
+        }
+        .days-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .stat-box {
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            border-radius: 12px;
+            padding: 10px;
+        }
+        .stat-box small {
+            font-size: 10px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .stat-box b {
+            font-size: 14px;
+            color: var(--text-main);
+        }
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -315,7 +309,7 @@
         .nav-center-btn {
             width: 50px;
             height: 50px;
-            background: #1e293b;
+            background: var(--primary-blue);
             border: 4px solid #000000;
             border-radius: 50%;
             display: flex;
@@ -324,20 +318,24 @@
             color: white;
             font-size: 18px;
             margin-top: -25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(29, 78, 216, 0.4);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Blue Hero Card -->
+        <!-- Welcome Header showing dynamic username -->
+        <div class="welcome-header">
+            Hi <span id="welcomeName">User</span> , welcome back 👏
+        </div>
+
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">E</div>
+                    <div class="avatar" id="avatarLetter">U</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">Emma730</h3>
+                        <h3 id="usernameDisplay">User</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -346,91 +344,82 @@
                         <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
                     </div>
                 </div>
-                <div class="vip-badge">VIP1</div>
+                <div class="vip-badge-top">VIP1</div>
             </div>
 
             <div class="balance-section">
-                <div class="balance-title">
-                    Total balance <span class="toggle-eye" id="toggleEye" onclick="toggleBalance()">👁️</span>
-                </div>
-                <div class="balance-amount" id="balanceDisplay">-532.99 USD</div>
+                <div class="balance-title">Total balance 👁️</div>
+                <!-- Dynamic balance starting from 10.00 USD registration bonus and increasing with tasks -->
+                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
             </div>
 
-            <div class="action-grid">
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">➕</div>
-                    <span>Add Wallet</span>
+            <div class="action-buttons-grid">
+                <a href="withdraw.html" class="action-btn">
+                    <span>➕</span>
+                    <small>Add Wallet</small>
                 </a>
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">⬇️</div>
-                    <span>Deposit</span>
+                <a href="withdraw.html" class="action-btn">
+                    <span>⬇️</span>
+                    <small>Deposit</small>
                 </a>
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">⬆️</div>
-                    <span>Withdraw</span>
+                <a href="withdraw.html" class="action-btn">
+                    <span>⬆️</span>
+                    <small>Withdraw</small>
                 </a>
-                <a href="withdraw.html" class="action-item">
-                    <div class="action-icon">🔄</div>
-                    <span>Transaction</span>
+                <a href="withdraw.html" class="action-btn">
+                    <span>🔄</span>
+                    <small>Transaction</small>
                 </a>
             </div>
         </div>
 
-        <!-- Profit Analysis Card -->
         <div class="profit-card">
             <div class="profit-tabs">
-                <div class="tab active" onclick="switchTab('today', event)">Today's Profit</div>
-                <div class="tab" onclick="switchTab('total', event)">Total Profit</div>
+                <div class="profit-tab active">Today's Profit</div>
+                <div class="profit-tab">Total Profit</div>
             </div>
-            <div class="profit-value" id="profitDisplay">0.00 USD</div>
+            <div class="profit-value">0.00 USD</div>
         </div>
 
-        <!-- Notice Board / Announcement Ticker -->
-        <div class="notice-card">
-            <div class="notice-icon">📢</div>
-            <div class="notice-content">
-                <div class="notice-title">System Announcement</div>
-                <div class="notice-ticker" id="announcementText">Welcome to the platform! Complete daily tasks to increase your tier rewards.</div>
+        <div class="announcement-card">
+            <div class="announcement-icon">📢</div>
+            <div class="announcement-content">
+                <h4>SYSTEM ANNOUNCEMENT</h4>
+                <p>Welcome to the platform! Complete daily tasks to increase your tier rewards.</p>
             </div>
         </div>
 
-        <!-- Optimization Needs Heatmap Card -->
-        <div class="analytics-card">
-            <div class="analytics-header">
+        <div class="heatmap-card">
+            <div class="heatmap-header">
                 <span>Optimization Needs Heatmap</span>
-                <span style="font-size: 12px; color: var(--text-muted); cursor: pointer;">▼</span>
+                <span style="color: var(--text-muted); font-size: 11px;">▼</span>
             </div>
-            
-            <div class="chart-container">
-                <svg viewBox="0 0 500 120" class="line-chart">
-                    <defs>
-                        <linearGradient id="blueGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#1d4ed8" stop-opacity="0.25"/>
-                            <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.0"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M 0,60 Q 70,10 130,20 T 230,100 T 350,30 L 500,20" fill="none" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M 0,60 Q 70,10 130,20 T 230,100 T 350,30 L 500,20 L 500,120 L 0,120 Z" fill="url(#blueGrad)"/>
-                </svg>
-                <div class="chart-days">
-                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-                </div>
+            <div class="heatmap-graph">
+                <div class="curve-line"></div>
             </div>
-
-            <div class="metrics-grid">
-                <div class="metric-box">
-                    <div class="metric-label">Total Online Users</div>
-                    <div class="metric-value">111.77K</div>
+            <div class="days-row">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <small>Total Online Users</small>
+                    <b>111.77K</b>
                 </div>
-                <div class="metric-box">
-                    <div class="metric-label">Avg User Optimization Volume</div>
-                    <div class="metric-value">58.95K</div>
+                <div class="stat-box">
+                    <small>Avg User Optimization Volume</small>
+                    <b>58.95K</b>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar with Corrected Link to task.html -->
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item active">
             <span class="icon">🏠</span><span>Home</span>
@@ -450,32 +439,11 @@
     </div>
 
     <script>
-        let actualBalance = "-532.99 USD";
-        let isBalanceVisible = true;
-
-        const storedBalance = localStorage.getItem('userBalance');
-        if (storedBalance !== null) {
-            actualBalance = parseFloat(storedBalance).toFixed(2) + ' USD';
-        }
-        document.getElementById('balanceDisplay').textContent = actualBalance;
-
-        function toggleBalance() {
-            isBalanceVisible = !isBalanceVisible;
-            const balanceEl = document.getElementById('balanceDisplay');
-            const eyeEl = document.getElementById('toggleEye');
-            
-            if (isBalanceVisible) {
-                balanceEl.textContent = actualBalance;
-                eyeEl.textContent = "👁️";
-            } else {
-                balanceEl.textContent = "********";
-                eyeEl.textContent = "👁️‍🗨️";
-            }
-        }
-
+        // Load the actual created username from localStorage dynamically
         const storedUser = localStorage.getItem('username');
         if (storedUser) {
             document.getElementById('usernameDisplay').textContent = storedUser;
+            document.getElementById('welcomeName').textContent = storedUser;
             document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
         }
 
@@ -484,29 +452,14 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        function switchTab(type, evt) {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(t => t.classList.remove('active'));
-            
-            if(type === 'today') {
-                evt.target.classList.add('active');
-                document.getElementById('profitDisplay').textContent = '0.00 USD';
-            } else {
-                evt.target.classList.add('active');
-                document.getElementById('profitDisplay').textContent = '1,268.01 USD';
-            }
+        // Initialize user balance with the 10.00 USD registration bonus if none exists,
+        // and dynamically reflect the balance as tasks increase the amount.
+        let currentBalance = parseFloat(localStorage.getItem('userBalance'));
+        if (isNaN(currentBalance)) {
+            currentBalance = 10.00;
+            localStorage.setItem('userBalance', currentBalance);
         }
-
-        const announcements = [
-            "Welcome to the platform! Complete daily tasks to increase your tier rewards.",
-            "New VIP tier features are now live. Check your membership status for details.",
-            "Reminder: Fast-track withdrawals are processed automatically every hour."
-        ];
-        let currentNotice = 0;
-        setInterval(() => {
-            currentNotice = (currentNotice + 1) % announcements.length;
-            document.getElementById('announcementText').textContent = announcements[currentNotice];
-        }, 4000);
+        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
     </script>
 
 </body>
