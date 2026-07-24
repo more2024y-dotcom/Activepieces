@@ -185,6 +185,42 @@
             text-align: center;
             padding: 10px 0;
         }
+        /* Announcement Notice Board */
+        .notice-card {
+            background: white;
+            border-radius: 14px;
+            padding: 14px 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .notice-icon {
+            font-size: 20px;
+            background: #eff6ff;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        .notice-content {
+            flex: 1;
+            overflow: hidden;
+        }
+        .notice-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .notice-ticker {
+            font-size: 13px;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
@@ -288,6 +324,15 @@
             </div>
             <div class="profit-value" id="profitDisplay">0.00 USD</div>
         </div>
+
+        <!-- Notice Board / Announcement Ticker -->
+        <div class="notice-card">
+            <div class="notice-icon">📢</div>
+            <div class="notice-content">
+                <div class="notice-title">System Announcement</div>
+                <div class="notice-ticker" id="announcementText">Welcome to the platform! Complete daily tasks to increase your tier rewards.</div>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Navigation Bar -->
@@ -358,6 +403,18 @@
                 document.getElementById('profitDisplay').textContent = '1,268.01 USD';
             }
         }
+
+        // Optional: Simple rotation for announcements
+        const announcements = [
+            "Welcome to the platform! Complete daily tasks to increase your tier rewards.",
+            "New VIP tier features are now live. Check your membership status for details.",
+            "Reminder: Fast-track withdrawals are processed automatically every hour."
+        ];
+        let currentNotice = 0;
+        setInterval(() => {
+            currentNotice = (currentNotice + 1) % announcements.length;
+            document.getElementById('announcementText').textContent = announcements[currentNotice];
+        }, 4000);
     </script>
 
 </body>
