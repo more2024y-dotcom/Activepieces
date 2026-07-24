@@ -327,15 +327,15 @@
     <div class="container">
         <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">Client</span> , welcome back 👏
+            Hi <span id="welcomeName">Member</span> , welcome back 👏
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">C</div>
+                    <div class="avatar" id="avatarLetter">M</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">Client</h3>
+                        <h3 id="usernameDisplay">Member</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -439,17 +439,21 @@
     </div>
 
     <script>
-        // Dynamically fetch the exact client username from localStorage created during registration
-        const storedUser = localStorage.getItem('username') || 
-                           localStorage.getItem('loggedInUser') || 
-                           localStorage.getItem('currentUser') || 
-                           localStorage.getItem('accountName');
+        // Dynamically fetch the exact registered client username from localStorage.
+        // If nothing is saved yet, it sets a default fallback and saves it so it registers cleanly.
+        let storedUser = localStorage.getItem('username') || 
+                         localStorage.getItem('loggedInUser') || 
+                         localStorage.getItem('currentUser') || 
+                         localStorage.getItem('accountName');
 
-        if (storedUser) {
-            document.getElementById('usernameDisplay').textContent = storedUser;
-            document.getElementById('welcomeName').textContent = storedUser;
-            document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
+        if (!storedUser) {
+            storedUser = 'Member';
+            localStorage.setItem('username', storedUser);
         }
+
+        document.getElementById('usernameDisplay').textContent = storedUser;
+        document.getElementById('welcomeName').textContent = storedUser;
+        document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
 
         const storedInvite = localStorage.getItem('inviteCode');
         if (storedInvite) {
