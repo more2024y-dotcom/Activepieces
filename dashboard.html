@@ -327,15 +327,15 @@
     <div class="container">
         <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">User</span> , welcome back 👏
+            Hi <span id="welcomeName">A</span> , welcome back 👏
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">U</div>
+                    <div class="avatar" id="avatarLetter">A</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">User</h3>
+                        <h3 id="usernameDisplay">A</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -349,7 +349,6 @@
 
             <div class="balance-section">
                 <div class="balance-title">Total balance 👁️</div>
-                <!-- Dynamic balance starting from 10.00 USD registration bonus and increasing with tasks -->
                 <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
             </div>
 
@@ -439,7 +438,12 @@
     </div>
 
     <script>
-        // Pulls whatever specific username the user created during registration/login (A, B, C, Emma, etc.)
+        // Automatically set a default username 'A' if none is found so it never displays placeholders like Member/Client
+        if (!localStorage.getItem('username')) {
+            localStorage.setItem('username', 'A');
+        }
+
+        // Dynamically fetch and display the exact username from localStorage
         const currentUsername = localStorage.getItem('username');
         if (currentUsername) {
             document.getElementById('usernameDisplay').textContent = currentUsername;
