@@ -106,6 +106,14 @@
             font-size: 13px;
             opacity: 0.85;
             margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .toggle-eye {
+            cursor: pointer;
+            font-size: 15px;
+            user-select: none;
         }
         .balance-amount {
             font-size: 28px;
@@ -208,7 +216,6 @@
             font-size: 20px;
             margin-bottom: 3px;
         }
-        /* Special Center Action Button in Nav */
         .nav-center-btn {
             width: 50px;
             height: 50px;
@@ -247,7 +254,9 @@
             </div>
 
             <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
+                <div class="balance-title">
+                    Total balance <span class="toggle-eye" id="toggleEye" onclick="toggleBalance()">👁️</span>
+                </div>
                 <div class="balance-amount" id="balanceDisplay">-532.99 USD</div>
             </div>
 
@@ -301,10 +310,28 @@
     </div>
 
     <script>
-        // Load stored balance
+        // Load stored balance and handle visibility
+        let actualBalance = "-532.99 USD";
+        let isBalanceVisible = true;
+
         const storedBalance = localStorage.getItem('userBalance');
         if (storedBalance !== null) {
-            document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
+            actualBalance = parseFloat(storedBalance).toFixed(2) + ' USD';
+        }
+        document.getElementById('balanceDisplay').textContent = actualBalance;
+
+        function toggleBalance() {
+            isBalanceVisible = !isBalanceVisible;
+            const balanceEl = document.getElementById('balanceDisplay');
+            const eyeEl = document.getElementById('toggleEye');
+            
+            if (isBalanceVisible) {
+                balanceEl.textContent = actualBalance;
+                eyeEl.textContent = "👁️";
+            } else {
+                balanceEl.textContent = "********";
+                eyeEl.textContent = "👁️‍🗨️";
+            }
         }
 
         // Load profile info if saved
