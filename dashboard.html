@@ -119,49 +119,6 @@
             font-weight: 800;
             letter-spacing: 0.5px;
         }
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .action-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 12px 5px;
-            text-align: center;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-main);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .action-card span {
-            display: block;
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-        .banner-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .banner-title {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-        .banner-body {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -212,15 +169,15 @@
 
     <div class="container">
         <div class="welcome-header">
-            Hi <span id="welcomeName">User</span> , welcome back 👏
+            Hi <span id="welcomeName">Emma730</span> , welcome back 👏
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">U</div>
+                    <div class="avatar" id="avatarLetter">E</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">User</h3>
+                        <h3 id="usernameDisplay">Emma730</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -234,29 +191,7 @@
 
             <div class="balance-section">
                 <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
-            </div>
-        </div>
-
-        <div class="quick-actions">
-            <a href="task.html" class="action-card">
-                <span>⚡</span>Start Task
-            </a>
-            <a href="withdraw.html" class="action-card">
-                <span>💳</span>Withdraw
-            </a>
-            <a href="withdraw.html" class="action-card">
-                <span>📄</span>Records
-            </a>
-            <a href="profile.html" class="action-card">
-                <span>👤</span>Profile
-            </a>
-        </div>
-
-        <div class="banner-card">
-            <div class="banner-title">Platform Announcement</div>
-            <div class="banner-body">
-                Welcome to ActivePieces! Complete your daily optimization tasks to earn 0.5% commission per order. New users receive a 10.00 USD registration bonus instantly.
+                <div class="balance-amount" id="balanceDisplay">2000.00 USD</div>
             </div>
         </div>
     </div>
@@ -280,7 +215,6 @@
     </div>
 
     <script>
-        // Load the actual newly created username from localStorage
         const storedUser = localStorage.getItem('username');
         if (storedUser) {
             document.getElementById('usernameDisplay').textContent = storedUser;
@@ -293,10 +227,9 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        // Load or initialize user balance to the 10.00 USD registration bonus
         let currentBalance = parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
-            currentBalance = 10.00;
+            currentBalance = 2000.00;
             localStorage.setItem('userBalance', currentBalance);
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
