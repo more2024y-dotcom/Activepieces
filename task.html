@@ -26,7 +26,6 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        /* Welcome Header */
         .welcome-header {
             font-size: 15px;
             font-weight: 600;
@@ -39,7 +38,6 @@
         .welcome-header span {
             color: var(--primary-blue);
         }
-        /* Top Hero Card */
         .hero-card {
             background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end));
             color: white;
@@ -121,7 +119,6 @@
             font-weight: 800;
             letter-spacing: 0.5px;
         }
-        /* Top Info Buttons */
         .info-buttons-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -140,7 +137,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
             cursor: pointer;
         }
-        /* VIP Status Banner */
         .vip-banner {
             background: linear-gradient(90deg, #eff6ff, #dbeafe);
             border: 1px solid #bfdbfe;
@@ -161,7 +157,6 @@
             border-radius: 20px;
             font-size: 12px;
         }
-        /* Optimization Status Bar */
         .optimization-header {
             font-size: 14px;
             font-weight: 600;
@@ -185,7 +180,6 @@
         .starting-action-bar:hover {
             background: #1e40af;
         }
-        /* Product Grid Container */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -203,7 +197,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
             font-size: 22px;
         }
-        /* Notice Board */
         .notice-card {
             background: white;
             border: 1px solid #e2e8f0;
@@ -228,7 +221,6 @@
             color: var(--text-muted);
             line-height: 1.4;
         }
-        /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -278,12 +270,10 @@
 <body>
 
     <div class="container">
-        <!-- Welcome Greeting -->
         <div class="welcome-header">
             Hi <span id="welcomeName">Emma730</span> , welcome back 👏
         </div>
 
-        <!-- Blue Hero Card -->
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
@@ -303,27 +293,23 @@
 
             <div class="balance-section">
                 <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">1,268.01 USD</div>
+                <div class="balance-amount" id="balanceDisplay">2000.00 USD</div>
             </div>
         </div>
 
-        <!-- Top Info Buttons -->
         <div class="info-buttons-grid">
             <div class="info-btn">📦 Order description</div>
             <div class="info-btn">📄 Please note</div>
         </div>
 
-        <!-- VIP Status Banner -->
         <div class="vip-banner">
             <span>🛡️ VIP 1</span>
-            <span class="profit-tag">Profit 0.6% &gt;</span>
+            <span class="profit-tag">Profit 0.5% &gt;</span>
         </div>
 
-        <!-- Optimization Status & Action -->
-        <div class="optimization-header" id="optStatusLabel">Start Optimization (0 / 2)</div>
-        <div class="starting-action-bar" id="startingBtn" onclick="goToSubmitPage()">Starting (17/40)</div>
+        <div class="optimization-header" id="optStatusLabel">Start Optimization (17 / 40)</div>
+        <div class="starting-action-bar" id="startingBtn" onclick="startTaskOptimization()">Starting (17/40)</div>
 
-        <!-- Product Slots Grid -->
         <div class="product-grid">
             <div class="product-card">🪒</div>
             <div class="product-card">👠</div>
@@ -333,7 +319,6 @@
             <div class="product-card">📷</div>
         </div>
 
-        <!-- Notice Section -->
         <div class="notice-card">
             <div class="notice-title">Notice</div>
             <hr class="notice-divider">
@@ -344,7 +329,6 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
@@ -364,7 +348,6 @@
     </div>
 
     <script>
-        // Load stored profile details & balance dynamically
         const storedUser = localStorage.getItem('username');
         if (storedUser) {
             document.getElementById('usernameDisplay').textContent = storedUser;
@@ -377,12 +360,31 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        const storedBalance = localStorage.getItem('userBalance');
-        if (storedBalance !== null) {
-            document.getElementById('balanceDisplay').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
+        // Initialize default balance to 2000 if not set yet
+        let currentBalance = parseFloat(localStorage.getItem('userBalance'));
+        if (isNaN(currentBalance)) {
+            currentBalance = 2000.00;
+            localStorage.setItem('userBalance', currentBalance);
         }
+        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        function goToSubmitPage() {
+        function startTaskOptimization() {
+            // Randomly generate order price between 1000 and 3000 to match your examples
+            const possiblePrices = [1000, 1500, 2000, 2500, 3000];
+            const randomOrderPrice = possiblePrices[Math.floor(Math.random() * possiblePrices.length)];
+            const commissionRate = 0.005; // 0.5%
+            const earnings = randomOrderPrice * commissionRate;
+
+            // Temporarily subtract order price from current balance (can go negative if price > balance)
+            currentBalance -= randomOrderPrice;
+
+            // Save active task details into localStorage for submit.html to use
+            localStorage.setItem('userBalance', currentBalance);
+            localStorage.setItem('activeOrderPrice', randomOrderPrice);
+            localStorage.setItem('activeEarnings', earnings);
+            localStorage.setItem('taskPending', 'true');
+
+            // Navigate to submission/review page
             window.location.href = 'submit.html';
         }
     </script>
