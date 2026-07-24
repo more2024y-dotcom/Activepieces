@@ -282,7 +282,27 @@
                 alert('Please select an automatic comment or write a review first!');
                 return;
             }
-            alert('Order submitted successfully!');
+
+            // Retrieve current balance and task count from localStorage (or set defaults)
+            let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 1268.01;
+            let currentTaskCount = parseInt(localStorage.getItem('taskCount')) || 17;
+
+            // Order price and commission earnings
+            const orderAmount = 901.00;
+            const earnings = 45.05;
+
+            // Return order amount plus the commission/earnings back to the balance
+            currentBalance += (orderAmount + earnings);
+            
+            // Increment task count (e.g. from 17/40 to 18/40)
+            currentTaskCount += 1;
+            if (currentTaskCount > 40) currentTaskCount = 40;
+
+            // Save updated values to localStorage
+            localStorage.setItem('userBalance', currentBalance);
+            localStorage.setItem('taskCount', currentTaskCount);
+
+            alert('Order submitted successfully! Commission added to balance.');
             window.location.href = 'dashboard.html';
         }
     </script>
