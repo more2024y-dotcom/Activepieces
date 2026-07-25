@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimization Task - Luxury VIP</title>
+    <title>Task Optimization - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
@@ -115,20 +115,16 @@
         .invite-text span {
             color: var(--accent-gold-light);
         }
-        .vip-badge-top {
+        .shield-badge {
+            width: 36px;
+            height: 36px;
             background: rgba(212, 175, 55, 0.15);
-            color: var(--accent-gold);
-            padding: 10px 12px;
             border-radius: 50%;
-            font-size: 14px;
-            font-weight: 700;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            cursor: pointer;
-            text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            font-size: 16px;
         }
         .balance-title {
             font-size: 12px;
@@ -144,7 +140,7 @@
             color: var(--accent-gold);
             font-family: 'Cinzel', serif;
         }
-        .info-buttons-grid {
+        .info-buttons-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
@@ -156,86 +152,82 @@
             border-radius: 14px;
             padding: 14px;
             text-align: center;
+            color: var(--text-main);
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-main);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             cursor: pointer;
-            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
-        .info-btn:hover {
-            border-color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
-        .vip-banner {
+        .vip-tier-card {
             background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 16px;
             padding: 16px 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.2s;
         }
-        .vip-banner:hover {
-            border-color: var(--accent-gold);
-        }
-        .profit-tag {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .optimization-header {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-main);
+        .vip-tier-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-size: 15px;
         }
-        .starting-action-bar {
+        .profit-badge {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            text-decoration: none;
+        }
+        .start-btn {
+            width: 100%;
             background: linear-gradient(135deg, #d4af37, #aa8c2c);
             color: #0f172a;
-            text-align: center;
-            padding: 16px;
+            border: none;
             border-radius: 14px;
+            padding: 18px;
             font-size: 16px;
             font-weight: 800;
             font-family: 'Cinzel', serif;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            margin-bottom: 20px;
             cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: opacity 0.2s;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.2s;
         }
-        .starting-action-bar:hover {
-            opacity: 0.9;
+        .start-btn:active {
+            transform: scale(0.98);
         }
-        .product-grid {
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-bottom: 20px;
         }
-        .product-card {
+        .product-box {
             background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
+            border-radius: 16px;
             height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 28px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            font-size: 24px;
         }
         .notice-card {
             background: var(--card-dark);
@@ -246,23 +238,18 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .notice-title {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
             font-weight: 700;
             font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
+            margin-bottom: 10px;
             letter-spacing: 0.5px;
         }
-        .notice-divider {
-            border: none;
-            border-top: 1px dashed rgba(212, 175, 55, 0.3);
-            margin: 10px 0;
-        }
-        .notice-body {
+        .notice-text {
             font-size: 12px;
             color: var(--text-muted);
             line-height: 1.5;
-            font-weight: 500;
+            margin: 0;
         }
         .bottom-nav {
             position: fixed;
@@ -314,16 +301,17 @@
 <body>
 
     <div class="container">
+        <!-- Welcome Header -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">Emma730</span> , welcome back 👑
+            Hi <span id="welcomeName">Guest</span> , welcome back 👑
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">E</div>
+                    <div class="avatar" id="avatarLetter">G</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">Emma730</h3>
+                        <h3 id="usernameDisplay">Guest</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -332,9 +320,7 @@
                         <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
                     </div>
                 </div>
-                <a href="vip.html" style="text-decoration: none;">
-                    <div class="vip-badge-top">🛡️</div>
-                </a>
+                <div class="shield-badge">🛡️</div>
             </div>
 
             <div class="balance-section">
@@ -343,38 +329,40 @@
             </div>
         </div>
 
-        <div class="info-buttons-grid">
-            <div class="info-btn">📦 Order description</div>
-            <div class="info-btn">📄 Please note</div>
+        <div class="info-buttons-row">
+            <a href="#" class="info-btn">📄 Order description</a>
+            <a href="#" class="info-btn">📄 Please note</a>
         </div>
 
-        <div class="vip-banner" onclick="window.location.href='vip.html'">
-            <span>🛡️ VIP 1</span>
-            <span class="profit-tag">Profit 0.5% &gt;</span>
+        <div class="vip-tier-card">
+            <div class="vip-tier-left">🛡️ VIP 1</div>
+            <a href="#" class="profit-badge">PROFIT 0.5% &gt;</a>
         </div>
 
-        <div class="optimization-header" id="optStatusLabel">Start Optimization (17 / 40)</div>
-        <div class="starting-action-bar" id="startingBtn" onclick="startTaskOptimization()">Starting (17/40)</div>
+        <!-- Task start button showing dynamic task count -->
+        <button class="start-btn" id="startBtn" onclick="startOptimizationTask()">
+            START OPTIMIZATION (<span id="taskCountDisplay">0</span> / 40)
+        </button>
 
-        <div class="product-grid">
-            <div class="product-card">🪒</div>
-            <div class="product-card">👠</div>
-            <div class="product-card">📦</div>
-            <div class="product-card">📷</div>
-            <div class="product-card">📱</div>
-            <div class="product-card">📷</div>
+        <div class="products-grid">
+            <div class="product-box">🗡️</div>
+            <div class="product-box">👠</div>
+            <div class="product-box">📦</div>
+            <div class="product-box">📷</div>
+            <div class="product-box">📱</div>
+            <div class="product-box">📸</div>
         </div>
 
         <div class="notice-card">
-            <div class="notice-title">Notice</div>
-            <hr class="notice-divider">
-            <div class="notice-body">
+            <div class="notice-title">NOTICE</div>
+            <p class="notice-text">
                 Online Support Hours 10:00 - 23:00<br>
                 Please contact online support for your assistance
-            </div>
+            </p>
         </div>
     </div>
 
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
@@ -394,87 +382,96 @@
     </div>
 
     <script>
-        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username');
-        if (storedUser) {
-            document.getElementById('usernameDisplay').textContent = storedUser;
-            document.getElementById('welcomeName').textContent = storedUser;
-            document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
+        // Retrieve username cleanly
+        const currentUsername = localStorage.getItem('userName') || 
+                                localStorage.getItem('username') || 
+                                localStorage.getItem('loggedInUser') || 
+                                localStorage.getItem('currentUser') || 
+                                localStorage.getItem('accountName');
+
+        if (currentUsername && currentUsername.trim() !== "") {
+            document.getElementById('usernameDisplay').textContent = currentUsername;
+            document.getElementById('welcomeName').textContent = currentUsername;
+            document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
+        } else {
+            document.getElementById('usernameDisplay').textContent = "Guest";
+            document.getElementById('welcomeName').textContent = "Guest";
+            document.getElementById('avatarLetter').textContent = "G";
         }
 
-        const storedInvite = localStorage.getItem('inviteCode');
+        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
         if (storedInvite) {
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        let currentBalance = parseFloat(localStorage.getItem('userBalance'));
+        // --- ACCOUNT-SCOPED BALANCE (Forces 10.00 USD for new accounts) ---
+        const userKeySuffix = currentUsername ? currentUsername.trim() : 'Guest';
+        const balanceKey = `userBalance_${userKeySuffix}`;
+        
+        let currentBalance = parseFloat(localStorage.getItem(balanceKey));
         if (isNaN(currentBalance)) {
             currentBalance = 10.00;
-            localStorage.setItem('userBalance', currentBalance);
+            localStorage.setItem(balanceKey, currentBalance);
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit'));
-        if (isNaN(todaysProfit)) {
-            todaysProfit = 0.00;
-            localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
-        }
-
-        let totalProfit = parseFloat(localStorage.getItem('totalProfit'));
-        if (isNaN(totalProfit)) {
-            totalProfit = 0.00;
-            localStorage.setItem('totalProfit', totalProfit.toFixed(2));
-        }
-
-        let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
-        if (isNaN(completedTasksCount)) {
-            completedTasksCount = 17;
-            localStorage.setItem('completedTasksCount', completedTasksCount);
-        }
+        // --- ACCOUNT-SCOPED TASK TRACKING (Forces 0/40 for new accounts & daily resets) ---
+        const taskKey = `completedTasks_${userKeySuffix}`;
+        const lastTaskDateKey = `lastTaskDate_${userKeySuffix}`;
         
-        const totalTasksMax = 40;
-        document.getElementById('optStatusLabel').textContent = `Start Optimization (${completedTasksCount} / ${totalTasksMax})`;
-        document.getElementById('startingBtn').textContent = `Starting (${completedTasksCount}/${totalTasksMax})`;
+        const todayDateStr = new Date().toDateString();
+        let lastRecordedTaskDate = localStorage.getItem(lastTaskDateKey);
 
-        const productCatalog = [
-            { name: "CD button skirt pants", img: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" },
-            { name: "Classic Casual Leather Shoes", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" },
-            { name: "Wireless Noise-Canceling Headphones", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" },
-            { name: "Minimalist Smart Watch Series", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" },
-            { name: "Professional DSLR Camera Body", img: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" },
-            { name: "Designer Summer Sun Hat", img: "https://images.unsplash.com/photo-1534215754734-18e55d134347?auto=format&fit=crop&w=400&q=80" },
-            { name: "Luxury Silk Evening Scarf", img: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=400&q=80" }
-        ];
+        if (lastRecordedTaskDate && lastRecordedTaskDate !== todayDateStr) {
+            localStorage.setItem(taskKey, '0');
+            localStorage.setItem(lastTaskDateKey, todayDateStr);
+        } else if (localStorage.getItem(taskKey) === null) {
+            localStorage.setItem(taskKey, '0');
+            localStorage.setItem(lastTaskDateKey, todayDateStr);
+        }
 
-        function startTaskOptimization() {
-            const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
-            
-            let randomOrderPrice;
-            if (currentBalance <= 20) {
-                randomOrderPrice = parseFloat((8 + Math.random() * 7).toFixed(2));
-            } else if (currentBalance <= 200) {
-                randomOrderPrice = parseFloat((50 + Math.random() * 150).toFixed(2));
-            } else {
-                randomOrderPrice = Math.floor(800 + Math.random() * 2000);
+        let completedTasks = parseInt(localStorage.getItem(taskKey)) || 0;
+        
+        function updateTaskDisplay() {
+            document.getElementById('taskCountDisplay').textContent = completedTasks;
+            const btn = document.getElementById('startBtn');
+            if (completedTasks >= 40) {
+                btn.textContent = "COMPLETED (40 / 40)";
+                btn.style.opacity = "0.7";
+            }
+        }
+        updateTaskDisplay();
+
+        // --- TASK EXECUTION & 40/40 BLOCKER ---
+        function startOptimizationTask() {
+            completedTasks = parseInt(localStorage.getItem(taskKey)) || 0;
+
+            if (completedTasks >= 40) {
+                alert("You have already completed your 40/40 tasks for today. No more tasks can be performed.");
+                return;
             }
 
-            const commissionRate = 0.005;
-            const earnings = randomOrderPrice * commissionRate;
+            // Increment task count and update balance/profit logic example
+            completedTasks++;
+            localStorage.setItem(taskKey, completedTasks);
 
-            currentBalance -= randomOrderPrice;
+            // Increment balance slightly per task (e.g., +0.05 USD)
+            currentBalance += 0.05;
+            localStorage.setItem(balanceKey, currentBalance);
 
-            todaysProfit += earnings;
-            totalProfit += earnings;
+            // Update todays profit
+            let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0;
+            todaysProfit += 0.05;
+            localStorage.setItem('todaysProfit', todaysProfit);
 
-            localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
-            localStorage.setItem('totalProfit', totalProfit.toFixed(2));
+            updateTaskDisplay();
+            document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-            localStorage.setItem('userBalance', currentBalance);
-            localStorage.setItem('currentOrderName', randomProduct.name);
-            localStorage.setItem('currentOrderImg', randomProduct.img);
-            localStorage.setItem('currentOrderPrice', randomOrderPrice);
-            localStorage.setItem('currentOrderEarnings', earnings);
-
-            window.location.href = 'submit.html';
+            if (completedTasks >= 40) {
+                alert("Congratulations! You have completed all 40 tasks for today.");
+            } else {
+                alert(`Task ${completedTasks}/40 successfully optimized!`);
+            }
         }
     </script>
 
