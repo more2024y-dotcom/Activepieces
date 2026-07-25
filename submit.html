@@ -1,276 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Task - Luxury VIP</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
-        :root {
-            --primary-dark: #0f172a;
-            --card-dark: #1e293b;
-            --accent-gold: #d4af37;
-            --accent-gold-light: #fef08a;
-            --bg-color: #090d16;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            padding-bottom: 50px;
-        }
-        .top-bar {
-            background-color: var(--primary-dark);
-            color: var(--accent-gold);
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        .container {
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .product-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 12px;
-            font-family: 'Cinzel', serif;
-        }
-        .image-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .image-card img {
-            max-width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid var(--accent-gold);
-        }
-        .dots {
-            text-align: center;
-            font-size: 20px;
-            margin-top: 10px;
-            color: var(--accent-gold);
-        }
-        .price-section {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-        .price-amount {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            padding-bottom: 15px;
-            font-family: 'Cinzel', serif;
-        }
-        .comment-label-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
-        .stars {
-            color: var(--text-muted);
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .stars.active {
-            color: var(--accent-gold);
-        }
-        .comment-box {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: 14px;
-            min-height: 90px;
-            position: relative;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .comment-text {
-            font-size: 13px;
-            color: var(--text-main);
-            outline: none;
-            border: none;
-            width: 100%;
-            background: transparent;
-            resize: none;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .auto-comment-btn {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 6px 12px;
-            border-radius: 6px;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            cursor: pointer;
-            border: none;
-            font-family: 'Cinzel', serif;
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-        }
-        .vip-banner-box {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 13px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-        }
-        .stats-table {
-            background: var(--card-dark);
-            border-radius: 14px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 16px;
-            font-size: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-        }
-        .stats-row:last-child {
-            margin-bottom: 0;
-        }
-        .stats-val {
-            font-weight: 700;
-            color: var(--accent-gold) !important;
-        }
-        .meta-card {
-            background: var(--card-dark);
-            border-radius: 14px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 16px;
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .meta-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        .meta-row:last-child {
-            margin-bottom: 0;
-        }
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 800;
-            cursor: pointer;
-            text-align: center;
-            font-family: 'Cinzel', serif;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            letter-spacing: 0.5px;
-            transition: opacity 0.2s;
-        }
-        .btn-submit:hover {
-            opacity: 0.9;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="top-bar" onclick="history.back()">
-        &lt;
-    </div>
-
-    <div class="container">
-        <div class="product-title" id="productTitleDisplay">CD button skirt pants</div>
-
-        <div class="image-card">
-            <img id="productImg" src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" alt="Product">
-            <div class="dots">•</div>
-        </div>
-
-        <div class="price-section">USD</div>
-        <div class="price-amount" id="priceDisplay">901.00 x1</div>
-
-        <div class="comment-label-row">
-            <span>Click to write a comment:</span>
-            <div class="stars" id="starContainer" onclick="fillRandomComment()">★★★★★</div>
-        </div>
-
-        <div class="comment-box">
-            <textarea class="comment-text" id="commentInput" placeholder="Click automatic comment or type here..."></textarea>
-            <button class="auto-comment-btn" onclick="fillRandomComment()">Automatic Comment</button>
-        </div>
-
-        <div class="vip-banner-box">
-            <span>🛡️</span> VIP 1
-        </div>
-
-        <div class="stats-table">
-            <div class="stats-row">
-                <span>Total Amount</span>
-                <span>Reward</span>
-                <span>Earnings</span>
-            </div>
-            <div class="stats-row stats-val" style="font-size: 13px; margin-top: 6px;">
-                <span id="statAmount">901.00(USD)</span>
-                <span>0.5%</span>
-                <span id="statEarnings">45.05(USD)</span>
-            </div>
-        </div>
-
-        <div class="meta-card">
-            <div class="meta-row">
-                <span>Date Created</span>
-                <span id="dateCreated">2026-07-17 17:27:34</span>
-            </div>
-            <div class="meta-row">
-                <span>Order Code</span>
-                <span id="orderCode">2026071717270000034</span>
-            </div>
-        </div>
-
-        <button class="btn-submit" onclick="submitOrder()">Submit</button>
-    </div>
-
-    <script>
+<script>
         const orderName = localStorage.getItem('currentOrderName') || "CD button skirt pants";
         const orderImg = localStorage.getItem('currentOrderImg') || "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80";
         const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 901.00;
@@ -336,8 +64,19 @@
                 return;
             }
 
-            // 1. Fetch current stored values safely
-            let currentBalance = parseFloat(localStorage.getItem('userBalance'));
+            // Determine the correct storage keys based on the logged-in user profile
+            const currentUsername = localStorage.getItem('userName') || 
+                                    localStorage.getItem('username') || 
+                                    localStorage.getItem('loggedInUser') || 
+                                    localStorage.getItem('currentUser') || 
+                                    localStorage.getItem('accountName') || 'PPPP';
+
+            const userKeySuffix = currentUsername.trim();
+            const balanceKey = `userBalance_${userKeySuffix}`;
+            const taskKey = `completedTasks_${userKeySuffix}`;
+
+            // 1. Fetch current stored values safely using user-specific keys (fallback to generic keys if needed)
+            let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance'));
             if (isNaN(currentBalance)) currentBalance = 10.00;
 
             let todaysProfit = parseFloat(localStorage.getItem('todaysProfit'));
@@ -346,30 +85,28 @@
             let totalProfit = parseFloat(localStorage.getItem('totalProfit'));
             if (isNaN(totalProfit)) totalProfit = 0.00;
 
-            let completedTasks = parseInt(localStorage.getItem('completedTasksCount'));
+            let completedTasks = parseInt(localStorage.getItem(taskKey)) || parseInt(localStorage.getItem('completedTasksCount'));
             if (isNaN(completedTasks)) completedTasks = 0;
 
-            // 2. Return principal (orderPrice) AND add ONLY commission earnings to balance.
-            // (If your flow deducts orderPrice when starting, you must return it here + add earnings).
+            // 2. Return principal (orderPrice) AND add commission earnings to balance
             currentBalance += (orderPrice + orderEarnings);
 
-            // 3. Increment Today's Profit and Total Profit by JUST the commission earnings
+            // 3. Increment Today's Profit, Total Profit, and completed tasks
             todaysProfit += orderEarnings;
             totalProfit += orderEarnings;
             completedTasks += 1;
 
             if (completedTasks > 40) completedTasks = 40;
 
-            // 4. Save back to localStorage
+            // 4. Save back to localStorage using both user-specific and generic keys for compatibility
+            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
             localStorage.setItem('totalProfit', totalProfit.toFixed(2));
+            localStorage.setItem(taskKey, completedTasks);
             localStorage.setItem('completedTasksCount', completedTasks);
 
             alert('Order submitted successfully! Commission credited to account.');
             window.location.href = 'task.html';
         }
     </script>
-
-</body>
-</html>
