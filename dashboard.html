@@ -374,10 +374,10 @@
 
         <div class="profit-card">
             <div class="profit-tabs">
-                <div class="profit-tab active">Today's Profit</div>
-                <div class="profit-tab">Total Profit</div>
+                <div class="profit-tab active" id="tabToday" onclick="switchProfitTab('today')">Today's Profit</div>
+                <div class="profit-tab" id="tabTotal" onclick="switchProfitTab('total')">Total Profit</div>
             </div>
-            <div class="profit-value">0.00 USD</div>
+            <div class="profit-value" id="profitDisplay">0.00 USD</div>
         </div>
 
         <div class="announcement-card">
@@ -444,7 +444,7 @@
             localStorage.removeItem('username');
         }
 
-        // Retrieve username cleanly, prioritizing 'userName' which is what your registration form uses
+        // Retrieve username cleanly
         const currentUsername = localStorage.getItem('userName') || 
                                 localStorage.getItem('username') || 
                                 localStorage.getItem('loggedInUser') || 
@@ -472,6 +472,48 @@
             localStorage.setItem('userBalance', currentBalance);
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+
+        // --- DAILY PROFIT & TOTAL PROFIT ROLLOVER SYSTEM ---
+        const todayDateStr = new Date().toDateString();
+        let lastRecordedDate = localStorage.getItem('lastProfitDate');
+
+        let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0;
+        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0;
+
+        // If the date has changed since the user last logged in, rollover today's profit to total profit
+        if (lastRecordedDate && lastRecordedDate !== todayDateStr) {
+            totalProfit += todaysProfit;
+            todaysProfit = 0;
+            localStorage.setItem('totalProfit', totalProfit);
+            localStorage.setItem('todaysProfit', todaysProfit);
+        }
+        localStorage.setItem('lastProfitDate', todayDateStr);
+
+        // Active tab tracking state ("today" or "total")
+        let activeProfitView = 'today';
+
+        function updateProfitDisplay() {
+            const displayVal = activeProfitView === 'today' ? todaysProfit : totalProfit;
+            document.getElementById('profitDisplay').textContent = displayVal.toFixed(2) + ' USD';
+        }
+
+        function switchProfitTab(tabName) {
+            activeProfitView = tabName;
+            const tabToday = document.getElementById('tabToday');
+            const tabTotal = document.getElementById('tabTotal');
+
+            if (tabName === 'today') {
+                tabToday.classList.add('active');
+                tabTotal.classList.remove('active');
+            } else {
+                tabTotal.classList.add('active');
+                tabToday.classList.remove('active');
+            }
+            updateProfitDisplay();
+        }
+
+        // Initial render
+        updateProfitDisplay();
     </script>
 
 </body>
