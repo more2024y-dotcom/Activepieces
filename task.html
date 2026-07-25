@@ -321,34 +321,23 @@
     </div>
 
     <script>
-        // Resolve dynamic user identification safely
-        const currentUsername = localStorage.getItem('userName') || 
-                                localStorage.getItem('username') || 
-                                localStorage.getItem('loggedInUser') || 
-                                localStorage.getItem('currentUser') || 
-                                localStorage.getItem('accountName') || 'PPPP';
+        // Use a strictly unified username key to prevent desyncing across views
+        const currentUsername = "PPPP";
+        localStorage.setItem('userName', currentUsername);
 
-        const userKeySuffix = currentUsername.trim();
-        const balanceKey = `userBalance_${userKeySuffix}`;
-        const taskKey = `completedTasks_${userKeySuffix}`;
+        const balanceKey = `userBalance_${currentUsername}`;
+        const taskKey = `completedTasks_${currentUsername}`;
 
-        // Update profile branding on UI
-        document.getElementById('usernameDisplay').textContent = userKeySuffix;
-        document.getElementById('avatarLetter').textContent = userKeySuffix.charAt(0).toUpperCase();
-        
-        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
-        if (storedInvite) {
-            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
+        // Ensure baseline entries are properly seeded if missing
+        if (localStorage.getItem(balanceKey) === null) {
+            localStorage.setItem(balanceKey, "10.00");
+        }
+        if (localStorage.getItem('userBalance') === null) {
+            localStorage.setItem('userBalance', "10.00");
         }
 
-        // Load balance dynamically using scoped key with fallback mechanisms
-        let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance'));
-        if (isNaN(currentBalance)) {
-            currentBalance = 10.00;
-            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
-            localStorage.setItem('userBalance', currentBalance.toFixed(2));
-        }
-
+        // Fetch current active balance consistently
+        let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || 10.00;
         let completedTasksCount = parseInt(localStorage.getItem(taskKey)) || parseInt(localStorage.getItem('completedTasksCount')) || 0;
 
         let isBalanceHidden = false;
@@ -370,7 +359,6 @@
 
         renderUI();
 
-        // Product pools for generation
         const productPool = [
             { name: "CD button skirt pants", img: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" },
             { name: "Luxury Designer Handbag", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80" },
@@ -379,40 +367,39 @@
         ];
 
         function startTaskOptimization() {
+            // Re-read latest balance right before executing action to prevent stale memory values
+            currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || 10.00;
+            completedTasksCount = parseInt(localStorage.getItem(taskKey)) || parseInt(localStorage.getItem('completedTasksCount')) || 0;
+
             if (completedTasksCount >= 40) {
                 alert("You have already completed your 40/40 tasks for today.");
                 return;
             }
 
-            // Balance-scaled order pricing matching tiers
+            // Fixed safe order tier scaling based on current total balance
             let randomOrderPrice;
             if (currentBalance <= 20) {
-                randomOrderPrice = parseFloat((currentBalance * (0.8 + Math.random() * 0.4)).toFixed(2));
-                if (randomOrderPrice < 2) randomOrderPrice = 2.00;
-            } else if (currentBalance <= 200) {
-                randomOrderPrice = parseFloat((currentBalance * (0.85 + Math.random() * 0.3)).toFixed(2));
+                randomOrderPrice = parseFloat((currentBalance * (0.5 + Math.random() * 0.3)).toFixed(2));
+                if (randomOrderPrice < 1.00) randomOrderPrice = 1.00;
             } else {
-                randomOrderPrice = parseFloat((currentBalance * (0.9 + Math.random() * 0.2)).toFixed(2));
+                randomOrderPrice = parseFloat((currentBalance * 0.4).toFixed(2));
             }
 
             if (currentBalance < randomOrderPrice) {
-                alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ". Please deposit funds.");
-                window.location.href = 'withdraw.html';
+                alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ".");
                 return;
             }
 
             const commissionRate = 0.005;
             const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2));
 
-            // Deduct price temporarily from scoped balance
+            // Deduct active price from both scoped and global keys simultaneously
             currentBalance -= randomOrderPrice;
             localStorage.setItem(balanceKey, currentBalance.toFixed(2));
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
 
-            // Pick a random product item
             const selectedProduct = productPool[Math.floor(Math.random() * productPool.length)];
 
-            // Save order specs for submission page
             localStorage.setItem('currentOrderName', selectedProduct.name);
             localStorage.setItem('currentOrderImg', selectedProduct.img);
             localStorage.setItem('currentOrderPrice', randomOrderPrice.toFixed(2));
@@ -421,10 +408,11 @@
             window.location.href = 'submit.html';
         }
 
-        // Live cross-tab storage sync
+        // Listen to cross-tab storage changes to ensure real-time synchronization
         window.addEventListener('storage', function(e) {
-            if (e.key === balanceKey || e.key === 'userBalance') {
+            if (e.key === balanceKey || e.key === 'userBalance' || e.key === taskKey) {
                 currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || currentBalance;
+                completedTasksCount = parseInt(localStorage.getItem(taskKey)) || parseInt(localStorage.getItem('completedTasksCount')) || completedTasksCount;
                 renderUI();
             }
         });
