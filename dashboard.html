@@ -19,17 +19,20 @@
         * {
             box-sizing: border-box;
         }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+        html, body {
             margin: 0;
             padding: 0;
+            width: 100%;
             min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        body {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding-bottom: 90px;
+            padding-bottom: 90px; /* Space for fixed bottom navigation */
         }
         .container {
             padding: 20px;
@@ -494,7 +497,6 @@
     </div>
 
     <script>
-        // Load user data from localStorage
         const storedUser = localStorage.getItem('userName') || localStorage.getItem('username');
         if (storedUser) {
             document.getElementById('usernameDisplay').textContent = storedUser;
@@ -540,7 +542,6 @@
         }
         document.getElementById('profitDisplay').textContent = todaysProfit.toFixed(2) + ' USD';
 
-        // Copy Invitation Code Function
         function copyInviteCode() {
             const codeText = document.getElementById('inviteCodeDisplay').textContent;
             navigator.clipboard.writeText(codeText).then(() => {
