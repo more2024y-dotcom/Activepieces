@@ -16,27 +16,33 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
         }
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 100px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 90px;
         }
         .container {
             padding: 20px;
             max-width: 600px;
+            width: 100%;
             margin: 0 auto;
+            flex: 1;
         }
         .welcome-header {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--text-main);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-bottom: 16px;
             font-family: 'Cinzel', serif;
         }
         .welcome-header span {
@@ -48,16 +54,14 @@
             border-radius: 20px;
             padding: 22px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
         .user-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
         .user-info {
             display: flex;
@@ -65,8 +69,8 @@
             gap: 14px;
         }
         .avatar {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: var(--primary-dark);
             display: flex;
@@ -79,14 +83,14 @@
             border: 2px solid var(--accent-gold);
         }
         .user-details h3 {
-            margin: 0 0 5px 0;
-            font-size: 17px;
+            margin: 0 0 4px 0;
+            font-size: 16px;
             font-weight: 700;
             font-family: 'Cinzel', serif;
             color: var(--accent-gold);
         }
         .credit-score-wrap {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             display: flex;
             align-items: center;
@@ -95,8 +99,8 @@
             font-weight: 500;
         }
         .progress-bar-bg {
-            width: 80px;
-            height: 6px;
+            width: 70px;
+            height: 5px;
             background: rgba(255,255,255,0.1);
             border-radius: 3px;
             overflow: hidden;
@@ -108,107 +112,132 @@
             background: var(--accent-gold);
         }
         .invite-text {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .invite-text span {
             color: var(--accent-gold-light);
         }
+        .copy-btn {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--accent-gold);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover {
+            background: rgba(212, 175, 55, 0.3);
+        }
         .vip-badge-top {
             background: rgba(212, 175, 55, 0.15);
             color: var(--accent-gold);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 12px;
             font-weight: 700;
-            font-family: 'Cinzel', serif;
-            backdrop-filter: blur(5px);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            cursor: pointer;
-            text-decoration: none;
+            font-family: 'Cinzel', serif;
         }
         .balance-title {
             font-size: 12px;
             color: var(--text-muted);
             margin-bottom: 6px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .eye-icon {
+            cursor: pointer;
+            font-size: 14px;
         }
         .balance-amount {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 800;
-            letter-spacing: 0.5px;
             color: var(--accent-gold);
             font-family: 'Cinzel', serif;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
         }
         .action-buttons-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
         .action-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
-            padding: 14px 5px;
+            border-radius: 12px;
+            padding: 10px 4px;
             text-align: center;
-            color: white;
-            text-decoration: none;
-            backdrop-filter: blur(5px);
-            transition: all 0.2s;
-        }
-        .action-btn:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--accent-gold);
-        }
-        .action-btn span {
-            display: block;
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
-        .action-btn small {
             font-size: 11px;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .action-btn:hover {
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        .action-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         .profit-card {
             background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
             padding: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             text-align: center;
         }
         .profit-tabs {
             display: flex;
-            background: rgba(15, 23, 42, 0.6);
+            background: var(--primary-dark);
             border-radius: 10px;
-            padding: 4px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
+            padding: 3px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
         .profit-tab {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-muted);
+            text-align: center;
             border-radius: 8px;
             cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
+            font-family: 'Cinzel', serif;
         }
         .profit-tab.active {
             background: linear-gradient(135deg, #d4af37, #aa8c2c);
             color: #0f172a;
-            font-weight: 700;
-            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         }
-        .profit-value {
-            font-size: 22px;
+        .profit-amount {
+            font-size: 24px;
             font-weight: 800;
             color: var(--accent-gold);
             font-family: 'Cinzel', serif;
@@ -217,98 +246,93 @@
             background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 16px;
-            padding: 16px 18px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .announcement-icon {
-            font-size: 22px;
+            font-size: 20px;
             background: rgba(212, 175, 55, 0.1);
-            padding: 12px;
+            padding: 10px;
             border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         .announcement-content h4 {
-            margin: 0 0 4px 0;
-            font-size: 13px;
+            margin: 0 0 3px 0;
+            font-size: 12px;
             color: var(--accent-gold);
             font-family: 'Cinzel', serif;
-            letter-spacing: 0.5px;
         }
         .announcement-content p {
             margin: 0;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
-            line-height: 1.4;
         }
         .heatmap-card {
             background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 18px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
         }
         .heatmap-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            margin-bottom: 14px;
+            font-size: 13px;
             font-weight: 700;
-            font-family: 'Cinzel', serif;
             color: var(--accent-gold);
-            margin-bottom: 18px;
+            font-family: 'Cinzel', serif;
         }
-        .heatmap-graph {
+        .heatmap-graph-mock {
             height: 90px;
-            width: 100%;
-            background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, rgba(15,23,42,0) 100%);
             border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
             position: relative;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
         }
-        .curve-line {
+        .heatmap-graph-mock::after {
+            content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
             width: 100%;
-            height: 70px;
-            background: radial-gradient(ellipse at bottom, var(--accent-gold) 0%, transparent 70%);
-            clip-path: polygon(0% 100%, 0% 60%, 25% 15%, 50% 90%, 75% 20%, 100% 10%, 100% 100%);
-            opacity: 0.5;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
         }
         .days-row {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
-            margin-bottom: 18px;
-            font-weight: 500;
+            margin-bottom: 14px;
         }
-        .stats-grid {
+        .heatmap-stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
-        .stat-box {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .heatmap-stat-box {
+            background: var(--primary-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 12px;
-            padding: 12px;
+            padding: 10px;
         }
-        .stat-box small {
-            font-size: 11px;
+        .heatmap-stat-label {
+            font-size: 10px;
             color: var(--text-muted);
-            display: block;
             margin-bottom: 4px;
-            font-weight: 500;
         }
-        .stat-box b {
-            font-size: 15px;
-            color: var(--accent-gold-light);
+        .heatmap-stat-val {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
             font-family: 'Cinzel', serif;
         }
         .bottom-nav {
@@ -361,59 +385,64 @@
 <body>
 
     <div class="container">
-        <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">Guest</span> , welcome back 👑
+            Hi <span id="welcomeName">NNNNN</span>, welcome back 👑
         </div>
 
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">G</div>
+                    <div class="avatar" id="avatarLetter">N</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">Guest</h3>
+                        <h3 id="usernameDisplay">NNNNN</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
                             <span>100%</span>
                         </div>
-                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
+                        <div class="invite-text">
+                            Invitation Code: <span id="inviteCodeDisplay">TTUV</span>
+                            <button class="copy-btn" onclick="copyInviteCode()">Copy</button>
+                        </div>
                     </div>
                 </div>
-                <a href="vip.html" class="vip-badge-top">VIP 1</a>
+                <div class="vip-badge-top">VIP 1</div>
             </div>
 
             <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
+                <div class="balance-title">
+                    Total balance 
+                    <span class="eye-icon" id="toggleEye" onclick="toggleBalanceVisibility()">👁️</span>
+                </div>
+                <div class="balance-amount" id="balanceDisplay">10.77 USD</div>
             </div>
 
             <div class="action-buttons-grid">
-                <a href="withdraw.html" class="action-btn">
-                    <span>➕</span>
-                    <small>Add Wallet</small>
+                <a href="deposit.html" class="action-btn">
+                    <div class="action-icon">➕</div>
+                    <span>Add Wallet</span>
+                </a>
+                <a href="deposit.html" class="action-btn">
+                    <div class="action-icon">📥</div>
+                    <span>Deposit</span>
                 </a>
                 <a href="withdraw.html" class="action-btn">
-                    <span>⬇️</span>
-                    <small>Deposit</small>
+                    <div class="action-icon">📤</div>
+                    <span>Withdraw</span>
                 </a>
                 <a href="withdraw.html" class="action-btn">
-                    <span>⬆️</span>
-                    <small>Withdraw</small>
-                </a>
-                <a href="withdraw.html" class="action-btn">
-                    <span>🔄</span>
-                    <small>Transaction</small>
+                    <div class="action-icon">🔄</div>
+                    <span>Transaction</span>
                 </a>
             </div>
         </div>
 
         <div class="profit-card">
             <div class="profit-tabs">
-                <div class="profit-tab active" id="tabToday" onclick="switchProfitTab('today')">Today's Profit</div>
-                <div class="profit-tab" id="tabTotal" onclick="switchProfitTab('total')">Total Profit</div>
+                <div class="profit-tab active">Today's Profit</div>
+                <div class="profit-tab">Total Profit</div>
             </div>
-            <div class="profit-value" id="profitDisplay">0.00 USD</div>
+            <div class="profit-amount" id="profitDisplay">0.39 USD</div>
         </div>
 
         <div class="announcement-card">
@@ -426,35 +455,26 @@
 
         <div class="heatmap-card">
             <div class="heatmap-header">
-                <span>Optimization Needs Heatmap</span>
-                <span style="color: var(--text-muted); font-size: 11px;">▼</span>
+                <span>OPTIMIZATION NEEDS HEATMAP</span>
+                <span>▼</span>
             </div>
-            <div class="heatmap-graph">
-                <div class="curve-line"></div>
-            </div>
+            <div class="heatmap-graph-mock"></div>
             <div class="days-row">
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
+                <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
             </div>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <small>Total Online Users</small>
-                    <b>111.77K</b>
+            <div class="heatmap-stats-grid">
+                <div class="heatmap-stat-box">
+                    <div class="heatmap-stat-label">Total Online Users</div>
+                    <div class="heatmap-stat-val">111.77K</div>
                 </div>
-                <div class="stat-box">
-                    <small>Avg User Optimization Volume</small>
-                    <b>58.95K</b>
+                <div class="heatmap-stat-box">
+                    <div class="heatmap-stat-label">Avg User Optimization Volume</div>
+                    <div class="heatmap-stat-val">58.95K</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item active">
             <span class="icon">🏠</span><span>Home</span>
@@ -474,82 +494,61 @@
     </div>
 
     <script>
-        // AUTOMATIC RESET: If the stored name is "Bob", wipe it out immediately
-        if (localStorage.getItem('userName') === 'Bob' || localStorage.getItem('username') === 'Bob') {
-            localStorage.removeItem('userName');
-            localStorage.removeItem('username');
+        // Load user data from localStorage
+        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username');
+        if (storedUser) {
+            document.getElementById('usernameDisplay').textContent = storedUser;
+            document.getElementById('welcomeName').textContent = storedUser;
+            document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
         }
 
-        // Retrieve username cleanly
-        const currentUsername = localStorage.getItem('userName') || 
-                                localStorage.getItem('username') || 
-                                localStorage.getItem('loggedInUser') || 
-                                localStorage.getItem('currentUser') || 
-                                localStorage.getItem('accountName');
-
-        if (currentUsername && currentUsername.trim() !== "") {
-            document.getElementById('usernameDisplay').textContent = currentUsername;
-            document.getElementById('welcomeName').textContent = currentUsername;
-            document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
-        } else {
-            document.getElementById('usernameDisplay').textContent = "Guest";
-            document.getElementById('welcomeName').textContent = "Guest";
-            document.getElementById('avatarLetter').textContent = "G";
-        }
-
-        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
+        const storedInvite = localStorage.getItem('inviteCode');
         if (storedInvite) {
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
         let currentBalance = parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
-            currentBalance = 10.00;
+            currentBalance = 10.77;
             localStorage.setItem('userBalance', currentBalance);
         }
-        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        // --- DAILY PROFIT & TOTAL PROFIT ROLLOVER SYSTEM ---
-        const todayDateStr = new Date().toDateString();
-        let lastRecordedDate = localStorage.getItem('lastProfitDate');
+        let isBalanceVisible = true;
+        const balanceDisplayEl = document.getElementById('balanceDisplay');
+        const toggleEyeEl = document.getElementById('toggleEye');
 
-        let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0;
-        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0;
-
-        // If the date has changed since the user last logged in, rollover today's profit to total profit
-        if (lastRecordedDate && lastRecordedDate !== todayDateStr) {
-            totalProfit += todaysProfit;
-            todaysProfit = 0;
-            localStorage.setItem('totalProfit', totalProfit);
-            localStorage.setItem('todaysProfit', todaysProfit);
-        }
-        localStorage.setItem('lastProfitDate', todayDateStr);
-
-        // Active tab tracking state ("today" or "total")
-        let activeProfitView = 'today';
-
-        function updateProfitDisplay() {
-            const displayVal = activeProfitView === 'today' ? todaysProfit : totalProfit;
-            document.getElementById('profitDisplay').textContent = displayVal.toFixed(2) + ' USD';
-        }
-
-        function switchProfitTab(tabName) {
-            activeProfitView = tabName;
-            const tabToday = document.getElementById('tabToday');
-            const tabTotal = document.getElementById('tabTotal');
-
-            if (tabName === 'today') {
-                tabToday.classList.add('active');
-                tabTotal.classList.remove('active');
+        function updateBalanceText() {
+            if (isBalanceVisible) {
+                balanceDisplayEl.textContent = currentBalance.toFixed(2) + ' USD';
+                toggleEyeEl.textContent = '👁️';
             } else {
-                tabTotal.classList.add('active');
-                tabToday.classList.remove('active');
+                balanceDisplayEl.textContent = '••••••';
+                toggleEyeEl.textContent = '🙈';
             }
-            updateProfitDisplay();
+        }
+        updateBalanceText();
+
+        function toggleBalanceVisibility() {
+            isBalanceVisible = !isBalanceVisible;
+            updateBalanceText();
         }
 
-        // Initial render
-        updateProfitDisplay();
+        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit'));
+        if (isNaN(todaysProfit)) {
+            todaysProfit = 0.39;
+            localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
+        }
+        document.getElementById('profitDisplay').textContent = todaysProfit.toFixed(2) + ' USD';
+
+        // Copy Invitation Code Function
+        function copyInviteCode() {
+            const codeText = document.getElementById('inviteCodeDisplay').textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert('Invitation code copied: ' + codeText);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
     </script>
 
 </body>
