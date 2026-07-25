@@ -134,6 +134,14 @@
             margin-bottom: 6px;
             font-weight: 600;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .eye-toggle {
+            cursor: pointer;
+            font-size: 14px;
+            user-select: none;
         }
         .balance-amount {
             font-size: 28px;
@@ -383,7 +391,10 @@
             </div>
 
             <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
+                <div class="balance-title">
+                    <span>Total balance</span>
+                    <span class="eye-toggle" id="eyeToggleBtn" onclick="toggleBalanceVisibility()">👁️</span>
+                </div>
                 <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
             </div>
 
@@ -472,11 +483,6 @@
     </div>
 
     <script>
-        if (localStorage.getItem('userName') === 'Bob' || localStorage.getItem('username') === 'Bob') {
-            localStorage.removeItem('userName');
-            localStorage.removeItem('username');
-        }
-
         const currentUsername = localStorage.getItem('userName') || 
                                 localStorage.getItem('username') || 
                                 localStorage.getItem('loggedInUser') || 
@@ -498,16 +504,43 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        // Use account-scoped balance key so it matches tasks and profile
         const userKeySuffix = currentUsername ? currentUsername.trim() : 'Guest';
         const balanceKey = `userBalance_${userKeySuffix}`;
         
-        let currentBalance = parseFloat(localStorage.getItem(balanceKey));
-        if (isNaN(currentBalance)) {
-            currentBalance = 10.00;
-            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
+        let isBalanceHidden = false;
+
+        function loadAndDisplayBalance() {
+            let currentBalance = parseFloat(localStorage.getItem(balanceKey));
+            if (isNaN(currentBalance)) {
+                currentBalance = 10.00;
+                localStorage.setItem(balanceKey, currentBalance.toFixed(2));
+            }
+            
+            if (isBalanceHidden) {
+                document.getElementById('balanceDisplay').textContent = '********';
+            } else {
+                document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+            }
         }
-        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+
+        function toggleBalanceVisibility() {
+            isBalanceHidden = !isBalanceHidden;
+            loadAndDisplayBalance();
+            document.getElementById('eyeToggleBtn').textContent = isBalanceHidden ? '🔒' : '👁️';
+        }
+
+        // Initial call
+        loadAndDisplayBalance();
+
+        // Listen for changes from other tabs/pages (tasks, deposits, etc.) instantly
+        window.addEventListener('storage', function(e) {
+            if (e.key === balanceKey) {
+                loadAndDisplayBalance();
+            }
+        });
+
+        // Periodic sync fallback to ensure updates render immediately
+        setInterval(loadAndDisplayBalance, 500);
 
         const taskKey = `completedTasks_${userKeySuffix}`;
         const lastTaskDateKey = `lastTaskDate_${userKeySuffix}`;
@@ -522,15 +555,6 @@
             localStorage.setItem(taskKey, '0');
             localStorage.setItem(lastTaskDateKey, todayDateStr);
         }
-
-        window.checkCanPerformTask = function() {
-            let currentTasks = parseInt(localStorage.getItem(taskKey)) || 0;
-            if (currentTasks >= 40) {
-                alert("You have already completed your 40/40 tasks for today. No more tasks can be performed.");
-                return false;
-            }
-            return true;
-        };
 
         let lastRecordedDate = localStorage.getItem('lastProfitDate');
         let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0;
