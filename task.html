@@ -396,7 +396,6 @@
     <script>
         const storedUser = localStorage.getItem('userName') || localStorage.getItem('username') || 'DefaultUser';
         
-        // Ensure new or switched accounts start fresh at 0/40 tasks and 10.00 USD balance
         const lastActiveUser = localStorage.getItem('lastActiveUser');
         if (lastActiveUser !== storedUser) {
             localStorage.setItem('lastActiveUser', storedUser);
@@ -453,24 +452,28 @@
                 return;
             }
 
-            const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
+            // Fixed product price rule: $866.00
+            const randomOrderPrice = 866.00;
             
-            let randomOrderPrice;
-            if (currentBalance <= 20) {
-                randomOrderPrice = parseFloat((1.00 + Math.random() * 3.00).toFixed(2));
-            } else if (currentBalance <= 200) {
-                randomOrderPrice = parseFloat((5.00 + Math.random() * 15.00).toFixed(2));
-            } else {
-                randomOrderPrice = parseFloat((20.00 + Math.random() * 50.00).toFixed(2));
+            // Check if balance is sufficient to cover the deduction
+            if (currentBalance < randomOrderPrice) {
+                alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ". Please deposit funds or contact support.");
+                return;
             }
 
+            const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
             const commissionRate = 0.005;
-            const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2));
+            const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2)); // $4.33
 
+            // Temporarily deduct product price from account balance
+            currentBalance -= randomOrderPrice;
+            localStorage.setItem('userBalance', currentBalance.toFixed(2));
+
+            // Save order details for submission page processing
             localStorage.setItem('currentOrderName', randomProduct.name);
             localStorage.setItem('currentOrderImg', randomProduct.img);
-            localStorage.setItem('currentOrderPrice', randomOrderPrice);
-            localStorage.setItem('currentOrderEarnings', earnings);
+            localStorage.setItem('currentOrderPrice', randomOrderPrice.toFixed(2));
+            localStorage.setItem('currentOrderEarnings', earnings.toFixed(2));
 
             window.location.href = 'submit.html';
         }
