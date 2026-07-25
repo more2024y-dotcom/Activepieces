@@ -452,9 +452,19 @@
                 return;
             }
 
-            // Fixed product price rule: $866.00
-            const randomOrderPrice = 866.00;
-            
+            // Dynamic order price scaling based on the user's balance range
+            let randomOrderPrice;
+            if (currentBalance <= 20) {
+                // If balance is around $10, order price will be around $5 to $12
+                randomOrderPrice = parseFloat((5.00 + Math.random() * 7.00).toFixed(2));
+            } else if (currentBalance <= 200) {
+                // If balance is medium, scale order price up accordingly
+                randomOrderPrice = parseFloat((20.00 + Math.random() * 50.00).toFixed(2));
+            } else {
+                // If balance is high (e.g., $1000), order price scales up closely to match balance tier
+                randomOrderPrice = parseFloat((currentBalance * (0.8 + Math.random() * 0.3)).toFixed(2));
+            }
+
             // Check if balance is sufficient to cover the deduction
             if (currentBalance < randomOrderPrice) {
                 alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ". Please deposit funds or contact support.");
@@ -463,7 +473,7 @@
 
             const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
             const commissionRate = 0.005;
-            const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2)); // $4.33
+            const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2));
 
             // Temporarily deduct product price from account balance
             currentBalance -= randomOrderPrice;
