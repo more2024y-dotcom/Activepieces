@@ -348,7 +348,6 @@
     </div>
 
     <script>
-        // Updated to check 'userName' first (matching registration code)
         const storedUser = localStorage.getItem('userName') || localStorage.getItem('username');
         if (storedUser) {
             document.getElementById('usernameDisplay').textContent = storedUser;
@@ -367,6 +366,13 @@
             localStorage.setItem('userBalance', currentBalance);
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+
+        // Initialize today's profit tracking
+        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit'));
+        if (isNaN(todaysProfit)) {
+            todaysProfit = 0.00;
+            localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
+        }
 
         let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
         if (isNaN(completedTasksCount)) {
@@ -404,6 +410,10 @@
             const earnings = randomOrderPrice * commissionRate;
 
             currentBalance -= randomOrderPrice;
+
+            // Update today's profit accumulation
+            todaysProfit += earnings;
+            localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
 
             localStorage.setItem('userBalance', currentBalance);
             localStorage.setItem('currentOrderName', randomProduct.name);
