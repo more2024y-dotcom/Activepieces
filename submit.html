@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Task - Blue Theme</title>
+    <title>Submit Task - Luxury VIP</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
         :root {
-            --primary-blue: #1d4ed8;
-            --blue-gradient-start: #1e40af;
-            --blue-gradient-end: #3b82f6;
-            --bg-color: #f8fafc;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --primary-dark: #0f172a;
+            --card-dark: #1e293b;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #fef08a;
+            --bg-color: #090d16;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -22,57 +25,65 @@
             padding-bottom: 50px;
         }
         .top-bar {
-            background-color: #e11d48;
-            color: white;
-            padding: 12px 15px;
+            background-color: var(--primary-dark);
+            color: var(--accent-gold);
+            padding: 15px 20px;
             display: flex;
             align-items: center;
             font-size: 20px;
             font-weight: bold;
             cursor: pointer;
+            font-family: 'Cinzel', serif;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
         .container {
-            padding: 15px;
+            padding: 20px;
             max-width: 600px;
             margin: 0 auto;
         }
         .product-title {
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-family: 'Cinzel', serif;
         }
         .image-card {
-            background: #fff5f5;
-            border: 1px solid #fee2e2;
-            border-radius: 12px;
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
             padding: 20px;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .image-card img {
             max-width: 200px;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
+            border: 2px solid var(--accent-gold);
         }
         .dots {
             text-align: center;
             font-size: 20px;
             margin-top: 10px;
-            color: #cbd5e1;
+            color: var(--accent-gold);
         }
         .price-section {
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
         .price-amount {
             font-size: 28px;
             font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            border-bottom: 1px solid #e2e8f0;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             padding-bottom: 15px;
+            font-family: 'Cinzel', serif;
         }
         .comment-label-row {
             display: flex;
@@ -81,23 +92,25 @@
             font-size: 13px;
             font-weight: 600;
             margin-bottom: 8px;
+            color: var(--text-main);
         }
         .stars {
-            color: #000000;
+            color: var(--text-muted);
             font-size: 16px;
             cursor: pointer;
         }
         .stars.active {
-            color: #eab308;
+            color: var(--accent-gold);
         }
         .comment-box {
-            background: white;
-            border: 1px solid #cbd5e1;
-            border-radius: 12px;
-            padding: 12px;
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 14px;
             min-height: 90px;
             position: relative;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .comment-text {
             font-size: 13px;
@@ -107,83 +120,95 @@
             width: 100%;
             background: transparent;
             resize: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         .auto-comment-btn {
-            background: #eab308;
-            color: #000;
-            font-size: 10px;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            font-size: 11px;
             font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 4px;
+            padding: 6px 12px;
+            border-radius: 6px;
             position: absolute;
             bottom: 10px;
             right: 10px;
             cursor: pointer;
             border: none;
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
         .vip-banner-box {
-            background: #fef08a;
-            border-radius: 8px;
-            padding: 10px 14px;
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 12px 16px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 15px;
-            color: #854d0e;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
         }
         .stats-table {
-            background: white;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            padding: 12px;
+            background: var(--card-dark);
+            border-radius: 14px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 16px;
             font-size: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .stats-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
+            color: var(--text-muted);
         }
         .stats-row:last-child {
             margin-bottom: 0;
         }
         .stats-val {
             font-weight: 700;
+            color: var(--accent-gold) !important;
         }
         .meta-card {
-            background: white;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            padding: 12px;
+            background: var(--card-dark);
+            border-radius: 14px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 16px;
             font-size: 12px;
             color: var(--text-muted);
             margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .meta-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .meta-row:last-child {
             margin-bottom: 0;
         }
         .btn-submit {
             width: 100%;
-            background: #e11d48;
-            color: white;
-            padding: 14px;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            padding: 16px;
             border: none;
-            border-radius: 10px;
+            border-radius: 14px;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
         }
         .btn-submit:hover {
-            background: #be123c;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -224,7 +249,7 @@
                 <span>Reward</span>
                 <span>Earnings</span>
             </div>
-            <div class="stats-row stats-val" style="color: var(--text-main); font-size: 13px; margin-top: 4px;">
+            <div class="stats-row stats-val" style="font-size: 13px; margin-top: 6px;">
                 <span id="statAmount">901.00(USD)</span>
                 <span>0.5%</span>
                 <span id="statEarnings">45.05(USD)</span>
@@ -246,7 +271,6 @@
     </div>
 
     <script>
-        // Load active order details passed from task.html
         const orderName = localStorage.getItem('currentOrderName') || "CD button skirt pants";
         const orderImg = localStorage.getItem('currentOrderImg') || "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80";
         const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 901.00;
@@ -258,7 +282,6 @@
         document.getElementById('statAmount').textContent = orderPrice.toFixed(2) + '(USD)';
         document.getElementById('statEarnings').textContent = orderEarnings.toFixed(2) + '(USD)';
 
-        // Timestamp generator
         const now = new Date();
         const year = now.getFullYear();
         const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -270,7 +293,6 @@
         document.getElementById('dateCreated').textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         document.getElementById('orderCode').textContent = `${year}${month}${day}${hours}${minutes}${Math.floor(10000 + Math.random() * 90000)}`;
 
-        // Dynamic distinct review banks for different product types
         const reviewPools = {
             clothing: [
                 "The fabric feels amazing and fits wonderfully!",
@@ -295,7 +317,6 @@
         function fillRandomComment() {
             document.getElementById('starContainer').classList.add('active');
             
-            // Pick review based on item name keywords
             let selectedPool = reviewPools.general;
             const lowerName = orderName.toLowerCase();
             if(lowerName.includes('shirt') || lowerName.includes('skirt') || lowerName.includes('pants') || lowerName.includes('shoes') || lowerName.includes('jacket')) {
@@ -315,18 +336,15 @@
                 return;
             }
 
-            // 1. Return principal order price + 0.5% commission earnings back to user balance
             let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 2000.00;
             currentBalance += (orderPrice + orderEarnings);
             localStorage.setItem('userBalance', currentBalance);
 
-            // 2. Increment completed task count (e.g., from 17 to 18 out of 40)
             let completedTasks = parseInt(localStorage.getItem('completedTasksCount')) || 17;
             completedTasks += 1;
             if (completedTasks > 40) completedTasks = 40;
             localStorage.setItem('completedTasksCount', completedTasks);
 
-            // Clear temporary pending flag
             localStorage.removeItem('taskPending');
 
             alert('Order submitted successfully! Commission credited to account.');
