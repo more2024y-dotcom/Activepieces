@@ -1,7 +1,359 @@
-VIP 1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Level</title>
+    <style>
+        :root {
+            --primary-red: #dc2626;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .back-btn {
+            position: absolute;
+            left: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .user-profile-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            margin-bottom: 15px;
+        }
+        .user-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            overflow: hidden;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .user-info h3 {
+            margin: 0 0 4px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .credit-wrap {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .progress-bg {
+            width: 80px;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .progress-fill {
+            width: 100%;
+            height: 100%;
+            background: var(--primary-red);
+        }
+        .current-vip-card {
+            background: linear-gradient(90deg, #fef08a, #fde047);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            color: #854d0e;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(250, 204, 21, 0.2);
+        }
+        .tier-banner {
+            background: linear-gradient(135deg, #991b1b, var(--primary-red));
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(220, 38, 38, 0.25);
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .yellow-line {
+            width: 100%;
+            height: 4px;
+            background: #facc15;
+            border-radius: 2px;
+            margin-bottom: 15px;
+        }
+        .tier-deposit {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .balance-box {
+            background: white;
+            color: var(--text-main);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: var(--primary-red);
+            width: 20px;
+            border-radius: 4px;
+        }
+        .details-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .details-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .details-list li {
+            font-size: 13px;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.4;
+        }
+        .details-list li::before {
+            content: "•";
+            color: var(--text-main);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-Current VIP Level
+    <div class="header">
+        <a href="dashboard.html" class="back-btn">&lt;</a>
+        VIP Level
+    </div>
 
-Selected Gifts
+    <div class="container">
+        <div class="user-profile-card">
+            <div class="user-left">
+                <div class="avatar" id="userAvatarLetter">E</div>
+                <div class="user-info">
+                    <h3 id="profileUsername">Emma730 <span style="font-size: 12px;">🛡️</span></h3>
+                    <div class="credit-wrap">
+                        <span>Credit Score:</span>
+                        <div class="progress-bg"><div class="progress-fill"></div></div>
+                        <span>100%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-View More
+        <div class="current-vip-card" id="currentVipBanner">
+            <span>🛡️ VIP 1</span>
+            <span>Current VIP Level</span>
+        </div>
+
+        <div class="tier-banner" id="tierBannerBg" onclick="nextTier()">
+            <div class="tier-header">
+                <span id="tierTitle">🛡️ VIP 1</span>
+                <span id="tierActionText">Current Level</span>
+            </div>
+            <div class="yellow-line"></div>
+            <div class="tier-deposit" id="tierDepositText">Deposit: 110.00 - 1,499.00 USD</div>
+        </div>
+
+        <div class="balance-box" id="balanceBoxText">
+            Available Balance: 10.71 USD
+        </div>
+
+        <div class="dots-container" id="dotsContainer">
+            <div class="dot active" onclick="setTier(0)"></div>
+            <div class="dot" onclick="setTier(1)"></div>
+            <div class="dot" onclick="setTier(2)"></div>
+            <div class="dot" onclick="setTier(3)"></div>
+        </div>
+
+        <div class="details-card">
+            <ul class="details-list" id="tierDetailsList">
+                <li>Deposit: 110.00 - 1,499.00 USD/USDC</li>
+                <li>Deposit in accordance with our renewal event</li>
+                <li>Profit of 0.5% per order - 40 Optimize orders per set</li>
+                <li>Better Profit and permission</li>
+                <li>Up to 40 orders per day can be submitted by VIP 1 users</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username') || 'Emma730';
+        document.getElementById('profileUsername').innerHTML = `${storedUser} <span style="font-size: 12px;">🛡️</span>`;
+        document.getElementById('userAvatarLetter').textContent = storedUser.charAt(0).toUpperCase();
+
+        let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 10.71;
+        
+        const tiers = [
+            {
+                name: "VIP 1",
+                deposit: "Deposit: 110.00 - 1,499.00 USD",
+                profit: "0.5%",
+                orders: 40,
+                details: [
+                    "Deposit: 110.00 - 1,499.00 USD/USDC",
+                    "Deposit in accordance with our renewal event",
+                    "Profit of 0.5% per order - 40 Optimize orders per set",
+                    "Better Profit and permission",
+                    "Up to 40 orders per day can be submitted by VIP 1 users"
+                ]
+            },
+            {
+                name: "VIP 2",
+                deposit: "Deposit: 1,499.00 - 4,999.00 USD",
+                profit: "0.8%",
+                orders: 80,
+                details: [
+                    "Deposit: 1,499.00 - 4,999.00 USD/USDC",
+                    "Deposit in accordance with our renewal event",
+                    "Profit of 0.8% per order - 40 Optimize orders per set",
+                    "Advanced VIP privileges and higher tier support",
+                    "Up to 80 orders per day can be submitted by VIP 2 users"
+                ]
+            },
+            {
+                name: "VIP 3",
+                deposit: "Deposit: 5,000.00 - 9,999.00 USD",
+                profit: "1.0%",
+                orders: 160,
+                details: [
+                    "Deposit: 5,000.00 - 9,999.00 USD/USDC",
+                    "Deposit in accordance with our renewal event",
+                    "Profit of 1.0% per order - 40 Optimize orders per set",
+                    "Exclusive priority withdrawals and higher limits",
+                    "Up to 160 orders per day can be submitted by VIP 3 users"
+                ]
+            },
+            {
+                name: "VIP 4",
+                deposit: "Deposit: ≥ 10,000.00 USD",
+                profit: "1.2%",
+                orders: 320,
+                details: [
+                    "Deposit: ≥ 10,000.00 USD/USDC",
+                    "Deposit in accordance with our renewal event",
+                    "Profit of 1.2% per order - 40 Optimize orders per set",
+                    "Maximum profit capability and dedicated account manager",
+                    "Up to 320 orders per day can be submitted by VIP 4 users"
+                ]
+            }
+        ];
+
+        let activeTierIndex = 0;
+
+        function updateView() {
+            const tier = tiers[activeTierIndex];
+            document.getElementById('tierTitle').textContent = `🛡️ ${tier.name}`;
+            document.getElementById('tierDepositText').textContent = tier.deposit;
+            document.getElementById('tierActionText').textContent = (activeTierIndex === 0) ? "Current Level" : "Register Now";
+            
+            const diff = currentBalance - (activeTierIndex === 0 ? 110 : activeTierIndex === 1 ? 1499 : activeTierIndex === 2 ? 5000 : 10000);
+            document.getElementById('balanceBoxText').textContent = `Available Balance: ${currentBalance.toFixed(2)} USD`;
+
+            const listEl = document.getElementById('tierDetailsList');
+            listEl.innerHTML = '';
+            tier.details.forEach(detail => {
+                const li = document.createElement('li');
+                li.textContent = detail;
+                listEl.appendChild(li);
+            });
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === activeTierIndex);
+            });
+        }
+
+        function setTier(index) {
+            activeTierIndex = index;
+            updateView();
+        }
+
+        function nextTier() {
+            activeTierIndex = (activeTierIndex + 1) % tiers.length;
+            updateView();
+        }
+
+        updateView();
+    </script>
+</body>
+</html>
