@@ -108,6 +108,7 @@
             font-size: 14px;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
         }
         .balance-title {
             font-size: 12px;
@@ -149,6 +150,7 @@
             font-weight: 600;
             font-size: 14px;
             color: var(--primary-blue);
+            cursor: pointer;
         }
         .profit-tag {
             background: var(--primary-blue);
@@ -288,7 +290,9 @@
                         <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
                     </div>
                 </div>
-                <div class="vip-badge-top">🛡️</div>
+                <a href="vip.html" style="text-decoration: none;">
+                    <div class="vip-badge-top">🛡️</div>
+                </a>
             </div>
 
             <div class="balance-section">
@@ -302,7 +306,7 @@
             <div class="info-btn">📄 Please note</div>
         </div>
 
-        <div class="vip-banner">
+        <div class="vip-banner" onclick="window.location.href='vip.html'">
             <span>🛡️ VIP 1</span>
             <span class="profit-tag">Profit 0.5% &gt;</span>
         </div>
@@ -367,14 +371,12 @@
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        // Initialize today's profit tracking
         let todaysProfit = parseFloat(localStorage.getItem('todaysProfit'));
         if (isNaN(todaysProfit)) {
             todaysProfit = 0.00;
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
         }
 
-        // Initialize total profit tracking across all days
         let totalProfit = parseFloat(localStorage.getItem('totalProfit'));
         if (isNaN(totalProfit)) {
             totalProfit = 0.00;
@@ -418,7 +420,6 @@
 
             currentBalance -= randomOrderPrice;
 
-            // Accumulate both today's profit and total lifetime profit
             todaysProfit += earnings;
             totalProfit += earnings;
 
