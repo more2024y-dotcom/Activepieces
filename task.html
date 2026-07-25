@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimization Task - Luxury VIP</title>
+    <title>Task Optimization - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
@@ -22,25 +22,12 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 100px;
+            padding-bottom: 80px;
         }
         .container {
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
-        }
-        .welcome-header {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'Cinzel', serif;
-        }
-        .welcome-header span {
-            color: var(--accent-gold);
         }
         .hero-card {
             background: linear-gradient(135deg, #0f172a, #1e293b);
@@ -118,17 +105,13 @@
         .vip-badge-top {
             background: rgba(212, 175, 55, 0.15);
             color: var(--accent-gold);
-            padding: 10px 12px;
-            border-radius: 50%;
-            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
             font-weight: 700;
+            font-family: 'Cinzel', serif;
             backdrop-filter: blur(5px);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         .balance-title {
             font-size: 12px;
@@ -136,6 +119,14 @@
             margin-bottom: 6px;
             font-weight: 600;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .eye-toggle {
+            cursor: pointer;
+            font-size: 14px;
+            user-select: none;
         }
         .balance-amount {
             font-size: 28px;
@@ -143,126 +134,75 @@
             letter-spacing: 0.5px;
             color: var(--accent-gold);
             font-family: 'Cinzel', serif;
+            margin-bottom: 10px;
         }
-        .info-buttons-grid {
+        .action-boxes {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin-bottom: 20px;
         }
-        .info-btn {
+        .action-box {
             background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 14px;
-            padding: 14px;
+            padding: 16px;
             text-align: center;
+            color: var(--accent-gold);
             font-size: 13px;
-            font-weight: 600;
-            color: var(--text-main);
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             cursor: pointer;
-            transition: all 0.2s;
         }
-        .info-btn:hover {
-            border-color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
-        .vip-banner {
+        .vip-tier-card {
             background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
+            border-radius: 14px;
             padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            cursor: pointer;
+            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.2s;
-        }
-        .vip-banner:hover {
-            border-color: var(--accent-gold);
-        }
-        .profit-tag {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .optimization-header {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-main);
+            color: var(--accent-gold);
             font-family: 'Cinzel', serif;
+            font-weight: 700;
         }
-        .starting-action-bar {
+        .btn-start {
+            width: 100%;
             background: linear-gradient(135deg, #d4af37, #aa8c2c);
             color: #0f172a;
-            text-align: center;
-            padding: 16px;
-            border-radius: 14px;
+            padding: 18px;
+            border: none;
+            border-radius: 16px;
             font-size: 16px;
             font-weight: 800;
+            cursor: pointer;
+            text-align: center;
             font-family: 'Cinzel', serif;
             box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            margin-bottom: 20px;
-            cursor: pointer;
             letter-spacing: 0.5px;
             transition: opacity 0.2s;
         }
-        .starting-action-bar:hover {
+        .btn-start:hover {
             opacity: 0.9;
         }
-        .product-grid {
+        .grid-showcase {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-top: 25px;
         }
-        .product-card {
+        .showcase-item {
             background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
-            height: 90px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            height: 75px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             font-size: 24px;
-        }
-        .notice-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 18px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .notice-title {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.5px;
-        }
-        .notice-divider {
-            border: none;
-            border-top: 1px dashed rgba(212, 175, 55, 0.3);
-            margin: 10px 0;
-        }
-        .notice-body {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.5;
-            font-weight: 500;
         }
         .bottom-nav {
             position: fixed;
@@ -314,16 +254,12 @@
 <body>
 
     <div class="container">
-        <div class="welcome-header">
-            Hi <span id="welcomeName">Emma730</span> , welcome back 👑
-        </div>
-
         <div class="hero-card">
             <div class="user-header">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">E</div>
+                    <div class="avatar" id="avatarLetter">P</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">Emma730</h3>
+                        <h3 id="usernameDisplay">PPPP</h3>
                         <div class="credit-score-wrap">
                             <span>Credit Score:</span>
                             <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
@@ -332,46 +268,37 @@
                         <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
                     </div>
                 </div>
-                <a href="vip.html" style="text-decoration: none;">
-                    <div class="vip-badge-top">🛡️</div>
-                </a>
+                <div class="vip-badge-top">🛡️</div>
             </div>
 
             <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
+                <div class="balance-title">
+                    <span>Total balance</span>
+                    <span class="eye-toggle" id="eyeToggleBtn" onclick="toggleBalanceVisibility()">👁️</span>
+                </div>
                 <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
             </div>
         </div>
 
-        <div class="info-buttons-grid">
-            <div class="info-btn">📦 Order description</div>
-            <div class="info-btn">📄 Please note</div>
+        <div class="action-boxes">
+            <div class="action-box">📦 Order description</div>
+            <div class="action-box">📝 Please note</div>
         </div>
 
-        <div class="vip-banner" onclick="window.location.href='vip.html'">
+        <div class="vip-tier-card">
             <span>🛡️ VIP 1</span>
-            <span class="profit-tag">Profit 0.5% &gt;</span>
+            <span style="color: var(--text-muted); font-size: 12px;">PROFIT 0.5% ></span>
         </div>
 
-        <div class="optimization-header" id="optStatusLabel">Start Optimization (0 / 40)</div>
-        <div class="starting-action-bar" id="startingBtn" onclick="startTaskOptimization()">Starting (0/40)</div>
+        <button class="btn-start" id="startBtn" onclick="startTaskOptimization()">START OPTIMIZATION (0 / 40)</button>
 
-        <div class="product-grid">
-            <div class="product-card">🪒</div>
-            <div class="product-card">👠</div>
-            <div class="product-card">📦</div>
-            <div class="product-card">📷</div>
-            <div class="product-card">📱</div>
-            <div class="product-card">📷</div>
-        </div>
-
-        <div class="notice-card">
-            <div class="notice-title">Notice</div>
-            <hr class="notice-divider">
-            <div class="notice-body">
-                Online Support Hours 10:00 - 23:00<br>
-                Please contact online support for your assistance
-            </div>
+        <div class="grid-showcase">
+            <div class="showcase-item">👞</div>
+            <div class="showcase-item">👠</div>
+            <div class="showcase-item">📦</div>
+            <div class="showcase-item">📷</div>
+            <div class="showcase-item">📱</div>
+            <div class="showcase-item">📸</div>
         </div>
     </div>
 
@@ -394,56 +321,61 @@
     </div>
 
     <script>
-        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username') || 'DefaultUser';
+        // Resolve dynamic user identification safely
+        const currentUsername = localStorage.getItem('userName') || 
+                                localStorage.getItem('username') || 
+                                localStorage.getItem('loggedInUser') || 
+                                localStorage.getItem('currentUser') || 
+                                localStorage.getItem('accountName') || 'PPPP';
+
+        const userKeySuffix = currentUsername.trim();
+        const balanceKey = `userBalance_${userKeySuffix}`;
+        const taskKey = `completedTasks_${userKeySuffix}`;
+
+        // Update profile branding on UI
+        document.getElementById('usernameDisplay').textContent = userKeySuffix;
+        document.getElementById('avatarLetter').textContent = userKeySuffix.charAt(0).toUpperCase();
         
-        const lastActiveUser = localStorage.getItem('lastActiveUser');
-        if (lastActiveUser !== storedUser) {
-            localStorage.setItem('lastActiveUser', storedUser);
-            localStorage.setItem('userBalance', '10.00');
-            localStorage.setItem('completedTasksCount', '0');
-            localStorage.setItem('todaysProfit', '0.00');
-            localStorage.setItem('totalProfit', '0.00');
-        }
-
-        if (storedUser && storedUser !== 'DefaultUser') {
-            document.getElementById('usernameDisplay').textContent = storedUser;
-            document.getElementById('welcomeName').textContent = storedUser;
-            document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
-        }
-
-        const storedInvite = localStorage.getItem('inviteCode');
+        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
         if (storedInvite) {
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        let currentBalance = parseFloat(localStorage.getItem('userBalance'));
+        // Load balance dynamically using scoped key with fallback mechanisms
+        let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
             currentBalance = 10.00;
-            localStorage.setItem('userBalance', currentBalance);
+            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
+            localStorage.setItem('userBalance', currentBalance.toFixed(2));
         }
-        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0.00;
-        let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0.00;
+        let completedTasksCount = parseInt(localStorage.getItem(taskKey)) || parseInt(localStorage.getItem('completedTasksCount')) || 0;
 
-        let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
-        if (isNaN(completedTasksCount)) {
-            completedTasksCount = 0;
-            localStorage.setItem('completedTasksCount', completedTasksCount);
+        let isBalanceHidden = false;
+
+        function renderUI() {
+            if (isBalanceHidden) {
+                document.getElementById('balanceDisplay').textContent = '********';
+            } else {
+                document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+            }
+            document.getElementById('startBtn').textContent = `START OPTIMIZATION (${completedTasksCount} / 40)`;
         }
-        
-        const totalTasksMax = 40;
-        document.getElementById('optStatusLabel').textContent = `Start Optimization (${completedTasksCount} / ${totalTasksMax})`;
-        document.getElementById('startingBtn').textContent = `Starting (${completedTasksCount}/${totalTasksMax})`;
 
-        const productCatalog = [
+        function toggleBalanceVisibility() {
+            isBalanceHidden = !isBalanceHidden;
+            renderUI();
+            document.getElementById('eyeToggleBtn').textContent = isBalanceHidden ? '🔒' : '👁️';
+        }
+
+        renderUI();
+
+        // Product pools for generation
+        const productPool = [
             { name: "CD button skirt pants", img: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" },
-            { name: "Classic Casual Leather Shoes", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" },
-            { name: "Wireless Noise-Canceling Headphones", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" },
-            { name: "Minimalist Smart Watch Series", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" },
-            { name: "Professional DSLR Camera Body", img: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" },
-            { name: "Designer Summer Sun Hat", img: "https://images.unsplash.com/photo-1534215754734-18e55d134347?auto=format&fit=crop&w=400&q=80" },
-            { name: "Luxury Silk Evening Scarf", img: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=400&q=80" }
+            { name: "Luxury Designer Handbag", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80" },
+            { name: "Classic Gold Watch", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" },
+            { name: "Wireless Smart Headphones", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" }
         ];
 
         function startTaskOptimization() {
@@ -452,42 +384,50 @@
                 return;
             }
 
-            // Dynamic order price scaling based on the user's balance range
+            // Balance-scaled order pricing matching tiers
             let randomOrderPrice;
             if (currentBalance <= 20) {
-                // If balance is around $10, order price will be around $5 to $12
-                randomOrderPrice = parseFloat((5.00 + Math.random() * 7.00).toFixed(2));
+                randomOrderPrice = parseFloat((currentBalance * (0.8 + Math.random() * 0.4)).toFixed(2));
+                if (randomOrderPrice < 2) randomOrderPrice = 2.00;
             } else if (currentBalance <= 200) {
-                // If balance is medium, scale order price up accordingly
-                randomOrderPrice = parseFloat((20.00 + Math.random() * 50.00).toFixed(2));
+                randomOrderPrice = parseFloat((currentBalance * (0.85 + Math.random() * 0.3)).toFixed(2));
             } else {
-                // If balance is high (e.g., $1000), order price scales up closely to match balance tier
-                randomOrderPrice = parseFloat((currentBalance * (0.8 + Math.random() * 0.3)).toFixed(2));
+                randomOrderPrice = parseFloat((currentBalance * (0.9 + Math.random() * 0.2)).toFixed(2));
             }
 
-            // Check if balance is sufficient to cover the deduction
             if (currentBalance < randomOrderPrice) {
-                alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ". Please deposit funds or contact support.");
+                alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ". Please deposit funds.");
+                window.location.href = 'withdraw.html';
                 return;
             }
 
-            const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
             const commissionRate = 0.005;
             const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2));
 
-            // Temporarily deduct product price from account balance
+            // Deduct price temporarily from scoped balance
             currentBalance -= randomOrderPrice;
+            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
 
-            // Save order details for submission page processing
-            localStorage.setItem('currentOrderName', randomProduct.name);
-            localStorage.setItem('currentOrderImg', randomProduct.img);
+            // Pick a random product item
+            const selectedProduct = productPool[Math.floor(Math.random() * productPool.length)];
+
+            // Save order specs for submission page
+            localStorage.setItem('currentOrderName', selectedProduct.name);
+            localStorage.setItem('currentOrderImg', selectedProduct.img);
             localStorage.setItem('currentOrderPrice', randomOrderPrice.toFixed(2));
             localStorage.setItem('currentOrderEarnings', earnings.toFixed(2));
 
             window.location.href = 'submit.html';
         }
-    </script>
 
+        // Live cross-tab storage sync
+        window.addEventListener('storage', function(e) {
+            if (e.key === balanceKey || e.key === 'userBalance') {
+                currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || currentBalance;
+                renderUI();
+            }
+        });
+    </script>
 </body>
 </html>
