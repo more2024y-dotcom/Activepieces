@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - ActivePieces</title>
+    <title>Dashboard - Luxury VIP</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
         :root {
-            --primary-blue: #2563eb;
-            --blue-gradient-start: #1d4ed8;
-            --blue-gradient-end: #3b82f6;
-            --bg-color: #f1f5f9;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
+            --primary-dark: #0f172a;
+            --card-dark: #1e293b;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #fef08a;
+            --bg-color: #090d16;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
@@ -22,73 +25,79 @@
             padding-bottom: 100px;
         }
         .container {
-            padding: 15px;
+            padding: 20px;
             max-width: 600px;
             margin: 0 auto;
         }
         .welcome-header {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-main);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             gap: 6px;
+            font-family: 'Cinzel', serif;
         }
         .welcome-header span {
-            color: var(--primary-blue);
+            color: var(--accent-gold);
         }
         .hero-card {
-            background: linear-gradient(135deg, var(--blue-gradient-start), var(--blue-gradient-end));
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: white;
             border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(29, 78, 216, 0.2);
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         .user-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
         .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
         .avatar {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: #ffffff;
+            background: var(--primary-dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: var(--primary-blue);
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
             font-size: 18px;
-            border: 2px solid rgba(255,255,255,0.8);
+            border: 2px solid var(--accent-gold);
         }
         .user-details h3 {
-            margin: 0 0 4px 0;
-            font-size: 16px;
+            margin: 0 0 5px 0;
+            font-size: 17px;
             font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
         }
         .credit-score-wrap {
-            font-size: 11px;
-            opacity: 0.9;
+            font-size: 12px;
+            color: var(--text-muted);
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 3px;
+            gap: 8px;
+            margin-bottom: 4px;
+            font-weight: 500;
         }
         .progress-bar-bg {
-            width: 70px;
-            height: 5px;
-            background: rgba(255,255,255,0.3);
+            width: 80px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
             border-radius: 3px;
             overflow: hidden;
             display: inline-block;
@@ -96,31 +105,43 @@
         .progress-bar-fill {
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: var(--accent-gold);
         }
         .invite-text {
-            font-size: 11px;
-            opacity: 0.9;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .invite-text span {
+            color: var(--accent-gold-light);
         }
         .vip-badge-top {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 12px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
+            font-family: 'Cinzel', serif;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            cursor: pointer;
+            text-decoration: none;
         }
         .balance-title {
             font-size: 12px;
-            opacity: 0.85;
-            margin-bottom: 4px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         .balance-amount {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 800;
             letter-spacing: 0.5px;
-            margin-bottom: 20px;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 22px;
         }
         .action-buttons-grid {
             display: grid;
@@ -128,115 +149,126 @@
             gap: 10px;
         }
         .action-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 14px;
-            padding: 12px 5px;
+            padding: 14px 5px;
             text-align: center;
             color: white;
             text-decoration: none;
             backdrop-filter: blur(5px);
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
         .action-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--accent-gold);
         }
         .action-btn span {
             display: block;
             font-size: 20px;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
         .action-btn small {
             font-size: 11px;
             font-weight: 600;
+            color: var(--text-muted);
         }
         .profit-card {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             text-align: center;
         }
         .profit-tabs {
             display: flex;
-            background: #f1f5f9;
+            background: rgba(15, 23, 42, 0.6);
             border-radius: 10px;
-            padding: 3px;
-            margin-bottom: 12px;
+            padding: 4px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
         .profit-tab {
             flex: 1;
-            padding: 8px;
+            padding: 10px;
             font-size: 12px;
             font-weight: 600;
             color: var(--text-muted);
             border-radius: 8px;
             cursor: pointer;
             text-align: center;
+            transition: all 0.2s;
         }
         .profit-tab.active {
-            background: var(--primary-blue);
-            color: white;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         }
         .profit-value {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
-            color: var(--text-main);
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
         }
         .announcement-card {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 16px;
-            padding: 14px 16px;
+            padding: 16px 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            gap: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .announcement-icon {
             font-size: 22px;
-            background: #eff6ff;
-            padding: 10px;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 12px;
             border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
         .announcement-content h4 {
-            margin: 0 0 3px 0;
+            margin: 0 0 4px 0;
             font-size: 13px;
-            color: var(--primary-blue);
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
         }
         .announcement-content p {
             margin: 0;
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-muted);
-            line-height: 1.3;
+            line-height: 1.4;
         }
         .heatmap-card {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 16px;
-            padding: 16px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            margin-bottom: 15px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
         }
         .heatmap-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 15px;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            margin-bottom: 18px;
         }
         .heatmap-graph {
             height: 90px;
             width: 100%;
-            background: linear-gradient(180deg, rgba(37,99,235,0.08) 0%, rgba(255,255,255,0) 100%);
-            border-bottom: 1px dashed #cbd5e1;
+            background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, rgba(255,255,255,0) 100%);
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
             position: relative;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .curve-line {
             position: absolute;
@@ -244,63 +276,67 @@
             left: 0;
             width: 100%;
             height: 70px;
-            background: radial-gradient(ellipse at bottom, var(--primary-blue) 0%, transparent 70%);
+            background: radial-gradient(ellipse at bottom, var(--accent-gold) 0%, transparent 70%);
             clip-path: polygon(0% 100%, 0% 60%, 25% 15%, 50% 90%, 75% 20%, 100% 10%, 100% 100%);
-            opacity: 0.6;
+            opacity: 0.5;
         }
         .days-row {
             display: flex;
             justify-content: space-between;
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            font-weight: 500;
         }
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
         .stat-box {
-            background: #f8fafc;
-            border: 1px solid #f1f5f9;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 10px;
+            padding: 12px;
         }
         .stat-box small {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-muted);
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            font-weight: 500;
         }
         .stat-box b {
-            font-size: 14px;
-            color: var(--text-main);
+            font-size: 15px;
+            color: var(--accent-gold-light);
+            font-family: 'Cinzel', serif;
         }
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #000000;
+            background-color: #05080f;
             display: flex;
             justify-content: space-around;
             align-items: center;
             height: 75px;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
             z-index: 1000;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #94a3b8;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 11px;
             font-weight: 500;
             flex: 1;
         }
         .nav-item.active {
-            color: #3b82f6;
+            color: var(--accent-gold);
         }
         .nav-item span.icon {
             font-size: 20px;
@@ -309,16 +345,16 @@
         .nav-center-btn {
             width: 50px;
             height: 50px;
-            background: var(--primary-blue);
-            border: 4px solid #000000;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            border: 4px solid #05080f;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #0f172a;
             font-size: 18px;
             margin-top: -25px;
-            box-shadow: 0 4px 10px rgba(29, 78, 216, 0.4);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
     </style>
 </head>
@@ -327,7 +363,7 @@
     <div class="container">
         <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
-            Hi <span id="welcomeName">Guest</span> , welcome back 👏
+            Hi <span id="welcomeName">Guest</span> , welcome back 👑
         </div>
 
         <div class="hero-card">
@@ -344,7 +380,7 @@
                         <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
                     </div>
                 </div>
-                <div class="vip-badge-top">VIP1</div>
+                <a href="vip.html" class="vip-badge-top">VIP 1</a>
             </div>
 
             <div class="balance-section">
