@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimization Task - Luxury VIP</title>
+    <title>Dashboard & Task Hub - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
@@ -22,472 +22,182 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 100px;
+            padding-bottom: 50px;
         }
         .container {
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
         }
-        .welcome-header {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .header-welcome {
             font-family: 'Cinzel', serif;
-        }
-        .welcome-header span {
             color: var(--accent-gold);
-        }
-        .hero-card {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
+            font-size: 16px;
+            font-weight: 700;
             margin-bottom: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
         }
-        .user-header {
+        .dashboard-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .user-row {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 22px;
+            align-items: center;
+            margin-bottom: 15px;
         }
         .user-info {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
         .avatar {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
+            border: 2px solid var(--accent-gold);
             border-radius: 50%;
-            background: var(--primary-dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
             font-family: 'Cinzel', serif;
+            font-weight: bold;
             color: var(--accent-gold);
             font-size: 18px;
-            border: 2px solid var(--accent-gold);
         }
-        .user-details h3 {
-            margin: 0 0 5px 0;
-            font-size: 17px;
-            font-weight: 700;
+        .user-details span {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .user-details strong {
+            font-size: 16px;
+            color: var(--text-main);
             font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
         }
-        .credit-score-wrap {
+        .vip-badge {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+        }
+        .balance-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .balance-label {
             font-size: 12px;
             color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-        .progress-bar-bg {
-            width: 80px;
-            height: 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            display: inline-block;
-        }
-        .progress-bar-fill {
-            width: 100%;
-            height: 100%;
-            background: var(--accent-gold);
-        }
-        .invite-text {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .invite-text span {
-            color: var(--accent-gold-light);
-        }
-        .vip-badge-top {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--accent-gold);
-            padding: 10px 12px;
-            border-radius: 50%;
-            font-size: 14px;
-            font-weight: 700;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            cursor: pointer;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .balance-title {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
         .balance-amount {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 800;
-            letter-spacing: 0.5px;
             color: var(--accent-gold);
             font-family: 'Cinzel', serif;
+            margin-top: 5px;
         }
-        .info-buttons-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .info-btn {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-main);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .info-btn:hover {
-            border-color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.05);
-        }
-        .vip-banner {
+        .profit-container {
             background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 16px;
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-weight: 700;
-            font-size: 14px;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.2s;
-        }
-        .vip-banner:hover {
-            border-color: var(--accent-gold);
-        }
-        .profit-tag {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .optimization-header {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-main);
-            font-family: 'Cinzel', serif;
-        }
-        .starting-action-bar {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
+            padding: 20px;
             text-align: center;
+            margin-bottom: 20px;
+        }
+        .profit-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .profit-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            margin-top: 8px;
+        }
+        .btn-action {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
             padding: 16px;
+            border: none;
             border-radius: 14px;
             font-size: 16px;
             font-weight: 800;
+            cursor: pointer;
+            text-align: center;
             font-family: 'Cinzel', serif;
             box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            margin-bottom: 20px;
-            cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: opacity 0.2s;
-        }
-        .starting-action-bar:hover {
-            opacity: 0.9;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .product-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            font-size: 24px;
-        }
-        .notice-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 18px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .notice-title {
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.5px;
-        }
-        .notice-divider {
-            border: none;
-            border-top: 1px dashed rgba(212, 175, 55, 0.3);
-            margin: 10px 0;
-        }
-        .notice-body {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.5;
-            font-weight: 500;
-        }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #05080f;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 75px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
-            z-index: 1000;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 500;
-            flex: 1;
-        }
-        .nav-item.active {
-            color: var(--accent-gold);
-        }
-        .nav-item span.icon {
-            font-size: 20px;
-            margin-bottom: 3px;
-        }
-        .nav-center-btn {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            border: 4px solid #05080f;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #0f172a;
-            font-size: 18px;
-            margin-top: -25px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="welcome-header">
-            Hi <span id="welcomeName">Emma730</span> , welcome back 👑
-        </div>
+        <div class="header-welcome" id="welcomeHeader">HI PPPP , WELCOME BACK 👑</div>
 
-        <div class="hero-card">
-            <div class="user-header">
+        <div class="dashboard-card">
+            <div class="user-row">
                 <div class="user-info">
-                    <div class="avatar" id="avatarLetter">E</div>
+                    <div class="avatar">P</div>
                     <div class="user-details">
-                        <h3 id="usernameDisplay">Emma730</h3>
-                        <div class="credit-score-wrap">
-                            <span>Credit Score:</span>
-                            <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
+                        <strong>PPPP</strong>
+                        <span>Credit Score: 100%</span>
                     </div>
                 </div>
-                <a href="vip.html" style="text-decoration: none;">
-                    <div class="vip-badge-top">🛡️</div>
-                </a>
+                <div class="vip-badge">VIP 1</div>
             </div>
-
             <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
+                <div class="balance-label">Total balance</div>
+                <div class="balance-amount" id="totalBalanceDisplay">10.00 USD</div>
             </div>
         </div>
 
-        <div class="info-buttons-grid">
-            <div class="info-btn">📦 Order description</div>
-            <div class="info-btn">📄 Please note</div>
+        <div class="profit-container">
+            <div class="profit-title">Today's Profit</div>
+            <div class="profit-value" id="todaysProfitDisplay">0.00 USD</div>
         </div>
 
-        <div class="vip-banner" onclick="window.location.href='vip.html'">
-            <span>🛡️ VIP 1</span>
-            <span class="profit-tag">Profit 0.5% &gt;</span>
-        </div>
-
-        <div class="optimization-header" id="optStatusLabel">Start Optimization (0 / 40)</div>
-        <div class="starting-action-bar" id="startingBtn" onclick="startTaskOptimization()">Starting (0/40)</div>
-
-        <div class="product-grid">
-            <div class="product-card">🪒</div>
-            <div class="product-card">👠</div>
-            <div class="product-card">📦</div>
-            <div class="product-card">📷</div>
-            <div class="product-card">📱</div>
-            <div class="product-card">📷</div>
-        </div>
-
-        <div class="notice-card">
-            <div class="notice-title">Notice</div>
-            <hr class="notice-divider">
-            <div class="notice-body">
-                Online Support Hours 10:00 - 23:00<br>
-                Please contact online support for your assistance
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item">
-            <span class="icon">🏠</span><span>Home</span>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">🛡️</span><span>Certificate</span>
-        </a>
-        <a href="task.html" class="nav-item active">
-            <div class="nav-center-btn">⚡</div>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">📝</span><span>Records</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <span class="icon">👤</span><span>My</span>
-        </a>
+        <button class="btn-action" onclick="window.location.href='submit.html'">Go to Task Submission Page</button>
     </div>
 
     <script>
-        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username') || 'DefaultUser';
-        
-        const lastActiveUser = localStorage.getItem('lastActiveUser');
-        if (lastActiveUser !== storedUser) {
-            localStorage.setItem('lastActiveUser', storedUser);
-            localStorage.setItem('userBalance', '10.00');
-            localStorage.setItem('completedTasksCount', '0');
-            localStorage.setItem('todaysProfit', '0.00');
-            localStorage.setItem('totalProfit', '0.00');
-        }
+        // Uniform Username & Key Resolution
+        const currentUsername = localStorage.getItem('userName') || 
+                                localStorage.getItem('username') || 
+                                localStorage.getItem('loggedInUser') || 
+                                localStorage.getItem('currentUser') || 
+                                localStorage.getItem('accountName') || 'PPPP';
 
-        if (storedUser && storedUser !== 'DefaultUser') {
-            document.getElementById('usernameDisplay').textContent = storedUser;
-            document.getElementById('welcomeName').textContent = storedUser;
-            document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
-        }
+        const userKeySuffix = currentUsername.trim();
+        const balanceKey = `userBalance_${userKeySuffix}`;
 
-        const storedInvite = localStorage.getItem('inviteCode');
-        if (storedInvite) {
-            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
-        }
-
-        let currentBalance = parseFloat(localStorage.getItem('userBalance'));
+        // Load and synchronize unified balances safely across pages
+        let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance'));
         if (isNaN(currentBalance)) {
             currentBalance = 10.00;
-            localStorage.setItem('userBalance', currentBalance);
-        }
-        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
-
-        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0.00;
-        let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0.00;
-
-        let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
-        if (isNaN(completedTasksCount)) {
-            completedTasksCount = 0;
-            localStorage.setItem('completedTasksCount', completedTasksCount);
-        }
-        
-        const totalTasksMax = 40;
-        document.getElementById('optStatusLabel').textContent = `Start Optimization (${completedTasksCount} / ${totalTasksMax})`;
-        document.getElementById('startingBtn').textContent = `Starting (${completedTasksCount}/${totalTasksMax})`;
-
-        const productCatalog = [
-            { name: "CD button skirt pants", img: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" },
-            { name: "Classic Casual Leather Shoes", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" },
-            { name: "Wireless Noise-Canceling Headphones", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" },
-            { name: "Minimalist Smart Watch Series", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" },
-            { name: "Professional DSLR Camera Body", img: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80" },
-            { name: "Designer Summer Sun Hat", img: "https://images.unsplash.com/photo-1534215754734-18e55d134347?auto=format&fit=crop&w=400&q=80" },
-            { name: "Luxury Silk Evening Scarf", img: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=400&q=80" }
-        ];
-
-        function startTaskOptimization() {
-            if (completedTasksCount >= 40) {
-                alert("You have already completed your 40/40 tasks for today.");
-                return;
-            }
-
-            // Dynamic order price scaling based on the user's balance range
-            let randomOrderPrice;
-            if (currentBalance <= 20) {
-                // If balance is around $10, order price will be around $5 to $12
-                randomOrderPrice = parseFloat((5.00 + Math.random() * 7.00).toFixed(2));
-            } else if (currentBalance <= 200) {
-                // If balance is medium, scale order price up accordingly
-                randomOrderPrice = parseFloat((20.00 + Math.random() * 50.00).toFixed(2));
-            } else {
-                // If balance is high (e.g., $1000), order price scales up closely to match balance tier
-                randomOrderPrice = parseFloat((currentBalance * (0.8 + Math.random() * 0.3)).toFixed(2));
-            }
-
-            // Check if balance is sufficient to cover the deduction
-            if (currentBalance < randomOrderPrice) {
-                alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ". Please deposit funds or contact support.");
-                return;
-            }
-
-            const randomProduct = productCatalog[Math.floor(Math.random() * productCatalog.length)];
-            const commissionRate = 0.005;
-            const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2));
-
-            // Temporarily deduct product price from account balance
-            currentBalance -= randomOrderPrice;
+            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
-
-            // Save order details for submission page processing
-            localStorage.setItem('currentOrderName', randomProduct.name);
-            localStorage.setItem('currentOrderImg', randomProduct.img);
-            localStorage.setItem('currentOrderPrice', randomOrderPrice.toFixed(2));
-            localStorage.setItem('currentOrderEarnings', earnings.toFixed(2));
-
-            window.location.href = 'submit.html';
         }
-    </script>
 
+        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit'));
+        if (isNaN(todaysProfit)) todaysProfit = 0.00;
+
+        // Render to UI elements
+        document.getElementById('totalBalanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+        document.getElementById('todaysProfitDisplay').textContent = todaysProfit.toFixed(2) + ' USD';
+        document.getElementById('welcomeHeader').textContent = `HI ${userKeySuffix.toUpperCase()} , WELCOME BACK 👑`;
+    </script>
 </body>
 </html>
