@@ -273,8 +273,8 @@
     <script>
         const orderName = localStorage.getItem('currentOrderName') || "CD button skirt pants";
         const orderImg = localStorage.getItem('currentOrderImg') || "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80";
-        const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 3.00;
-        const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 0.02;
+        const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 901.00;
+        const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 4.51;
 
         document.getElementById('productTitleDisplay').textContent = orderName;
         document.getElementById('productImg').src = orderImg;
@@ -349,15 +349,18 @@
             let completedTasks = parseInt(localStorage.getItem('completedTasksCount'));
             if (isNaN(completedTasks)) completedTasks = 0;
 
-            // 2. Add back the order cost + commission earnings to the balance, and update profits
+            // 2. Return principal (orderPrice) AND add ONLY commission earnings to balance.
+            // (If your flow deducts orderPrice when starting, you must return it here + add earnings).
             currentBalance += (orderPrice + orderEarnings);
+
+            // 3. Increment Today's Profit and Total Profit by JUST the commission earnings
             todaysProfit += orderEarnings;
             totalProfit += orderEarnings;
             completedTasks += 1;
 
             if (completedTasks > 40) completedTasks = 40;
 
-            // 3. Save back to localStorage
+            // 4. Save back to localStorage
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
             localStorage.setItem('totalProfit', totalProfit.toFixed(2));
