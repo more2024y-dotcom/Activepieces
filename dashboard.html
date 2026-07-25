@@ -509,8 +509,25 @@
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        // --- DAILY PROFIT & TOTAL PROFIT ROLLOVER SYSTEM ---
+        // --- USER-SCOPED TASK TRACKING & INITIALIZATION ---
+        const userKeySuffix = currentUsername ? currentUsername.trim() : 'Guest';
+        const taskKey = `completedTasks_${userKeySuffix}`;
+        const lastTaskDateKey = `lastTaskDate_${userKeySuffix}`;
+        
         const todayDateStr = new Date().toDateString();
+        let lastRecordedTaskDate = localStorage.getItem(lastTaskDateKey);
+
+        // If it's a new day, reset this specific user's tasks to 0
+        if (lastRecordedTaskDate && lastRecordedTaskDate !== todayDateStr) {
+            localStorage.setItem(taskKey, '0');
+            localStorage.setItem(lastTaskDateKey, todayDateStr);
+        } else if (!localStorage.getItem(taskKey)) {
+            // If the key doesn't exist yet (brand new account), explicitly initialize to 0
+            localStorage.setItem(taskKey, '0');
+            localStorage.setItem(lastTaskDateKey, todayDateStr);
+        }
+
+        // --- DAILY PROFIT & TOTAL PROFIT ROLLOVER SYSTEM ---
         let lastRecordedDate = localStorage.getItem('lastProfitDate');
 
         let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0;
@@ -524,6 +541,16 @@
             localStorage.setItem('todaysProfit', todaysProfit);
         }
         localStorage.setItem('lastProfitDate', todayDateStr);
+
+        // Active task submission check helper (can be imported or used in task logic)
+        function checkCanPerformTask() {
+            let currentTasks = parseInt(localStorage.getItem(taskKey)) || 0;
+            if (currentTasks >= 40) {
+                alert("You have already completed your 40/40 tasks for today.");
+                return false;
+            }
+            return true;
+        }
 
         // Active tab tracking state ("today" or "total")
         let activeProfitView = 'today';
