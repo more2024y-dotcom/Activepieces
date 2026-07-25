@@ -394,8 +394,19 @@
     </div>
 
     <script>
-        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username');
-        if (storedUser) {
+        const storedUser = localStorage.getItem('userName') || localStorage.getItem('username') || 'DefaultUser';
+        
+        // Ensure new or switched accounts start fresh at 0/40 tasks and 10.00 USD balance
+        const lastActiveUser = localStorage.getItem('lastActiveUser');
+        if (lastActiveUser !== storedUser) {
+            localStorage.setItem('lastActiveUser', storedUser);
+            localStorage.setItem('userBalance', '10.00');
+            localStorage.setItem('completedTasksCount', '0');
+            localStorage.setItem('todaysProfit', '0.00');
+            localStorage.setItem('totalProfit', '0.00');
+        }
+
+        if (storedUser && storedUser !== 'DefaultUser') {
             document.getElementById('usernameDisplay').textContent = storedUser;
             document.getElementById('welcomeName').textContent = storedUser;
             document.getElementById('avatarLetter').textContent = storedUser.charAt(0).toUpperCase();
@@ -413,17 +424,8 @@
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit'));
-        if (isNaN(todaysProfit)) {
-            todaysProfit = 0.00;
-            localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
-        }
-
-        let totalProfit = parseFloat(localStorage.getItem('totalProfit'));
-        if (isNaN(totalProfit)) {
-            totalProfit = 0.00;
-            localStorage.setItem('totalProfit', totalProfit.toFixed(2));
-        }
+        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0.00;
+        let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0.00;
 
         let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
         if (isNaN(completedTasksCount)) {
