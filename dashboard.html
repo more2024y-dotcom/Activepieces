@@ -361,7 +361,6 @@
 <body>
 
     <div class="container">
-        <!-- Welcome Header showing dynamic username -->
         <div class="welcome-header">
             Hi <span id="welcomeName">Guest</span> , welcome back 👑
         </div>
@@ -454,7 +453,6 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item active">
             <span class="icon">🏠</span><span>Home</span>
@@ -474,13 +472,11 @@
     </div>
 
     <script>
-        // AUTOMATIC RESET: If the stored name is "Bob", wipe it out immediately
         if (localStorage.getItem('userName') === 'Bob' || localStorage.getItem('username') === 'Bob') {
             localStorage.removeItem('userName');
             localStorage.removeItem('username');
         }
 
-        // Retrieve username cleanly
         const currentUsername = localStorage.getItem('userName') || 
                                 localStorage.getItem('username') || 
                                 localStorage.getItem('loggedInUser') || 
@@ -502,18 +498,17 @@
             document.getElementById('inviteCodeDisplay').textContent = storedInvite;
         }
 
-        // --- UNIQUE ACCOUNT-SCOPED BALANCE (Forces 10.00 USD for new accounts) ---
+        // Use account-scoped balance key so it matches tasks and profile
         const userKeySuffix = currentUsername ? currentUsername.trim() : 'Guest';
         const balanceKey = `userBalance_${userKeySuffix}`;
         
         let currentBalance = parseFloat(localStorage.getItem(balanceKey));
         if (isNaN(currentBalance)) {
             currentBalance = 10.00;
-            localStorage.setItem(balanceKey, currentBalance);
+            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
         }
         document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
 
-        // --- UNIQUE ACCOUNT-SCOPED TASK TRACKING (Forces 0/40 for new accounts & daily resets) ---
         const taskKey = `completedTasks_${userKeySuffix}`;
         const lastTaskDateKey = `lastTaskDate_${userKeySuffix}`;
         
@@ -521,16 +516,13 @@
         let lastRecordedTaskDate = localStorage.getItem(lastTaskDateKey);
 
         if (lastRecordedTaskDate && lastRecordedTaskDate !== todayDateStr) {
-            // New day rollover: reset task count to 0
             localStorage.setItem(taskKey, '0');
             localStorage.setItem(lastTaskDateKey, todayDateStr);
         } else if (localStorage.getItem(taskKey) === null) {
-            // Brand new account initialization: explicitly start at 0
             localStorage.setItem(taskKey, '0');
             localStorage.setItem(lastTaskDateKey, todayDateStr);
         }
 
-        // Global check helper function to block tasks once 40/40 is reached
         window.checkCanPerformTask = function() {
             let currentTasks = parseInt(localStorage.getItem(taskKey)) || 0;
             if (currentTasks >= 40) {
@@ -540,9 +532,7 @@
             return true;
         };
 
-        // --- DAILY PROFIT & TOTAL PROFIT ROLLOVER SYSTEM ---
         let lastRecordedDate = localStorage.getItem('lastProfitDate');
-
         let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0;
         let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0;
 
@@ -554,7 +544,6 @@
         }
         localStorage.setItem('lastProfitDate', todayDateStr);
 
-        // Active tab tracking state ("today" or "total")
         let activeProfitView = 'today';
 
         function updateProfitDisplay() {
@@ -577,7 +566,6 @@
             updateProfitDisplay();
         }
 
-        // Initial render
         updateProfitDisplay();
     </script>
 
