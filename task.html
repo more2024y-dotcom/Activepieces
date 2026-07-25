@@ -374,6 +374,13 @@
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
         }
 
+        // Initialize total profit tracking across all days
+        let totalProfit = parseFloat(localStorage.getItem('totalProfit'));
+        if (isNaN(totalProfit)) {
+            totalProfit = 0.00;
+            localStorage.setItem('totalProfit', totalProfit.toFixed(2));
+        }
+
         let completedTasksCount = parseInt(localStorage.getItem('completedTasksCount'));
         if (isNaN(completedTasksCount)) {
             completedTasksCount = 17;
@@ -411,9 +418,12 @@
 
             currentBalance -= randomOrderPrice;
 
-            // Update today's profit accumulation
+            // Accumulate both today's profit and total lifetime profit
             todaysProfit += earnings;
+            totalProfit += earnings;
+
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
+            localStorage.setItem('totalProfit', totalProfit.toFixed(2));
 
             localStorage.setItem('userBalance', currentBalance);
             localStorage.setItem('currentOrderName', randomProduct.name);
