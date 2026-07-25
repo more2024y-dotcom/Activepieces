@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Task - Luxury VIP</title>
+    <title>Dashboard - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
@@ -22,334 +22,534 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 50px;
-        }
-        .top-bar {
-            background-color: var(--primary-dark);
-            color: var(--accent-gold);
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Cinzel', serif;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 100px;
         }
         .container {
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
         }
-        .product-title {
-            font-size: 14px;
-            font-weight: 700;
+        .welcome-header {
+            font-size: 16px;
+            font-weight: 600;
             color: var(--text-main);
-            margin-bottom: 12px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-family: 'Cinzel', serif;
         }
-        .image-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .image-card img {
-            max-width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 2px solid var(--accent-gold);
-        }
-        .dots {
-            text-align: center;
-            font-size: 20px;
-            margin-top: 10px;
+        .welcome-header span {
             color: var(--accent-gold);
         }
-        .price-section {
+        .hero-card {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .user-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 18px;
+            border: 2px solid var(--accent-gold);
+        }
+        .user-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+        }
+        .credit-score-wrap {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .progress-bar-bg {
+            width: 80px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .progress-bar-fill {
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gold);
+        }
+        .invite-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .invite-text span {
+            color: var(--accent-gold-light);
+        }
+        .vip-badge-top {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .balance-title {
             font-size: 12px;
             color: var(--text-muted);
             margin-bottom: 6px;
             font-weight: 600;
+            letter-spacing: 0.5px;
         }
-        .price-amount {
+        .balance-amount {
             font-size: 28px;
             font-weight: 800;
+            letter-spacing: 0.5px;
             color: var(--accent-gold);
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            padding-bottom: 15px;
             font-family: 'Cinzel', serif;
+            margin-bottom: 22px;
         }
-        .comment-label-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-main);
+        .action-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
-        .stars {
-            color: var(--text-muted);
-            font-size: 16px;
-            cursor: pointer;
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 14px;
+            padding: 14px 5px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
         }
-        .stars.active {
-            color: var(--accent-gold);
+        .action-btn:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--accent-gold);
         }
-        .comment-box {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: 14px;
-            min-height: 90px;
-            position: relative;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        .action-btn span {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 6px;
         }
-        .comment-text {
-            font-size: 13px;
-            color: var(--text-main);
-            outline: none;
-            border: none;
-            width: 100%;
-            background: transparent;
-            resize: none;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .auto-comment-btn {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
+        .action-btn small {
             font-size: 11px;
-            font-weight: 700;
-            padding: 6px 12px;
-            border-radius: 6px;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            cursor: pointer;
-            border: none;
-            font-family: 'Cinzel', serif;
-            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-        }
-        .vip-banner-box {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
-            padding: 12px 16px;
-            font-size: 13px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-        }
-        .stats-table {
-            background: var(--card-dark);
-            border-radius: 14px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 16px;
-            font-size: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .stats-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
+            font-weight: 600;
             color: var(--text-muted);
         }
-        .stats-row:last-child {
-            margin-bottom: 0;
-        }
-        .stats-val {
-            font-weight: 700;
-            color: var(--accent-gold) !important;
-        }
-        .meta-card {
+        .profit-card {
             background: var(--card-dark);
-            border-radius: 14px;
             border: 1px solid rgba(212, 175, 55, 0.2);
-            padding: 16px;
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: center;
         }
-        .meta-row {
+        .profit-tabs {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .meta-row:last-child {
-            margin-bottom: 0;
-        }
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            padding: 16px;
-            border: none;
-            border-radius: 14px;
-            font-size: 16px;
-            font-weight: 800;
+        .profit-tab {
+            flex: 1;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 8px;
             cursor: pointer;
             text-align: center;
-            font-family: 'Cinzel', serif;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            letter-spacing: 0.5px;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
         }
-        .btn-submit:hover {
-            opacity: 0.9;
+        .profit-tab.active {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+        .profit-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+        }
+        .announcement-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .announcement-icon {
+            font-size: 22px;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .announcement-content h4 {
+            margin: 0 0 4px 0;
+            font-size: 13px;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+        }
+        .announcement-content p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        .heatmap-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+        .heatmap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            margin-bottom: 18px;
+        }
+        .heatmap-graph {
+            height: 90px;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, rgba(255,255,255,0) 100%);
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+            position: relative;
+            margin-bottom: 12px;
+        }
+        .curve-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: radial-gradient(ellipse at bottom, var(--accent-gold) 0%, transparent 70%);
+            clip-path: polygon(0% 100%, 0% 60%, 25% 15%, 50% 90%, 75% 20%, 100% 10%, 100% 100%);
+            opacity: 0.5;
+        }
+        .days-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .stat-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+        }
+        .stat-box small {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .stat-box b {
+            font-size: 15px;
+            color: var(--accent-gold-light);
+            font-family: 'Cinzel', serif;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #05080f;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 75px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
+            z-index: 1000;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: var(--accent-gold);
+        }
+        .nav-item span.icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        .nav-center-btn {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            border: 4px solid #05080f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f172a;
+            font-size: 18px;
+            margin-top: -25px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar" onclick="history.back()">
-        &lt;
+    <div class="container">
+        <!-- Welcome Header showing dynamic username -->
+        <div class="welcome-header">
+            Hi <span id="welcomeName">Guest</span> , welcome back 👑
+        </div>
+
+        <div class="hero-card">
+            <div class="user-header">
+                <div class="user-info">
+                    <div class="avatar" id="avatarLetter">G</div>
+                    <div class="user-details">
+                        <h3 id="usernameDisplay">Guest</h3>
+                        <div class="credit-score-wrap">
+                            <span>Credit Score:</span>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
+                            <span>100%</span>
+                        </div>
+                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
+                    </div>
+                </div>
+                <a href="vip.html" class="vip-badge-top">VIP 1</a>
+            </div>
+
+            <div class="balance-section">
+                <div class="balance-title">Total balance 👁️</div>
+                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
+            </div>
+
+            <div class="action-buttons-grid">
+                <a href="withdraw.html" class="action-btn">
+                    <span>➕</span>
+                    <small>Add Wallet</small>
+                </a>
+                <a href="withdraw.html" class="action-btn">
+                    <span>⬇️</span>
+                    <small>Deposit</small>
+                </a>
+                <a href="withdraw.html" class="action-btn">
+                    <span>⬆️</span>
+                    <small>Withdraw</small>
+                </a>
+                <a href="withdraw.html" class="action-btn">
+                    <span>🔄</span>
+                    <small>Transaction</small>
+                </a>
+            </div>
+        </div>
+
+        <div class="profit-card">
+            <div class="profit-tabs">
+                <div class="profit-tab active" id="tabToday" onclick="switchProfitTab('today')">Today's Profit</div>
+                <div class="profit-tab" id="tabTotal" onclick="switchProfitTab('total')">Total Profit</div>
+            </div>
+            <div class="profit-value" id="profitDisplay">0.00 USD</div>
+        </div>
+
+        <div class="announcement-card">
+            <div class="announcement-icon">📢</div>
+            <div class="announcement-content">
+                <h4>SYSTEM ANNOUNCEMENT</h4>
+                <p>Welcome to the platform! Complete daily tasks to increase your tier rewards.</p>
+            </div>
+        </div>
+
+        <div class="heatmap-card">
+            <div class="heatmap-header">
+                <span>Optimization Needs Heatmap</span>
+                <span style="color: var(--text-muted); font-size: 11px;">▼</span>
+            </div>
+            <div class="heatmap-graph">
+                <div class="curve-line"></div>
+            </div>
+            <div class="days-row">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <small>Total Online Users</small>
+                    <b>111.77K</b>
+                </div>
+                <div class="stat-box">
+                    <small>Avg User Optimization Volume</small>
+                    <b>58.95K</b>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container">
-        <div class="product-title" id="productTitleDisplay">CD button skirt pants</div>
-
-        <div class="image-card">
-            <img id="productImg" src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" alt="Product">
-            <div class="dots">•</div>
-        </div>
-
-        <div class="price-section">USD</div>
-        <div class="price-amount" id="priceDisplay">901.00 x1</div>
-
-        <div class="comment-label-row">
-            <span>Click to write a comment:</span>
-            <div class="stars" id="starContainer" onclick="fillRandomComment()">★★★★★</div>
-        </div>
-
-        <div class="comment-box">
-            <textarea class="comment-text" id="commentInput" placeholder="Click automatic comment or type here..."></textarea>
-            <button class="auto-comment-btn" onclick="fillRandomComment()">Automatic Comment</button>
-        </div>
-
-        <div class="vip-banner-box">
-            <span>🛡️</span> VIP 1
-        </div>
-
-        <div class="stats-table">
-            <div class="stats-row">
-                <span>Total Amount</span>
-                <span>Reward</span>
-                <span>Earnings</span>
-            </div>
-            <div class="stats-row stats-val" style="font-size: 13px; margin-top: 6px;">
-                <span id="statAmount">901.00(USD)</span>
-                <span>0.5%</span>
-                <span id="statEarnings">45.05(USD)</span>
-            </div>
-        </div>
-
-        <div class="meta-card">
-            <div class="meta-row">
-                <span>Date Created</span>
-                <span id="dateCreated">2026-07-17 17:27:34</span>
-            </div>
-            <div class="meta-row">
-                <span>Order Code</span>
-                <span id="orderCode">2026071717270000034</span>
-            </div>
-        </div>
-
-        <button class="btn-submit" onclick="submitOrder()">Submit</button>
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">🛡️</span><span>Certificate</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <div class="nav-center-btn">⚡</div>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">📝</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="icon">👤</span><span>My</span>
+        </a>
     </div>
 
     <script>
-        const orderName = localStorage.getItem('currentOrderName') || "CD button skirt pants";
-        const orderImg = localStorage.getItem('currentOrderImg') || "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80";
-        const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 901.00;
-        const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 4.51;
-
-        document.getElementById('productTitleDisplay').textContent = orderName;
-        document.getElementById('productImg').src = orderImg;
-        document.getElementById('priceDisplay').textContent = orderPrice.toFixed(2) + ' x1';
-        document.getElementById('statAmount').textContent = orderPrice.toFixed(2) + '(USD)';
-        document.getElementById('statEarnings').textContent = orderEarnings.toFixed(2) + '(USD)';
-
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        
-        document.getElementById('dateCreated').textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        document.getElementById('orderCode').textContent = `${year}${month}${day}${hours}${minutes}${Math.floor(10000 + Math.random() * 90000)}`;
-
-        const reviewPools = {
-            clothing: [
-                "The fabric feels amazing and fits wonderfully!",
-                "Stitching is neat and high quality. Very pleased.",
-                "Beautiful color and true to size. Highly recommended!",
-                "Comfortable to wear all day long. Great style."
-            ],
-            gadgets: [
-                "Works seamlessly right out of the box. Super fast!",
-                "Excellent build quality and great battery life.",
-                "Very practical design, completely met my expectations.",
-                "Top-tier performance, worth every penny."
-            ],
-            general: [
-                "Fast shipping and item matched the description perfectly.",
-                "Extremely satisfied with this purchase experience.",
-                "Exceeded expectations, will definitely buy again.",
-                "Wonderful product quality and lovely packaging."
-            ]
-        };
-
-        function fillRandomComment() {
-            document.getElementById('starContainer').classList.add('active');
-            
-            let selectedPool = reviewPools.general;
-            const lowerName = orderName.toLowerCase();
-            if(lowerName.includes('shirt') || lowerName.includes('skirt') || lowerName.includes('pants') || lowerName.includes('shoes') || lowerName.includes('jacket')) {
-                selectedPool = reviewPools.clothing;
-            } else if(lowerName.includes('phone') || lowerName.includes('camera') || lowerName.includes('watch') || lowerName.includes('headphone')) {
-                selectedPool = reviewPools.gadgets;
-            }
-
-            const randomReview = selectedPool[Math.floor(Math.random() * selectedPool.length)];
-            document.getElementById('commentInput').value = randomReview;
+        // AUTOMATIC RESET: If the stored name is "Bob", wipe it out immediately
+        if (localStorage.getItem('userName') === 'Bob' || localStorage.getItem('username') === 'Bob') {
+            localStorage.removeItem('userName');
+            localStorage.removeItem('username');
         }
 
-        function submitOrder() {
-            const comment = document.getElementById('commentInput').value;
-            if (!comment) {
-                alert('Please select an automatic comment or write a review first!');
-                return;
-            }
+        // Retrieve username cleanly
+        const currentUsername = localStorage.getItem('userName') || 
+                                localStorage.getItem('username') || 
+                                localStorage.getItem('loggedInUser') || 
+                                localStorage.getItem('currentUser') || 
+                                localStorage.getItem('accountName');
 
-            let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 2000.00;
-            currentBalance += (orderPrice + orderEarnings);
+        if (currentUsername && currentUsername.trim() !== "") {
+            document.getElementById('usernameDisplay').textContent = currentUsername;
+            document.getElementById('welcomeName').textContent = currentUsername;
+            document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
+        } else {
+            document.getElementById('usernameDisplay').textContent = "Guest";
+            document.getElementById('welcomeName').textContent = "Guest";
+            document.getElementById('avatarLetter').textContent = "G";
+        }
+
+        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
+        if (storedInvite) {
+            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
+        }
+
+        let currentBalance = parseFloat(localStorage.getItem('userBalance'));
+        if (isNaN(currentBalance)) {
+            currentBalance = 10.00;
             localStorage.setItem('userBalance', currentBalance);
-
-            let completedTasks = parseInt(localStorage.getItem('completedTasksCount')) || 17;
-            completedTasks += 1;
-            if (completedTasks > 40) completedTasks = 40;
-            localStorage.setItem('completedTasksCount', completedTasks);
-
-            localStorage.removeItem('taskPending');
-
-            alert('Order submitted successfully! Commission credited to account.');
-            window.location.href = 'task.html';
         }
+        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+
+        // --- DAILY PROFIT & TOTAL PROFIT ROLLOVER SYSTEM ---
+        const todayDateStr = new Date().toDateString();
+        let lastRecordedDate = localStorage.getItem('lastProfitDate');
+
+        let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0;
+        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0;
+
+        // If the date has changed since the user last logged in, rollover today's profit to total profit
+        if (lastRecordedDate && lastRecordedDate !== todayDateStr) {
+            totalProfit += todaysProfit;
+            todaysProfit = 0;
+            localStorage.setItem('totalProfit', totalProfit);
+            localStorage.setItem('todaysProfit', todaysProfit);
+        }
+        localStorage.setItem('lastProfitDate', todayDateStr);
+
+        // Active tab tracking state ("today" or "total")
+        let activeProfitView = 'today';
+
+        function updateProfitDisplay() {
+            const displayVal = activeProfitView === 'today' ? todaysProfit : totalProfit;
+            document.getElementById('profitDisplay').textContent = displayVal.toFixed(2) + ' USD';
+        }
+
+        function switchProfitTab(tabName) {
+            activeProfitView = tabName;
+            const tabToday = document.getElementById('tabToday');
+            const tabTotal = document.getElementById('tabTotal');
+
+            if (tabName === 'today') {
+                tabToday.classList.add('active');
+                tabTotal.classList.remove('active');
+            } else {
+                tabTotal.classList.add('active');
+                tabToday.classList.remove('active');
+            }
+            updateProfitDisplay();
+        }
+
+        // Initial render
+        updateProfitDisplay();
     </script>
 
 </body>
