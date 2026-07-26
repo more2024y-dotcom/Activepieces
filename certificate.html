@@ -110,6 +110,7 @@
             text-decoration: none;
             font-size: 10px;
             flex: 1;
+            cursor: pointer;
         }
         .nav-item.active {
             color: #ffd700;
@@ -142,9 +143,9 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar: Change 'home.html' below to 'index.html' if your homepage is index.html -->
+    <!-- Bottom Navigation Bar using JavaScript history.back() to prevent white screens or logouts -->
     <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
+        <a onclick="history.back()" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
         </a>
         <a href="certificate.html" class="nav-item active" style="color: #ffd700;">
