@@ -152,13 +152,13 @@
         <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
         </a>
-        <a href="withdraw.html" class="nav-item">
+        <a href="certificate.html" class="nav-item">
             <span class="icon">🛡️</span><span>Certificate</span>
         </a>
-        <a href="withdraw.html" class="nav-item">
+        <a href="task.html" class="nav-item">
             <div class="nav-center-btn">⚡</div>
         </a>
-        <a href="withdraw.html" class="nav-item">
+        <a href="withdraw.html" class="nav-item active">
             <span class="icon">📝</span><span>Records</span>
         </a>
         <a href="profile.html" class="nav-item">
@@ -167,19 +167,42 @@
     </div>
 
     <script>
-        const storedBalance = localStorage.getItem('userBalance');
+        // Support user-specific balance key matching dashboard logic
+        const currentUsername = localStorage.getItem('userName') ||
+                                localStorage.getItem('username') ||
+                                localStorage.getItem('loggedInUser') ||
+                                localStorage.getItem('currentUser') ||
+                                localStorage.getItem('accountName');
+        const userKeySuffix = currentUsername ? currentUsername.trim() : 'Guest';
+        const balanceKey = `userBalance_${userKeySuffix}`;
+
+        const storedBalance = localStorage.getItem(balanceKey) || localStorage.getItem('userBalance');
         if (storedBalance !== null) {
             document.getElementById('withdrawBalance').textContent = parseFloat(storedBalance).toFixed(2) + ' USD';
         }
 
         function handleWithdraw() {
-            const amt = document.getElementById('amountInput').value;
+            const amt = parseFloat(document.getElementById('amountInput').value);
             const wallet = document.getElementById('walletInput').value;
             if(!amt || !wallet) {
                 alert('Please fill in all fields');
                 return;
             }
+
+            let currentBal = parseFloat(localStorage.getItem(balanceKey) || localStorage.getItem('userBalance') || '1268.01');
+            if (amt > currentBal) {
+                alert('Insufficient balance for this withdrawal.');
+                return;
+            }
+
+            currentBal -= amt;
+            localStorage.setItem(balanceKey, currentBal.toFixed(2));
+            localStorage.setItem('userBalance', currentBal.toFixed(2));
+
+            document.getElementById('withdrawBalance').textContent = currentBal.toFixed(2) + ' USD';
             alert('Withdrawal request submitted successfully!');
+            document.getElementById('amountInput').value = '';
+            document.getElementById('walletInput').value = '';
         }
     </script>
 
