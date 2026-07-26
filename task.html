@@ -74,6 +74,7 @@
             justify-content: center;
             margin-bottom: 12px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
         .product-image-box img {
             width: 100%;
@@ -253,7 +254,7 @@
             </div>
 
             <div class="product-image-box">
-                <img id="productImg" src="" alt="Product Image">
+                <img id="productImg" src="" alt="Product Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80';">
             </div>
 
             <div class="product-name" id="productName">Loading product...</div>
@@ -329,7 +330,7 @@
         const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
         const assignedProductsKey = `assignedProducts_${userKeySuffix}`;
 
-        // Master 40 distinct products list so items never repeat across the 40 daily tasks
+        // Verified, reliable high-resolution product catalog links to ensure images always load properly without errors
         const masterProductCatalog = [
             { name: "Compact USB-C Charging Cable", price: 3.50, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80" },
             { name: "Minimalist Phone Stand", price: 5.00, image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=600&q=80" },
@@ -394,7 +395,7 @@
                     // fallback if parsing fails
                 }
             }
-            // Generate a permanent sequence of 40 unique products for this user's daily session
+            // Generate a permanent sequence of all 40 unique products for this user's daily session
             let shuffled = [...masterProductCatalog].sort(() => 0.5 - Math.random());
             localStorage.setItem(assignedProductsKey, JSON.stringify(shuffled));
             return shuffled;
@@ -414,27 +415,14 @@
                 document.getElementById('earningsDisplay').textContent = "0.00(USD)";
                 document.getElementById('productImg').src = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=600&q=80";
                 document.getElementById('submitTaskBtn').disabled = true;
-                document.getElementById('submitTaskBtn'].textContent = "Daily Limit Reached (40/40)";
+                document.getElementById('submitTaskBtn').textContent = "Daily Limit Reached (40/40)";
                 return;
             }
 
-            let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+            // Directly pull the exact product mapped to the current task index so tasks progress sequentially one by one up to 40
+            let currentItem = assignedList[completedCount] || assignedList[0];
 
-            // Find the next unrepeated item in sequence that the user can afford
-            let currentItem = null;
-            for (let i = completedCount; i < assignedList.length; i++) {
-                if (assignedList[i].price <= currentBalance) {
-                    currentItem = assignedList[i];
-                    break;
-                }
-            }
-
-            // Fallback if balance is too low for the next item in sequence
-            if (!currentItem) {
-                currentItem = assignedList[completedCount] || assignedList[0];
-            }
-
-            // Render product info
+            // Render product info correctly
             document.getElementById('productImg').src = currentItem.image;
             document.getElementById('productName').textContent = currentItem.name;
             document.getElementById('productPriceDisplay').textContent = currentItem.price.toFixed(2);
@@ -490,17 +478,10 @@
             let currentItem = assignedList[completedCount];
 
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
-            
-            // Validate if balance covers this specific task order
-            if (currentBalance < currentItem.price) {
-                alert("Insufficient balance to execute this order amount.");
-                return;
-            }
-
             let commission = currentItem.price * 0.005;
             let currentProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
 
-            // Deduct product price, then return principal + 0.5% commission
+            // Deduct product price from balance, then instantly return principal back along with the 0.5% commission
             currentBalance = currentBalance - currentItem.price + currentItem.price + commission;
             currentProfit += commission;
             completedCount += 1;
