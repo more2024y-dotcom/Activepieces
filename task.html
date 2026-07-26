@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Optimization - VIP</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap';);
         :root {
             --primary-blue: #0f172a;
             --accent-blue: #2563eb;
@@ -315,7 +315,7 @@
 <body>
     <div class="container">
         <div class="top-nav-bar">
-            <a href="dashboard.html" class="back-btn">&lt; Back</a>
+            <a href="dashboard.html" class="back-btn">< Back</a>
         </div>
         
         <div class="task-card">
@@ -326,7 +326,7 @@
 
             <!-- Image Box / Activepieces Completion Banner Area -->
             <div class="product-image-box" id="mediaBoxContainer">
-                <img id="productImg" src="" alt="Product Image" style="display: block;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80';">
+                <img id="productImg" src="" alt="Product Image" style="display: block;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80';">;
             </div>
 
             <div class="product-name" id="productName">Loading product...</div>
@@ -401,53 +401,51 @@
                                 localStorage.getItem('accountName') || 'Guest';
 
         const userKeySuffix = currentUsername.trim();
-        const taskKey = `completedTasks_${userKeySuffix}`;
-        const balanceKey = `userBalance_${userKeySuffix}`;
-        const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
-        const assignedProductsKey = `assignedProducts_${userKeySuffix}`;
+        const taskKey = `completedTasks_{userKeySuffix}`;         const balanceKey = `userBalance_{userKeySuffix}`;         const balanceKey = `userBalance_{userKeySuffix}`;
+        const todaysProfitKey = `todaysProfit_{userKeySuffix}`;         const assignedProductsKey = `assignedProducts_{userKeySuffix}`;         const assignedProductsKey = `assignedProducts_{userKeySuffix}`;
 
         // Master 40 products catalog with verified high-resolution images
         const masterProductCatalog = [
-            { name: "Compact USB-C Charging Cable", price: 3.50, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80" },
-            { name: "Minimalist Phone Stand", price: 5.00, image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=600&q=80" },
-            { name: "Stainless Steel Travel Mug", price: 7.20, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80" },
-            { name: "Designer Silk Scarf", price: 10.00, image: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=600&q=80" },
-            { name: "Classic Leather Wallet", price: 12.50, image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80" },
-            { name: "Titanium Polarized Sunglasses", price: 15.00, image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" },
-            { name: "Wireless Bluetooth Earbuds", price: 18.00, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80" },
-            { name: "Smart Fitness Activity Band", price: 20.00, image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=600&q=80" },
-            { name: "Portable Mini Power Bank", price: 22.50, image: "https://images.unsplash.com/photo-1609592424104-97d4c42c74fa?auto=format&fit=crop&w=600&q=80" },
-            { name: "Ergonomic Desk Mouse Pad", price: 25.00, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80" },
-            { name: "Aromatherapy Essential Oil Diffuser", price: 28.00, image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80" },
-            { name: "LED Desk Reading Lamp", price: 32.00, image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" },
-            { name: "Stainless Steel Water Bottle", price: 35.00, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80" },
-            { name: "Leather Passport Holder", price: 38.50, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80" },
-            { name: "Desktop Mechanical Keyboard", price: 42.00, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80" },
-            { name: "Designer Cufflinks Set", price: 46.00, image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&q=80" },
-            { name: "Luxury Scented Soy Candle", price: 50.00, image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80" },
-            { name: "Smart Wireless Charging Pad", price: 55.00, image: "https://images.unsplash.com/photo-1622445275576-7243c78cf4a6?auto=format&fit=crop&w=600&q=80" },
-            { name: "Gold Plated Minimalist Necklace", price: 60.00, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80" },
-            { name: "Canvas Weekend Travel Duffel", price: 68.00, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" },
-            { name: "Gourmet Coffee Bean Gift Box", price: 75.00, image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80" },
-            { name: "Automatic Electric Wine Opener", price: 82.00, image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" },
-            { name: "Noise-Isolating Gaming Headset", price: 90.00, image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80" },
-            { name: "Designer Silk Evening Couture Gown", price: 100.00, image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80" },
-            { name: "High-End Electric Toothbrush", price: 115.00, image: "https://images.unsplash.com/photo-1559595500-e15296f7e4c0?auto=format&fit=crop&w=600&q=80" },
-            { name: "Ultra-Slim Laptop Sleeve", price: 130.00, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=600&q=80" },
-            { name: "Italian Full-Grain Leather Briefcase", price: 150.00, image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80" },
-            { name: "Professional Hair Styling Dryer", price: 175.00, image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" },
-            { name: "Compact Action Sports Camera", price: 200.00, image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" },
-            { name: "Premium Noise-Canceling Headphones", price: 240.00, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" },
-            { name: "Designer Sunglasses Limited Edition", price: 280.00, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80" },
-            { name: "Smart Home Security Camera", price: 320.00, image: "https://images.unsplash.com/photo-1557324232-b8917d7c3dcb?auto=format&fit=crop&w=600&q=80" },
-            { name: "Designer Streetwear Sneakers", price: 380.00, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" },
-            { name: "4K Ultra HD Curved Smart OLED TV", price: 450.00, image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80" },
-            { name: "Professional DSLR Camera Kit", price: 550.00, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80" },
-            { name: "Swiss Automatic Gold Chronograph Watch", price: 680.00, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" },
-            { name: "Luxury Designer Leather Handbag", price: 780.00, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" },
-            { name: "18K White Gold Diamond Accent Ring", price: 850.00, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" },
-            { name: "CD button skirt pants", price: 901.00, image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=600&q=80" },
-            { name: "Exclusive Diamond Crown Collector Piece", price: 990.00, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80" }
+            { name: "Compact USB-C Charging Cable", price: 3.50, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Minimalist Phone Stand", price: 5.00, image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Stainless Steel Travel Mug", price: 7.20, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Silk Scarf", price: 10.00, image: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Classic Leather Wallet", price: 12.50, image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Titanium Polarized Sunglasses", price: 15.00, image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Wireless Bluetooth Earbuds", price: 18.00, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Smart Fitness Activity Band", price: 20.00, image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Portable Mini Power Bank", price: 22.50, image: "https://images.unsplash.com/photo-1609592424104-97d4c42c74fa?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Ergonomic Desk Mouse Pad", price: 25.00, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Aromatherapy Essential Oil Diffuser", price: 28.00, image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80"; },
+            { name: "LED Desk Reading Lamp", price: 32.00, image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Stainless Steel Water Bottle", price: 35.00, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Leather Passport Holder", price: 38.50, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Desktop Mechanical Keyboard", price: 42.00, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Cufflinks Set", price: 46.00, image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Luxury Scented Soy Candle", price: 50.00, image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Smart Wireless Charging Pad", price: 55.00, image: "https://images.unsplash.com/photo-1622445275576-7243c78cf4a6?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Gold Plated Minimalist Necklace", price: 60.00, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Canvas Weekend Travel Duffel", price: 68.00, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Gourmet Coffee Bean Gift Box", price: 75.00, image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Automatic Electric Wine Opener", price: 82.00, image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Noise-Isolating Gaming Headset", price: 90.00, image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Silk Evening Couture Gown", price: 100.00, image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80"; },
+            { name: "High-End Electric Toothbrush", price: 115.00, image: "https://images.unsplash.com/photo-1559595500-e15296f7e4c0?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Ultra-Slim Laptop Sleeve", price: 130.00, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Italian Full-Grain Leather Briefcase", price: 150.00, image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Professional Hair Styling Dryer", price: 175.00, image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Compact Action Sports Camera", price: 200.00, image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Premium Noise-Canceling Headphones", price: 240.00, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Sunglasses Limited Edition", price: 280.00, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Smart Home Security Camera", price: 320.00, image: "https://images.unsplash.com/photo-1557324232-b8917d7c3dcb?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Streetwear Sneakers", price: 380.00, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"; },
+            { name: "4K Ultra HD Curved Smart OLED TV", price: 450.00, image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Professional DSLR Camera Kit", price: 550.00, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Swiss Automatic Gold Chronograph Watch", price: 680.00, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Luxury Designer Leather Handbag", price: 780.00, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80"; },
+            { name: "18K White Gold Diamond Accent Ring", price: 850.00, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "CD button skirt pants", price: 901.00, image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Exclusive Diamond Crown Collector Piece", price: 990.00, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80"; }
         ];
 
         function generateRandomOrderCode() {
@@ -459,7 +457,7 @@
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             const randomSuffix = Math.floor(100000 + Math.random() * 900000);
-            return `${year}${month}${day}${hours}${minutes}${seconds}${randomSuffix}`;
+            return `year{month}day{hours}minutes{seconds}${randomSuffix}`;
         }
 
         function getAssignedProducts() {
@@ -544,10 +542,7 @@
             productImgElem.src = currentItem.image;
             document.getElementById('productName').textContent = currentItem.name;
             document.getElementById('productPriceDisplay').textContent = currentItem.price.toFixed(2);
-            document.getElementById('totalAmountDisplay').textContent = `${currentItem.price.toFixed(2)}(USD)`;
-
-            let commission = currentItem.price * 0.005;
-            document.getElementById('earningsDisplay').textContent = `${commission.toFixed(2)}(USD)`;
+            document.getElementById('totalAmountDisplay').textContent = `currentItem.price.toFixed(2)(USD)‘;letcommission=currentItem.price∗0.005;document.getElementById(′earningsDisplay′).textContent=‘{commission.toFixed(2)}(USD)`;
 
             document.getElementById('negativeWarningBox').style.display = 'none';
             document.getElementById('starRatingDisplay').classList.remove('active');
