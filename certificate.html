@@ -1,58 +1,157 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Certificate</title>
-
-<link rel="stylesheet" href="dashboard.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Certificate - VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        :root {
+            --primary-blue: #0f172a;
+            --accent-blue: #2563eb;
+            --accent-blue-light: #3b82f6;
+            --bg-color: #0b1120;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 100px;
+        }
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .top-nav-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-blue-light);
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+        .cert-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .cert-image-container {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .cert-image-container img {
+            width: 100%;
+            height: auto;
+            max-height: 700px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .cert-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 14px;
+            line-height: 1.5;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0b1120;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: var(--accent-blue-light);
+        }
+        .nav-item span.icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+    </style>
 </head>
-
-
 <body>
+    <div class="container">
+        <div class="top-nav-bar">
+            <a href="dashboard.html" class="back-btn">&lt; Back</a>
+        </div>
+        
+        <div class="page-title">Company Legal Certificate</div>
 
+        <div class="cert-card">
+            <div class="cert-image-container">
+                <!-- 
+                  PASTE YOUR CERTIFICATE IMAGE LINK OR BASE64 DATA HERE 
+                  Replace the text inside the src="..." attribute below with your image file path or URL:
+                -->
+                <img src="YOUR_CERTIFICATE_IMAGE_URL_HERE" alt="New York Secretary of State Articles of Incorporation" id="certificateImg">
+            </div>
+            <div class="cert-description">
+                Official Electronic Filing Certificate issued by the New York Secretary of State for Activepieces (Entity File Number: 5517408). Verified and legally registered.
+            </div>
+        </div>
+    </div>
 
-<div class="content">
-
-<h1>
-Certificate
-</h1>
-
-
-<p>
-Your achievements will appear here.
-</p>
-
-
-</div>
-
-
-<nav class="bottom-nav">
-
-<a href="home.html">
-🏠<br>HOME
-</a>
-
-<a href="certificate.html">
-🏆<br>CERTIFICATE
-</a>
-
-<a href="start.html">
-🚀<br>START
-</a>
-
-<a href="records.html">
-📋<br>RECORDS
-</a>
-
-<a href="profile.html">
-👤<br>MY
-</a>
-
-</nav>
-
-
+    <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="withdraw.html" class="nav-item active">
+            <span class="icon">🛡️</span><span>Certificate</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <span class="icon">⚡</span><span>Task</span>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">📝</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="icon">👤</span><span>My</span>
+        </a>
+    </div>
 </body>
-
 </html>
