@@ -39,6 +39,11 @@
             font-family: 'Cinzel', serif;
             color: var(--accent-gold);
             font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
             margin-bottom: 20px;
         }
         .input-field {
@@ -75,8 +80,9 @@
 
     <div class="auth-card">
         <div class="title">Luxury VIP Portal</div>
-        <input type="text" id="usernameInput" class="input-field" placeholder="Enter your username">
-        <button class="btn-auth" onclick="loginOrRegister()">ACCESS ACCOUNT</button>
+        <div class="subtitle">Login or Register with your username</div>
+        <input type="text" id="usernameInput" class="input-field" placeholder="Enter username...">
+        <button class="btn-auth" onclick="loginOrRegister()">ENTER DASHBOARD</button>
     </div>
 
     <script>
@@ -95,19 +101,19 @@
             const taskKey = `completedTasks_${username}`;
             const profitKey = `todaysProfit_${username}`;
 
-            // If this account has never logged in before, provision a completely fresh slate
+            // Provision a fresh slate if it's a brand new account
             if (localStorage.getItem(balanceKey) === null) {
-                localStorage.setItem(balanceKey, "10.00"); // Fresh starting balance
+                localStorage.setItem(balanceKey, "10.00");
             }
             if (localStorage.getItem(taskKey) === null) {
-                localStorage.setItem(taskKey, "0"); // 0 completed tasks
+                localStorage.setItem(taskKey, "0");
             }
             if (localStorage.getItem(profitKey) === null) {
-                localStorage.setItem(profitKey, "0.00"); // 0 profit
+                localStorage.setItem(profitKey, "0.00");
             }
 
-            // Redirect directly to the Task Hub
-            window.location.href = 'task.html';
+            // Redirect directly to the dashboard
+            window.location.href = 'dashboard.html';
         }
     </script>
 </body>
