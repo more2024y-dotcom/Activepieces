@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Records - VIP Platform</title>
+    <title>Task Records - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
         :root {
             --bg-color: #0b1120;
             --card-bg: #1e293b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent-gold: #ffd700;
+            --border-color: rgba(56, 189, 248, 0.3);
         }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
@@ -21,26 +24,111 @@
             padding: 0;
             padding-bottom: 100px;
         }
+
         .container {
             padding: 16px;
-            max-width: 600px;
+            max-width: 440px;
             margin: 0 auto;
+            box-sizing: border-box;
         }
+
         .header-title {
             font-size: 22px;
             font-weight: 800;
             margin-bottom: 20px;
-            color: var(--text-main);
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
+            color: #38bdf8;
             text-align: center;
         }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Tabs styling */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border-color: #38bdf8;
+        }
+
+        /* Records list */
+        .record-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .record-item {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .record-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .record-info p {
+            margin: 0;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .record-amount {
+            text-align: right;
+        }
+
+        .record-amount .amount {
+            font-size: 14px;
+            font-weight: 700;
+            color: #22c55e;
+            margin: 0 0 2px 0;
+        }
+
+        .record-amount .status {
+            font-size: 11px;
+            color: #fde047;
+            margin: 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
         /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
@@ -55,6 +143,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -65,13 +154,16 @@
             flex: 1;
             cursor: pointer;
         }
+
         .nav-item.active {
             color: var(--accent-gold);
         }
+
         .nav-item span.icon {
             font-size: 18px;
             margin-bottom: 2px;
         }
+
         .nav-item-center {
             position: relative;
             display: flex;
@@ -81,6 +173,7 @@
             text-decoration: none;
             cursor: pointer;
         }
+
         .floating-center-btn {
             width: 50px;
             height: 50px;
@@ -104,21 +197,26 @@
         <div class="header-title">Task Records</div>
         
         <div class="card">
-            <p style="color: var(--text-muted); font-size: 14px; margin: 0;">
-                Your optimization history and transaction logs will appear here.
-            </p>
+            <div class="tabs">
+                <button class="tab-btn active" id="tabCompleted" onclick="switchTab('completed')">Completed</button>
+                <button class="tab-btn" id="tabPending" onclick="switchTab('pending')">Pending</button>
+            </div>
+
+            <div id="recordsContainer" class="record-list">
+                <!-- Dynamically populated records -->
+            </div>
         </div>
     </div>
 
     <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
+        <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
         </a>
         <a href="start.html" class="nav-item-center">
             <div class="floating-center-btn">⚡</div>
         </a>
-        <a href="records.html" class="nav-item active" style="color: #ffd700;">
+        <a href="records.html" class="nav-item active">
             <span class="icon">📋</span><span>Records</span>
         </a>
         <a href="profile.html" class="nav-item">
@@ -126,5 +224,54 @@
         </a>
     </nav>
 
+    <script>
+        const currentUsername = localStorage.getItem('username');
+
+        function loadRecords(type) {
+            const container = document.getElementById('recordsContainer');
+            container.innerHTML = '';
+
+            if (!currentUsername) {
+                container.innerHTML = '<div class="empty-state">Please log in to view records.</div>';
+                return;
+            }
+
+            // Fetch records from localStorage or default to empty array
+            const storageKey = `userRecords_${currentUsername}`;
+            const allRecords = JSON.parse(localStorage.getItem(storageKey) || '[]');
+
+            const filtered = allRecords.filter(r => r.status === type);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="empty-state">No ${type} optimization records found.</div>`;
+                return;
+            }
+
+            filtered.forEach(rec => {
+                const item = document.createElement('div');
+                item.className = 'record-item';
+                item.innerHTML = `
+                    <div class="record-info">
+                        <h4>${rec.productName || 'VIP Optimization Task'}</h4>
+                        <p>${rec.date || 'Today'}</p>
+                    </div>
+                    <div class="record-amount">
+                        <p class="amount">+$${parseFloat(rec.commission || 0).toFixed(2)}</p>
+                        <p class="status" style="color: ${rec.status === 'completed' ? '#22c55e' : '#fde047'}">${rec.status.toUpperCase()}</p>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function switchTab(type) {
+            document.getElementById('tabCompleted').classList.toggle('active', type === 'completed');
+            document.getElementById('tabPending').classList.toggle('active', type === 'pending');
+            loadRecords(type);
+        }
+
+        // Initialize view
+        loadRecords('completed');
+    </script>
 </body>
 </html>
