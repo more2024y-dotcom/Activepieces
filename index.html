@@ -1,142 +1,114 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register - Luxury VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-<title>Activepieces Platform</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+        :root {
+            --primary-dark: #0f172a;
+            --card-dark: #1e293b;
+            --accent-gold: #d4af37;
+            --bg-color: #090d16;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .auth-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .title {
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: var(--text-main);
+            padding: 12px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .input-field:focus {
+            border-color: var(--accent-gold);
+        }
+        .btn-auth {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+    </style>
 </head>
-
-
 <body>
 
-
-<header>
-
-<div class="brand">
-
-<img src="assets/logo.png" class="logo">
-
-<h1>
-Activepieces
-</h1>
-
-</div>
-
-
-
-<nav>
-
-<a href="index.html">
-Home
-</a>
-
-<a href="#">
-Features
-</a>
-
-<a href="login.html">
-Login
-</a>
-
-<a href="signup.html">
-Create Account
-</a>
-
-</nav>
-
-
-</header>
-
-
-
-
-
-<section class="hero">
-
-
-<h2>
-Build Your Workflow Platform
-</h2>
-
-
-<p>
-A modern automation and task management system.
-</p>
-
-
-
-<a href="signup.html">
-
-<button>
-Get Started
-</button>
-
-</a>
-
-
-</section>
-
-
-
-
-
-
-<section class="features">
-
-
-<div class="card">
-
-<h3>
-Automation
-</h3>
-
-<p>
-Create powerful workflows easily.
-</p>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h3>
-Task Management
-</h3>
-
-<p>
-Manage your daily operations.
-</p>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h3>
-Team Platform
-</h3>
-
-<p>
-Connect and collaborate.
-</p>
-
-</div>
-
-
-
-</section>
-
-
-
+    <div class="auth-card">
+        <div class="title">Luxury VIP Portal</div>
+        <input type="text" id="usernameInput" class="input-field" placeholder="Enter your username">
+        <button class="btn-auth" onclick="loginOrRegister()">ACCESS ACCOUNT</button>
+    </div>
+
+    <script>
+        function loginOrRegister() {
+            const username = document.getElementById('usernameInput').value.trim();
+            if (!username) {
+                alert("Please enter a valid username.");
+                return;
+            }
+
+            // Save active session username
+            localStorage.setItem('userName', username);
+
+            // Scoped keys for this specific user
+            const balanceKey = `userBalance_${username}`;
+            const taskKey = `completedTasks_${username}`;
+            const profitKey = `todaysProfit_${username}`;
+
+            // If this account has never logged in before, provision a completely fresh slate
+            if (localStorage.getItem(balanceKey) === null) {
+                localStorage.setItem(balanceKey, "10.00"); // Fresh starting balance
+            }
+            if (localStorage.getItem(taskKey) === null) {
+                localStorage.setItem(taskKey, "0"); // 0 completed tasks
+            }
+            if (localStorage.getItem(profitKey) === null) {
+                localStorage.setItem(profitKey, "0.00"); // 0 profit
+            }
+
+            // Redirect directly to the Task Hub
+            window.location.href = 'task.html';
+        }
+    </script>
 </body>
-
 </html>
