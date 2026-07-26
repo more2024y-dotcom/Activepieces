@@ -67,14 +67,16 @@
         .product-image-box {
             width: 100%;
             height: 240px;
-            background: #0f172a;
+            /* Replaced background with activepieces brand theme matching the second uploaded image */
+            background: radial-gradient(circle at 50% 50%, #7c3aed 0%, #5b21b6 100%);
             border-radius: 12px;
             overflow: hidden;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
         }
         .product-image-box img {
@@ -82,6 +84,62 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Activepieces Custom Branding Styles for Completion Box */
+        .brand-completion-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            position: relative;
+            display: inline-block;
+        }
+        .blob {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+        .blob-1 { width: 15px; height: 15px; top: 4px; left: 7px; }
+        .blob-2 { width: 14px; height: 14px; top: 5px; right: 4px; }
+        .blob-3 { width: 22px; height: 22px; bottom: 3px; left: 12px; }
+        .blob-connector {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 15px;
+        }
+        .conn-1 { width: 11px; height: 19px; top: 10px; left: 11px; transform: rotate(-35deg); }
+        .conn-2 { width: 12px; height: 20px; top: 10px; right: 10px; transform: rotate(35deg); }
+        .conn-3 { width: 14px; height: 14px; bottom: 8px; left: 15px; }
+
+        .logo-text {
+            font-size: 34px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.8px;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .banner-tagline {
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            letter-spacing: -0.2px;
+        }
+
         .product-name {
             font-size: 14px;
             font-weight: 600;
@@ -266,8 +324,9 @@
                 <span>Rate: <b>0.5%</b></span>
             </div>
 
-            <div class="product-image-box">
-                <img id="productImg" src="" alt="Product Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80';">
+            <!-- Image Box / Activepieces Completion Banner Area -->
+            <div class="product-image-box" id="mediaBoxContainer">
+                <img id="productImg" src="" alt="Product Image" style="display: block;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80';">
             </div>
 
             <div class="product-name" id="productName">Loading product...</div>
@@ -407,16 +466,14 @@
             let stored = localStorage.getItem(assignedProductsKey);
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
             
-            // Controlled pricing rule: Filter out any items whose price is higher than the user's current account balance
             let affordableCatalog = masterProductCatalog.filter(p => p.price <= currentBalance);
             if (affordableCatalog.length === 0) {
-                affordableCatalog = [masterProductCatalog[0]]; // Absolute fallback to lowest-priced item
+                affordableCatalog = [masterProductCatalog[0]];
             }
 
             if (stored) {
                 try {
                     let parsed = JSON.parse(stored);
-                    // Ensure assigned list only contains items within the affordable threshold
                     let filteredStored = parsed.filter(p => p.price <= currentBalance);
                     if (filteredStored.length >= 40) {
                         return filteredStored;
@@ -424,7 +481,6 @@
                 } catch (e) {}
             }
 
-            // Generate a shuffled sequence of 40 unique items restricted strictly to user's available balance
             let pool = [];
             for (let i = 0; i < 40; i++) {
                 let randomItem = affordableCatalog[Math.floor(Math.random() * affordableCatalog.length)];
@@ -439,31 +495,53 @@
             let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
             document.getElementById('taskCountDisplay').textContent = completedCount;
 
+            const mediaBox = document.getElementById('mediaBoxContainer');
+            const productImgElem = document.getElementById('productImg');
+
             // Check if all 40 tasks are completed
             if (completedCount >= 40) {
                 document.getElementById('productName').textContent = "All 40 Daily Tasks Completed!";
                 document.getElementById('productPriceDisplay').textContent = "0.00";
                 document.getElementById('totalAmountDisplay').textContent = "0.00(USD)";
                 document.getElementById('earningsDisplay').textContent = "0.00(USD)";
-                document.getElementById('productImg').src = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=600&q=80";
+                
+                // Replace image container contents with the requested Activepieces branded layout
+                productImgElem.style.display = 'none';
+                mediaBox.innerHTML = `
+                    <div class="brand-completion-container">
+                        <div class="logo-row">
+                            <div class="logo-icon">
+                                <div class="blob-connector conn-1"></div>
+                                <div class="blob-connector conn-2"></div>
+                                <div class="blob-connector conn-3"></div>
+                                <div class="blob blob-1"></div>
+                                <div class="blob blob-2"></div>
+                                <div class="blob blob-3"></div>
+                            </div>
+                            <h1 class="logo-text">activepieces</h1>
+                        </div>
+                        <p class="banner-tagline">AI-first automation for every team</p>
+                    </div>
+                `;
+                
                 document.getElementById('submitTaskBtn').disabled = true;
                 document.getElementById('submitTaskBtn').textContent = "Daily Limit Reached (40/40)";
                 document.getElementById('negativeWarningBox').style.display = 'none';
                 return;
             }
 
+            // Normal active product view setup
+            productImgElem.style.display = 'block';
             let assignedList = getAssignedProducts();
             let currentItem = assignedList[completedCount] || assignedList[0];
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
 
-            // Safety check: ensure price never exceeds balance (prevents negative balance issue completely)
             if (currentItem.price > currentBalance) {
                 let affordable = masterProductCatalog.filter(p => p.price <= currentBalance);
                 currentItem = affordable.length > 0 ? affordable[0] : masterProductCatalog[0];
             }
 
-            // Render product info
-            document.getElementById('productImg').src = currentItem.image;
+            productImgElem.src = currentItem.image;
             document.getElementById('productName').textContent = currentItem.name;
             document.getElementById('productPriceDisplay').textContent = currentItem.price.toFixed(2);
             document.getElementById('totalAmountDisplay').textContent = `${currentItem.price.toFixed(2)}(USD)`;
@@ -471,19 +549,14 @@
             let commission = currentItem.price * 0.005;
             document.getElementById('earningsDisplay').textContent = `${commission.toFixed(2)}(USD)`;
 
-            // Hide negative warning box since pricing is fully controlled below balance
             document.getElementById('negativeWarningBox').style.display = 'none';
-
-            // Reset star ratings back to grey/unselected state on new task load
             document.getElementById('starRatingDisplay').classList.remove('active');
 
-            // Set metadata
             const now = new Date();
             const dateStr = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 8);
             document.getElementById('dateCreated').textContent = dateStr;
             document.getElementById('orderCode').textContent = generateRandomOrderCode();
             
-            // Clear review box on load
             document.getElementById('reviewText').value = "";
         }
 
@@ -499,8 +572,6 @@
             ];
             const randomComment = comments[Math.floor(Math.random() * comments.length)];
             document.getElementById('reviewText').value = randomComment;
-
-            // Light up stars to 5-star gold when Automatic Comment is triggered
             document.getElementById('starRatingDisplay').classList.add('active');
         }
 
@@ -521,7 +592,6 @@
             let currentItem = assignedList[completedCount] || assignedList[0];
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
 
-            // Strict protection check against negative balance
             if (currentItem.price > currentBalance) {
                 document.getElementById('negativeWarningBox').style.display = 'block';
                 alert("Order price exceeds your account balance. Please check your balance settings.");
@@ -531,7 +601,6 @@
             let commission = currentItem.price * 0.005;
             let currentProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
 
-            // Deduct product price, then instantly return principal back along with the 0.5% commission
             currentBalance = currentBalance - currentItem.price + currentItem.price + commission;
             currentProfit += commission;
             completedCount += 1;
