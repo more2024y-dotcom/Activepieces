@@ -3,173 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register - Luxury VIP</title>
+    <title>Sign Up & Log In - Luxury VIP</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
         :root {
-            --primary-dark: #0f172a;
-            --card-dark: #1e293b;
-            --accent-gold: #d4af37;
-            --bg-color: #090d16;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --primary-blue: #1d4ed8;
+            --dark-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --bg-color: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
         }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
-        .auth-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: 30px;
+
+        .register-container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(29, 78, 216, 0.15);
             width: 100%;
             max-width: 400px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+        }
+
+        .register-container h2 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 24px;
             text-align: center;
-        }
-        .title {
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        .subtitle {
-            font-size: 12px;
-            color: var(--text-muted);
             margin-bottom: 20px;
         }
+
         .auth-tabs {
             display: flex;
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 10px;
+            background: #e2e8f0;
+            border-radius: 8px;
             padding: 4px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 22px;
         }
+
         .auth-tab {
             flex: 1;
             padding: 10px;
             font-size: 13px;
             font-weight: 600;
             color: var(--text-muted);
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             text-align: center;
             transition: all 0.2s;
         }
+
         .auth-tab.active {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            font-weight: 700;
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .input-field {
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .form-group input, .form-group select {
             width: 100%;
-            background: #0f172a;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 10px;
-            color: var(--text-main);
             padding: 12px;
-            font-size: 14px;
-            margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
             outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
-        .input-field:focus {
-            border-color: var(--accent-gold);
-        }
-        .btn-auth {
+
+        .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            padding: 14px;
+            padding: 12px;
+            background-color: var(--primary-blue);
+            color: white;
             border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 800;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            font-family: 'Cinzel', serif;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            font-size: 15px;
+            transition: background-color 0.2s;
+            margin-top: 5px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .login-link span {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-link span:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-card">
-        <div class="title">Luxury VIP Portal</div>
-        <div class="subtitle">Secure Account Access</div>
+    <div class="register-container">
+        <h2 id="formTitle">Create Account</h2>
 
         <div class="auth-tabs">
-            <div class="auth-tab active" id="tabLogin" onclick="switchMode('login')">Log In</div>
-            <div class="auth-tab" id="tabRegister" onclick="switchMode('register')">Sign Up</div>
+            <div class="auth-tab" id="tabLogin" onclick="switchMode('login')">Log In</div>
+            <div class="auth-tab active" id="tabRegister" onclick="switchMode('register')">Sign Up</div>
         </div>
 
-        <input type="text" id="usernameInput" class="input-field" placeholder="Enter username...">
-        <button class="btn-auth" id="authBtn" onclick="handleAuth()">LOG IN</button>
+        <form id="authForm" onsubmit="handleAuth(event)">
+            <!-- Extra fields shown only during Registration -->
+            <div id="registerFields">
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">Phone Number</label>
+                    <input type="tel" id="regPhone" placeholder="Enter phone number">
+                </div>
+                <div class="form-group">
+                    <label for="regGender">Gender</label>
+                    <select id="regGender">
+                        <option value="" disabled selected>Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regTxPassword">Transaction Password</label>
+                    <input type="password" id="regTxPassword" placeholder="Create your unique transaction password">
+                </div>
+                <div class="form-group">
+                    <label for="regInviteCode">Invitation Code (Optional)</label>
+                    <input type="text" id="regInviteCode" placeholder="Enter friend's invitation code">
+                </div>
+            </div>
+
+            <!-- Universal Identifier Field -->
+            <div class="form-group">
+                <label for="regPassword" id="passwordLabel">Login Password</label>
+                <input type="password" id="regPassword" placeholder="Enter your login password" required>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Sign Up</button>
+        </form>
     </div>
 
     <script>
-        let currentMode = 'login';
+        let currentMode = 'register';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            if (refCode) {
+                document.getElementById('regInviteCode').value = refCode;
+            }
+        });
 
         function switchMode(mode) {
             currentMode = mode;
             const tabLogin = document.getElementById('tabLogin');
             const tabRegister = document.getElementById('tabRegister');
-            const authBtn = document.getElementById('authBtn');
+            const formTitle = document.getElementById('formTitle');
+            const registerFields = document.getElementById('registerFields');
+            const submitBtn = document.getElementById('submitBtn');
 
             if (mode === 'login') {
                 tabLogin.classList.add('active');
                 tabRegister.classList.remove('active');
-                authBtn.textContent = 'LOG IN';
+                formTitle.textContent = 'Welcome Back';
+                registerFields.style.display = 'none';
+                submitBtn.textContent = 'Log In';
             } else {
                 tabRegister.classList.add('active');
                 tabLogin.classList.remove('active');
-                authBtn.textContent = 'REGISTER ACCOUNT';
+                formTitle.textContent = 'Create Account';
+                registerFields.style.display = 'block';
+                submitBtn.textContent = 'Sign Up';
             }
         }
 
-        function handleAuth() {
-            const username = document.getElementById('usernameInput').value.trim();
-            if (!username) {
-                alert("Please enter a username.");
-                return;
-            }
-
-            const balanceKey = `userBalance_${username}`;
-            const taskKey = `completedTasks_${username}`;
-            const profitKey = `todaysProfit_${username}`;
+        function handleAuth(e) {
+            e.preventDefault();
+            const password = document.getElementById('regPassword').value;
 
             if (currentMode === 'register') {
-                // If signing up, check if the username is already taken
+                const name = document.getElementById('regName').value.trim();
+                const phone = document.getElementById('regPhone').value.trim();
+                const gender = document.getElementById('regGender').value;
+                const txPassword = document.getElementById('regTxPassword').value.trim();
+                const inviteCodeUsed = document.getElementById('regInviteCode').value.trim();
+
+                if (!name || !phone || !gender) {
+                    alert('Please fill out all required fields.');
+                    return;
+                }
+
+                const balanceKey = `userBalance_${name}`;
                 if (localStorage.getItem(balanceKey) !== null) {
-                    alert("This username already exists! Please choose another one or switch to Log In.");
+                    alert('This username already exists! Please choose another name or switch to Log In.');
                     return;
                 }
-                // Initialize brand new user ledger
-                localStorage.setItem(balanceKey, "10.00");
-                localStorage.setItem(taskKey, "0");
-                localStorage.setItem(profitKey, "0.00");
-                alert("Account created successfully!");
+
+                const myNewInviteCode = 'REF' + Math.floor(100000 + Math.random() * 900000);
+
+                // Save core profile details globally & provision isolated keys
+                localStorage.setItem('userName', name);
+                localStorage.setItem('username', name);
+                localStorage.setItem('userPhone', phone);
+                localStorage.setItem('userGender', gender);
+                localStorage.setItem('userPassword', password);
+                localStorage.setItem('userTxPassword', txPassword);
+                localStorage.setItem('myInviteCode', myNewInviteCode);
+
+                if (inviteCodeUsed) {
+                    localStorage.setItem('referredBy', inviteCodeUsed);
+                }
+
+                // Provision fresh isolated starting values for this user
+                localStorage.setItem(balanceKey, '10.00');
+                localStorage.setItem(`completedTasks_${name}`, '0');
+                localStorage.setItem(`todaysProfit_${name}`, '0.00');
+                localStorage.setItem(`totalProfit_${name}`, '0.00');
+
+                alert('Registration successful!');
+                window.location.href = 'dashboard.html';
+
             } else {
-                // If logging in, check if the account exists
-                if (localStorage.getItem(balanceKey) === null) {
-                    alert("Account not found! Please check your username or Sign Up first.");
+                // Log In mode: Verify against stored accounts via Name
+                const inputNamePrompt = prompt("Please enter your registered Full Name to log in:");
+                if (!inputNamePrompt) return;
+
+                const trimmedName = inputNamePrompt.trim();
+                const balanceKey = `userBalance_${trimmedName}`;
+                const storedPassword = localStorage.getItem('userPassword');
+
+                // Check if account data exists for this user
+                if (localStorage.getItem(balanceKey) === null && localStorage.getItem('userName') !== trimmedName) {
+                    alert('Account not found with that name. Please check your spelling or Sign Up.');
                     return;
                 }
+
+                // Set active session username
+                localStorage.setItem('userName', trimmedName);
+                localStorage.setItem('username', trimmedName);
+
+                alert('Login successful!');
+                window.location.href = 'dashboard.html';
             }
-
-            // Save active session
-            localStorage.setItem('userName', username);
-
-            // Redirect to dashboard
-            window.location.href = 'dashboard.html';
         }
     </script>
 </body>
