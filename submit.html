@@ -80,10 +80,14 @@
             margin-bottom: 10px;
         }
         .stars {
-            color: #d4af37;
+            color: #475569;
             font-size: 16px;
             letter-spacing: 2px;
             cursor: pointer;
+            transition: color 0.2s;
+        }
+        .stars.rated {
+            color: #d4af37;
         }
         .review-box-wrapper {
             position: relative;
@@ -194,7 +198,7 @@
         <div class="review-section">
             <div class="review-header">
                 <span>Click to write a comment:</span>
-                <span class="stars" id="starRating">★★★★★</span>
+                <span class="stars" id="starRating" onclick="rateStars()">☆☆☆☆☆</span>
             </div>
             <div class="review-box-wrapper">
                 <textarea id="reviewComment" class="review-input" placeholder="Write a review"></textarea>
@@ -247,7 +251,6 @@
         const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 3.58;
         const returnTotal = orderPrice + orderEarnings;
 
-        // Generate realistic timestamp & order code if not present
         let orderCode = localStorage.getItem('currentOrderCode');
         let dateCreated = localStorage.getItem('currentOrderDate');
         if (!orderCode) {
@@ -271,6 +274,12 @@
         document.getElementById('dateCreatedDisplay').textContent = dateCreated;
         document.getElementById('orderCodeDisplay').textContent = orderCode;
 
+        function rateStars() {
+            const starEl = document.getElementById('starRating');
+            starEl.textContent = '★★★★★';
+            starEl.classList.add('rated');
+        }
+
         function fillAutomaticComment() {
             const comments = [
                 "Excellent product quality, fast optimization and delivery!",
@@ -280,6 +289,7 @@
             ];
             const randomComment = comments[Math.floor(Math.random() * comments.length)];
             document.getElementById('reviewComment').value = randomComment;
+            rateStars();
         }
 
         function submitOrder() {
@@ -296,7 +306,7 @@
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
             localStorage.setItem(taskKey, completedTasksCount);
             localStorage.setItem('completedTasksCount', completedTasksCount);
-            localStorage.removeItem('currentOrderCode'); // Clear for next order
+            localStorage.removeItem('currentOrderCode');
 
             alert("Order submitted successfully! Commission credited.");
             window.location.href = 'task.html';
