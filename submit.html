@@ -42,59 +42,51 @@
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 16px;
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             text-align: center;
         }
         .product-img {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
-            border-radius: 14px;
+            border-radius: 12px;
             border: 2px solid var(--accent-gold);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .product-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-family: 'Cinzel', serif;
-        }
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            margin: 8px 0;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-        }
-        .info-row strong {
-            color: var(--accent-gold);
         }
         .review-section {
             background: var(--card-dark);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
+            padding: 16px;
+            margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .review-title {
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 13px;
             font-weight: 700;
             color: var(--accent-gold);
             font-family: 'Cinzel', serif;
             margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
         .stars {
             color: #d4af37;
             font-size: 16px;
             letter-spacing: 2px;
+            cursor: pointer;
+        }
+        .review-box-wrapper {
+            position: relative;
         }
         .review-input {
             width: 100%;
@@ -103,19 +95,68 @@
             border-radius: 10px;
             color: var(--text-main);
             padding: 12px;
+            padding-right: 120px;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 13px;
             resize: none;
             box-sizing: border-box;
             outline: none;
+            height: 75px;
         }
-        .review-input:focus {
-            border-color: var(--accent-gold);
+        .auto-comment-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: #d4af37;
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+        .vip-badge-row {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--accent-gold);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .details-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin: 8px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+        .info-row span:last-child {
+            color: var(--text-main);
+            font-weight: 600;
         }
         .btn-submit {
             width: 100%;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
+            background: #22c55e;
+            color: white;
             padding: 16px;
             border: none;
             border-radius: 14px;
@@ -124,56 +165,74 @@
             cursor: pointer;
             text-align: center;
             font-family: 'Cinzel', serif;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
             margin-bottom: 10px;
         }
         .btn-back {
             width: 100%;
             background: transparent;
             color: var(--text-muted);
-            padding: 12px;
+            padding: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-size: 13px;
             cursor: pointer;
             text-align: center;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="page-title">⚡ Order Optimization & Submission</div>
+        <div class="page-title">⚡ Order Submission</div>
 
         <div class="order-card">
             <img id="orderImg" class="product-img" src="" alt="Product">
             <div id="orderName" class="product-name">Loading Product...</div>
-            
-            <div class="info-row">
-                <span>Order Amount:</span>
-                <strong id="orderPriceDisplay">0.00 USD</strong>
-            </div>
-            <div class="info-row">
-                <span>Estimated Commission:</span>
-                <strong id="orderEarningsDisplay">0.00 USD</strong>
-            </div>
-            <div class="info-row">
-                <span>Return Total:</span>
-                <strong id="orderReturnDisplay">0.00 USD</strong>
-            </div>
         </div>
 
         <div class="review-section">
-            <div class="review-title">
-                <span>Product Review & Rating</span>
-                <span class="stars">⭐⭐⭐⭐⭐</span>
+            <div class="review-header">
+                <span>Click to write a comment:</span>
+                <span class="stars" id="starRating">★★★★★</span>
             </div>
-            <textarea id="reviewComment" class="review-input" rows="3" placeholder="Write your product feedback or review here...">Excellent product quality, fast optimization and delivery!</textarea>
+            <div class="review-box-wrapper">
+                <textarea id="reviewComment" class="review-input" placeholder="Write a review"></textarea>
+                <button class="auto-comment-btn" onclick="fillAutomaticComment()">Automatic Comment</button>
+            </div>
         </div>
 
-        <button class="btn-submit" onclick="submitOrder()">SUBMIT OPTIMIZATION ORDER</button>
+        <div class="vip-badge-row">
+            <span>🛡️</span> <span>VIP 1</span>
+        </div>
+
+        <div class="details-card">
+            <div class="info-row">
+                <span>Total Amount</span>
+                <span id="orderPriceDisplay">0.00(USD)</span>
+            </div>
+            <div class="info-row">
+                <span>Reward</span>
+                <span>0.5%</span>
+            </div>
+            <div class="info-row">
+                <span>Earnings</span>
+                <span id="orderEarningsDisplay">0.00(USD)</span>
+            </div>
+        </div>
+
+        <div class="details-card">
+            <div class="info-row">
+                <span>Date Created</span>
+                <span id="dateCreatedDisplay">2026-07-08 14:04:42</span>
+            </div>
+            <div class="info-row">
+                <span>Order Code</span>
+                <span id="orderCodeDisplay">20260708140400000005</span>
+            </div>
+        </div>
+
+        <button class="btn-submit" onclick="submitOrder()">Submit</button>
         <button class="btn-back" onclick="window.location.href='task.html'">Return to Task Hub</button>
     </div>
 
@@ -184,15 +243,44 @@
 
         const orderName = localStorage.getItem('currentOrderName') || "Luxury Designer Handbag";
         const orderImg = localStorage.getItem('currentOrderImg') || "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80";
-        const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 5.00;
-        const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 0.02;
+        const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 715.00;
+        const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 3.58;
         const returnTotal = orderPrice + orderEarnings;
+
+        // Generate realistic timestamp & order code if not present
+        let orderCode = localStorage.getItem('currentOrderCode');
+        let dateCreated = localStorage.getItem('currentOrderDate');
+        if (!orderCode) {
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const hh = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            dateCreated = `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
+            orderCode = `${yyyy}${mm}${dd}${hh}${min}` + Math.floor(100000 + Math.random() * 900000);
+            localStorage.setItem('currentOrderCode', orderCode);
+            localStorage.setItem('currentOrderDate', dateCreated);
+        }
 
         document.getElementById('orderName').textContent = orderName;
         document.getElementById('orderImg').src = orderImg;
-        document.getElementById('orderPriceDisplay').textContent = orderPrice.toFixed(2) + ' USD';
-        document.getElementById('orderEarningsDisplay').textContent = orderEarnings.toFixed(2) + ' USD';
-        document.getElementById('orderReturnDisplay').textContent = returnTotal.toFixed(2) + ' USD';
+        document.getElementById('orderPriceDisplay').textContent = orderPrice.toFixed(2) + '(USD)';
+        document.getElementById('orderEarningsDisplay').textContent = orderEarnings.toFixed(2) + '(USD)';
+        document.getElementById('dateCreatedDisplay').textContent = dateCreated;
+        document.getElementById('orderCodeDisplay').textContent = orderCode;
+
+        function fillAutomaticComment() {
+            const comments = [
+                "Excellent product quality, fast optimization and delivery!",
+                "Very satisfied with this item. Highly recommended!",
+                "Amazing value and premium quality. Perfect service!",
+                "Exceeded expectations, smooth transaction and fast commission."
+            ];
+            const randomComment = comments[Math.floor(Math.random() * comments.length)];
+            document.getElementById('reviewComment').value = randomComment;
+        }
 
         function submitOrder() {
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || 10.00;
@@ -208,6 +296,7 @@
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
             localStorage.setItem(taskKey, completedTasksCount);
             localStorage.setItem('completedTasksCount', completedTasksCount);
+            localStorage.removeItem('currentOrderCode'); // Clear for next order
 
             alert("Order submitted successfully! Commission credited.");
             window.location.href = 'task.html';
