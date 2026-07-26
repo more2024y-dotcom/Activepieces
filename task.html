@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Optimization - Luxury VIP</title>
+    <title>Submit Order - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
@@ -21,457 +21,141 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 0;
+            padding: 20px;
             padding-bottom: 100px;
         }
         .container {
-            padding: 20px;
             max-width: 600px;
             margin: 0 auto;
         }
-        .welcome-header {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .header-title {
             font-family: 'Cinzel', serif;
-        }
-        .welcome-header span {
-            color: var(--accent-gold);
-        }
-        .hero-card {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-        .user-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 22px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
             font-size: 18px;
-            border: 2px solid var(--accent-gold);
-        }
-        .user-details h3 {
-            margin: 0 0 5px 0;
-            font-size: 17px;
             font-weight: 700;
-            font-family: 'Cinzel', serif;
             color: var(--accent-gold);
-        }
-        .credit-score-wrap {
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-        .progress-bar-bg {
-            width: 80px;
-            height: 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            display: inline-block;
-        }
-        .progress-bar-fill {
-            width: 100%;
-            height: 100%;
-            background: var(--accent-gold);
-        }
-        .invite-text {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-        .invite-text span {
-            color: var(--accent-gold-light);
-        }
-        .shield-badge {
-            width: 36px;
-            height: 36px;
-            background: rgba(212, 175, 55, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            font-size: 16px;
-        }
-        .balance-title {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .balance-amount {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-        }
-        .info-buttons-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .info-btn {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
-            padding: 14px;
             text-align: center;
-            color: var(--text-main);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .vip-tier-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .vip-tier-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            color: var(--accent-gold);
-            font-size: 15px;
-        }
-        .profit-badge {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--accent-gold);
-            padding: 8px 16px;
+        .card {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            text-decoration: none;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            text-align: center;
         }
-        .start-btn {
+        .product-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            margin-bottom: 15px;
+        }
+        .product-name {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        .order-details {
+            text-align: left;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .detail-row span:first-child {
+            color: var(--text-muted);
+        }
+        .detail-row span:last-child {
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        .submit-btn {
             width: 100%;
             background: linear-gradient(135deg, #d4af37, #aa8c2c);
             color: #0f172a;
             border: none;
             border-radius: 14px;
-            padding: 18px;
+            padding: 16px;
             font-size: 16px;
             font-weight: 800;
             font-family: 'Cinzel', serif;
             cursor: pointer;
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-            margin-bottom: 20px;
-            text-align: center;
-            transition: all 0.2s;
+            transition: opacity 0.2s;
         }
-        .start-btn:active {
-            transform: scale(0.98);
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .product-box {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .notice-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 18px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .notice-title {
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
-        .notice-text {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin: 0;
-        }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #05080f;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 75px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
-            z-index: 1000;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 500;
-            flex: 1;
-        }
-        .nav-item.active {
-            color: var(--accent-gold);
-        }
-        .nav-item span.icon {
-            font-size: 20px;
-            margin-bottom: 3px;
-        }
-        .nav-center-btn {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            border: 4px solid #05080f;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #0f172a;
-            font-size: 18px;
-            margin-top: -25px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        .submit-btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Welcome Header -->
-        <div class="welcome-header">
-            Hi <span id="welcomeName">Guest</span> , welcome back 👑
-        </div>
+        <div class="header-title">Optimize & Submit Order</div>
 
-        <div class="hero-card">
-            <div class="user-header">
-                <div class="user-info">
-                    <div class="avatar" id="avatarLetter">G</div>
-                    <div class="user-details">
-                        <h3 id="usernameDisplay">Guest</h3>
-                        <div class="credit-score-wrap">
-                            <span>Credit Score:</span>
-                            <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
-                    </div>
+        <div class="card">
+            <img id="orderImg" src="" alt="Product Image" class="product-img">
+            <div class="product-name" id="orderName">Loading Product...</div>
+
+            <div class="order-details">
+                <div class="detail-row">
+                    <span>Order Price:</span>
+                    <span id="orderPrice">0.00 USD</span>
                 </div>
-                <div class="shield-badge">🛡️</div>
+                <div class="detail-row">
+                    <span>Commission (0.5%):</span>
+                    <span id="orderEarnings">0.00 USD</span>
+                </div>
             </div>
 
-            <div class="balance-section">
-                <div class="balance-title">Total balance 👁️</div>
-                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
-            </div>
+            <button class="submit-btn" onclick="submitOrder()">Submit Order & Complete Task</button>
         </div>
-
-        <div class="info-buttons-row">
-            <a href="#" class="info-btn">📄 Order description</a>
-            <a href="#" class="info-btn">📄 Please note</a>
-        </div>
-
-        <div class="vip-tier-card">
-            <div class="vip-tier-left">🛡️ VIP 1</div>
-            <a href="#" class="profit-badge">PROFIT 0.5% &gt;</a>
-        </div>
-
-        <!-- Task start button showing dynamic task count -->
-        <button class="start-btn" id="startBtn" onclick="startOptimizationTask()">
-            START OPTIMIZATION (<span id="taskCountDisplay">0</span> / 40)
-        </button>
-
-        <div class="products-grid">
-            <div class="product-box">🗡️</div>
-            <div class="product-box">👠</div>
-            <div class="product-box">📦</div>
-            <div class="product-box">📷</div>
-            <div class="product-box">📱</div>
-            <div class="product-box">📸</div>
-        </div>
-
-        <div class="notice-card">
-            <div class="notice-title">NOTICE</div>
-            <p class="notice-text">
-                Online Support Hours 10:00 - 23:00<br>
-                Please contact online support for your assistance
-            </p>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation Bar -->
-    <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item">
-            <span class="icon">🏠</span><span>Home</span>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">🛡️</span><span>Certificate</span>
-        </a>
-        <a href="task.html" class="nav-item active">
-            <div class="nav-center-btn">⚡</div>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">📝</span><span>Records</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <span class="icon">👤</span><span>My</span>
-        </a>
     </div>
 
     <script>
-        // Retrieve username cleanly
-        const currentUsername = localStorage.getItem('userName') || 
-                                localStorage.getItem('username') || 
-                                localStorage.getItem('loggedInUser') || 
-                                localStorage.getItem('currentUser') || 
-                                localStorage.getItem('accountName');
+        // Load stored order details passed from task.html
+        const name = localStorage.getItem('currentOrderName') || 'Luxury Item';
+        const img = localStorage.getItem('currentOrderImg') || 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80';
+        const price = parseFloat(localStorage.getItem('currentOrderPrice')) || 10.00;
+        const earnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 0.05;
 
-        if (currentUsername && currentUsername.trim() !== "") {
-            document.getElementById('usernameDisplay').textContent = currentUsername;
-            document.getElementById('welcomeName').textContent = currentUsername;
-            document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
-        } else {
-            document.getElementById('usernameDisplay').textContent = "Guest";
-            document.getElementById('welcomeName').textContent = "Guest";
-            document.getElementById('avatarLetter').textContent = "G";
-        }
+        document.getElementById('orderName').textContent = name;
+        document.getElementById('orderImg').src = img;
+        document.getElementById('orderPrice').textContent = price.toFixed(2) + ' USD';
+        document.getElementById('orderEarnings').textContent = earnings.toFixed(2) + ' USD';
 
-        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
-        if (storedInvite) {
-            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
-        }
+        function submitOrder() {
+            // Retrieve current user balance and profit metrics
+            let currentBalance = parseFloat(localStorage.getItem('userBalance')) || 10.00;
+            let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0.00;
+            let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0.00;
 
-        // --- ACCOUNT-SCOPED BALANCE (Forces 10.00 USD for new accounts) ---
-        const userKeySuffix = currentUsername ? currentUsername.trim() : 'Guest';
-        const balanceKey = `userBalance_${userKeySuffix}`;
-        
-        let currentBalance = parseFloat(localStorage.getItem(balanceKey));
-        if (isNaN(currentBalance)) {
-            currentBalance = 10.00;
-            localStorage.setItem(balanceKey, currentBalance);
-        }
-        document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+            // When order is submitted, the principal order price returns plus the commission earned
+            currentBalance += price + earnings;
+            todaysProfit += earnings;
+            totalProfit += earnings;
 
-        // --- ACCOUNT-SCOPED TASK TRACKING (Forces 0/40 for new accounts & daily resets) ---
-        const taskKey = `completedTasks_${userKeySuffix}`;
-        const lastTaskDateKey = `lastTaskDate_${userKeySuffix}`;
-        
-        const todayDateStr = new Date().toDateString();
-        let lastRecordedTaskDate = localStorage.getItem(lastTaskDateKey);
+            // Save updated balance back to localStorage
+            localStorage.setItem('userBalance', currentBalance.toFixed(2));
+            localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
+            localStorage.setItem('totalProfit', totalProfit.toFixed(2));
 
-        if (lastRecordedTaskDate && lastRecordedTaskDate !== todayDateStr) {
-            localStorage.setItem(taskKey, '0');
-            localStorage.setItem(lastTaskDateKey, todayDateStr);
-        } else if (localStorage.getItem(taskKey) === null) {
-            localStorage.setItem(taskKey, '0');
-            localStorage.setItem(lastTaskDateKey, todayDateStr);
-        }
-
-        let completedTasks = parseInt(localStorage.getItem(taskKey)) || 0;
-        
-        function updateTaskDisplay() {
-            document.getElementById('taskCountDisplay').textContent = completedTasks;
-            const btn = document.getElementById('startBtn');
-            if (completedTasks >= 40) {
-                btn.textContent = "COMPLETED (40 / 40)";
-                btn.style.opacity = "0.7";
-            }
-        }
-        updateTaskDisplay();
-
-        // --- TASK EXECUTION & 40/40 BLOCKER ---
-        function startOptimizationTask() {
-            completedTasks = parseInt(localStorage.getItem(taskKey)) || 0;
-
-            if (completedTasks >= 40) {
-                alert("You have already completed your 40/40 tasks for today. No more tasks can be performed.");
-                return;
-            }
-
-            // Increment task count and update balance/profit logic example
-            completedTasks++;
-            localStorage.setItem(taskKey, completedTasks);
-
-            // Increment balance slightly per task (e.g., +0.05 USD)
-            currentBalance += 0.05;
-            localStorage.setItem(balanceKey, currentBalance);
-
-            // Update todays profit
-            let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0;
-            todaysProfit += 0.05;
-            localStorage.setItem('todaysProfit', todaysProfit);
-
-            updateTaskDisplay();
-            document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
-
-            if (completedTasks >= 40) {
-                alert("Congratulations! You have completed all 40 tasks for today.");
-            } else {
-                alert(`Task ${completedTasks}/40 successfully optimized!`);
-            }
+            alert("Order submitted successfully! Commission added to your balance.");
+            
+            // Redirect back to task page
+            window.location.href = 'task.html';
         }
     </script>
 
