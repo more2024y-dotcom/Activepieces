@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Optimization - Starting</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        :root {
+            --primary-blue: #0f172a;
+            --accent-blue: #2563eb;
+            --accent-blue-light: #3b82f6;
+            --bg-color: #0b1120;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 100px;
+        }
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .top-nav-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-blue-light);
+            padding: 6px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .header-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .action-btn {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #ffffff;
+            border: none;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0b1120;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            flex: 1;
+            cursor: pointer;
+        }
+        .nav-item.active {
+            color: #ffd700;
+        }
+        .nav-item span.icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-nav-bar">
+            <a onclick="history.back()" class="back-btn">&lt; Back</a>
+        </div>
+        <div class="header-title">Task Optimization Hub</div>
+        
+        <div class="card">
+            <h3>Ready to Start</h3>
+            <p style="color: var(--text-muted); font-size: 14px;">
+                Click below to begin optimizing your assigned VIP tasks for today.
+            </p>
+            <button class="action-btn" onclick="alert('Task optimization started!')">Start Grabbing / Tasks</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a onclick="history.back()" class="nav-item">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="certificate.html" class="nav-item">
+            <span class="icon">🏆</span><span>Certificate</span>
+        </a>
+        <a href="start.html" class="nav-item active" style="color: #ffd700;">
+            <span class="icon">🚀</span><span>Starting</span>
+        </a>
+        <a href="records.html" class="nav-item">
+            <span class="icon">📋</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="icon">👤</span><span>My</span>
+        </a>
+    </nav>
+
+</body>
+</html>
