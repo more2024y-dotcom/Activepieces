@@ -14,6 +14,7 @@
             --card-bg: #1e293b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --danger-red: #ef4444;
         }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -210,6 +211,18 @@
             cursor: not-allowed;
             box-shadow: none;
         }
+        .negative-warning {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--danger-red);
+            color: #fca5a5;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 12px;
+            display: none;
+            font-weight: 600;
+            text-align: center;
+        }
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -259,6 +272,10 @@
 
             <div class="product-name" id="productName">Loading product...</div>
             <div class="price-qty"><span id="currencyLabel">USD</span> <b id="productPriceDisplay">0.00</b> x1</div>
+
+            <div class="negative-warning" id="negativeWarningBox">
+                ⚠️ Order price exceeds account balance! Negative balance penalty triggered. Please refill balance to proceed.
+            </div>
 
             <div class="review-section">
                 <div class="review-header">
@@ -330,7 +347,7 @@
         const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
         const assignedProductsKey = `assignedProducts_${userKeySuffix}`;
 
-        // Verified, reliable high-resolution product catalog links to ensure images always load properly without errors
+        // Master 40 products catalog with verified high-resolution images
         const masterProductCatalog = [
             { name: "Compact USB-C Charging Cable", price: 3.50, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80" },
             { name: "Minimalist Phone Stand", price: 5.00, image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=600&q=80" },
@@ -388,24 +405,39 @@
 
         function getAssignedProducts() {
             let stored = localStorage.getItem(assignedProductsKey);
+            let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+            
+            // Controlled pricing rule: Filter out any items whose price is higher than the user's current account balance
+            let affordableCatalog = masterProductCatalog.filter(p => p.price <= currentBalance);
+            if (affordableCatalog.length === 0) {
+                affordableCatalog = [masterProductCatalog[0]]; // Absolute fallback to lowest-priced item
+            }
+
             if (stored) {
                 try {
-                    return JSON.parse(stored);
-                } catch (e) {
-                    // fallback if parsing fails
-                }
+                    let parsed = JSON.parse(stored);
+                    // Ensure assigned list only contains items within the affordable threshold
+                    let filteredStored = parsed.filter(p => p.price <= currentBalance);
+                    if (filteredStored.length >= 40) {
+                        return filteredStored;
+                    }
+                } catch (e) {}
             }
-            // Generate a permanent sequence of all 40 unique products for this user's daily session
-            let shuffled = [...masterProductCatalog].sort(() => 0.5 - Math.random());
-            localStorage.setItem(assignedProductsKey, JSON.stringify(shuffled));
-            return shuffled;
+
+            // Generate a shuffled sequence of 40 unique items restricted strictly to user's available balance
+            let pool = [];
+            for (let i = 0; i < 40; i++) {
+                let randomItem = affordableCatalog[Math.floor(Math.random() * affordableCatalog.length)];
+                pool.push(randomItem);
+            }
+
+            localStorage.setItem(assignedProductsKey, JSON.stringify(pool));
+            return pool;
         }
 
         function loadTaskData() {
             let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
             document.getElementById('taskCountDisplay').textContent = completedCount;
-
-            let assignedList = getAssignedProducts();
 
             // Check if all 40 tasks are completed
             if (completedCount >= 40) {
@@ -416,13 +448,21 @@
                 document.getElementById('productImg').src = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=600&q=80";
                 document.getElementById('submitTaskBtn').disabled = true;
                 document.getElementById('submitTaskBtn').textContent = "Daily Limit Reached (40/40)";
+                document.getElementById('negativeWarningBox').style.display = 'none';
                 return;
             }
 
-            // Directly pull the exact product mapped to the current task index so tasks progress sequentially one by one up to 40
+            let assignedList = getAssignedProducts();
             let currentItem = assignedList[completedCount] || assignedList[0];
+            let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
 
-            // Render product info correctly
+            // Safety check: ensure price never exceeds balance (prevents negative balance issue completely)
+            if (currentItem.price > currentBalance) {
+                let affordable = masterProductCatalog.filter(p => p.price <= currentBalance);
+                currentItem = affordable.length > 0 ? affordable[0] : masterProductCatalog[0];
+            }
+
+            // Render product info
             document.getElementById('productImg').src = currentItem.image;
             document.getElementById('productName').textContent = currentItem.name;
             document.getElementById('productPriceDisplay').textContent = currentItem.price.toFixed(2);
@@ -430,6 +470,9 @@
 
             let commission = currentItem.price * 0.005;
             document.getElementById('earningsDisplay').textContent = `${commission.toFixed(2)}(USD)`;
+
+            // Hide negative warning box since pricing is fully controlled below balance
+            document.getElementById('negativeWarningBox').style.display = 'none';
 
             // Reset star ratings back to grey/unselected state on new task load
             document.getElementById('starRatingDisplay').classList.remove('active');
@@ -475,13 +518,20 @@
             }
 
             let assignedList = getAssignedProducts();
-            let currentItem = assignedList[completedCount];
-
+            let currentItem = assignedList[completedCount] || assignedList[0];
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+
+            // Strict protection check against negative balance
+            if (currentItem.price > currentBalance) {
+                document.getElementById('negativeWarningBox').style.display = 'block';
+                alert("Order price exceeds your account balance. Please check your balance settings.");
+                return;
+            }
+
             let commission = currentItem.price * 0.005;
             let currentProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
 
-            // Deduct product price from balance, then instantly return principal back along with the 0.5% commission
+            // Deduct product price, then instantly return principal back along with the 0.5% commission
             currentBalance = currentBalance - currentItem.price + currentItem.price + commission;
             currentProfit += commission;
             completedCount += 1;
