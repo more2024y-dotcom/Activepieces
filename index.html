@@ -3,85 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up & Log In - Luxury VIP</title>
+    <title>Create Your Account - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
         :root {
             /* Premium Rich Blue Theme */
-            --primary-blue: #0284c7;
-            --dark-blue: #0f172a;
-            --accent-blue: #38bdf8;
+            --primary-color: #f8fafc;
+            --accent-color: #0284c7;
+            --accent-hover: #0369a1;
             --bg-color: #090d16;
-            --card-dark: #1e293b;
-            --text-main: #f8fafc;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
             --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            margin: 0;
+            padding: 20px 0;
         }
 
-        .register-container {
-            background: var(--card-dark);
-            padding: 40px 30px;
+        .auth-card {
+            background-color: var(--card-bg);
+            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 400px;
+            max-width: 440px;
             box-sizing: border-box;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            position: relative;
+            border: 1px solid var(--border-color);
         }
 
-        .register-container h2 {
-            margin-top: 0;
-            color: var(--accent-blue);
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .auth-tabs {
+        .language-header {
             display: flex;
-            background: rgba(15, 23, 42, 0.8);
-            border-radius: 10px;
-            padding: 4px;
-            margin-bottom: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            justify-content: flex-end;
+            margin-bottom: 10px;
         }
 
-        .auth-tab {
-            flex: 1;
-            padding: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-muted);
-            border-radius: 8px;
-            cursor: pointer;
+        .language-header select {
+            width: auto;
+            padding: 6px 10px;
+            font-size: 12px;
+            background: #0f172a;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            outline: none;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #38bdf8;
             text-align: center;
-            transition: all 0.2s;
-        }
-
-        .auth-tab.active {
-            background: linear-gradient(135deg, #0284c7, #0369a1);
-            color: white;
-            box-shadow: 0 2px 10px rgba(2, 132, 199, 0.4);
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 24px;
         }
 
         .form-group {
             margin-bottom: 18px;
         }
 
-        .form-group label {
+        label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
@@ -89,194 +81,295 @@
             color: var(--text-muted);
         }
 
-        .form-group input, .form-group select {
+        input, select {
             width: 100%;
             padding: 12px;
             background: #0f172a;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
             box-sizing: border-box;
             font-size: 14px;
-            color: var(--text-main);
-            outline: none;
+            color: var(--text-color);
         }
 
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--accent-blue);
+        input:focus, select:focus {
+            outline: none;
+            border-color: #38bdf8;
             box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
         }
 
-        .btn-submit {
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-group select {
+            width: 140px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        button.submit-btn {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #0284c7, #0369a1);
             color: white;
             border: none;
             border-radius: 12px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            font-size: 15px;
             transition: opacity 0.2s;
-            margin-top: 5px;
             box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+            margin-top: 5px;
         }
 
-        .btn-submit:hover {
+        button.submit-btn:hover {
             opacity: 0.9;
+        }
+
+        .error-msg {
+            color: #f87171;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .switch-link a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .switch-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="register-container">
-        <h2 id="formTitle">Create Account</h2>
-
-        <div class="auth-tabs">
-            <div class="auth-tab" id="tabLogin" onclick="switchMode('login')">Log In</div>
-            <div class="auth-tab active" id="tabRegister" onclick="switchMode('register')">Sign Up</div>
+    <div class="auth-card">
+        <div class="language-header">
+            <select id="languageSelect">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ja">日本語</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ar">العربية</option>
+                <option value="pt">Português</option>
+                <option value="ru">Русский</option>
+                <option value="it">Italiano</option>
+                <option value="ko">한국어</option>
+            </select>
         </div>
 
-        <form id="authForm" onsubmit="handleAuth(event)">
-            <!-- Extra fields shown only during Registration -->
-            <div id="registerFields">
-                <div class="form-group">
-                    <label for="regName">Full Name</label>
-                    <input type="text" id="regName" placeholder="Enter your name">
-                </div>
-                <div class="form-group">
-                    <label for="regPhone">Phone Number</label>
-                    <input type="tel" id="regPhone" placeholder="Enter phone number">
-                </div>
-                <div class="form-group">
-                    <label for="regGender">Gender</label>
-                    <select id="regGender">
-                        <option value="" disabled selected>Select gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="regTxPassword">Transaction Password</label>
-                    <input type="password" id="regTxPassword" placeholder="Create your unique transaction password">
-                </div>
-                <div class="form-group">
-                    <label for="regInviteCode">Invitation Code (Optional)</label>
-                    <input type="text" id="regInviteCode" placeholder="Enter friend's invitation code">
-                </div>
-            </div>
-
-            <!-- Universal Identifier Field -->
+        <h2>Create Account</h2>
+        <form id="signupForm">
+            
             <div class="form-group">
-                <label for="regPassword" id="passwordLabel">Login Password</label>
-                <input type="password" id="regPassword" placeholder="Enter your login password" required>
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Choose a username" required>
             </div>
 
-            <button type="submit" class="btn-submit" id="submitBtn">Sign Up</button>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="" disabled selected>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="phone-group">
+                    <select id="countryCode">
+                        <option value="+1">🇺🇸 +1 (US)</option>
+                        <option value="+44">🇬🇧 +44 (UK)</option>
+                        <option value="+91">🇮🇳 +91 (IN)</option>
+                        <option value="+86">🇨🇳 +86 (CN)</option>
+                        <option value="+81">🇯🇵 +81 (JP)</option>
+                        <option value="+49">🇩🇪 +49 (DE)</option>
+                        <option value="+33">🇫🇷 +33 (FR)</option>
+                        <option value="+55">🇧🇷 +55 (BR)</option>
+                        <option value="+52">🇲🇽 +52 (MX)</option>
+                        <option value="+61">🇦🇺 +61 (AU)</option>
+                        <option value="+971">🇦🇪 +971 (UAE)</option>
+                        <option value="+27">🇿🇦 +27 (ZA)</option>
+                    </select>
+                    <input type="tel" id="phone" placeholder="Enter phone number" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Login Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="At least 6 characters" required>
+                    <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="transPassword">Transaction Password</label>
+                <div class="password-container">
+                    <input type="password" id="transPassword" placeholder="At least 6 characters" required>
+                    <button type="button" id="toggleTransPassword" class="toggle-password">👁️</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inviteCode">Invite Code</label>
+                <input type="text" id="inviteCode" placeholder="Enter invite code (e.g. 2DI2 or user code)" required>
+                <div id="formError" class="error-msg"></div>
+            </div>
+
+            <button type="submit" class="submit-btn">Sign Up</button>
+
+            <div class="switch-link">
+                Already have an account? <a href="login.html">Log In</a>
+            </div>
         </form>
     </div>
 
     <script>
-        let currentMode = 'register';
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const refCode = urlParams.get('ref');
-            if (refCode) {
-                document.getElementById('regInviteCode').value = refCode;
-            }
-        });
-
-        function switchMode(mode) {
-            currentMode = mode;
-            const tabLogin = document.getElementById('tabLogin');
-            const tabRegister = document.getElementById('tabRegister');
-            const formTitle = document.getElementById('formTitle');
-            const registerFields = document.getElementById('registerFields');
-            const submitBtn = document.getElementById('submitBtn');
-
-            if (mode === 'login') {
-                tabLogin.classList.add('active');
-                tabRegister.classList.remove('active');
-                formTitle.textContent = 'Welcome Back';
-                registerFields.style.display = 'none';
-                submitBtn.textContent = 'Log In';
-            } else {
-                tabRegister.classList.add('active');
-                tabLogin.classList.remove('active');
-                formTitle.textContent = 'Create Account';
-                registerFields.style.display = 'block';
-                submitBtn.textContent = 'Sign Up';
-            }
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        if (togglePassword && passwordInput) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🔒';
+            });
         }
 
-        function handleAuth(e) {
+        const toggleTransPassword = document.getElementById('toggleTransPassword');
+        const transPasswordInput = document.getElementById('transPassword');
+        if (toggleTransPassword && transPasswordInput) {
+            toggleTransPassword.addEventListener('click', function () {
+                const type = transPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                transPasswordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🔒';
+            });
+        }
+
+        // Helper function to generate a random 4-character code
+        function generateRandomInviteCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < 4; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            const password = document.getElementById('regPassword').value;
+            
+            const formError = document.getElementById('formError');
+            const usernameInput = document.getElementById('username').value.trim();
+            const phoneInput = document.getElementById('phone').value.trim();
+            const inviteCodeInput = document.getElementById('inviteCode').value.trim().toUpperCase();
+            const passVal = passwordInput.value;
+            const transPassVal = transPasswordInput.value;
 
-            if (currentMode === 'register') {
-                const name = document.getElementById('regName').value.trim();
-                const phone = document.getElementById('regPhone').value.trim();
-                const gender = document.getElementById('regGender').value;
-                const txPassword = document.getElementById('regTxPassword').value.trim();
-                const inviteCodeUsed = document.getElementById('regInviteCode').value.trim();
+            // Get existing users list from localStorage
+            let users = JSON.parse(localStorage.getItem('usersList')) || [];
 
-                if (!name || !phone || !gender) {
-                    alert('Please fill out all required fields.');
-                    return;
-                }
-
-                const balanceKey = `userBalance_${name}`;
-                if (localStorage.getItem(balanceKey) !== null) {
-                    alert('This username already exists! Please choose another name or switch to Log In.');
-                    return;
-                }
-
-                const myNewInviteCode = 'REF' + Math.floor(100000 + Math.random() * 900000);
-
-                // Save core profile details globally & provision isolated keys
-                localStorage.setItem('userName', name);
-                localStorage.setItem('username', name);
-                localStorage.setItem('userPhone', phone);
-                localStorage.setItem('userGender', gender);
-                localStorage.setItem('userPassword', password);
-                localStorage.setItem('userTxPassword', txPassword);
-                localStorage.setItem('myInviteCode', myNewInviteCode);
-
-                if (inviteCodeUsed) {
-                    localStorage.setItem('referredBy', inviteCodeUsed);
-                }
-
-                // Provision fresh isolated starting values for this user
-                localStorage.setItem(balanceKey, '10.00');
-                localStorage.setItem(`completedTasks_${name}`, '0');
-                localStorage.setItem(`todaysProfit_${name}`, '0.00');
-                localStorage.setItem(`totalProfit_${name}`, '0.00');
-
-                alert('Registration successful!');
-                window.location.href = 'dashboard.html';
-
-            } else {
-                // Log In mode: Verify against stored accounts via Name
-                const inputNamePrompt = prompt("Please enter your registered Full Name to log in:");
-                if (!inputNamePrompt) return;
-
-                const trimmedName = inputNamePrompt.trim();
-                const balanceKey = `userBalance_${trimmedName}`;
-
-                // Check if account data exists for this user
-                if (localStorage.getItem(balanceKey) === null && localStorage.getItem('userName') !== trimmedName) {
-                    alert('Account not found with that name. Please check your spelling or Sign Up.');
-                    return;
-                }
-
-                // Set active session username
-                localStorage.setItem('userName', trimmedName);
-                localStorage.setItem('username', trimmedName);
-
-                alert('Login successful!');
-                window.location.href = 'dashboard.html';
+            // 1. Check if username already exists
+            const existingUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
+            if (existingUser) {
+                formError.textContent = 'This username is already taken. Please choose another one.';
+                formError.style.display = 'block';
+                return;
             }
-        }
+
+            // 2. Phone Number Validation
+            const phoneDigitsOnly = phoneInput.replace(/\D/g, '');
+            if (phoneDigitsOnly.length < 7) {
+                formError.textContent = 'Please enter a valid phone number correctly.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            // 3. Check Passwords length
+            if (passVal.length < 6) {
+                formError.textContent = 'Login password must be at least 6 characters long.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            if (transPassVal.length < 6) {
+                formError.textContent = 'Transaction password must be at least 6 characters long.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            // 4. Validate Invite Code (Must be either master code '2DI2' OR an existing user's unique referral code)
+            const isMasterCode = (inviteCodeInput === '2DI2');
+            const foundReferrer = users.find(u => u.myInviteCode === inviteCodeInput);
+
+            if (!isMasterCode && !foundReferrer) {
+                formError.textContent = 'Invalid invite code. Please enter a valid referral code.';
+                formError.style.display = 'block';
+                return;
+            }
+            
+            formError.style.display = 'none';
+
+            const fullPhone = document.getElementById('countryCode').value + ' ' + phoneInput;
+            const selectedGender = document.getElementById('gender').value;
+            const selectedLang = document.getElementById('languageSelect').value;
+
+            // Generate a unique random code for this new user
+            let newUniqueCode = generateRandomInviteCode();
+            while (users.some(u => u.myInviteCode === newUniqueCode) || newUniqueCode === '2DI2') {
+                newUniqueCode = generateRandomInviteCode();
+            }
+
+            // Create new user object including their personal referral code
+            const newUser = {
+                username: usernameInput,
+                gender: selectedGender,
+                phone: fullPhone,
+                password: passVal,
+                transPassword: transPassVal,
+                language: selectedLang,
+                myInviteCode: newUniqueCode
+            };
+
+            // Save to array and update localStorage
+            users.push(newUser);
+            localStorage.setItem('usersList', JSON.stringify(users));
+
+            alert('Account created successfully! Your personal invite code is: ' + newUniqueCode);
+            window.location.href = 'login.html';
+        });
     </script>
 </body>
 </html>
