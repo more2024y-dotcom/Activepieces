@@ -1,227 +1,364 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Luxury VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-<title>My Page</title>
+        :root {
+            --primary-color: #f8fafc;
+            --accent-color: #0284c7;
+            --accent-hover: #0369a1;
+            --bg-color: #090d16;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
+        }
 
-<link rel="stylesheet" href="css/my-page.css">
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
 
+        .my-page {
+            width: 100%;
+            max-width: 440px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-card, .balance-card, .profit-card, .gift-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .profile-pic {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #38bdf8;
+            background-color: #0f172a;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h1 {
+            margin: 0 0 4px 0;
+            font-size: 20px;
+            color: #38bdf8;
+        }
+
+        .vip {
+            display: inline-block;
+            background: rgba(253, 224, 71, 0.15);
+            color: #fde047;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .profile-info p {
+            margin: 2px 0;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .profile-info span {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .balance-card h2, .profit-card h2, .gift-card h2 {
+            margin-top: 0;
+            font-size: 15px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .balance-card h1 {
+            margin: 0 0 20px 0;
+            font-size: 28px;
+            color: #fde047;
+        }
+
+        .wallet-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .wallet-buttons button {
+            padding: 10px;
+            background: #0f172a;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .wallet-buttons button:hover {
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .profit-card h1 {
+            margin: 0 0 4px 0;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        .profit-card > p {
+            margin: 0 0 16px 0;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .profit-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+
+        .profit-box h3 {
+            margin: 0 0 4px 0;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .profit-box p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .gift-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .gift-item img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .gift-item h3 {
+            margin: 0 0 2px 0;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        .gift-item p {
+            margin: 0;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Bottom Navigation Bar Styles */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0b1120;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #ffd700;
+        }
+
+        .nav-item span.icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .nav-item-center {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .floating-center-btn {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #fde047, #ca8a04);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: -25px;
+            box-shadow: 0 4px 15px rgba(253, 224, 71, 0.4);
+            color: #0f172a;
+            font-size: 22px;
+            border: 2px solid #0b1120;
+        }
+    </style>
 </head>
-
-
 <body>
 
+    <div class="my-page">
 
-<div class="my-page">
-
-
-
-<!-- Profile -->
-
-<div class="profile-card">
-
-
-    <div class="profile-header">
-
-
-        <img src="assets/female.png" class="profile-pic">
-
-
-        <div class="profile-info">
-
-
-            <h1>
-                Emma730
-            </h1>
-
-
-            <div class="vip">
-                ⭐ VIP 1
+        <!-- Profile -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <img src="assets/female.png" class="profile-pic" alt="Profile Picture">
+                <div class="profile-info">
+                    <h1 id="profileUsername">Emma730</h1>
+                    <div class="vip">⭐ VIP 1</div>
+                    <p>Credit Score: <span>100%</span></p>
+                    <p>Invitation Code: <span id="profileInviteCode">EAYBA</span></p>
+                </div>
             </div>
-
-
-            <p>
-                Credit Score:
-                <span>100%</span>
-            </p>
-
-
-            <p>
-                Invitation Code:
-                <span>EAYBA</span>
-            </p>
-
-
         </div>
 
+        <!-- Balance -->
+        <div class="balance-card">
+            <h2>💰 Total Balance</h2>
+            <h1 id="profileBalance">$1,268.01</h1>
+            <div class="wallet-buttons">
+                <button>➕ Add Wallet</button>
+                <button>💳 Deposit</button>
+                <button>⬇ Withdraw</button>
+                <button onclick="window.location.href='records.html'">📜 Transaction</button>
+            </div>
+        </div>
+
+        <!-- Profit -->
+        <div class="profit-card">
+            <h2>📊 Profit Analysis</h2>
+            <h1 id="profileTotalProfitDisplay">$0.00</h1>
+            <p id="profileCompletedCount">You've made 0 transactions</p>
+            <div class="profit-box">
+                <div>
+                    <h3>Today's Profit</h3>
+                    <p id="profileTodaysProfit">$0.00</p>
+                </div>
+                <div>
+                    <h3>Total Profit</h3>
+                    <p id="profileTotalProfit">$0.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gifts -->
+        <div class="gift-card">
+            <h2>🎁 Selected Gifts</h2>
+            <div class="gift-item">
+                <img src="assets/watch.png" alt="Luxury Watch">
+                <div>
+                    <h3>Luxury Watch</h3>
+                    <p>VIP Reward Gift</p>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-
-</div>
-
-
-
-
-
-<!-- Balance -->
-
-
-<div class="balance-card">
-
-
-<h2>
-💰 Total Balance
-</h2>
-
-
-<h1>
-1,268.01 USD
-</h1>
-
-
-
-<div class="wallet-buttons">
-
-
-<button>
-➕ Add Wallet
-</button>
-
-
-<button>
-💳 Deposit
-</button>
-
-
-<button>
-⬇ Withdraw
-</button>
-
-
-<button>
-📜 Transaction
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- Profit -->
-
-
-<div class="profit-card">
-
-
-<h2>
-📊 Profit Analysis
-</h2>
-
-
-<h1>
-0.00 USD
-</h1>
-
-
-<p>
-You've made 0 transactions
-</p>
-
-
-
-
-<div class="profit-box">
-
-
-<div>
-
-<h3>
-Today's Profit
-</h3>
-
-<p>
-0.00 USD
-</p>
-
-</div>
-
-
-
-
-<div>
-
-<h3>
-Total Profit
-</h3>
-
-<p>
-0.00 USD
-</p>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- Gifts -->
-
-
-<div class="gift-card">
-
-
-<h2>
-🎁 Selected Gifts
-</h2>
-
-
-<div class="gift-item">
-
-
-<img src="assets/watch.png">
-
-
-<div>
-
-<h3>
-Luxury Watch
-</h3>
-
-
-<p>
-VIP Reward Gift
-</p>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="start.html" class="nav-item-center">
+            <div class="floating-center-btn">⚡</div>
+        </a>
+        <a href="records.html" class="nav-item">
+            <span class="icon">📋</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <span class="icon">👤</span><span>My</span>
+        </a>
+    </nav>
+
+    <script>
+        const currentUsername = localStorage.getItem('username');
+
+        if (currentUsername) {
+            document.getElementById('profileUsername').textContent = currentUsername;
+            
+            const inviteCode = localStorage.getItem('myInviteCode');
+            if (inviteCode) {
+                document.getElementById('profileInviteCode').textContent = inviteCode;
+            }
+
+            const balanceKey = `userBalance_${currentUsername}`;
+            const completedKey = `completedTasks_${currentUsername}`;
+            const todaysProfitKey = `todaysProfit_${currentUsername}`;
+            const totalProfitKey = `totalProfit_${currentUsername}`;
+
+            const userBal = parseFloat(localStorage.getItem(balanceKey) || '1268.01').toFixed(2);
+            const completedCount = localStorage.getItem(completedKey) || '0';
+            const todaysProf = parseFloat(localStorage.getItem(todaysProfitKey) || '0.00').toFixed(2);
+            const totalProf = parseFloat(localStorage.getItem(totalProfitKey) || '0.00').toFixed(2);
+
+            document.getElementById('profileBalance').textContent = '$' + userBal;
+            document.getElementById('profileCompletedCount').textContent = `You've made ${completedCount} transactions`;
+            document.getElementById('profileTotalProfitDisplay').textContent = '$' + totalProf;
+            document.getElementById('profileTodaysProfit').textContent = '$' + todaysProf;
+            document.getElementById('profileTotalProfit').textContent = '$' + totalProf;
+        }
+    </script>
 </body>
-
 </html>
