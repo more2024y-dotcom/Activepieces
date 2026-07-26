@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Optimization - Luxury VIP</title>
+    <title>Task Optimization - VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
         :root {
@@ -81,21 +81,45 @@
             background: rgba(10, 15, 28, 0.75);
             border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 14px;
-            padding: 22px;
+            padding: 18px;
             text-align: center;
             margin-bottom: 20px;
         }
-        .product-icon {
-            font-size: 42px;
-            margin-bottom: 10px;
+        .product-image-container {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .product-name {
             font-family: 'Cinzel', serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--accent-gold);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+        .product-rating {
+            color: #f59e0b;
+            font-size: 14px;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+        }
+        .product-reviews-count {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
         }
         .product-price {
             font-size: 15px;
@@ -207,8 +231,12 @@
             </div>
 
             <div class="product-preview">
-                <div class="product-icon" id="productIcon">👜</div>
+                <div class="product-image-container">
+                    <img id="productImg" src="" alt="Product Image">
+                </div>
                 <div class="product-name" id="productName">LUXURY DESIGNER HANDBAG</div>
+                <div class="product-rating" id="productRating">★★★★★</div>
+                <div class="product-reviews-count" id="productReviews">(1,248 Reviews)</div>
                 <div class="product-price" id="productPrice">Price: $866.00 USD</div>
             </div>
 
@@ -258,16 +286,76 @@
         const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
 
         const productCatalog = [
-            { icon: "👜", name: "LUXURY DESIGNER HANDBAG", price: 866.00 },
-            { icon: "⌚", name: "SWISS AUTOMATIC GOLD WATCH", price: 1250.00 },
-            { icon: "🎧", name: "WIRELESS NOISE-CANCELING EARBUDS", price: 240.00 },
-            { icon: "📺", name: "4K ULTRA HD SMART TV", price: 650.00 },
-            { icon: "👗", name: "DESIGNER SILK EVENING GOWN", price: 490.00 },
-            { icon: "📷", name: "PROFESSIONAL DSLR CAMERA KIT", price: 1100.00 },
-            { icon: "💼", name: "PREMIUM LEATHER BUSINESS BRIEFCASE", price: 320.00 },
-            { icon: "💍", name: "18K DIAMOND ACCENT RING", price: 1450.00 },
-            { icon: "👟", name: "LIMITED EDITION DESIGNER SNEAKERS", price: 380.00 },
-            { icon: "🕶️", name: "TITANIUM POLARIZED SUNGLASSES", price: 210.00 }
+            { 
+                name: "LUXURY DESIGNER LEATHER HANDBAG", 
+                price: 866.00, 
+                rating: "★★★★★", 
+                reviews: "(1,420 Reviews)",
+                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "SWISS AUTOMATIC GOLD CHRONOGRAPH WATCH", 
+                price: 1250.00, 
+                rating: "★★★★★", 
+                reviews: "(890 Reviews)",
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "PREMIUM WIRELESS ACTIVE NOISE-CANCELING HEADPHONES", 
+                price: 240.00, 
+                rating: "★★★★★", 
+                reviews: "(2,150 Reviews)",
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "4K ULTRA HD CURVED SMART OLED TV", 
+                price: 650.00, 
+                rating: "★★★★★", 
+                reviews: "(630 Reviews)",
+                image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "DESIGNER SILK EVENING COUTURE GOWN", 
+                price: 490.00, 
+                rating: "★★★★★", 
+                reviews: "(410 Reviews)",
+                image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "PROFESSIONAL DSLR FULL-FRAME CAMERA KIT", 
+                price: 1100.00, 
+                rating: "★★★★★", 
+                reviews: "(980 Reviews)",
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "ITALIAN FULL-GRAIN LEATHER BRIEFCASE", 
+                price: 320.00, 
+                rating: "★★★★★", 
+                reviews: "(750 Reviews)",
+                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "18K WHITE GOLD DIAMOND ACCENT RING", 
+                price: 1450.00, 
+                rating: "★★★★★", 
+                reviews: "(340 Reviews)",
+                image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "LIMITED EDITION STREETWEAR DESIGNER SNEAKERS", 
+                price: 380.00, 
+                rating: "★★★★★", 
+                reviews: "(1,890 Reviews)",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" 
+            },
+            { 
+                name: "TITANIUM POLARIZED LUXURY SUNGLASSES", 
+                price: 210.00, 
+                rating: "★★★★★", 
+                reviews: "(520 Reviews)",
+                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" 
+            }
         ];
 
         function loadTaskData() {
@@ -277,8 +365,10 @@
             let catalogIndex = completedCount % productCatalog.length;
             let currentItem = productCatalog[catalogIndex];
 
-            document.getElementById('productIcon').textContent = currentItem.icon;
+            document.getElementById('productImg').src = currentItem.image;
             document.getElementById('productName').textContent = currentItem.name;
+            document.getElementById('productRating').textContent = currentItem.rating;
+            document.getElementById('productReviews').textContent = currentItem.reviews;
             document.getElementById('productPrice').textContent = `Price: $${currentItem.price.toFixed(2)} USD`;
 
             let commission = currentItem.price * 0.005;
