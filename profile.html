@@ -5,27 +5,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - Platform</title>
-    <link rel="stylesheet" href="my-page.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        :root {
+            --primary-blue: #0f172a;
+            --accent-blue: #2563eb;
+            --accent-blue-light: #3b82f6;
+            --bg-color: #0b1120;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 100px;
+        }
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 16px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-blue-light);
+        }
+        .vip {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+        .profile-info h1 {
+            font-size: 18px;
+            margin: 0 0 2px 0;
+        }
+        .profile-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .balance-card h2, .profit-card h2, .gift-card h2 {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+        .balance-card h1 {
+            font-size: 28px;
+            margin: 0 0 16px 0;
+            color: var(--text-main);
+        }
+        .wallet-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .wallet-buttons button {
+            flex: 1;
+            background: var(--accent-blue);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .wallet-buttons button:hover {
+            background: var(--accent-blue-light);
+        }
+        .profit-box {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .profit-box div {
+            flex: 1;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .profit-box h3 {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin: 0 0 4px 0;
+        }
+        .profit-box p {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+            color: #4ade80;
+        }
+        .gift-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gift-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+        .gift-item h3 {
+            font-size: 14px;
+            margin: 0 0 2px 0;
+        }
+        .gift-item p {
+            font-size: 12px;
+            color: #fde047;
+            margin: 0;
+        }
+        .logout-container {
+            margin-top: 10px;
+        }
+        .btn-danger {
+            width: 100%;
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0b1120;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: var(--accent-blue-light);
+        }
+        .nav-item span.icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="my-page">
+    <div class="container">
+        <div class="header-title">My Profile</div>
 
         <!-- Profile Card -->
-        <div class="profile-card">
+        <div class="card profile-card">
             <div class="profile-header">
-                <img src="assets/logo.png" alt="Profile Picture" class="profile-pic">
+                <img src="assets/logo.png" alt="Profile Picture" class="profile-pic" onerror="this.src='https://via.placeholder.com/60'">
                 <div class="profile-info">
                     <div class="vip">VIP 1</div>
-                    <h1>John Doe</h1>
-                    <p>Username: <span>user123</span></p>
+                    <h1 id="profileUsername">John Doe</h1>
+                    <p>Username: <span id="profileHandle">user123</span></p>
                 </div>
             </div>
         </div>
 
         <!-- Balance Card -->
-        <div class="balance-card">
+        <div class="card balance-card">
             <h2>Total Balance</h2>
             <h1>$1,250.00</h1>
             
@@ -36,7 +225,7 @@
         </div>
 
         <!-- Profit Card -->
-        <div class="profit-card">
+        <div class="card profit-card">
             <h2>Earnings Overview</h2>
             <div class="profit-box">
                 <div>
@@ -51,10 +240,10 @@
         </div>
 
         <!-- Selected Gifts Card -->
-        <div class="gift-card">
+        <div class="card gift-card">
             <h2>Selected Gifts</h2>
             <div class="gift-item">
-                <img src="assets/products/ipad.png" alt="iPad">
+                <img src="assets/products/ipad.png" alt="iPad" onerror="this.src='https://via.placeholder.com/50'">
                 <div>
                     <h3>Apple iPad Pro</h3>
                     <p>⭐ 68 Points</p>
@@ -62,16 +251,51 @@
             </div>
         </div>
 
+        <!-- Logout Action -->
+        <div class="logout-container">
+            <button class="btn-danger" onclick="logoutUser()">Log Out / Switch Account</button>
+        </div>
+
     </div>
 
-    <!-- Bottom Navigation Bar -->
-    <nav class="bottom-nav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #333;">
-        <a href="home.html" style="color: white; text-decoration: none; text-align: center;">🏠<br>Home</a>
-        <a href="certificate.html" style="color: white; text-decoration: none; text-align: center;">🏆<br>Certificate</a>
-        <a href="start.html" style="color: white; text-decoration: none; text-align: center;">🚀<br>Starting</a>
-        <a href="records.html" style="color: white; text-decoration: none; text-align: center;">📋<br>Records</a>
-        <a href="profile.html" style="color: #ffd700; text-decoration: none; text-align: center;">👤<br>My</a>
-    </nav>
+    <!-- Bottom Navigation Bar matching site design language -->
+    <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="certificate.html" class="nav-item">
+            <span class="icon">🛡️</span><span>Certificate</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <span class="icon">⚡</span><span>Task</span>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">📝</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <span class="icon">👤</span><span>My</span>
+        </a>
+    </div>
+
+    <script>
+        // Sync local storage username data dynamically if available
+        const savedName = localStorage.getItem('userName') || 
+                          localStorage.getItem('username') || 
+                          localStorage.getItem('loggedInUser') || 
+                          localStorage.getItem('currentUser');
+        if (savedName) {
+            document.getElementById('profileUsername').textContent = savedName;
+            document.getElementById('profileHandle').textContent = savedName;
+        }
+
+        function logoutUser() {
+            if (confirm("Are you sure you want to log out?")) {
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('currentUser');
+                window.location.href = 'dashboard.html';
+            }
+        }
+    </script>
 
 </body>
 
