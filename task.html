@@ -203,12 +203,6 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .showcase-item:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-gold);
         }
         .bottom-nav {
             position: fixed;
@@ -255,101 +249,9 @@
             margin-top: -25px;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
-
-        /* Product Popup Modal Overlay */
-        #productModal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(9, 13, 22, 0.9);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal-content {
-            background: var(--card-dark);
-            border: 2px solid var(--accent-gold);
-            border-radius: 20px;
-            padding: 25px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-        }
-        .modal-product-img {
-            width: 140px;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid var(--accent-gold);
-            margin: 15px 0;
-        }
-        .modal-product-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--text-main);
-            margin-bottom: 10px;
-        }
-        .modal-info-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            margin: 8px 0;
-            color: var(--text-muted);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .modal-info-row span strong {
-            color: var(--accent-gold);
-        }
-        .modal-btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .modal-btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-family: 'Cinzel', serif;
-            cursor: pointer;
-            border: none;
-        }
-        .btn-cancel {
-            background: #334155;
-            color: var(--text-muted);
-        }
-        .btn-proceed {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-        }
     </style>
 </head>
 <body>
-
-    <!-- Interactive Product Modal Popup -->
-    <div id="productModal">
-        <div class="modal-content">
-            <h3 style="margin-top:0; font-size: 18px;">Matched Product Order</h3>
-            <img id="modalImg" class="modal-product-img" src="" alt="Product">
-            <div id="modalTitle" class="modal-product-title">Product Name</div>
-            <div class="modal-info-row">
-                <span>Order Price:</span>
-                <strong id="modalPrice">0.00 USD</strong>
-            </div>
-            <div class="modal-info-row">
-                <span>Estimated Commission:</span>
-                <strong id="modalEarnings">0.00 USD</strong>
-            </div>
-            <div class="modal-btn-group">
-                <button class="modal-btn btn-cancel" onclick="closeProductModal()">Cancel</button>
-                <button class="modal-btn btn-proceed" onclick="proceedToSubmit()">Submit Order</button>
-            </div>
-        </div>
-    </div>
 
     <div class="container">
         <div class="hero-card">
@@ -391,12 +293,12 @@
         <button class="btn-start" id="startBtn" onclick="startTaskOptimization()">START OPTIMIZATION (0 / 40)</button>
 
         <div class="grid-showcase">
-            <div class="showcase-item" onclick="showDirectProduct(0)">👞</div>
-            <div class="showcase-item" onclick="showDirectProduct(1)">👠</div>
-            <div class="showcase-item" onclick="showDirectProduct(2)">📦</div>
-            <div class="showcase-item" onclick="showDirectProduct(3)">📷</div>
-            <div class="showcase-item" onclick="showDirectProduct(4)">📱</div>
-            <div class="showcase-item" onclick="showDirectProduct(5)">📸</div>
+            <div class="showcase-item">👞</div>
+            <div class="showcase-item">👠</div>
+            <div class="showcase-item">📦</div>
+            <div class="showcase-item">📷</div>
+            <div class="showcase-item">📱</div>
+            <div class="showcase-item">📸</div>
         </div>
     </div>
 
@@ -463,10 +365,6 @@
             { name: "Designer Sunglasses", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=400&q=80" }
         ];
 
-        let pendingOrderPrice = 0;
-        let pendingEarnings = 0;
-        let pendingProduct = null;
-
         function startTaskOptimization() {
             currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || 10.00;
             completedTasksCount = parseInt(localStorage.getItem(taskKey)) || parseInt(localStorage.getItem('completedTasksCount')) || 0;
@@ -481,63 +379,35 @@
                 return;
             }
 
+            let randomOrderPrice;
             if (currentBalance <= 20) {
-                pendingOrderPrice = parseFloat((currentBalance * (0.5 + Math.random() * 0.3)).toFixed(2));
-                if (pendingOrderPrice < 1.00) pendingOrderPrice = 1.00;
+                randomOrderPrice = parseFloat((currentBalance * (0.5 + Math.random() * 0.3)).toFixed(2));
+                if (randomOrderPrice < 1.00) randomOrderPrice = 1.00;
             } else {
-                pendingOrderPrice = parseFloat((currentBalance * 0.4).toFixed(2));
+                randomOrderPrice = parseFloat((currentBalance * 0.4).toFixed(2));
             }
 
-            if (currentBalance < pendingOrderPrice) {
-                alert("Your account balance is insufficient to temporarily cover the product price of $" + pendingOrderPrice.toFixed(2) + ".");
+            if (currentBalance < randomOrderPrice) {
+                alert("Your account balance is insufficient to temporarily cover the product price of $" + randomOrderPrice.toFixed(2) + ".");
                 return;
             }
 
             const commissionRate = 0.005;
-            pendingEarnings = parseFloat((pendingOrderPrice * commissionRate).toFixed(2));
-            pendingProduct = productPool[Math.floor(Math.random() * productPool.length)];
+            const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2));
 
-            document.getElementById('modalImg').src = pendingProduct.img;
-            document.getElementById('modalTitle').textContent = pendingProduct.name;
-            document.getElementById('modalPrice').textContent = pendingOrderPrice.toFixed(2) + ' USD';
-            document.getElementById('modalEarnings').textContent = pendingEarnings.toFixed(2) + ' USD';
-            document.getElementById('productModal').style.display = 'flex';
-        }
-
-        function showDirectProduct(index) {
-            currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || 10.00;
-            if (currentBalance <= 0) {
-                alert("Insufficient balance.");
-                return;
-            }
-            pendingOrderPrice = parseFloat((currentBalance * 0.3).toFixed(2));
-            if (pendingOrderPrice < 1.00) pendingOrderPrice = 1.00;
-            
-            const commissionRate = 0.005;
-            pendingEarnings = parseFloat((pendingOrderPrice * commissionRate).toFixed(2));
-            pendingProduct = productPool[index % productPool.length];
-
-            document.getElementById('modalImg').src = pendingProduct.img;
-            document.getElementById('modalTitle').textContent = pendingProduct.name;
-            document.getElementById('modalPrice').textContent = pendingOrderPrice.toFixed(2) + ' USD';
-            document.getElementById('modalEarnings').textContent = pendingEarnings.toFixed(2) + ' USD';
-            document.getElementById('productModal').style.display = 'flex';
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModal').style.display = 'none';
-        }
-
-        function proceedToSubmit() {
-            currentBalance -= pendingOrderPrice;
+            // Deduct balance temporarily for the active order
+            currentBalance -= randomOrderPrice;
             localStorage.setItem(balanceKey, currentBalance.toFixed(2));
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
 
-            localStorage.setItem('currentOrderName', pendingProduct.name);
-            localStorage.setItem('currentOrderImg', pendingProduct.img);
-            localStorage.setItem('currentOrderPrice', pendingOrderPrice.toFixed(2));
-            localStorage.setItem('currentOrderEarnings', pendingEarnings.toFixed(2));
+            const selectedProduct = productPool[Math.floor(Math.random() * productPool.length)];
 
+            localStorage.setItem('currentOrderName', selectedProduct.name);
+            localStorage.setItem('currentOrderImg', selectedProduct.img);
+            localStorage.setItem('currentOrderPrice', randomOrderPrice.toFixed(2));
+            localStorage.setItem('currentOrderEarnings', earnings.toFixed(2));
+
+            // Instantly redirect to submission page
             window.location.href = 'submit.html';
         }
 
