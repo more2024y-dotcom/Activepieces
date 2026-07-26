@@ -43,46 +43,40 @@
             font-size: 13px;
             font-weight: 600;
         }
-        .page-title {
+        .header-title {
             font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
+            font-weight: 800;
             color: var(--text-main);
+            margin-bottom: 20px;
         }
-        .cert-card {
+        .card {
             background: var(--card-bg);
             border: 1px solid rgba(59, 130, 246, 0.25);
             border-radius: 16px;
-            padding: 18px;
+            padding: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
             text-align: center;
         }
-        .cert-image-container {
-            width: 100%;
-            background: #ffffff;
+        .cert-frame {
+            border: 2px dashed rgba(59, 130, 246, 0.4);
+            padding: 20px;
             border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            box-sizing: border-box;
+            background: rgba(15, 23, 42, 0.4);
         }
-        .cert-image-container img {
-            width: 100%;
-            height: auto;
-            max-height: 700px;
-            object-fit: contain;
-            border-radius: 4px;
+        .cert-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fde047;
+            margin-bottom: 10px;
         }
-        .cert-description {
+        .cert-desc {
             font-size: 13px;
             color: var(--text-muted);
-            margin-top: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
+        /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -115,29 +109,27 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <div class="top-nav-bar">
             <a href="dashboard.html" class="back-btn">&lt; Back</a>
         </div>
+        <div class="header-title">Official Certificate</div>
         
-        <div class="page-title">Company Legal Certificate</div>
-
-        <div class="cert-card">
-            <div class="cert-image-container">
-                <!-- 
-                  PASTE YOUR CERTIFICATE BASE64 DATA BELOW 
-                  To embed your exact certificate image directly into the code so it never breaks, 
-                  replace the entire data URI inside src="..." below with your image's Base64 string 
-                  (e.g., data:image/jpeg;base64,...).
-                -->
-                <img src="data:image/jpeg;base64,PASTE_YOUR_BASE64_CODE_HERE" alt="New York Secretary of State Articles of Incorporation" id="certificateImg">
-            </div>
-            <div class="cert-description">
-                Official Electronic Filing Certificate issued by the New York Secretary of State for Activepieces (Entity File Number: 5517408). Verified and legally registered.
+        <div class="card">
+            <div class="cert-frame">
+                <div class="cert-title">Certificate of Incorporation & Compliance</div>
+                <p class="cert-desc">
+                    This document certifies that the automated optimization hub is verified, fully authorized, and operates in compliance with international digital trade protocol standards.
+                </p>
+                <div style="font-size: 12px; color: var(--accent-blue-light); font-weight: 600;">
+                    Status: Verified & Secure (Active)
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
@@ -155,5 +147,6 @@
             <span class="icon">👤</span><span>My</span>
         </a>
     </div>
+
 </body>
 </html>
