@@ -47,15 +47,15 @@
             text-align: center;
         }
         .product-img {
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             object-fit: cover;
             border-radius: 14px;
             border: 2px solid var(--accent-gold);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .product-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 15px;
@@ -65,13 +65,52 @@
             display: flex;
             justify-content: space-between;
             font-size: 14px;
-            margin: 10px 0;
-            padding: 8px 0;
+            margin: 8px 0;
+            padding: 6px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--text-muted);
         }
         .info-row strong {
             color: var(--accent-gold);
+        }
+        .review-section {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .review-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .stars {
+            color: #d4af37;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+        .review-input {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: var(--text-main);
+            padding: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            resize: none;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .review-input:focus {
+            border-color: var(--accent-gold);
         }
         .btn-submit {
             width: 100%;
@@ -86,7 +125,7 @@
             text-align: center;
             font-family: 'Cinzel', serif;
             box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-            margin-top: 10px;
+            margin-bottom: 10px;
         }
         .btn-back {
             width: 100%;
@@ -98,7 +137,7 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 10px;
+            text-align: center;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
@@ -126,30 +165,29 @@
             </div>
         </div>
 
+        <div class="review-section">
+            <div class="review-title">
+                <span>Product Review & Rating</span>
+                <span class="stars">⭐⭐⭐⭐⭐</span>
+            </div>
+            <textarea id="reviewComment" class="review-input" rows="3" placeholder="Write your product feedback or review here...">Excellent product quality, fast optimization and delivery!</textarea>
+        </div>
+
         <button class="btn-submit" onclick="submitOrder()">SUBMIT OPTIMIZATION ORDER</button>
         <button class="btn-back" onclick="window.location.href='task.html'">Return to Task Hub</button>
     </div>
 
     <script>
-        // Uniform Username & Key Resolution
-        const currentUsername = localStorage.getItem('userName') || 
-                                localStorage.getItem('username') || 
-                                localStorage.getItem('loggedInUser') || 
-                                localStorage.getItem('currentUser') || 
-                                localStorage.getItem('accountName') || 'PPPP';
+        const currentUsername = localStorage.getItem('userName') || 'PPPP';
+        const balanceKey = `userBalance_${currentUsername}`;
+        const taskKey = `completedTasks_${currentUsername}`;
 
-        const userKeySuffix = currentUsername.trim();
-        const balanceKey = `userBalance_${userKeySuffix}`;
-        const taskKey = `completedTasks_${userKeySuffix}`;
-
-        // Retrieve active order details saved from task hub
         const orderName = localStorage.getItem('currentOrderName') || "Luxury Designer Handbag";
         const orderImg = localStorage.getItem('currentOrderImg') || "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80";
         const orderPrice = parseFloat(localStorage.getItem('currentOrderPrice')) || 5.00;
         const orderEarnings = parseFloat(localStorage.getItem('currentOrderEarnings')) || 0.02;
         const returnTotal = orderPrice + orderEarnings;
 
-        // Render details to UI elements
         document.getElementById('orderName').textContent = orderName;
         document.getElementById('orderImg').src = orderImg;
         document.getElementById('orderPriceDisplay').textContent = orderPrice.toFixed(2) + ' USD';
@@ -157,17 +195,14 @@
         document.getElementById('orderReturnDisplay').textContent = returnTotal.toFixed(2) + ' USD';
 
         function submitOrder() {
-            // Retrieve latest balances
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || parseFloat(localStorage.getItem('userBalance')) || 10.00;
             let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0.00;
             let completedTasksCount = parseInt(localStorage.getItem(taskKey)) || parseInt(localStorage.getItem('completedTasksCount')) || 0;
 
-            // Credit principal back + commission earnings
             currentBalance += returnTotal;
             todaysProfit += orderEarnings;
             completedTasksCount += 1;
 
-            // Save back to storage keys securely
             localStorage.setItem(balanceKey, currentBalance.toFixed(2));
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
             localStorage.setItem('todaysProfit', todaysProfit.toFixed(2));
