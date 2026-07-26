@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - Luxury VIP</title>
+    <title>Create Your Account - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
         :root {
-            /* Premium Rich Blue Theme matching your Sign Up page */
+            /* Premium Rich Blue Theme */
             --primary-color: #f8fafc;
             --accent-color: #0284c7;
             --accent-hover: #0369a1;
@@ -81,7 +81,7 @@
             color: var(--text-muted);
         }
 
-        input {
+        input, select {
             width: 100%;
             padding: 12px;
             background: #0f172a;
@@ -92,10 +92,19 @@
             color: var(--text-color);
         }
 
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #38bdf8;
             box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        }
+
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-group select {
+            width: 140px;
         }
 
         .password-container {
@@ -178,27 +187,71 @@
             </select>
         </div>
 
-        <h2>Log In</h2>
-        <form id="loginForm">
+        <h2>Create Account</h2>
+        <form id="signupForm">
             
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter your username" required>
+                <input type="text" id="username" placeholder="Choose a username" required>
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="" disabled selected>Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="phone-group">
+                    <select id="countryCode">
+                        <option value="+1">🇺🇸 +1 (US)</option>
+                        <option value="+44">🇬🇧 +44 (UK)</option>
+                        <option value="+91">🇮🇳 +91 (IN)</option>
+                        <option value="+86">🇨🇳 +86 (CN)</option>
+                        <option value="+81">🇯🇵 +81 (JP)</option>
+                        <option value="+49">🇩🇪 +49 (DE)</option>
+                        <option value="+33">🇫🇷 +33 (FR)</option>
+                        <option value="+55">🇧🇷 +55 (BR)</option>
+                        <option value="+52">🇲🇽 +52 (MX)</option>
+                        <option value="+61">🇦🇺 +61 (AU)</option>
+                        <option value="+971">🇦🇪 +971 (UAE)</option>
+                        <option value="+27">🇿🇦 +27 (ZA)</option>
+                    </select>
+                    <input type="tel" id="phone" placeholder="Enter phone number" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Login Password</label>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <input type="password" id="password" placeholder="At least 6 characters" required>
                     <button type="button" id="togglePassword" class="toggle-password">👁️</button>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="transPassword">Transaction Password</label>
+                <div class="password-container">
+                    <input type="password" id="transPassword" placeholder="At least 6 characters" required>
+                    <button type="button" id="toggleTransPassword" class="toggle-password">👁️</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inviteCode">Invite Code</label>
+                <input type="text" id="inviteCode" placeholder="Enter invite code (e.g. 2DI2 or user code)" required>
                 <div id="formError" class="error-msg"></div>
             </div>
 
-            <button type="submit" class="submit-btn">Log In</button>
+            <button type="submit" class="submit-btn">Sign Up</button>
 
             <div class="switch-link">
-                Don't have an account? <a href="index.html">Sign Up</a>
+                Already have an account? <a href="login.html">Log In</a>
             </div>
         </form>
     </div>
@@ -214,44 +267,109 @@
             });
         }
 
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', function (e) {
+        const toggleTransPassword = document.getElementById('toggleTransPassword');
+        const transPasswordInput = document.getElementById('transPassword');
+        if (toggleTransPassword && transPasswordInput) {
+            toggleTransPassword.addEventListener('click', function () {
+                const type = transPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                transPasswordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🔒';
+            });
+        }
+
+        // Helper function to generate a random 4-character code
+        function generateRandomInviteCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < 4; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        const signupForm = document.getElementById('signupForm');
+        signupForm.addEventListener('submit', function (e) {
             e.preventDefault();
             
             const formError = document.getElementById('formError');
             const usernameInput = document.getElementById('username').value.trim();
+            const phoneInput = document.getElementById('phone').value.trim();
+            const inviteCodeInput = document.getElementById('inviteCode').value.trim().toUpperCase();
             const passVal = passwordInput.value;
+            const transPassVal = transPasswordInput.value;
 
+            // Get existing users list from localStorage
             let users = JSON.parse(localStorage.getItem('usersList')) || [];
 
-            const foundUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
-
-            if (!foundUser || foundUser.password !== passVal) {
-                formError.textContent = 'Invalid username or password. Please try again.';
+            // 1. Check if username already exists
+            const existingUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
+            if (existingUser) {
+                formError.textContent = 'This username is already taken. Please choose another one.';
                 formError.style.display = 'block';
                 return;
             }
 
-            formError.style.display = 'none';
-
-            // Set current active session details
-            localStorage.setItem('userName', foundUser.username);
-            localStorage.setItem('username', foundUser.username);
-            localStorage.setItem('userGender', foundUser.gender);
-            localStorage.setItem('userPhone', foundUser.phone);
-            localStorage.setItem('myInviteCode', foundUser.myInviteCode);
-
-            // Initialize isolated balance/tasks if they don't exist yet for this user
-            const balanceKey = `userBalance_${foundUser.username}`;
-            if (localStorage.getItem(balanceKey) === null) {
-                localStorage.setItem(balanceKey, '10.00');
-                localStorage.setItem(`completedTasks_${foundUser.username}`, '0');
-                localStorage.setItem(`todaysProfit_${foundUser.username}`, '0.00');
-                localStorage.setItem(`totalProfit_${foundUser.username}`, '0.00');
+            // 2. Phone Number Validation
+            const phoneDigitsOnly = phoneInput.replace(/\D/g, '');
+            if (phoneDigitsOnly.length < 7) {
+                formError.textContent = 'Please enter a valid phone number correctly.';
+                formError.style.display = 'block';
+                return;
             }
 
-            alert('Login successful!');
-            window.location.href = 'dashboard.html';
+            // 3. Check Passwords length
+            if (passVal.length < 6) {
+                formError.textContent = 'Login password must be at least 6 characters long.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            if (transPassVal.length < 6) {
+                formError.textContent = 'Transaction password must be at least 6 characters long.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            // 4. Validate Invite Code (Change '2DI2' here to your custom master code if needed)
+            const masterInviteCode = '2DI2'; 
+            const isMasterCode = (inviteCodeInput === masterInviteCode);
+            const foundReferrer = users.find(u => u.myInviteCode === inviteCodeInput);
+
+            if (!isMasterCode && !foundReferrer) {
+                formError.textContent = 'Invalid invite code. Please enter a valid referral code.';
+                formError.style.display = 'block';
+                return;
+            }
+            
+            formError.style.display = 'none';
+
+            const fullPhone = document.getElementById('countryCode').value + ' ' + phoneInput;
+            const selectedGender = document.getElementById('gender').value;
+            const selectedLang = document.getElementById('languageSelect').value;
+
+            // Generate a unique random code for this new user
+            let newUniqueCode = generateRandomInviteCode();
+            while (users.some(u => u.myInviteCode === newUniqueCode) || newUniqueCode === masterInviteCode) {
+                newUniqueCode = generateRandomInviteCode();
+            }
+
+            // Create new user object including their personal referral code
+            const newUser = {
+                username: usernameInput,
+                gender: selectedGender,
+                phone: fullPhone,
+                password: passVal,
+                transPassword: transPassVal,
+                language: selectedLang,
+                myInviteCode: newUniqueCode
+            };
+
+            // Save to array and update localStorage
+            users.push(newUser);
+            localStorage.setItem('usersList', JSON.stringify(users));
+
+            alert('Account created successfully! Your personal invite code is: ' + newUniqueCode);
+            window.location.href = 'login.html';
         });
     </script>
 </body>
