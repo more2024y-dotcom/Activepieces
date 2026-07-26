@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - VIP Platform</title>
+    <title>My Profile - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
         :root {
             --primary-blue: #0f172a;
             --accent-blue: #2563eb;
@@ -14,7 +15,9 @@
             --card-bg: #1e293b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
         }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
@@ -23,25 +26,120 @@
             padding: 0;
             padding-bottom: 100px;
         }
+
         .container {
             padding: 16px;
-            max-width: 600px;
+            max-width: 440px;
             margin: 0 auto;
+            box-sizing: border-box;
         }
+
         .header-title {
             font-size: 22px;
             font-weight: 800;
-            color: var(--text-main);
+            color: #38bdf8;
             margin-bottom: 20px;
+            text-align: center;
         }
+
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
             margin-bottom: 20px;
         }
+
+        .profile-pic {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #38bdf8;
+            background-color: #0f172a;
+        }
+
+        .profile-info h1 {
+            margin: 0 0 4px 0;
+            font-size: 20px;
+            color: #38bdf8;
+        }
+
+        .vip {
+            display: inline-block;
+            background: rgba(253, 224, 71, 0.15);
+            color: #fde047;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .profile-info p {
+            margin: 2px 0;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .profile-info span {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .balance-section {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
+
+        .balance-title {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fde047;
+            margin-bottom: 20px;
+        }
+
+        .wallet-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .wallet-buttons button {
+            padding: 12px;
+            background: #0f172a;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .wallet-buttons button:hover {
+            background: rgba(56, 189, 248, 0.1);
+        }
+
         .logout-btn {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -55,7 +153,15 @@
             display: block;
             text-decoration: none;
             box-sizing: border-box;
+            font-size: 15px;
+            transition: opacity 0.2s;
         }
+
+        .logout-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Bottom Navigation Bar */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -69,6 +175,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -79,13 +186,16 @@
             flex: 1;
             cursor: pointer;
         }
+
         .nav-item.active {
             color: #ffd700;
         }
+
         .nav-item span.icon {
             font-size: 18px;
             margin-bottom: 2px;
         }
+
         .nav-item-center {
             position: relative;
             display: flex;
@@ -95,6 +205,7 @@
             text-decoration: none;
             cursor: pointer;
         }
+
         .floating-center-btn {
             width: 50px;
             height: 50px;
@@ -117,9 +228,33 @@
     <div class="container">
         <div class="header-title">My Profile</div>
         
+        <!-- Profile & Balance Card -->
         <div class="card">
-            <!-- Logout / Switch Account -->
-            <button class="logout-btn" onclick="localStorage.clear(); window.location.href='index.html';">
+            <div class="profile-header">
+                <img src="assets/female.png" class="profile-pic" alt="Profile Picture" id="profilePic">
+                <div class="profile-info">
+                    <h1 id="profileUsername">User</h1>
+                    <div class="vip">⭐ VIP 1</div>
+                    <p>Phone: <span id="profilePhone">--</span></p>
+                    <p>Invitation Code: <span id="profileInviteCode">----</span></p>
+                </div>
+            </div>
+
+            <div class="balance-section">
+                <div class="balance-title">Available Balance</div>
+                <div class="balance-amount" id="profileBalance">$0.00</div>
+                <div class="wallet-buttons">
+                    <button onclick="alert('Add Wallet feature coming soon!')">➕ Add Wallet</button>
+                    <button onclick="alert('Deposit feature coming soon!')">💳 Deposit</button>
+                    <button onclick="alert('Withdrawal feature coming soon!')">⬇ Withdraw</button>
+                    <button onclick="window.location.href='records.html'">📜 Transaction</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Card -->
+        <div class="card" style="padding: 16px;">
+            <button class="logout-btn" id="logoutBtn">
                 Log Out / Switch Account
             </button>
         </div>
@@ -127,7 +262,7 @@
 
     <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
+        <a href="dashboard.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
         </a>
         <a href="start.html" class="nav-item-center">
@@ -136,10 +271,39 @@
         <a href="records.html" class="nav-item">
             <span class="icon">📋</span><span>Records</span>
         </a>
-        <a href="profile.html" class="nav-item active" style="color: #ffd700;">
+        <a href="profile.html" class="nav-item active">
             <span class="icon">👤</span><span>My</span>
         </a>
     </nav>
 
+    <script>
+        const currentUsername = localStorage.getItem('username');
+
+        if (!currentUsername) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('profileUsername').textContent = currentUsername;
+            document.getElementById('profilePhone').textContent = localStorage.getItem('userPhone') || 'N/A';
+            document.getElementById('profileInviteCode').textContent = localStorage.getItem('myInviteCode') || 'N/A';
+
+            const balanceKey = `userBalance_${currentUsername}`;
+            const userBal = parseFloat(localStorage.getItem(balanceKey) || '10.00').toFixed(2);
+            document.getElementById('profileBalance').textContent = '$' + userBal;
+
+            const gender = localStorage.getItem('userGender');
+            if (gender === 'Male') {
+                document.getElementById('profilePic').src = 'assets/male.png';
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userGender');
+            localStorage.removeItem('userPhone');
+            localStorage.removeItem('myInviteCode');
+            window.location.href = 'login.html';
+        });
+    </script>
 </body>
 </html>
