@@ -120,6 +120,31 @@
             font-size: 18px;
             margin-bottom: 2px;
         }
+        /* Floating middle action button style matching homepage */
+        .nav-item-center {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .floating-center-btn {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #fde047, #ca8a04);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: -25px;
+            box-shadow: 0 4px 15px rgba(253, 224, 71, 0.4);
+            color: #0f172a;
+            font-size: 22px;
+            border: 2px solid #0b1120;
+        }
     </style>
 </head>
 <body>
@@ -144,7 +169,7 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Navigation Bar with floating gold center button -->
     <nav class="bottom-nav">
         <a onclick="history.back()" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
@@ -152,8 +177,8 @@
         <a href="certificate.html" class="nav-item active" style="color: #ffd700;">
             <span class="icon">🏆</span><span>Certificate</span>
         </a>
-        <a href="start.html" class="nav-item">
-            <span class="icon">🚀</span><span>Starting</span>
+        <a href="start.html" class="nav-item-center">
+            <div class="floating-center-btn">⚡</div>
         </a>
         <a href="records.html" class="nav-item">
             <span class="icon">📋</span><span>Records</span>
