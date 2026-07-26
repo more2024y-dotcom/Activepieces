@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
         :root {
             --primary-dark: #0f172a;
-            --card-dark: #1e293b;
+            --card-dark: #121b2f;
             --accent-gold: #d4af37;
             --accent-gold-light: #fef08a;
             --bg-color: #090d16;
@@ -49,19 +49,20 @@
             gap: 6px;
         }
         .header-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             font-family: 'Cinzel', serif;
             color: var(--accent-gold);
             margin-bottom: 20px;
             text-align: center;
+            letter-spacing: 1px;
         }
         .task-card {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, #0f172a, #162238);
+            border: 1px solid rgba(212, 175, 55, 0.35);
             border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             margin-bottom: 20px;
         }
         .progress-indicator {
@@ -70,35 +71,37 @@
             align-items: center;
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             font-weight: 600;
         }
         .progress-indicator span b {
             color: var(--accent-gold);
         }
         .product-preview {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(10, 15, 28, 0.75);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 14px;
-            padding: 18px;
+            padding: 22px;
             text-align: center;
             margin-bottom: 20px;
         }
         .product-icon {
-            font-size: 40px;
+            font-size: 42px;
             margin-bottom: 10px;
         }
         .product-name {
             font-family: 'Cinzel', serif;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--accent-gold);
             margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
         .product-price {
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         .task-stats {
             display: grid;
@@ -107,21 +110,22 @@
             margin-bottom: 22px;
         }
         .stat-box {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(10, 15, 28, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 12px;
+            padding: 14px;
             text-align: center;
         }
         .stat-box small {
             font-size: 11px;
             color: var(--text-muted);
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            font-weight: 500;
         }
         .stat-box b {
-            font-size: 14px;
-            color: var(--accent-gold-light);
+            font-size: 15px;
+            color: var(--accent-gold);
             font-family: 'Cinzel', serif;
         }
         .submit-btn {
@@ -136,6 +140,7 @@
             font-family: 'Cinzel', serif;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            letter-spacing: 0.5px;
             transition: opacity 0.2s;
         }
         .submit-btn:hover {
@@ -193,7 +198,7 @@
         <div class="top-nav-bar">
             <a href="dashboard.html" class="back-btn">← Back Home</a>
         </div>
-        <div class="header-title">VIP TASK OPTIMIZATION</div>
+        <div class="header-title">VIP TASK OF OPTIMIZATION</div>
         
         <div class="task-card">
             <div class="progress-indicator">
@@ -203,7 +208,7 @@
 
             <div class="product-preview">
                 <div class="product-icon" id="productIcon">👜</div>
-                <div class="product-name" id="productName">Luxury Designer Handbag</div>
+                <div class="product-name" id="productName">LUXURY DESIGNER HANDBAG</div>
                 <div class="product-price" id="productPrice">Price: $866.00 USD</div>
             </div>
 
@@ -218,7 +223,7 @@
                 </div>
             </div>
 
-            <button class="submit-btn" id="submitTaskBtn" onclick="completeTask()">Submit Optimization Task</button>
+            <button class="submit-btn" id="submitTaskBtn" onclick="completeTask()">SUBMIT OPTIMIZATION TASK</button>
         </div>
     </div>
 
@@ -252,25 +257,23 @@
         const balanceKey = `userBalance_${userKeySuffix}`;
         const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
 
-        // Diverse product pool so every task generates a unique item
         const productCatalog = [
-            { icon: "👜", name: "Luxury Designer Handbag", price: 866.00 },
-            { icon: "⌚", name: "Swiss Automatic Gold Watch", price: 1250.00 },
-            { icon: "🎧", name: "Wireless Noise-Canceling Earbuds", price: 240.00 },
-            { icon: "📺", name: "4K Ultra HD Smart TV", price: 650.00 },
-            { icon: "👗", name: "Designer Silk Evening Gown", price: 490.00 },
-            { icon: "📷", name: "Professional DSLR Camera Kit", price: 1100.00 },
-            { icon: "💼", name: "Premium Leather Business Briefcase", price: 320.00 },
-            { icon: "💍", name: "18K Diamond Accent Ring", price: 1450.00 },
-            { icon: "👟", name: "Limited Edition Designer Sneakers", price: 380.00 },
-            { icon: "🕶️", name: "Titanium Polarized Sunglasses", price: 210.00 }
+            { icon: "👜", name: "LUXURY DESIGNER HANDBAG", price: 866.00 },
+            { icon: "⌚", name: "SWISS AUTOMATIC GOLD WATCH", price: 1250.00 },
+            { icon: "🎧", name: "WIRELESS NOISE-CANCELING EARBUDS", price: 240.00 },
+            { icon: "📺", name: "4K ULTRA HD SMART TV", price: 650.00 },
+            { icon: "👗", name: "DESIGNER SILK EVENING GOWN", price: 490.00 },
+            { icon: "📷", name: "PROFESSIONAL DSLR CAMERA KIT", price: 1100.00 },
+            { icon: "💼", name: "PREMIUM LEATHER BUSINESS BRIEFCASE", price: 320.00 },
+            { icon: "💍", name: "18K DIAMOND ACCENT RING", price: 1450.00 },
+            { icon: "👟", name: "LIMITED EDITION DESIGNER SNEAKERS", price: 380.00 },
+            { icon: "🕶️", name: "TITANIUM POLARIZED SUNGLASSES", price: 210.00 }
         ];
 
         function loadTaskData() {
             let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
             document.getElementById('taskCountDisplay').textContent = completedCount;
 
-            // Pick a product based on the current completion count to ensure rotation
             let catalogIndex = completedCount % productCatalog.length;
             let currentItem = productCatalog[catalogIndex];
 
@@ -296,7 +299,6 @@
             let currentItem = productCatalog[catalogIndex];
             let commission = currentItem.price * 0.005;
 
-            // Update user balance and profit
             let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
             let currentProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
 
