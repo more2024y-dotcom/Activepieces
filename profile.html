@@ -42,38 +42,6 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
         }
-        /* Menu link item inside profile */
-        .menu-link-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(59, 130, 246, 0.15);
-            padding: 15px 18px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 15px;
-            margin-bottom: 15px;
-            transition: all 0.2s ease;
-        }
-        .menu-link-item:hover {
-            background: rgba(59, 130, 246, 0.1);
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-        .menu-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .menu-icon {
-            font-size: 18px;
-        }
-        .arrow-icon {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
         .logout-btn {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -149,18 +117,7 @@
     <div class="container">
         <div class="header-title">My Profile</div>
         
-        <!-- User Info & Balance Cards can stay as you have them, with the Certificate link added below -->
-        
         <div class="card">
-            <!-- Link leading to Certificate page -->
-            <a href="certificate.html" class="menu-link-item">
-                <div class="menu-left">
-                    <span class="menu-icon">🏆</span>
-                    <span>Company Certificate</span>
-                </div>
-                <span class="arrow-icon">&gt;</span>
-            </a>
-
             <!-- Logout / Switch Account -->
             <button class="logout-btn" onclick="localStorage.clear(); window.location.href='index.html';">
                 Log Out / Switch Account
@@ -168,9 +125,9 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar (Certificate removed from bar, floating center button kept) -->
+    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
-        <a onclick="history.back()" class="nav-item">
+        <a href="home.html" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
         </a>
         <a href="start.html" class="nav-item-center">
