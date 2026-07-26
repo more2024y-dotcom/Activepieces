@@ -3,203 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Luxury VIP</title>
+    <title>Task Optimization - VIP</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap';);
         :root {
-            --primary-blue: #0284c7;
-            --dark-blue: #0f172a;
-            --accent-blue: #38bdf8;
+            --primary-blue: #0f172a;
+            --accent-blue: #2563eb;
+            --accent-blue-light: #3b82f6;
             --bg-color: #0b1120;
             --card-bg: #1e293b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(56, 189, 248, 0.3);
+            --danger-red: #ef4444;
         }
-
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            padding-bottom: 100px;
+        }
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .top-nav-bar {
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+            margin-bottom: 12px;
         }
-
-        .register-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 30px 24px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-
-        .register-container h2 {
-            margin-top: 0;
-            color: #38bdf8;
-            font-size: 22px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-blue-light);
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
             font-weight: 600;
-            font-size: 12px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            background: #0f172a;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-size: 14px;
-            color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        .task-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
         }
-
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #38bdf8, #0284c7);
-            color: #0f172a;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 15px;
-            transition: opacity 0.2s;
-            margin-top: 6px;
-        }
-
-        .btn-submit:hover {
-            opacity: 0.9;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 13px;
             color: var(--text-muted);
-        }
-
-        .login-link a {
-            color: #38bdf8;
-            text-decoration: none;
+            margin-bottom: 15px;
             font-weight: 600;
         }
+        .progress-indicator span b {
+            color: var(--accent-blue-light);
+        }
+        .product-image-box {
+            width: 100%;
+            height: 240px;
+            /* Replaced background with activepieces brand theme matching the second uploaded image */
+            background: radial-gradient(circle at 50% 50%, #7c3aed 0%, #5b21b6 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-        .login-link a:hover {
-            text-decoration: underline;
+        /* Activepieces Custom Branding Styles for Completion Box */
+        .brand-completion-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            position: relative;
+            display: inline-block;
+        }
+        .blob {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+        .blob-1 { width: 15px; height: 15px; top: 4px; left: 7px; }
+        .blob-2 { width: 14px; height: 14px; top: 5px; right: 4px; }
+        .blob-3 { width: 22px; height: 22px; bottom: 3px; left: 12px; }
+        .blob-connector {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 15px;
+        }
+        .conn-1 { width: 11px; height: 19px; top: 10px; left: 11px; transform: rotate(-35deg); }
+        .conn-2 { width: 12px; height: 20px; top: 10px; right: 10px; transform: rotate(35deg); }
+        .conn-3 { width: 14px; height: 14px; bottom: 8px; left: 15px; }
+
+        .logo-text {
+            font-size: 34px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.8px;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .banner-tagline {
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0;
+            letter-spacing: -0.2px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        .price-qty {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+        .price-qty span {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .review-section {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .stars {
+            color: #475569;
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+        .stars.active {
+            color: #f59e0b;
+        }
+        .review-input-container {
+            position: relative;
+        }
+        .review-textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-main);
+            padding: 10px;
+            font-size: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            resize: none;
+            box-sizing: border-box;
+            height: 60px;
+        }
+        .auto-comment-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #d97706;
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .vip-badge-box {
+            background: linear-gradient(135deg, #fef08a, #fde047);
+            color: #854d0e;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .task-details-grid {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-bottom: 12px;
+        }
+        .task-details-grid div {
+            text-align: center;
+            flex: 1;
+        }
+        .task-details-grid div span {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        .task-details-grid div b {
+            color: var(--text-main);
+            font-size: 12px;
+        }
+        .meta-info {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .submit-btn {
+            width: 100%;
+            background: var(--accent-blue);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: var(--accent-blue-light);
+        }
+        .submit-btn:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .negative-warning {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid var(--danger-red);
+            color: #fca5a5;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 12px;
+            display: none;
+            font-weight: 600;
+            text-align: center;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0b1120;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: var(--accent-blue-light);
+        }
+        .nav-item span.icon {
+            font-size: 18px;
+            margin-bottom: 2px;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="top-nav-bar">
+            <a href="dashboard.html" class="back-btn">< Back</a>
+        </div>
+        
+        <div class="task-card">
+            <div class="progress-indicator">
+                <span>Task Progress: <b id="taskCountDisplay">0</b> / 40</span>
+                <span>Rate: <b>0.5%</b></span>
+            </div>
 
-    <div class="register-container">
-        <h2>Create Account</h2>
-        <form id="registerForm" onsubmit="handleRegister(event)">
-            <div class="form-group">
-                <label for="regName">Full Name</label>
-                <input type="text" id="regName" placeholder="Enter your name" required>
+            <!-- Image Box / Activepieces Completion Banner Area -->
+            <div class="product-image-box" id="mediaBoxContainer">
+                <img id="productImg" src="" alt="Product Image" style="display: block;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80';">;
             </div>
-            <div class="form-group">
-                <label for="regPhone">Phone Number</label>
-                <input type="tel" id="regPhone" placeholder="Enter phone number" required>
+
+            <div class="product-name" id="productName">Loading product...</div>
+            <div class="price-qty"><span id="currencyLabel">USD</span> <b id="productPriceDisplay">0.00</b> x1</div>
+
+            <div class="negative-warning" id="negativeWarningBox">
+                ⚠️ Order price exceeds account balance! Negative balance penalty triggered. Please refill balance to proceed.
             </div>
-            <div class="form-group">
-                <label for="regGender">Gender</label>
-                <select id="regGender" required>
-                    <option value="" disabled selected>Select gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
+
+            <div class="review-section">
+                <div class="review-header">
+                    <span>Click to write a comment:</span>
+                    <div class="stars" id="starRatingDisplay">★★★★★</div>
+                </div>
+                <div class="review-input-container">
+                    <textarea class="review-textarea" id="reviewText" placeholder="Write your review here..."></textarea>
+                    <button class="auto-comment-btn" onclick="fillAutoComment()">Automatic Comment</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="regPassword">Login Password</label>
-                <input type="password" id="regPassword" placeholder="Create a login password" required>
+
+            <div class="vip-badge-box">
+                VIP 1
             </div>
-            <div class="form-group">
-                <label for="regTxPassword">Transaction Password</label>
-                <input type="password" id="regTxPassword" placeholder="Create your unique transaction password" required>
+
+            <div class="task-details-grid">
+                <div>
+                    <span>Total Amount</span>
+                    <b id="totalAmountDisplay">0.00(USD)</b>
+                </div>
+                <div>
+                    <span>Reward</span>
+                    <b>0.5%</b>
+                </div>
+                <div>
+                    <span>Earnings</span>
+                    <b id="earningsDisplay">0.00(USD)</b>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="regInviteCode">Invitation Code (Optional)</label>
-                <input type="text" id="regInviteCode" placeholder="Enter friend's invitation code">
+
+            <div class="meta-info">
+                <div>Date Created: <span id="dateCreated">-</span></div>
+                <div>Order Code: <span id="orderCode">-</span></div>
             </div>
-            <button type="submit" class="btn-submit">Sign Up</button>
-        </form>
-        <div class="login-link">
-            Already have an account? <a href="login.html">Log In</a>
+
+            <button class="submit-btn" id="submitTaskBtn" onclick="completeTask()">Submit</button>
         </div>
     </div>
 
+    <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">🛡️</span><span>Certificate</span>
+        </a>
+        <a href="task.html" class="nav-item active">
+            <span class="icon">⚡</span><span>Task</span>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">📝</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="icon">👤</span><span>My</span>
+        </a>
+    </div>
+
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const refCode = urlParams.get('ref');
-            if (refCode) {
-                document.getElementById('regInviteCode').value = refCode;
-            }
-        });
+        const currentUsername = localStorage.getItem('userName') ||
+                                localStorage.getItem('username') ||
+                                localStorage.getItem('loggedInUser') ||
+                                localStorage.getItem('currentUser') ||
+                                localStorage.getItem('accountName') || 'Guest';
 
-        function handleRegister(e) {
-            e.preventDefault();
-            const name = document.getElementById('regName').value.trim();
-            const phone = document.getElementById('regPhone').value.trim();
-            const gender = document.getElementById('regGender').value;
-            const password = document.getElementById('regPassword').value;
-            const txPassword = document.getElementById('regTxPassword').value.trim();
-            const inviteCodeUsed = document.getElementById('regInviteCode').value.trim();
+        const userKeySuffix = currentUsername.trim();
+        const taskKey = `completedTasks_{userKeySuffix}`;         const balanceKey = `userBalance_{userKeySuffix}`;         const balanceKey = `userBalance_{userKeySuffix}`;
+        const todaysProfitKey = `todaysProfit_{userKeySuffix}`;         const assignedProductsKey = `assignedProducts_{userKeySuffix}`;         const assignedProductsKey = `assignedProducts_{userKeySuffix}`;
 
-            const myNewInviteCode = 'REF' + Math.floor(100000 + Math.random() * 900000);
+        // Master 40 products catalog with verified high-resolution images
+        const masterProductCatalog = [
+            { name: "Compact USB-C Charging Cable", price: 3.50, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Minimalist Phone Stand", price: 5.00, image: "https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Stainless Steel Travel Mug", price: 7.20, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Silk Scarf", price: 10.00, image: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Classic Leather Wallet", price: 12.50, image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Titanium Polarized Sunglasses", price: 15.00, image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Wireless Bluetooth Earbuds", price: 18.00, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Smart Fitness Activity Band", price: 20.00, image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Portable Mini Power Bank", price: 22.50, image: "https://images.unsplash.com/photo-1609592424104-97d4c42c74fa?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Ergonomic Desk Mouse Pad", price: 25.00, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Aromatherapy Essential Oil Diffuser", price: 28.00, image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80"; },
+            { name: "LED Desk Reading Lamp", price: 32.00, image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Stainless Steel Water Bottle", price: 35.00, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Leather Passport Holder", price: 38.50, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Desktop Mechanical Keyboard", price: 42.00, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Cufflinks Set", price: 46.00, image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Luxury Scented Soy Candle", price: 50.00, image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Smart Wireless Charging Pad", price: 55.00, image: "https://images.unsplash.com/photo-1622445275576-7243c78cf4a6?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Gold Plated Minimalist Necklace", price: 60.00, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Canvas Weekend Travel Duffel", price: 68.00, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Gourmet Coffee Bean Gift Box", price: 75.00, image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Automatic Electric Wine Opener", price: 82.00, image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Noise-Isolating Gaming Headset", price: 90.00, image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Silk Evening Couture Gown", price: 100.00, image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80"; },
+            { name: "High-End Electric Toothbrush", price: 115.00, image: "https://images.unsplash.com/photo-1559595500-e15296f7e4c0?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Ultra-Slim Laptop Sleeve", price: 130.00, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Italian Full-Grain Leather Briefcase", price: 150.00, image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Professional Hair Styling Dryer", price: 175.00, image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Compact Action Sports Camera", price: 200.00, image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Premium Noise-Canceling Headphones", price: 240.00, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Sunglasses Limited Edition", price: 280.00, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Smart Home Security Camera", price: 320.00, image: "https://images.unsplash.com/photo-1557324232-b8917d7c3dcb?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Designer Streetwear Sneakers", price: 380.00, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"; },
+            { name: "4K Ultra HD Curved Smart OLED TV", price: 450.00, image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Professional DSLR Camera Kit", price: 550.00, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Swiss Automatic Gold Chronograph Watch", price: 680.00, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Luxury Designer Leather Handbag", price: 780.00, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80"; },
+            { name: "18K White Gold Diamond Accent Ring", price: 850.00, image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"; },
+            { name: "CD button skirt pants", price: 901.00, image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=600&q=80"; },
+            { name: "Exclusive Diamond Crown Collector Piece", price: 990.00, image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80"; }
+        ];
 
-            // Save user data securely to local storage
-            localStorage.setItem('userName', name);
-            localStorage.setItem('username', name);
-            localStorage.setItem('userPhone', phone);
-            localStorage.setItem('userGender', gender);
-            localStorage.setItem('userPassword', password);
-            localStorage.setItem('userTxPassword', txPassword);
-            localStorage.setItem('myInviteCode', myNewInviteCode);
-
-            // Set initial balance for the newly registered user
-            localStorage.setItem(`userBalance_${name}`, '10.00');
-
-            if (inviteCodeUsed) {
-                localStorage.setItem('referredBy', inviteCodeUsed);
-            }
-
-            alert('Registration successful!');
-            
-            // Redirect straight to dashboard.html so it loads your new username immediately
-            window.location.href = 'dashboard.html';
+        function generateRandomOrderCode() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const randomSuffix = Math.floor(100000 + Math.random() * 900000);
+            return `year{month}day{hours}minutes{seconds}${randomSuffix}`;
         }
+
+        function getAssignedProducts() {
+            let stored = localStorage.getItem(assignedProductsKey);
+            let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+            
+            let affordableCatalog = masterProductCatalog.filter(p => p.price <= currentBalance);
+            if (affordableCatalog.length === 0) {
+                affordableCatalog = [masterProductCatalog[0]];
+            }
+
+            if (stored) {
+                try {
+                    let parsed = JSON.parse(stored);
+                    let filteredStored = parsed.filter(p => p.price <= currentBalance);
+                    if (filteredStored.length >= 40) {
+                        return filteredStored;
+                    }
+                } catch (e) {}
+            }
+
+            let pool = [];
+            for (let i = 0; i < 40; i++) {
+                let randomItem = affordableCatalog[Math.floor(Math.random() * affordableCatalog.length)];
+                pool.push(randomItem);
+            }
+
+            localStorage.setItem(assignedProductsKey, JSON.stringify(pool));
+            return pool;
+        }
+
+        function loadTaskData() {
+            let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
+            document.getElementById('taskCountDisplay').textContent = completedCount;
+
+            const mediaBox = document.getElementById('mediaBoxContainer');
+            const productImgElem = document.getElementById('productImg');
+
+            // Check if all 40 tasks are completed
+            if (completedCount >= 40) {
+                document.getElementById('productName').textContent = "All 40 Daily Tasks Completed!";
+                document.getElementById('productPriceDisplay').textContent = "0.00";
+                document.getElementById('totalAmountDisplay').textContent = "0.00(USD)";
+                document.getElementById('earningsDisplay').textContent = "0.00(USD)";
+                
+                // Replace image container contents with the requested Activepieces branded layout
+                productImgElem.style.display = 'none';
+                mediaBox.innerHTML = `
+                    <div class="brand-completion-container">
+                        <div class="logo-row">
+                            <div class="logo-icon">
+                                <div class="blob-connector conn-1"></div>
+                                <div class="blob-connector conn-2"></div>
+                                <div class="blob-connector conn-3"></div>
+                                <div class="blob blob-1"></div>
+                                <div class="blob blob-2"></div>
+                                <div class="blob blob-3"></div>
+                            </div>
+                            <h1 class="logo-text">activepieces</h1>
+                        </div>
+                        <p class="banner-tagline">AI-first automation for every team</p>
+                    </div>
+                `;
+                
+                document.getElementById('submitTaskBtn').disabled = true;
+                document.getElementById('submitTaskBtn').textContent = "Daily Limit Reached (40/40)";
+                document.getElementById('negativeWarningBox').style.display = 'none';
+                return;
+            }
+
+            // Normal active product view setup
+            productImgElem.style.display = 'block';
+            let assignedList = getAssignedProducts();
+            let currentItem = assignedList[completedCount] || assignedList[0];
+            let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+
+            if (currentItem.price > currentBalance) {
+                let affordable = masterProductCatalog.filter(p => p.price <= currentBalance);
+                currentItem = affordable.length > 0 ? affordable[0] : masterProductCatalog[0];
+            }
+
+            productImgElem.src = currentItem.image;
+            document.getElementById('productName').textContent = currentItem.name;
+            document.getElementById('productPriceDisplay').textContent = currentItem.price.toFixed(2);
+            document.getElementById('totalAmountDisplay').textContent = `currentItem.price.toFixed(2)(USD)‘;letcommission=currentItem.price∗0.005;document.getElementById(′earningsDisplay′).textContent=‘{commission.toFixed(2)}(USD)`;
+
+            document.getElementById('negativeWarningBox').style.display = 'none';
+            document.getElementById('starRatingDisplay').classList.remove('active');
+
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 8);
+            document.getElementById('dateCreated').textContent = dateStr;
+            document.getElementById('orderCode').textContent = generateRandomOrderCode();
+            
+            document.getElementById('reviewText').value = "";
+        }
+
+        function fillAutoComment() {
+            let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
+            if (completedCount >= 40) return;
+
+            const comments = [
+                "The package arrived on time and well protected. The products are small, like a gift. They are very good quality products.",
+                "Amazing quality item! Shipped fast and looks even better in person. Highly recommended.",
+                "Exceeded my expectations! Very premium finish and fast delivery service.",
+                "Absolute luxury standard. Very satisfied with the prompt delivery and item condition."
+            ];
+            const randomComment = comments[Math.floor(Math.random() * comments.length)];
+            document.getElementById('reviewText').value = randomComment;
+            document.getElementById('starRatingDisplay').classList.add('active');
+        }
+
+        function completeTask() {
+            let review = document.getElementById('reviewText').value.trim();
+            if (!review) {
+                alert("Please click 'Automatic Comment' or write a review before submitting.");
+                return;
+            }
+
+            let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
+            if (completedCount >= 40) {
+                alert("You have completed all 40 tasks for today!");
+                return;
+            }
+
+            let assignedList = getAssignedProducts();
+            let currentItem = assignedList[completedCount] || assignedList[0];
+            let currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+
+            if (currentItem.price > currentBalance) {
+                document.getElementById('negativeWarningBox').style.display = 'block';
+                alert("Order price exceeds your account balance. Please check your balance settings.");
+                return;
+            }
+
+            let commission = currentItem.price * 0.005;
+            let currentProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
+
+            currentBalance = currentBalance - currentItem.price + currentItem.price + commission;
+            currentProfit += commission;
+            completedCount += 1;
+
+            localStorage.setItem(balanceKey, currentBalance.toFixed(2));
+            localStorage.setItem(todaysProfitKey, currentProfit.toFixed(2));
+            localStorage.setItem(taskKey, completedCount);
+
+            alert(`Task submitted successfully! Principal returned + $${commission.toFixed(2)} USD commission added.`);
+            loadTaskData();
+        }
+
+        loadTaskData();
     </script>
 </body>
 </html>
