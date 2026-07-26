@@ -1,4 +1,324 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Optimization - Luxury VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-dark: #0f172a;
+            --card-dark: #1e293b;
+            --accent-gold: #d4af37;
+            --accent-gold-light: #fef08a;
+            --bg-color: #090d16;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero-card {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .user-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 18px;
+            border: 2px solid var(--accent-gold);
+        }
+        .user-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+        }
+        .credit-score-wrap {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .progress-bar-bg {
+            width: 80px;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .progress-bar-fill {
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gold);
+        }
+        .invite-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .invite-text span {
+            color: var(--accent-gold-light);
+        }
+        .vip-badge-top {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        .balance-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .eye-toggle {
+            cursor: pointer;
+            font-size: 14px;
+            user-select: none;
+        }
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 10px;
+        }
+        .action-boxes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .action-box {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .vip-tier-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+        }
+        .btn-start {
+            width: 100%;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            padding: 18px;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            letter-spacing: 0.5px;
+        }
+        .btn-start:hover {
+            opacity: 0.9;
+        }
+        .grid-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 25px;
+        }
+        .showcase-item {
+            background: var(--card-dark);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #05080f;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 75px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
+            z-index: 1000;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: var(--accent-gold);
+        }
+        .nav-item span.icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        .nav-center-btn {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            border: 4px solid #05080f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f172a;
+            font-size: 18px;
+            margin-top: -25px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="hero-card">
+            <div class="user-header">
+                <div class="user-info">
+                    <div class="avatar" id="avatarLetter">P</div>
+                    <div class="user-details">
+                        <h3 id="usernameDisplay">PPPP</h3>
+                        <div class="credit-score-wrap">
+                            <span>Credit Score:</span>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
+                            <span>100%</span>
+                        </div>
+                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
+                    </div>
+                </div>
+                <div class="vip-badge-top">🛡️</div>
+            </div>
+
+            <div class="balance-section">
+                <div class="balance-title">
+                    <span>Total balance</span>
+                    <span class="eye-toggle" id="eyeToggleBtn" onclick="toggleBalanceVisibility()">👁️</span>
+                </div>
+                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
+            </div>
+        </div>
+
+        <div class="action-boxes">
+            <div class="action-box">📦 Order description</div>
+            <div class="action-box">📝 Please note</div>
+        </div>
+
+        <div class="vip-tier-card">
+            <span>🛡️ VIP 1</span>
+            <span style="color: var(--text-muted); font-size: 12px;">PROFIT 0.5% ></span>
+        </div>
+
+        <button class="btn-start" id="startBtn" onclick="startTaskOptimization()">START OPTIMIZATION (0 / 40)</button>
+
+        <div class="grid-showcase">
+            <div class="showcase-item">👞</div>
+            <div class="showcase-item">👠</div>
+            <div class="showcase-item">📦</div>
+            <div class="showcase-item">📷</div>
+            <div class="showcase-item">📱</div>
+            <div class="showcase-item">📸</div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">🛡️</span><span>Certificate</span>
+        </a>
+        <a href="task.html" class="nav-item active">
+            <div class="nav-center-btn">⚡</div>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <span class="icon">📝</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="icon">👤</span><span>My</span>
+        </a>
+    </div>
+
+    <script>
         const currentUsername = "PPPP";
         localStorage.setItem('userName', currentUsername);
 
@@ -18,21 +338,34 @@
         let isBalanceHidden = false;
 
         function renderUI() {
-            if (isBalanceHidden) {
-                document.getElementById('balanceDisplay').textContent = '********';
-            } else {
-                document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
+            const balanceEl = document.getElementById('balanceDisplay');
+            const startBtnEl = document.getElementById('startBtn');
+            
+            if (balanceEl) {
+                if (isBalanceHidden) {
+                    balanceEl.textContent = '********';
+                } else {
+                    balanceEl.textContent = currentBalance.toFixed(2) + ' USD';
+                }
             }
-            document.getElementById('startBtn').textContent = `START OPTIMIZATION (${completedTasksCount} / 40)`;
+            if (startBtnEl) {
+                startBtnEl.textContent = `START OPTIMIZATION (${completedTasksCount} / 40)`;
+            }
         }
 
         function toggleBalanceVisibility() {
             isBalanceHidden = !isBalanceHidden;
             renderUI();
-            document.getElementById('eyeToggleBtn').textContent = isBalanceHidden ? '🔒' : '👁️';
+            const eyeBtn = document.getElementById('eyeToggleBtn');
+            if (eyeBtn) {
+                eyeBtn.textContent = isBalanceHidden ? '🔒' : '👁️';
+            }
         }
 
-        renderUI();
+        // Run UI render safely on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderUI();
+        });
 
         const productPool = [
             { name: "CD button skirt pants", img: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=400&q=80" },
@@ -57,7 +390,6 @@
                 return;
             }
 
-            // Calculate a valid random order amount based on balance
             let randomOrderPrice;
             if (currentBalance <= 20) {
                 randomOrderPrice = parseFloat((currentBalance * (0.5 + Math.random() * 0.3)).toFixed(2));
@@ -74,21 +406,19 @@
             const commissionRate = 0.005;
             const earnings = parseFloat((randomOrderPrice * commissionRate).toFixed(2));
 
-            // Deduct balance temporarily for the active order
             currentBalance -= randomOrderPrice;
             localStorage.setItem(balanceKey, currentBalance.toFixed(2));
             localStorage.setItem('userBalance', currentBalance.toFixed(2));
 
-            // Pick a random product
             const selectedProduct = productPool[Math.floor(Math.random() * productPool.length)];
 
-            // Save details for submit.html
             localStorage.setItem('currentOrderName', selectedProduct.name);
             localStorage.setItem('currentOrderImg', selectedProduct.img);
             localStorage.setItem('currentOrderPrice', randomOrderPrice.toFixed(2));
             localStorage.setItem('currentOrderEarnings', earnings.toFixed(2));
 
-            // Instantly transition to submission page
             window.location.href = 'submit.html';
         }
     </script>
+</body>
+</html>
