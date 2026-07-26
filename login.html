@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - Luxury VIP</title>
+    <title>Dashboard - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
         :root {
-            /* Premium Rich Blue Theme matching your Sign Up page */
             --primary-color: #f8fafc;
             --accent-color: #0284c7;
             --accent-hover: #0369a1;
@@ -23,98 +22,124 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 90px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 20px 0;
+            box-sizing: border-box;
         }
 
-        .auth-card {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        .dashboard-container {
             width: 100%;
             max-width: 440px;
             box-sizing: border-box;
-            position: relative;
-            border: 1px solid var(--border-color);
         }
 
-        .language-header {
+        .header-section {
             display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .language-header select {
-            width: auto;
-            padding: 6px 10px;
-            font-size: 12px;
-            background: #0f172a;
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            outline: none;
-        }
-
-        h2 {
-            margin-top: 0;
-            color: #38bdf8;
-            text-align: center;
+        .welcome-text {
+            font-size: 18px;
             font-weight: 700;
-            font-size: 24px;
-            margin-bottom: 24px;
+            color: #38bdf8;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: 600;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.9;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .balance-title {
             font-size: 13px;
             color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            background: #0f172a;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            box-sizing: border-box;
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fde047;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
             font-size: 14px;
+            font-weight: 600;
             color: var(--text-color);
         }
 
-        input:focus {
-            outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        .action-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .password-container {
-            position: relative;
+        .action-card h3 {
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #38bdf8;
         }
 
-        .toggle-password {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
+        .action-card p {
+            font-size: 13px;
             color: var(--text-muted);
+            margin-bottom: 20px;
         }
 
-        button.submit-btn {
+        .start-btn {
+            display: block;
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #0284c7, #0369a1);
@@ -124,134 +149,154 @@
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: opacity 0.2s;
+            text-decoration: none;
             box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
-            margin-top: 5px;
+            box-sizing: border-box;
         }
 
-        button.submit-btn:hover {
+        .start-btn:hover {
             opacity: 0.9;
         }
 
-        .error-msg {
-            color: #f87171;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
+        /* Bottom Navigation Bar Styles */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0b1120;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
         }
 
-        .switch-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 13px;
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             color: var(--text-muted);
-        }
-
-        .switch-link a {
-            color: #38bdf8;
             text-decoration: none;
-            font-weight: 600;
+            font-size: 10px;
+            flex: 1;
+            cursor: pointer;
         }
 
-        .switch-link a:hover {
-            text-decoration: underline;
+        .nav-item.active {
+            color: #ffd700;
+        }
+
+        .nav-item span.icon {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .nav-item-center {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .floating-center-btn {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #fde047, #ca8a04);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: -25px;
+            box-shadow: 0 4px 15px rgba(253, 224, 71, 0.4);
+            color: #0f172a;
+            font-size: 22px;
+            border: 2px solid #0b1120;
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-card">
-        <div class="language-header">
-            <select id="languageSelect">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="zh">中文</option>
-                <option value="ja">日本語</option>
-                <option value="hi">हिन्दी</option>
-                <option value="ar">العربية</option>
-                <option value="pt">Português</option>
-                <option value="ru">Русский</option>
-                <option value="it">Italiano</option>
-                <option value="ko">한국어</option>
-            </select>
+    <div class="dashboard-container">
+        <div class="header-section">
+            <div class="welcome-text" id="welcomeUser">Welcome, User</div>
+            <button class="logout-btn" id="logoutBtn">Log Out</button>
         </div>
 
-        <h2>Log In</h2>
-        <form id="loginForm">
+        <div class="balance-card">
+            <div class="balance-title">Available Balance</div>
+            <div class="balance-amount" id="userBalance">$0.00</div>
             
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter your username" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <div class="password-container">
-                    <input type="password" id="password" placeholder="Enter your password" required>
-                    <button type="button" id="togglePassword" class="toggle-password">👁️</button>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Completed</div>
+                    <div class="stat-value" id="completedTasks">0</div>
                 </div>
-                <div id="formError" class="error-msg"></div>
+                <div class="stat-item">
+                    <div class="stat-label">Today's Profit</div>
+                    <div class="stat-value" id="todaysProfit">$0.00</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Total Profit</div>
+                    <div class="stat-value" id="totalProfit">$0.00</div>
+                </div>
             </div>
+        </div>
 
-            <button type="submit" class="submit-btn">Log In</button>
-
-            <div class="switch-link">
-                Don't have an account? <a href="index.html">Sign Up</a>
-            </div>
-        </form>
+        <div class="action-card">
+            <h3>VIP Task Center</h3>
+            <p>Complete your daily optimization tasks to unlock maximum earnings and high-yield returns.</p>
+            <a href="start.html" class="start-btn">Start Grabbing Tasks</a>
+        </div>
     </div>
 
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <span class="icon">🏠</span><span>Home</span>
+        </a>
+        <a href="start.html" class="nav-item-center">
+            <div class="floating-center-btn">⚡</div>
+        </a>
+        <a href="records.html" class="nav-item">
+            <span class="icon">📋</span><span>Records</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="icon">👤</span><span>My</span>
+        </a>
+    </nav>
+
     <script>
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        if (togglePassword && passwordInput) {
-            togglePassword.addEventListener('click', function () {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.textContent = type === 'password' ? '👁️' : '🔒';
-            });
+        const currentUsername = localStorage.getItem('username');
+
+        if (!currentUsername) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('welcomeUser').textContent = 'Welcome, ' + currentUsername;
+
+            const balanceKey = `userBalance_${currentUsername}`;
+            const completedKey = `completedTasks_${currentUsername}`;
+            const todaysProfitKey = `todaysProfit_${currentUsername}`;
+            const totalProfitKey = `totalProfit_${currentUsername}`;
+
+            document.getElementById('userBalance').textContent = '$' + parseFloat(localStorage.getItem(balanceKey) || '10.00').toFixed(2);
+            document.getElementById('completedTasks').textContent = localStorage.getItem(completedKey) || '0';
+            document.getElementById('todaysProfit').textContent = '$' + parseFloat(localStorage.getItem(todaysProfitKey) || '0.00').toFixed(2);
+            document.getElementById('totalProfit').textContent = '$' + parseFloat(localStorage.getItem(totalProfitKey) || '0.00').toFixed(2);
         }
 
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            
-            const formError = document.getElementById('formError');
-            const usernameInput = document.getElementById('username').value.trim();
-            const passVal = passwordInput.value;
-
-            let users = JSON.parse(localStorage.getItem('usersList')) || [];
-
-            const foundUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
-
-            if (!foundUser || foundUser.password !== passVal) {
-                formError.textContent = 'Invalid username or password. Please try again.';
-                formError.style.display = 'block';
-                return;
-            }
-
-            formError.style.display = 'none';
-
-            // Set current active session details
-            localStorage.setItem('userName', foundUser.username);
-            localStorage.setItem('username', foundUser.username);
-            localStorage.setItem('userGender', foundUser.gender);
-            localStorage.setItem('userPhone', foundUser.phone);
-            localStorage.setItem('myInviteCode', foundUser.myInviteCode);
-
-            // Initialize isolated balance/tasks if they don't exist yet for this user
-            const balanceKey = `userBalance_${foundUser.username}`;
-            if (localStorage.getItem(balanceKey) === null) {
-                localStorage.setItem(balanceKey, '10.00');
-                localStorage.setItem(`completedTasks_${foundUser.username}`, '0');
-                localStorage.setItem(`todaysProfit_${foundUser.username}`, '0.00');
-                localStorage.setItem(`totalProfit_${foundUser.username}`, '0.00');
-            }
-
-            alert('Login successful!');
-            window.location.href = 'dashboard.html';
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('username');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userGender');
+            localStorage.removeItem('userPhone');
+            localStorage.removeItem('myInviteCode');
+            window.location.href = 'login.html';
         });
     </script>
 </body>
