@@ -478,12 +478,11 @@
             </div>
         </div>
     </div>
+    
+    <!-- Bottom Navigation Bar (Certificate Removed, Fixed Center Task Routing) -->
     <div class="bottom-nav">
         <a href="dashboard.html" class="nav-item active">
             <span class="icon">🏠</span><span>Home</span>
-        </a>
-        <a href="certificate.html" class="nav-item">
-            <span class="icon">🛡️</span><span>Certificate</span>
         </a>
         <a href="task.html" class="nav-item">
             <div class="nav-center-btn">⚡</div>
@@ -495,6 +494,7 @@
             <span class="icon">👤</span><span>My</span>
         </a>
     </div>
+
     <script>
         const currentUsername = localStorage.getItem('userName') ||
                                 localStorage.getItem('username') ||
@@ -591,7 +591,7 @@
         }
         updateProfitDisplay();
 
-        // Dynamic multi-product rotation helper for tasks (resolves the repeating handbag issue)
+        // Dynamic multi-product rotation helper for tasks (Expanded to 80 products)
         window.getRotatedTaskItem = function(taskIndex) {
             const catalog = [
                 { name: "Luxury Designer Handbag", price: 866.00 },
@@ -601,7 +601,79 @@
                 { name: "Designer Silk Evening Gown", price: 490.00 },
                 { name: "Professional DSLR Camera Kit", price: 1100.00 },
                 { name: "Premium Leather Business Briefcase", price: 320.00 },
-                { name: "Smart Fitness Tracker Band", price: 150.00 }
+                { name: "Smart Fitness Tracker Band", price: 150.00 },
+                { name: "Platinum Diamond Tennis Bracelet", price: 3400.00 },
+                { name: "Handmade Cashmere Overcoat", price: 890.00 },
+                { name: "Bespoke Italian Leather Oxford Shoes", price: 550.00 },
+                { name: "Limited Edition Fountain Pen", price: 410.00 },
+                { name: "Ultra-Slim Carbon Fiber Wallet", price: 120.00 },
+                { name: "High-End Espresso Coffee Machine", price: 950.00 },
+                { name: "Smart Home Security Hub", price: 299.00 },
+                { name: "Designer Aviator Sunglasses", price: 280.00 },
+                { name: "Pure Silk Embroidered Kimono", price: 460.00 },
+                { name: "Artisanal Ceramic Tea Set", price: 180.00 },
+                { name: "Pro Gaming Mechanical Keyboard", price: 210.00 },
+                { name: "Studio Reference Headset", price: 380.00 },
+                { name: "Vintage Oak Wine Rack", price: 340.00 },
+                { name: "Designer Velvet Throw Pillows", price: 130.00 },
+                { name: "Aromatherapy Ultrasonic Diffuser", price: 95.00 },
+                { name: "Hand-Tufted Wool Area Rug", price: 780.00 },
+                { name: "Crystal Champagne Flutes (Set of 6)", price: 260.00 },
+                { name: "Gold-Plated Tabletop Globe", price: 310.00 },
+                { name: "Minimalist Marble Desk Lamp", price: 220.00 },
+                { name: "Smart Robotic Floor Vacuum", price: 620.00 },
+                { name: "Portable Ultra-Bright Projector", price: 850.00 },
+                { name: "Titanium Travel Suitcase", price: 690.00 },
+                { name: "Silk Blend Pocket Square", price: 75.00 },
+                { name: "Handmade Wooden Chess Set", price: 450.00 },
+                { name: "Designer Leather Passport Holder", price: 140.00 },
+                { name: "Automatic Watch Winder Box", price: 390.00 },
+                { name: "Electric Fireplace Heater", price: 520.00 },
+                { name: "Executive Ergonomic Office Chair", price: 980.00 },
+                { name: "Standing Electric Motorized Desk", price: 750.00 },
+                { name: "Professional Chef Knife Set", price: 480.00 },
+                { name: "Cast Iron Dutch Oven", price: 230.00 },
+                { name: "Copper Moscow Mule Mugs (Set of 4)", price: 110.00 },
+                { name: "Smart Wi-Fi Digital Picture Frame", price: 190.00 },
+                { name: "Bluetooth Retro Vinyl Turntable", price: 350.00 },
+                { name: "Thermal Insulated French Press", price: 90.00 },
+                { name: "Hand-Carved Alabaster Sculpture", price: 1200.00 },
+                { name: "Designer Sterling Silver Cufflinks", price: 210.00 },
+                { name: "Luxury Scented Soy Candle", price: 65.00 },
+                { name: "Genuine Ostrich Skin Belt", price: 310.00 },
+                { name: "Monogrammed Travel Duffle Bag", price: 540.00 },
+                { name: "High-Velocity Hair Dryer", price: 400.00 },
+                { name: "Facial LED Light Therapy Mask", price: 330.00 },
+                { name: "Smart Body Composition Scale", price: 140.00 },
+                { name: "Ultra-Lightweight Hiking Tent", price: 450.00 },
+                { name: "Carbon Fiber Mountain Bike", price: 2800.00 },
+                { name: "Inflatable Stand-Up Paddle Board", price: 550.00 },
+                { name: "Professional Golf Club Set", price: 1600.00 },
+                { name: "Precision Digital Kitchen Scale", price: 50.00 },
+                { name: "Stainless Steel Cocktail Shaker Set", price: 85.00 },
+                { name: "Leatherbound Classic Literature Collection", price: 650.00 },
+                { name: "Hand-Painted Porcelain Vase", price: 420.00 },
+                { name: "Solid Brass Desk Calendar", price: 130.00 },
+                { name: "Velvet Jewelry Organizer Box", price: 160.00 },
+                { name: "Designer Wool Scarf", price: 240.00 },
+                { name: "Polarized Driving Sunglasses", price: 220.00 },
+                { name: "Automatic Smart Pet Feeder", price: 180.00 },
+                { name: "Ergonomic Memory Foam Mattress", price: 1400.00 },
+                { name: "Cooling Bamboo Bed Sheets", price: 170.00 },
+                { name: "Down Alternative Luxury Comforter", price: 250.00 },
+                { name: "Brushed Nickel Rainfall Shower Head", price: 210.00 },
+                { name: "Touchless Smart Trash Can", price: 120.00 },
+                { name: "Handheld Fabric Steamer", price: 95.00 },
+                { name: "Ultrasonic Jewelry Cleaner", price: 80.00 },
+                { name: "Mini Desktop Air Purifier", price: 150.00 },
+                { name: "Smart LED Floor Corner Lamp", price: 130.00 },
+                { name: "Wireless Charging Valet Tray", price: 110.00 },
+                { name: "Magnetic Knife Block Holder", price: 90.00 },
+                { name: "Heavyweight Linen Tablecloth", price: 140.00 },
+                { name: "Hand-Blown Glass Decanter", price: 190.00 },
+                { name: "Vintage Leather Journal Notebook", price: 65.00 },
+                { name: "Stainless Steel Insulated Growler", price: 75.00 },
+                { name: "Executive Leather Conference Folder", price: 180.00 }
             ];
             return catalog[taskIndex % catalog.length];
         };
