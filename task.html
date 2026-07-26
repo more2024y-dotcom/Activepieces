@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Optimization - VIP</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
         :root {
-            --primary-dark: #0f172a;
-            --card-dark: #121b2f;
-            --accent-gold: #d4af37;
-            --accent-gold-light: #fef08a;
-            --bg-color: #090d16;
+            --primary-blue: #0f172a;
+            --accent-blue: #2563eb;
+            --accent-blue-light: #3b82f6;
+            --bg-color: #0b1120;
+            --card-bg: #1e293b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
         }
@@ -24,45 +24,31 @@
             padding-bottom: 100px;
         }
         .container {
-            padding: 20px;
+            padding: 16px;
             max-width: 600px;
             margin: 0 auto;
         }
         .top-nav-bar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .back-btn {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            color: var(--accent-gold);
-            padding: 6px 14px;
-            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-blue-light);
+            padding: 6px 12px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            font-family: 'Cinzel', serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .header-title {
-            font-size: 16px;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            text-align: center;
-            letter-spacing: 1px;
         }
         .task-card {
-            background: linear-gradient(135deg, #0f172a, #162238);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            background: var(--card-bg);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
         }
         .progress-indicator {
@@ -71,118 +57,161 @@
             align-items: center;
             font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             font-weight: 600;
         }
         .progress-indicator span b {
-            color: var(--accent-gold);
+            color: var(--accent-blue-light);
         }
-        .product-preview {
-            background: rgba(10, 15, 28, 0.75);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 14px;
-            padding: 18px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .product-image-container {
+        .product-image-box {
             width: 100%;
-            height: 180px;
-            border-radius: 10px;
+            height: 240px;
+            background: #0f172a;
+            border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 12px;
-            background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .product-image-container img {
+        .product-image-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         .product-name {
-            font-family: 'Cinzel', serif;
             font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        .price-qty {
+            font-size: 24px;
             font-weight: 700;
-            color: var(--accent-gold);
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-            line-height: 1.4;
+            color: var(--text-main);
+            margin-bottom: 18px;
         }
-        .product-rating {
-            color: #f59e0b;
-            font-size: 14px;
-            margin-bottom: 6px;
-            letter-spacing: 2px;
+        .price-qty span {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 400;
         }
-        .product-reviews-count {
-            font-size: 11px;
+        .review-section {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
             color: var(--text-muted);
             margin-bottom: 8px;
         }
-        .product-price {
-            font-size: 15px;
-            font-weight: 700;
+        .stars {
+            color: #f59e0b;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        .review-input-container {
+            position: relative;
+        }
+        .review-textarea {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             color: var(--text-main);
+            padding: 10px;
+            font-size: 12px;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            resize: none;
+            box-sizing: border-box;
+            height: 60px;
         }
-        .task-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 22px;
+        .auto-comment-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #d97706;
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
         }
-        .stat-box {
-            background: rgba(10, 15, 28, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 14px;
-            text-align: center;
+        .vip-badge-box {
+            background: linear-gradient(135deg, #fef08a, #fde047);
+            color: #854d0e;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
-        .stat-box small {
+        .task-details-grid {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
             font-size: 11px;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
+            margin-bottom: 12px;
         }
-        .stat-box b {
-            font-size: 15px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
+        .task-details-grid div {
+            text-align: center;
+            flex: 1;
+        }
+        .task-details-grid div span {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        .task-details-grid div b {
+            color: var(--text-main);
+            font-size: 12px;
+        }
+        .meta-info {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
         }
         .submit-btn {
             width: 100%;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
+            background: var(--accent-blue);
+            color: #fff;
             border: none;
-            border-radius: 14px;
-            padding: 16px;
-            font-size: 15px;
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 14px;
             font-weight: 700;
-            font-family: 'Cinzel', serif;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            letter-spacing: 0.5px;
-            transition: opacity 0.2s;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            transition: background 0.2s;
         }
         .submit-btn:hover {
-            opacity: 0.9;
+            background: var(--accent-blue-light);
         }
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #05080f;
+            background-color: #0b1120;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            height: 75px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
         .nav-item {
             display: flex;
@@ -190,68 +219,73 @@
             align-items: center;
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 11px;
-            font-weight: 500;
+            font-size: 10px;
             flex: 1;
         }
         .nav-item.active {
-            color: var(--accent-gold);
+            color: var(--accent-blue-light);
         }
         .nav-item span.icon {
-            font-size: 20px;
-            margin-bottom: 3px;
-        }
-        .nav-center-btn {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            border: 4px solid #05080f;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #0f172a;
             font-size: 18px;
-            margin-top: -25px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            margin-bottom: 2px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="top-nav-bar">
-            <a href="dashboard.html" class="back-btn">← Back Home</a>
+            <a href="dashboard.html" class="back-btn">&lt; Back</a>
         </div>
-        <div class="header-title">VIP TASK OF OPTIMIZATION</div>
         
         <div class="task-card">
             <div class="progress-indicator">
                 <span>Task Progress: <b id="taskCountDisplay">0</b> / 10</span>
-                <span>Commission Rate: <b>0.5%</b></span>
+                <span>Rate: <b>0.5%</b></span>
             </div>
 
-            <div class="product-preview">
-                <div class="product-image-container">
-                    <img id="productImg" src="" alt="Product Image">
-                </div>
-                <div class="product-name" id="productName">LUXURY DESIGNER HANDBAG</div>
-                <div class="product-rating" id="productRating">★★★★★</div>
-                <div class="product-reviews-count" id="productReviews">(1,248 Reviews)</div>
-                <div class="product-price" id="productPrice">Price: $866.00 USD</div>
+            <div class="product-image-box">
+                <img id="productImg" src="" alt="Product Image">
             </div>
 
-            <div class="task-stats">
-                <div class="stat-box">
-                    <small>Estimated Commission</small>
-                    <b id="commissionDisplay">$4.33 USD</b>
+            <div class="product-name" id="productName">CD button skirt pants</div>
+            <div class="price-qty"><span id="currencyLabel">USD</span> <b id="productPriceDisplay">901.00</b> x1</div>
+
+            <div class="review-section">
+                <div class="review-header">
+                    <span>Click to write a comment:</span>
+                    <div class="stars">★★★★★</div>
                 </div>
-                <div class="stat-box">
-                    <small>Return Total</small>
-                    <b id="returnTotalDisplay">$870.33 USD</b>
+                <div class="review-input-container">
+                    <textarea class="review-textarea" id="reviewText" placeholder="Write your review here..."></textarea>
+                    <button class="auto-comment-btn" onclick="fillAutoComment()">Automatic Comment</button>
                 </div>
             </div>
 
-            <button class="submit-btn" id="submitTaskBtn" onclick="completeTask()">SUBMIT OPTIMIZATION TASK</button>
+            <div class="vip-badge-box">
+                VIP 1
+            </div>
+
+            <div class="task-details-grid">
+                <div>
+                    <span>Total Amount</span>
+                    <b id="totalAmountDisplay">901.00(USD)</b>
+                </div>
+                <div>
+                    <span>Reward</span>
+                    <b>0.5%</b>
+                </div>
+                <div>
+                    <span>Earnings</span>
+                    <b id="earningsDisplay">4.51(USD)</b>
+                </div>
+            </div>
+
+            <div class="meta-info">
+                <div>Date Created: <span id="dateCreated">2026-07-17 17:27:34</span></div>
+                <div>Order Code: <span id="orderCode">20260717172700000034</span></div>
+            </div>
+
+            <button class="submit-btn" onclick="completeTask()">Submit</button>
         </div>
     </div>
 
@@ -263,7 +297,7 @@
             <span class="icon">🛡️</span><span>Certificate</span>
         </a>
         <a href="task.html" class="nav-item active">
-            <div class="nav-center-btn">⚡</div>
+            <span class="icon">⚡</span><span>Task</span>
         </a>
         <a href="withdraw.html" class="nav-item">
             <span class="icon">📝</span><span>Records</span>
@@ -287,76 +321,68 @@
 
         const productCatalog = [
             { 
-                name: "LUXURY DESIGNER LEATHER HANDBAG", 
-                price: 866.00, 
-                rating: "★★★★★", 
-                reviews: "(1,420 Reviews)",
-                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" 
+                name: "CD button skirt pants", 
+                price: 901.00, 
+                image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "SWISS AUTOMATIC GOLD CHRONOGRAPH WATCH", 
+                name: "Swiss Automatic Gold Chronograph Watch", 
                 price: 1250.00, 
-                rating: "★★★★★", 
-                reviews: "(890 Reviews)",
                 image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "PREMIUM WIRELESS ACTIVE NOISE-CANCELING HEADPHONES", 
+                name: "Premium Wireless Noise-Canceling Headphones", 
                 price: 240.00, 
-                rating: "★★★★★", 
-                reviews: "(2,150 Reviews)",
                 image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "4K ULTRA HD CURVED SMART OLED TV", 
+                name: "4K Ultra HD Curved Smart OLED TV", 
                 price: 650.00, 
-                rating: "★★★★★", 
-                reviews: "(630 Reviews)",
                 image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "DESIGNER SILK EVENING COUTURE GOWN", 
+                name: "Designer Silk Evening Couture Gown", 
                 price: 490.00, 
-                rating: "★★★★★", 
-                reviews: "(410 Reviews)",
                 image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "PROFESSIONAL DSLR FULL-FRAME CAMERA KIT", 
+                name: "Professional DSLR Full-Frame Camera Kit", 
                 price: 1100.00, 
-                rating: "★★★★★", 
-                reviews: "(980 Reviews)",
                 image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "ITALIAN FULL-GRAIN LEATHER BRIEFCASE", 
+                name: "Italian Full-Grain Leather Briefcase", 
                 price: 320.00, 
-                rating: "★★★★★", 
-                reviews: "(750 Reviews)",
                 image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "18K WHITE GOLD DIAMOND ACCENT RING", 
+                name: "18K White Gold Diamond Accent Ring", 
                 price: 1450.00, 
-                rating: "★★★★★", 
-                reviews: "(340 Reviews)",
                 image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "LIMITED EDITION STREETWEAR DESIGNER SNEAKERS", 
+                name: "Limited Edition Streetwear Designer Sneakers", 
                 price: 380.00, 
-                rating: "★★★★★", 
-                reviews: "(1,890 Reviews)",
                 image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" 
             },
             { 
-                name: "TITANIUM POLARIZED LUXURY SUNGLASSES", 
+                name: "Titanium Polarized Luxury Sunglasses", 
                 price: 210.00, 
-                rating: "★★★★★", 
-                reviews: "(520 Reviews)",
                 image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" 
             }
         ];
+
+        function generateRandomOrderCode() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const randomSuffix = Math.floor(100000 + Math.random() * 900000);
+            return `${year}${month}${day}${hours}${minutes}${seconds}${randomSuffix}`;
+        }
 
         function loadTaskData() {
             let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
@@ -367,18 +393,40 @@
 
             document.getElementById('productImg').src = currentItem.image;
             document.getElementById('productName').textContent = currentItem.name;
-            document.getElementById('productRating').textContent = currentItem.rating;
-            document.getElementById('productReviews').textContent = currentItem.reviews;
-            document.getElementById('productPrice').textContent = `Price: $${currentItem.price.toFixed(2)} USD`;
+            document.getElementById('productPriceDisplay').textContent = currentItem.price.toFixed(2);
+            document.getElementById('totalAmountDisplay').textContent = `${currentItem.price.toFixed(2)}(USD)`;
 
             let commission = currentItem.price * 0.005;
-            let returnTotal = currentItem.price + commission;
+            document.getElementById('earningsDisplay').textContent = `${commission.toFixed(2)}(USD)`;
 
-            document.getElementById('commissionDisplay').textContent = `$${commission.toFixed(2)} USD`;
-            document.getElementById('returnTotalDisplay').textContent = `$${returnTotal.toFixed(2)} USD`;
+            // Set dynamic date and code metadata
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0, 10) + ' ' + now.toTimeString().slice(0, 8);
+            document.getElementById('dateCreated').textContent = dateStr;
+            document.getElementById('orderCode').textContent = generateRandomOrderCode();
+            
+            // Clear review box on load
+            document.getElementById('reviewText').value = "";
+        }
+
+        function fillAutoComment() {
+            const comments = [
+                "The package arrived on time and well protected. The products are small, like a gift. They are very good quality products.",
+                "Amazing quality item! Shipped fast and looks even better in person. Highly recommended.",
+                "Exceeded my expectations! Very premium finish and fast delivery service.",
+                "Absolute luxury standard. Very satisfied with the prompt delivery and item condition."
+            ];
+            const randomComment = comments[Math.floor(Math.random() * comments.length)];
+            document.getElementById('reviewText').value = randomComment;
         }
 
         function completeTask() {
+            let review = document.getElementById('reviewText').value.trim();
+            if (!review) {
+                alert("Please click 'Automatic Comment' or write a review before submitting.");
+                return;
+            }
+
             let completedCount = parseInt(localStorage.getItem(taskKey)) || 0;
             if (completedCount >= 10) {
                 alert("You have completed all your tasks for today!");
@@ -400,7 +448,7 @@
             localStorage.setItem(todaysProfitKey, currentProfit.toFixed(2));
             localStorage.setItem(taskKey, completedCount);
 
-            alert(`Task successfully optimized! Earned $${commission.toFixed(2)} commission.`);
+            alert(`Task submitted successfully! Earned $${commission.toFixed(2)} USD commission.`);
             loadTaskData();
         }
 
