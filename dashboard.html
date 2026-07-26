@@ -532,15 +532,19 @@
         // Initial call
         loadAndDisplayBalance();
 
-        // Listen for changes from other tabs/pages (tasks, deposits, etc.) instantly
+        // Listen for changes from other tabs/pages instantly
         window.addEventListener('storage', function(e) {
-            if (e.key === balanceKey) {
+            if (e.key === balanceKey || e.key === `todaysProfit_${userKeySuffix}` || e.key === `totalProfit_${userKeySuffix}`) {
                 loadAndDisplayBalance();
+                updateProfitDisplay();
             }
         });
 
         // Periodic sync fallback to ensure updates render immediately
-        setInterval(loadAndDisplayBalance, 500);
+        setInterval(() => {
+            loadAndDisplayBalance();
+            updateProfitDisplay();
+        }, 500);
 
         const taskKey = `completedTasks_${userKeySuffix}`;
         const lastTaskDateKey = `lastTaskDate_${userKeySuffix}`;
@@ -556,21 +560,30 @@
             localStorage.setItem(lastTaskDateKey, todayDateStr);
         }
 
-        let lastRecordedDate = localStorage.getItem('lastProfitDate');
-        let totalProfit = parseFloat(localStorage.getItem('totalProfit')) || 0;
-        let todaysProfit = parseFloat(localStorage.getItem('todaysProfit')) || 0;
+        // Scoped Profit Keys for Account Isolation
+        const lastProfitDateKey = `lastProfitDate_${userKeySuffix}`;
+        const totalProfitKey = `totalProfit_${userKeySuffix}`;
+        const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
+
+        let lastRecordedDate = localStorage.getItem(lastProfitDateKey);
+        let totalProfit = parseFloat(localStorage.getItem(totalProfitKey)) || 0;
+        let todaysProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
 
         if (lastRecordedDate && lastRecordedDate !== todayDateStr) {
             totalProfit += todaysProfit;
             todaysProfit = 0;
-            localStorage.setItem('totalProfit', totalProfit);
-            localStorage.setItem('todaysProfit', todaysProfit);
+            localStorage.setItem(totalProfitKey, totalProfit);
+            localStorage.setItem(todaysProfitKey, todaysProfit);
         }
-        localStorage.setItem('lastProfitDate', todayDateStr);
+        localStorage.setItem(lastProfitDateKey, todayDateStr);
 
         let activeProfitView = 'today';
 
         function updateProfitDisplay() {
+            // Re-fetch in case other pages updated it
+            todaysProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
+            totalProfit = parseFloat(localStorage.getItem(totalProfitKey)) || 0;
+
             const displayVal = activeProfitView === 'today' ? todaysProfit : totalProfit;
             document.getElementById('profitDisplay').textContent = displayVal.toFixed(2) + ' USD';
         }
