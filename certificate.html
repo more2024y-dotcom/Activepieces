@@ -42,6 +42,7 @@
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
+            cursor: pointer;
         }
         .header-title {
             font-size: 22px;
@@ -125,7 +126,7 @@
 
     <div class="container">
         <div class="top-nav-bar">
-            <a href="javascript:history.back()" class="back-btn">&lt; Back</a>
+            <a onclick="history.back()" class="back-btn">&lt; Back</a>
         </div>
         <div class="header-title">Official Certificate</div>
         
@@ -143,7 +144,7 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar using JavaScript history.back() to prevent white screens or logouts -->
+    <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
         <a onclick="history.back()" class="nav-item">
             <span class="icon">🏠</span><span>Home</span>
