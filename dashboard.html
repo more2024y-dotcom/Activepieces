@@ -5,606 +5,357 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Luxury VIP</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
         :root {
-            --primary-dark: #0f172a;
-            --card-dark: #1e293b;
-            --accent-gold: #d4af37;
-            --accent-gold-light: #fef08a;
             --bg-color: #090d16;
-            --text-main: #f8fafc;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
             --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
+            --gold-color: #facc15;
+            --gold-gradient: linear-gradient(135deg, #facc15, #ca8a04);
         }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-color);
             margin: 0;
-            padding: 0;
-            padding-bottom: 100px;
-        }
-        .container {
             padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .welcome-header {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 18px;
             display: flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'Cinzel', serif;
-        }
-        .welcome-header span {
-            color: var(--accent-gold);
-        }
-        .hero-card {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-        .user-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 22px;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary-dark);
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            font-size: 18px;
-            border: 2px solid var(--accent-gold);
+            min-height: 100vh;
         }
-        .user-details h3 {
-            margin: 0 0 5px 0;
-            font-size: 17px;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-        }
-        .credit-score-wrap {
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-        .progress-bar-bg {
-            width: 80px;
-            height: 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            display: inline-block;
-        }
-        .progress-bar-fill {
+
+        .dashboard-container {
             width: 100%;
-            height: 100%;
-            background: var(--accent-gold);
+            max-width: 480px;
+            box-sizing: border-box;
         }
-        .invite-text {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
-        .invite-text span {
-            color: var(--accent-gold-light);
+
+        .account-display {
+            font-weight: 700;
+            color: var(--gold-color);
+            font-size: 15px;
+            letter-spacing: 0.5px;
         }
-        .vip-badge-top {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--accent-gold);
+
+        .home-btn {
+            background: #334155;
+            color: #f8fafc;
+            border: 1px solid var(--border-color);
             padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .balance-title {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .eye-toggle {
-            cursor: pointer;
-            font-size: 14px;
-            user-select: none;
-        }
-        .balance-amount {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-            margin-bottom: 22px;
-        }
-        .action-buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        .action-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
-            padding: 14px 5px;
-            text-align: center;
-            color: white;
-            text-decoration: none;
-            backdrop-filter: blur(5px);
-            transition: all 0.2s;
-        }
-        .action-btn:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--accent-gold);
-        }
-        .action-btn span {
-            display: block;
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
-        .action-btn small {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-        .profit-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-        .profit-tabs {
-            display: flex;
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 10px;
-            padding: 4px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .profit-tab {
-            flex: 1;
-            padding: 10px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
             border-radius: 8px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-        }
-        .profit-tab.active {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: #0f172a;
-            font-weight: 700;
-            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
-        }
-        .profit-value {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-        }
-        .announcement-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 16px 18px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .announcement-icon {
-            font-size: 22px;
-            background: rgba(212, 175, 55, 0.1);
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        .announcement-content h4 {
-            margin: 0 0 4px 0;
             font-size: 13px;
-            color: var(--accent-gold);
-            font-family: 'Cinzel', serif;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
         }
-        .announcement-content p {
-            margin: 0;
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.4;
+
+        .home-btn:hover {
+            background: #475569;
         }
-        .heatmap-card {
-            background: var(--card-dark);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 16px;
-            padding: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+        .hub-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
             margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-        .heatmap-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            color: var(--accent-gold);
-            margin-bottom: 18px;
+
+        .hub-card h2 {
+            margin-top: 0;
+            color: var(--gold-color);
+            font-size: 22px;
+            margin-bottom: 10px;
         }
-        .heatmap-graph {
-            height: 90px;
-            width: 100%;
-            background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, rgba(255,255,255,0) 100%);
-            border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
-            position: relative;
-            margin-bottom: 12px;
-        }
-        .curve-line {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 70px;
-            background: radial-gradient(ellipse at bottom, var(--accent-gold) 0%, transparent 70%);
-            clip-path: polygon(0% 100%, 0% 60%, 25% 15%, 50% 90%, 75% 20%, 100% 10%, 100% 100%);
-            opacity: 0.5;
-        }
-        .days-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
+
+        .hub-card p {
             color: var(--text-muted);
-            margin-bottom: 18px;
-            font-weight: 500;
+            font-size: 13px;
+            margin: 0;
+            line-height: 1.5;
         }
+
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
+
         .stat-box {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 12px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
         }
-        .stat-box small {
+
+        .stat-box.full-width {
+            grid-column: span 2;
+        }
+
+        .stat-label {
             font-size: 11px;
+            font-weight: 700;
             color: var(--text-muted);
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
         }
-        .stat-box b {
-            font-size: 15px;
-            color: var(--accent-gold-light);
-            font-family: 'Cinzel', serif;
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold-color);
         }
-        .bottom-nav {
+
+        .action-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold-gradient);
+            color: #1e293b;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(250, 204, 21, 0.3);
+            transition: opacity 0.2s, transform 0.1s;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Modal Overlay for Task Simulation */
+        .modal-overlay {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             width: 100%;
-            background-color: #05080f;
-            display: flex;
-            justify-content: space-around;
+            height: 100%;
+            background: rgba(9, 13, 22, 0.85);
+            display: none;
+            justify-content: center;
             align-items: center;
-            height: 75px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.8);
             z-index: 1000;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 500;
-            flex: 1;
+
+        .modal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
-        .nav-item.active {
-            color: var(--accent-gold);
-        }
-        .nav-item span.icon {
+
+        .modal-card h3 {
+            color: var(--gold-color);
+            margin-top: 0;
             font-size: 20px;
-            margin-bottom: 3px;
+            margin-bottom: 15px;
         }
-        .nav-center-btn {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            border: 4px solid #05080f;
-            border-radius: 50%;
+
+        .product-img {
+            width: 100px;
+            height: 100px;
+            background: #0f172a;
+            border-radius: 12px;
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #0f172a;
-            font-size: 18px;
-            margin-top: -25px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            font-size: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f8fafc;
+        }
+
+        .product-price {
+            font-size: 15px;
+            color: var(--gold-color);
+            font-weight: 600;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="welcome-header">
-            Hi <span id="welcomeName">Guest</span> , welcome back 👑
+    <div class="dashboard-container">
+        <!-- Top Bar with Account & Back to Homepage Button -->
+        <div class="top-bar">
+            <div class="account-display" id="displayUser">ACCOUNT: NNNNNN</div>
+            <a href="login.html" class="home-btn">🏠 Home</a>
         </div>
 
-        <div class="hero-card">
-            <div class="user-header">
-                <div class="user-info">
-                    <div class="avatar" id="avatarLetter">G</div>
-                    <div class="user-details">
-                        <h3 id="usernameDisplay">Guest</h3>
-                        <div class="credit-score-wrap">
-                            <span>Credit Score:</span>
-                            <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
-                            <span>100%</span>
-                        </div>
-                        <div class="invite-text">Invitation Code: <span id="inviteCodeDisplay">EAYBA</span></div>
-                    </div>
-                </div>
-                <a href="vip.html" class="vip-badge-top">VIP 1</a>
-            </div>
+        <!-- VIP Task Hub Header Card -->
+        <div class="hub-card">
+            <h2>VIP TASK HUB</h2>
+            <p>Complete your daily optimization tasks to earn 0.5% commission.</p>
+        </div>
 
-            <div class="balance-section">
-                <div class="balance-title">
-                    <span>Total balance</span>
-                    <span class="eye-toggle" id="eyeToggleBtn" onclick="toggleBalanceVisibility()">👁️</span>
-                </div>
-                <div class="balance-amount" id="balanceDisplay">10.00 USD</div>
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">Total Balance</div>
+                <div class="stat-value" id="totalBalance">10.00 USD</div>
             </div>
-
-            <div class="action-buttons-grid">
-                <a href="withdraw.html" class="action-btn">
-                    <span>➕</span>
-                    <small>Add Wallet</small>
-                </a>
-                <a href="withdraw.html" class="action-btn">
-                    <span>⬇️</span>
-                    <small>Deposit</small>
-                </a>
-                <a href="withdraw.html" class="action-btn">
-                    <span>⬆️</span>
-                    <small>Withdraw</small>
-                </a>
-                <a href="withdraw.html" class="action-btn">
-                    <span>🔄</span>
-                    <small>Transaction</small>
-                </a>
+            <div class="stat-box">
+                <div class="stat-label">Completed Tasks</div>
+                <div class="stat-value" id="completedTasks">0 / 40</div>
+            </div>
+            <div class="stat-box full-width">
+                <div class="stat-label">Today's Profit</div>
+                <div class="stat-value" id="todaysProfit">0.00 USD</div>
             </div>
         </div>
 
-        <div class="profit-card">
-            <div class="profit-tabs">
-                <div class="profit-tab active" id="tabToday" onclick="switchProfitTab('today')">Today's Profit</div>
-                <div class="profit-tab" id="tabTotal" onclick="switchProfitTab('total')">Total Profit</div>
-            </div>
-            <div class="profit-value" id="profitDisplay">0.00 USD</div>
-        </div>
-
-        <div class="announcement-card">
-            <div class="announcement-icon">📢</div>
-            <div class="announcement-content">
-                <h4>SYSTEM ANNOUNCEMENT</h4>
-                <p>Welcome to the platform! Complete daily tasks to increase your tier rewards.</p>
-            </div>
-        </div>
-
-        <div class="heatmap-card">
-            <div class="heatmap-header">
-                <span>Optimization Needs Heatmap</span>
-                <span style="color: var(--text-muted); font-size: 11px;">▼</span>
-            </div>
-            <div class="heatmap-graph">
-                <div class="curve-line"></div>
-            </div>
-            <div class="days-row">
-                <span>Sun</span>
-                <span>Mon</span>
-                <span>Tue</span>
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
-                <span>Sat</span>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <small>Total Online Users</small>
-                    <b>111.77K</b>
-                </div>
-                <div class="stat-box">
-                    <small>Avg User Optimization Volume</small>
-                    <b>58.95K</b>
-                </div>
-            </div>
-        </div>
+        <!-- Start Task Button -->
+        <button class="action-btn" id="startTaskBtn">START OPTIMIZATION TASK</button>
     </div>
 
-    <div class="bottom-nav">
-        <a href="dashboard.html" class="nav-item active">
-            <span class="icon">🏠</span><span>Home</span>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">🛡️</span><span>Certificate</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <div class="nav-center-btn">⚡</div>
-        </a>
-        <a href="withdraw.html" class="nav-item">
-            <span class="icon">📝</span><span>Records</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <span class="icon">👤</span><span>My</span>
-        </a>
+    <!-- Task Execution Modal -->
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal-card">
+            <h3 id="modalTitle">Optimizing Product...</h3>
+            <div class="product-img" id="productIcon">👜</div>
+            <div class="product-name" id="productName">Loading Product...</div>
+            <div class="product-price" id="productPrice">Price: $0.00 | Commission: $0.00</div>
+            <button class="action-btn" id="submitTaskBtn">Submit Task</button>
+        </div>
     </div>
 
     <script>
-        const currentUsername = localStorage.getItem('userName') || 
-                                localStorage.getItem('username') || 
-                                localStorage.getItem('loggedInUser') || 
-                                localStorage.getItem('currentUser') || 
-                                localStorage.getItem('accountName');
+        // Retrieve current logged-in user
+        const currentUser = localStorage.getItem('username') || localStorage.getItem('userName') || 'NNNNNN';
+        document.getElementById('displayUser').textContent = `ACCOUNT: ${currentUser.toUpperCase()}`;
 
-        if (currentUsername && currentUsername.trim() !== "") {
-            document.getElementById('usernameDisplay').textContent = currentUsername;
-            document.getElementById('welcomeName').textContent = currentUsername;
-            document.getElementById('avatarLetter').textContent = currentUsername.charAt(0).toUpperCase();
-        } else {
-            document.getElementById('usernameDisplay').textContent = "Guest";
-            document.getElementById('welcomeName').textContent = "Guest";
-            document.getElementById('avatarLetter').textContent = "G";
+        // Isolated localStorage keys for the current user
+        const balanceKey = `userBalance_${currentUser}`;
+        const tasksKey = `completedTasks_${currentUser}`;
+        const profitKey = `todaysProfit_${currentUser}`;
+
+        // Initialize defaults if not present
+        if (localStorage.getItem(balanceKey) === null) {
+            localStorage.setItem(balanceKey, '10.00');
+            localStorage.setItem(tasksKey, '0');
+            localStorage.setItem(profitKey, '0.00');
         }
 
-        const storedInvite = localStorage.getItem('myInviteCode') || localStorage.getItem('inviteCode');
-        if (storedInvite) {
-            document.getElementById('inviteCodeDisplay').textContent = storedInvite;
+        // DOM elements
+        const totalBalanceEl = document.getElementById('totalBalance');
+        const completedTasksEl = document.getElementById('completedTasks');
+        const todaysProfitEl = document.getElementById('todaysProfit');
+        const startTaskBtn = document.getElementById('startTaskBtn');
+        const taskModal = document.getElementById('taskModal');
+        const submitTaskBtn = document.getElementById('submitTaskBtn');
+        const productNameEl = document.getElementById('productName');
+        const productPriceEl = document.getElementById('productPrice');
+        const productIconEl = document.getElementById('productIcon');
+
+        // Diverse pool of luxury products so tasks change dynamically
+        const luxuryProducts = [
+            { name: "Luxury Designer Handbag", icon: "👜", basePrice: 280.00 },
+            { name: "Swiss Gold Chronograph Watch", icon: "⌚", basePrice: 450.00 },
+            { name: "Diamond Encrusted Necklace", icon: "💎", basePrice: 620.00 },
+            { name: "Italian Leather Oxford Shoes", icon: "👞", basePrice: 210.00 },
+            { name: "Pure Silk Designer Scarf", icon: "🧣", basePrice: 150.00 },
+            { name: "Exclusive 18K Gold Bracelet", icon: "✨", basePrice: 380.00 },
+            { name: "Signature Luxury Sunglasses", icon: "🕶️", basePrice: 190.00 },
+            { name: "Couture Velvet Evening Clutch", icon: "👛", basePrice: 310.00 }
+        ];
+
+        let currentTaskData = null;
+
+        function updateUI() {
+            let balance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+            let tasks = parseInt(localStorage.getItem(tasksKey)) || 0;
+            let profit = parseFloat(localStorage.getItem(profitKey)) || 0.00;
+
+            totalBalanceEl.textContent = balance.toFixed(2) + ' USD';
+            completedTasksEl.textContent = tasks + ' / 40';
+            todaysProfitEl.textContent = profit.toFixed(2) + ' USD';
         }
 
-        const userKeySuffix = currentUsername ? currentUsername.trim() : 'Guest';
-        const balanceKey = `userBalance_${userKeySuffix}`;
-        
-        let isBalanceHidden = false;
+        updateUI();
 
-        function loadAndDisplayBalance() {
-            let currentBalance = parseFloat(localStorage.getItem(balanceKey));
-            if (isNaN(currentBalance)) {
-                currentBalance = 10.00;
-                localStorage.setItem(balanceKey, currentBalance.toFixed(2));
+        startTaskBtn.addEventListener('click', function() {
+            let tasks = parseInt(localStorage.getItem(tasksKey)) || 0;
+            if (tasks >= 40) {
+                alert('You have completed all 40 tasks for today!');
+                return;
             }
+
+            // Pick a random product from the list so it changes every time
+            const randomProduct = luxuryProducts[Math.floor(Math.random() * luxuryProducts.length)];
+            let balance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
             
-            if (isBalanceHidden) {
-                document.getElementById('balanceDisplay').textContent = '********';
-            } else {
-                document.getElementById('balanceDisplay').textContent = currentBalance.toFixed(2) + ' USD';
-            }
-        }
+            // Generate realistic randomized item price based on balance scale
+            let itemPrice = randomProduct.basePrice + (balance * 0.1);
+            let commission = itemPrice * 0.005; // 0.5% commission
 
-        function toggleBalanceVisibility() {
-            isBalanceHidden = !isBalanceHidden;
-            loadAndDisplayBalance();
-            document.getElementById('eyeToggleBtn').textContent = isBalanceHidden ? '🔒' : '👁️';
-        }
+            currentTaskData = {
+                name: randomProduct.name,
+                icon: randomProduct.icon,
+                price: itemPrice,
+                commission: commission
+            };
 
-        // Initial call
-        loadAndDisplayBalance();
+            productIconEl.textContent = currentTaskData.icon;
+            productNameEl.textContent = currentTaskData.name;
+            productPriceEl.textContent = `Price: $${itemPrice.toFixed(2)} | Commission: +$${commission.toFixed(2)}`;
 
-        // Listen for changes from other tabs/pages instantly
-        window.addEventListener('storage', function(e) {
-            if (e.key === balanceKey || e.key === `todaysProfit_${userKeySuffix}` || e.key === `totalProfit_${userKeySuffix}`) {
-                loadAndDisplayBalance();
-                updateProfitDisplay();
-            }
+            taskModal.style.display = 'flex';
         });
 
-        // Periodic sync fallback to ensure updates render immediately
-        setInterval(() => {
-            loadAndDisplayBalance();
-            updateProfitDisplay();
-        }, 500);
+        submitTaskBtn.addEventListener('click', function() {
+            if (!currentTaskData) return;
 
-        const taskKey = `completedTasks_${userKeySuffix}`;
-        const lastTaskDateKey = `lastTaskDate_${userKeySuffix}`;
-        
-        const todayDateStr = new Date().toDateString();
-        let lastRecordedTaskDate = localStorage.getItem(lastTaskDateKey);
+            let balance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
+            let tasks = parseInt(localStorage.getItem(tasksKey)) || 0;
+            let profit = parseFloat(localStorage.getItem(profitKey)) || 0.00;
 
-        if (lastRecordedTaskDate && lastRecordedTaskDate !== todayDateStr) {
-            localStorage.setItem(taskKey, '0');
-            localStorage.setItem(lastTaskDateKey, todayDateStr);
-        } else if (localStorage.getItem(taskKey) === null) {
-            localStorage.setItem(taskKey, '0');
-            localStorage.setItem(lastTaskDateKey, todayDateStr);
-        }
+            balance += currentTaskData.commission;
+            profit += currentTaskData.commission;
+            tasks += 1;
 
-        // Scoped Profit Keys for Account Isolation
-        const lastProfitDateKey = `lastProfitDate_${userKeySuffix}`;
-        const totalProfitKey = `totalProfit_${userKeySuffix}`;
-        const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
+            localStorage.setItem(balanceKey, balance.toFixed(2));
+            localStorage.setItem(tasksKey, tasks);
+            localStorage.setItem(profitKey, profit.toFixed(2));
 
-        let lastRecordedDate = localStorage.getItem(lastProfitDateKey);
-        let totalProfit = parseFloat(localStorage.getItem(totalProfitKey)) || 0;
-        let todaysProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
-
-        if (lastRecordedDate && lastRecordedDate !== todayDateStr) {
-            totalProfit += todaysProfit;
-            todaysProfit = 0;
-            localStorage.setItem(totalProfitKey, totalProfit);
-            localStorage.setItem(todaysProfitKey, todaysProfit);
-        }
-        localStorage.setItem(lastProfitDateKey, todayDateStr);
-
-        let activeProfitView = 'today';
-
-        function updateProfitDisplay() {
-            // Re-fetch in case other pages updated it
-            todaysProfit = parseFloat(localStorage.getItem(todaysProfitKey)) || 0;
-            totalProfit = parseFloat(localStorage.getItem(totalProfitKey)) || 0;
-
-            const displayVal = activeProfitView === 'today' ? todaysProfit : totalProfit;
-            document.getElementById('profitDisplay').textContent = displayVal.toFixed(2) + ' USD';
-        }
-
-        function switchProfitTab(tabName) {
-            activeProfitView = tabName;
-            const tabToday = document.getElementById('tabToday');
-            const tabTotal = document.getElementById('tabTotal');
-
-            if (tabName === 'today') {
-                tabToday.classList.add('active');
-                tabTotal.classList.remove('active');
-            } else {
-                tabTotal.classList.add('active');
-                tabToday.classList.remove('active');
-            }
-            updateProfitDisplay();
-        }
-
-        updateProfitDisplay();
+            taskModal.style.display = 'none';
+            updateUI();
+            alert(`Task completed successfully! Commission earned: +$${currentTaskData.commission.toFixed(2)}`);
+        });
     </script>
-
 </body>
 </html>
