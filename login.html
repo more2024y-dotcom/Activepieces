@@ -1,27 +1,26 @@
-The reason your invite code displayed as **N/A** and didn't work is because your **`login.html`** file wasn't updated yet to save the new user code (`myInviteCode`) into `localStorage` when you logged in. Because it wasn't saved during login, the dashboard couldn't load it.
-
-Here is the complete, updated **`login.html`** file. It now correctly grabs `foundUser.myInviteCode` and saves it to `localStorage` upon login, fixing the "N/A" issue so you can copy it and use it to register new users successfully.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In to Your Account</title>
+    <title>Log In - Luxury VIP</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
         :root {
-            --primary-color: #0f172a;
-            --accent-color: #2563eb;
-            --accent-hover: #1d4ed8;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-color: #334155;
-            --border-color: #cbd5e1;
+            /* Premium Rich Blue Theme matching your Sign Up page */
+            --primary-color: #f8fafc;
+            --accent-color: #0284c7;
+            --accent-hover: #0369a1;
+            --bg-color: #090d16;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             display: flex;
@@ -35,12 +34,13 @@ Here is the complete, updated **`login.html`** file. It now correctly grabs `fou
         .auth-card {
             background-color: var(--card-bg);
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             width: 100%;
             max-width: 440px;
             box-sizing: border-box;
             position: relative;
+            border: 1px solid var(--border-color);
         }
 
         .language-header {
@@ -53,39 +53,49 @@ Here is the complete, updated **`login.html`** file. It now correctly grabs `fou
             width: auto;
             padding: 6px 10px;
             font-size: 12px;
+            background: #0f172a;
+            color: var(--text-color);
             border: 1px solid var(--border-color);
             border-radius: 6px;
+            outline: none;
         }
 
         h2 {
             margin-top: 0;
-            color: var(--primary-color);
+            color: #38bdf8;
             text-align: center;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 24px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
         input {
             width: 100%;
             padding: 12px;
+            background: #0f172a;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 10px;
             box-sizing: border-box;
             font-size: 14px;
+            color: var(--text-color);
         }
 
         input:focus {
             outline: none;
-            border-color: var(--accent-color);
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
         }
 
         .password-container {
@@ -101,42 +111,44 @@ Here is the complete, updated **`login.html`** file. It now correctly grabs `fou
             border: none;
             cursor: pointer;
             font-size: 16px;
-            color: #64748b;
+            color: var(--text-muted);
         }
 
         button.submit-btn {
             width: 100%;
-            padding: 12px;
-            background-color: var(--accent-color);
+            padding: 14px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: opacity 0.2s;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+            margin-top: 5px;
         }
 
         button.submit-btn:hover {
-            background-color: var(--accent-hover);
+            opacity: 0.9;
         }
 
         .error-msg {
-            color: #dc2626;
+            color: #f87171;
             font-size: 12px;
             margin-top: 5px;
             display: none;
-            text-align: center;
         }
 
         .switch-link {
             text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
         .switch-link a {
-            color: var(--accent-color);
+            color: #38bdf8;
             text-decoration: none;
             font-weight: 600;
         }
@@ -170,36 +182,34 @@ Here is the complete, updated **`login.html`** file. It now correctly grabs `fou
         <form id="loginForm">
             
             <div class="form-group">
-                <label for="loginUsername">Username</label>
-                <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
             </div>
 
             <div class="form-group">
-                <label for="loginPassword">Password</label>
+                <label for="password">Password</label>
                 <div class="password-container">
-                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    <input type="password" id="password" placeholder="Enter your password" required>
                     <button type="button" id="togglePassword" class="toggle-password">👁️</button>
                 </div>
+                <div id="formError" class="error-msg"></div>
             </div>
 
-            <div id="loginError" class="error-msg">Incorrect username or password. Please try again.</div>
+            <button type="submit" class="submit-btn">Log In</button>
 
-            <button type="submit" class="submit-btn" style="margin-top: 10px;">Log In</button>
-            
             <div class="switch-link">
-                Don't have an account? <a href="signup.html">Sign Up</a>
+                Don't have an account? <a href="index.html">Sign Up</a>
             </div>
         </form>
     </div>
 
     <script>
         const togglePassword = document.getElementById('togglePassword');
-        const loginPasswordInput = document.getElementById('loginPassword');
-
-        if (togglePassword && loginPasswordInput) {
+        const passwordInput = document.getElementById('password');
+        if (togglePassword && passwordInput) {
             togglePassword.addEventListener('click', function () {
-                const type = loginPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                loginPasswordInput.setAttribute('type', type);
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
                 this.textContent = type === 'password' ? '👁️' : '🔒';
             });
         }
@@ -207,34 +217,42 @@ Here is the complete, updated **`login.html`** file. It now correctly grabs `fou
         const loginForm = document.getElementById('loginForm');
         loginForm.addEventListener('submit', function (e) {
             e.preventDefault();
+            
+            const formError = document.getElementById('formError');
+            const usernameInput = document.getElementById('username').value.trim();
+            const passVal = passwordInput.value;
 
-            const enteredUser = document.getElementById('loginUsername').value.trim();
-            const enteredPass = loginPasswordInput.value;
-            const loginError = document.getElementById('loginError');
+            let users = JSON.parse(localStorage.getItem('usersList')) || [];
 
-            // Get users list from localStorage
-            const users = JSON.parse(localStorage.getItem('usersList')) || [];
+            const foundUser = users.find(u => u.username.toLowerCase() === usernameInput.toLowerCase());
 
-            // Find matching user
-            const foundUser = users.find(u => u.username === enteredUser && u.password === enteredPass);
-
-            if (foundUser) {
-                loginError.style.display = 'none';
-                
-                // Save active user details and their personal referral code into localStorage
-                localStorage.setItem('userName', foundUser.username);
-                localStorage.setItem('userPhone', foundUser.phone);
-                localStorage.setItem('userGender', foundUser.gender);
-                localStorage.setItem('myInviteCode', foundUser.myInviteCode || '');
-
-                alert('Login successful!');
-                window.location.href = 'dashboard.html';
-            } else {
-                loginError.style.display = 'block';
+            if (!foundUser || foundUser.password !== passVal) {
+                formError.textContent = 'Invalid username or password. Please try again.';
+                formError.style.display = 'block';
+                return;
             }
+
+            formError.style.display = 'none';
+
+            // Set current active session details
+            localStorage.setItem('userName', foundUser.username);
+            localStorage.setItem('username', foundUser.username);
+            localStorage.setItem('userGender', foundUser.gender);
+            localStorage.setItem('userPhone', foundUser.phone);
+            localStorage.setItem('myInviteCode', foundUser.myInviteCode);
+
+            // Initialize isolated balance/tasks if they don't exist yet for this user
+            const balanceKey = `userBalance_${foundUser.username}`;
+            if (localStorage.getItem(balanceKey) === null) {
+                localStorage.setItem(balanceKey, '10.00');
+                localStorage.setItem(`completedTasks_${foundUser.username}`, '0');
+                localStorage.setItem(`todaysProfit_${foundUser.username}`, '0.00');
+                localStorage.setItem(`totalProfit_${foundUser.username}`, '0.00');
+            }
+
+            alert('Login successful!');
+            window.location.href = 'dashboard.html';
         });
     </script>
 </body>
 </html>
-
-```
