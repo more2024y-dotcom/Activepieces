@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login / Register - Luxury VIP</title>
+    <title>Login & Register - Luxury VIP</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
@@ -46,6 +46,30 @@
             color: var(--text-muted);
             margin-bottom: 20px;
         }
+        .auth-tabs {
+            display: flex;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .auth-tab.active {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #0f172a;
+            font-weight: 700;
+        }
         .input-field {
             width: 100%;
             background: #0f172a;
@@ -80,39 +104,71 @@
 
     <div class="auth-card">
         <div class="title">Luxury VIP Portal</div>
-        <div class="subtitle">Login or Register with your username</div>
+        <div class="subtitle">Secure Account Access</div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="tabLogin" onclick="switchMode('login')">Log In</div>
+            <div class="auth-tab" id="tabRegister" onclick="switchMode('register')">Sign Up</div>
+        </div>
+
         <input type="text" id="usernameInput" class="input-field" placeholder="Enter username...">
-        <button class="btn-auth" onclick="loginOrRegister()">ENTER DASHBOARD</button>
+        <button class="btn-auth" id="authBtn" onclick="handleAuth()">LOG IN</button>
     </div>
 
     <script>
-        function loginOrRegister() {
+        let currentMode = 'login';
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const authBtn = document.getElementById('authBtn');
+
+            if (mode === 'login') {
+                tabLogin.classList.add('active');
+                tabRegister.classList.remove('active');
+                authBtn.textContent = 'LOG IN';
+            } else {
+                tabRegister.classList.add('active');
+                tabLogin.classList.remove('active');
+                authBtn.textContent = 'REGISTER ACCOUNT';
+            }
+        }
+
+        function handleAuth() {
             const username = document.getElementById('usernameInput').value.trim();
             if (!username) {
-                alert("Please enter a valid username.");
+                alert("Please enter a username.");
                 return;
             }
 
-            // Save active session username
-            localStorage.setItem('userName', username);
-
-            // Scoped keys for this specific user
             const balanceKey = `userBalance_${username}`;
             const taskKey = `completedTasks_${username}`;
             const profitKey = `todaysProfit_${username}`;
 
-            // Provision a fresh slate if it's a brand new account
-            if (localStorage.getItem(balanceKey) === null) {
+            if (currentMode === 'register') {
+                // If signing up, check if the username is already taken
+                if (localStorage.getItem(balanceKey) !== null) {
+                    alert("This username already exists! Please choose another one or switch to Log In.");
+                    return;
+                }
+                // Initialize brand new user ledger
                 localStorage.setItem(balanceKey, "10.00");
-            }
-            if (localStorage.getItem(taskKey) === null) {
                 localStorage.setItem(taskKey, "0");
-            }
-            if (localStorage.getItem(profitKey) === null) {
                 localStorage.setItem(profitKey, "0.00");
+                alert("Account created successfully!");
+            } else {
+                // If logging in, check if the account exists
+                if (localStorage.getItem(balanceKey) === null) {
+                    alert("Account not found! Please check your username or Sign Up first.");
+                    return;
+                }
             }
 
-            // Redirect directly to the dashboard
+            // Save active session
+            localStorage.setItem('userName', username);
+
+            // Redirect to dashboard
             window.location.href = 'dashboard.html';
         }
     </script>
