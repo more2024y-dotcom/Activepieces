@@ -398,6 +398,8 @@
         const todaysProfitKey = `todaysProfit_${userKeySuffix}`;
         const assignedProductsKey = `assignedProducts_${userKeySuffix}`;
         const cycleDateKey = `cycleDate_${userKeySuffix}`;
+        const catalogVersionKey = `catalogVersion_${userKeySuffix}`;
+        const CURRENT_CATALOG_VERSION = "v2-fixed-images";
 
         // ============================================================
         // EXPANDED MASTER CATALOG — 80 unique products, no duplicates in a cycle
@@ -448,13 +450,13 @@
             { name: "Eco-Friendly Canvas Tote Bag", price: 6.20, image: "https://images.unsplash.com/photo-1597484662317-c931384b2d3b?auto=format&fit=crop&w=600&q=80" },
             { name: "Ceramic Coffee Pour-Over Set", price: 8.90, image: "https://images.unsplash.com/photo-1544650039-22858f6a31d5?auto=format&fit=crop&w=600&q=80" },
             { name: "Wireless Smart Scale", price: 11.50, image: "https://images.unsplash.com/photo-1576516002715-3c3f47e8762b?auto=format&fit=crop&w=600&q=80" },
-            { name: "Retro Instant Print Camera", price: 14.00, image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" },
+            { name: "Retro Instant Print Camera", price: 14.00, image: "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?auto=format&fit=crop&w=600&q=80" },
             { name: "Genuine Leather Belt", price: 16.80, image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?auto=format&fit=crop&w=600&q=80" },
             { name: "Smart LED Light Strip Kit", price: 19.50, image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=600&q=80" },
             { name: "Premium Yoga Mat", price: 23.00, image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?auto=format&fit=crop&w=600&q=80" },
             { name: "Handmade Wooden Sunglasses", price: 26.50, image: "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=600&q=80" },
             { name: "Compact Espresso Maker", price: 29.00, image: "https://images.unsplash.com/photo-1517260739337-6799d239ce83?auto=format&fit=crop&w=600&q=80" },
-            { name: "Smart Temperature Bottle", price: 33.00, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80" },
+            { name: "Smart Temperature Bottle", price: 33.00, image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80" },
             { name: "Leather Desk Organizer", price: 36.00, image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=80" },
             { name: "Portable Projector Mini", price: 40.00, image: "https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=600&q=80" },
             { name: "Cashmere Wool Scarf", price: 44.00, image: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=600&q=80" },
@@ -474,7 +476,7 @@
             { name: "Outdoor Camping Tent", price: 185.00, image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80" },
             { name: "Electric Standing Desk", price: 210.00, image: "https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&w=600&q=80" },
             { name: "Smart Mirror with LED", price: 230.00, image: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80" },
-            { name: "Premium Espresso Machine", price: 260.00, image: "https://images.unsplash.com/photo-1517260739337-6799d239ce83?auto=format&fit=crop&w=600&q=80" },
+            { name: "Premium Espresso Machine", price: 260.00, image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" },
             { name: "Drone with 4K Camera", price: 300.00, image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=600&q=80" },
             { name: "Smart Refrigerator Display", price: 350.00, image: "https://images.unsplash.com/photo-1571175443880-49e1d58b794a?auto=format&fit=crop&w=600&q=80" },
             { name: "Home Theater Sound System", price: 400.00, image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=600&q=80" },
@@ -509,55 +511,29 @@
         }
 
         function getAssignedProducts() {
-            const currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
             const today = new Date().toISOString().slice(0, 10);
             const storedCycleDate = localStorage.getItem(cycleDateKey);
+            const storedVersion = localStorage.getItem(catalogVersionKey);
             let stored = localStorage.getItem(assignedProductsKey);
 
-            // If we already have a valid stored assignment for today, use it
-            if (stored && storedCycleDate === today) {
+            // If we already have a valid stored assignment for today AND the catalog version matches, return it as-is
+            if (stored && storedCycleDate === today && storedVersion === CURRENT_CATALOG_VERSION) {
                 try {
                     const parsed = JSON.parse(stored);
                     if (Array.isArray(parsed) && parsed.length === 40) {
-                        // Filter out any products that now exceed balance
-                        const affordableStored = parsed.filter(p => p.price <= currentBalance);
-                        if (affordableStored.length >= 40) {
-                            return affordableStored;
-                        }
+                        return parsed;
                     }
                 } catch (e) {}
             }
 
-            // Need to generate a fresh cycle
-            const affordableCatalog = masterProductCatalog.filter(p => p.price <= currentBalance);
-            
-            if (affordableCatalog.length === 0) {
-                // Fallback: return cheapest product repeated (edge case)
-                const cheapest = masterProductCatalog.reduce((min, p) => p.price < min.price ? p : min, masterProductCatalog[0]);
-                const fallbackPool = Array(40).fill(cheapest);
-                localStorage.setItem(assignedProductsKey, JSON.stringify(fallbackPool));
-                localStorage.setItem(cycleDateKey, today);
-                return fallbackPool;
-            }
-
-            // Shuffle and pick 40 unique products (no repeats within cycle)
-            let pool = [];
-            if (affordableCatalog.length >= 40) {
-                const shuffled = shuffleArray(affordableCatalog);
-                pool = shuffled.slice(0, 40);
-            } else {
-                // Not enough unique affordable products, shuffle what we have and fill rest
-                const shuffled = shuffleArray(affordableCatalog);
-                pool = [...shuffled];
-                // Fill remaining slots with random picks from affordable catalog
-                while (pool.length < 40) {
-                    const randomPick = affordableCatalog[Math.floor(Math.random() * affordableCatalog.length)];
-                    pool.push(randomPick);
-                }
-            }
+            // Generate a fresh cycle: shuffle FULL catalog and pick 40 UNIQUE products
+            // (Never filter by balance here — that causes duplicates when balance is low)
+            const shuffled = shuffleArray(masterProductCatalog);
+            const pool = shuffled.slice(0, 40);
 
             localStorage.setItem(assignedProductsKey, JSON.stringify(pool));
             localStorage.setItem(cycleDateKey, today);
+            localStorage.setItem(catalogVersionKey, CURRENT_CATALOG_VERSION);
             return pool;
         }
 
@@ -605,25 +581,21 @@
             const currentItem = assignedList[completedCount] || assignedList[0];
             const currentBalance = parseFloat(localStorage.getItem(balanceKey)) || 10.00;
 
-            // Safety check: if current assigned product exceeds balance, swap to affordable one
-            let displayItem = currentItem;
-            if (currentItem.price > currentBalance) {
-                const affordable = masterProductCatalog.filter(p => p.price <= currentBalance);
-                displayItem = affordable.length > 0 ? affordable[0] : masterProductCatalog[0];
-                // Update the assignment so this slot uses the affordable item
-                assignedList[completedCount] = displayItem;
-                localStorage.setItem(assignedProductsKey, JSON.stringify(assignedList));
-            }
+            // Show the assigned product exactly as planned — NEVER swap it out
+            productImgElem.src = currentItem.image;
+            document.getElementById('productName').textContent = currentItem.name;
+            document.getElementById('productPriceDisplay').textContent = currentItem.price.toFixed(2);
+            document.getElementById('totalAmountDisplay').textContent = `${currentItem.price.toFixed(2)}(USD)`;
 
-            productImgElem.src = displayItem.image;
-            document.getElementById('productName').textContent = displayItem.name;
-            document.getElementById('productPriceDisplay').textContent = displayItem.price.toFixed(2);
-            document.getElementById('totalAmountDisplay').textContent = `${displayItem.price.toFixed(2)}(USD)`;
-
-            const commission = displayItem.price * 0.005;
+            const commission = currentItem.price * 0.005;
             document.getElementById('earningsDisplay').textContent = `${commission.toFixed(2)}(USD)`;
 
-            document.getElementById('negativeWarningBox').style.display = 'none';
+            // Show warning if user can't afford this specific product
+            if (currentItem.price > currentBalance) {
+                document.getElementById('negativeWarningBox').style.display = 'block';
+            } else {
+                document.getElementById('negativeWarningBox').style.display = 'none';
+            }
             document.getElementById('starRatingDisplay').classList.remove('active');
 
             const now = new Date();
