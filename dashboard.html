@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Luxury VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        :root {
+            --bg-color: #090d16;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .dashboard-container {
+            width: 100%;
+            max-width: 440px;
+        }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .welcome-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .balance-card {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .balance-title {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fde047;
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .stat-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .action-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+        }
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #0b1120;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 65px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 10px;
+            flex: 1;
+        }
+        .nav-item.active {
+            color: #ffd700;
+        }
+        .nav-item .icon {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header-section">
+            <div class="welcome-text" id="welcomeUser">Welcome, User</div>
+            <button class="logout-btn" onclick="logoutUser()">Log Out</button>
+        </div>
+        <div class="balance-card">
+            <div class="balance-title">Available Balance</div>
+            <div class="balance-amount" id="userBalance">$0.00</div>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-label">Tasks</div><div class="stat-value" id="completedTasks">0</div></div>
+                <div class="stat-item"><div class="stat-label">Today</div><div class="stat-value" id="todaysProfit">$0.00</div></div>
+                <div class="stat-item"><div class="stat-label">Total</div><div class="stat-value" id="totalProfit">$0.00</div></div>
+            </div>
+        </div>
+        <div class="action-card">
+            <h3>VIP Task Center</h3>
+            <p>Start your daily optimization now.</p>
+            <a href="start.html" class="start-btn">Start Grabbing Tasks</a>
+        </div>
+    </div>
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active"><span class="icon">🏠</span><span>Home</span></a>
+        <a href="start.html" class="nav-item"><span class="icon">⚡</span><span>Task</span></a>
+        <a href="admin.html" class="nav-item"><span class="icon">👤</span><span>Admin</span></a>
+    </nav>
+
+    <script>
+        const currentUsername = localStorage.getItem('userName') || 'User';
+        const balanceKey = `userBalance_${currentUsername}`;
+        const taskKey = `completedTasks_${currentUsername}`;
+        const profitKey = `todaysProfit_${currentUsername}`;
+
+        document.getElementById('welcomeUser').textContent = 'Welcome, ' + currentUsername;
+        document.getElementById('userBalance').textContent = '$' + (parseFloat(localStorage.getItem(balanceKey)) || 0.00).toFixed(2);
+        document.getElementById('completedTasks').textContent = localStorage.getItem(taskKey) || '0';
+        document.getElementById('todaysProfit').textContent = '$' + (parseFloat(localStorage.getItem(profitKey)) || 0.00).toFixed(2);
+        document.getElementById('totalProfit').textContent = '$' + (parseFloat(localStorage.getItem(profitKey)) || 0.00).toFixed(2);
+
+        function logoutUser() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
