@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account - Luxury VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        :root {
+            --primary-color: #0b1120;
+            --accent-color: #38bdf8;
+            --bg-color: #0b1120;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .auth-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px 24px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 440px;
+        }
+        .language-header { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+        .language-header select { padding: 6px 10px; font-size: 11px; background: #0f172a; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); cursor: pointer; }
+        h2 { color: #38bdf8; text-align: center; font-size: 22px; font-weight: 800; margin-bottom: 20px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        input, select { width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-color); border-radius: 10px; box-sizing: border-box; font-size: 14px; color: var(--text-color); }
+        .phone-group { display: flex; gap: 10px; }
+        .phone-group select { width: 100px; }
+        button.submit-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #38bdf8, #0284c7); color: #0f172a; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+        .switch-link { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-muted); }
+        .switch-link a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="auth-card">
+        <div class="language-header">
+            <select id="langSelect">
+                <option value="en">English</option>
+                <option value="my">မြန်မာဘာသာ (Myanmar)</option>
+            </select>
+        </div>
+        <h2 id="titleText">Create Account</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label id="userLabel">Username</label>
+                <input type="text" id="username" placeholder="Choose a username" required>
+            </div>
+            <div class="form-group">
+                <label id="genderLabel">Gender</label>
+                <select id="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="phoneLabel">Phone Number</label>
+                <div class="phone-group">
+                    <select id="countryCode">
+                        <option value="+1">+1</option>
+                        <option value="+95">+95</option>
+                    </select>
+                    <input type="tel" id="phone" placeholder="Phone number" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="passLabel">Login Password</label>
+                <input type="password" id="password" placeholder="At least 6 characters" required>
+            </div>
+            <div class="form-group">
+                <label id="txPassLabel">Transaction Password</label>
+                <input type="password" id="txPassword" placeholder="Set withdrawal password" required>
+            </div>
+            <div class="form-group">
+                <label id="inviteLabel">Invite Code</label>
+                <input type="text" id="inviteCode" placeholder="Enter code (e.g. BGTY)" required>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Sign Up</button>
+            <div class="switch-link">
+                <span id="switchText">Already have an account?</span> <a href="login.html" id="loginLink">Log In</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Generate a unique code for every user (e.g., LUX-1234)
+        function generateUniqueCode() {
+            return 'LUX-' + Math.floor(1000 + Math.random() * 9000);
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('username').value.trim();
+            const inviteCode = document.getElementById('inviteCode').value.trim().toUpperCase();
+
+            // Validate invite code: Must be BGTY or an existing user's code
+            const allUsers = JSON.parse(localStorage.getItem('allUsers') || '{}');
+            let referrer = null;
+
+            if (inviteCode === 'BGTY') {
+                referrer = 'SYSTEM';
+            } else {
+                // Check if the invite code belongs to an existing user
+                for (let user in allUsers) {
+                    if (allUsers[user].myInviteCode === inviteCode) {
+                        referrer = user;
+                        break;
+                    }
+                }
+            }
+
+            if (!referrer) {
+                alert('Invalid invite code. Please use "BGTY" or a friend\'s code.');
+                return;
+            }
+
+            const myCode = generateUniqueCode();
+            
+            // Save user profile
+            const userData = {
+                username: name,
+                password: document.getElementById('password').value,
+                txPassword: document.getElementById('txPassword').value,
+                gender: document.getElementById('gender').value,
+                myInviteCode: myCode,
+                referredBy: referrer
+            };
+
+            allUsers[name] = userData;
+            localStorage.setItem('allUsers', JSON.stringify(allUsers));
+            
+            // Legacy keys for compatibility
+            localStorage.setItem('userName', name);
+            localStorage.setItem('myInviteCode', myCode);
+            localStorage.setItem(`userBalance_${name}`, '10.00');
+
+            alert('Account created! Your invite code is: ' + myCode);
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>
