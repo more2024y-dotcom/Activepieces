@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Optimization - VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        :root {
+            --primary-blue: #0f172a;
+            --accent-blue: #2563eb;
+            --bg-color: #0b1120;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding-bottom: 100px; }
+        .container { padding: 16px; max-width: 600px; margin: 0 auto; }
+        .task-card { background: var(--card-bg); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 16px; padding: 18px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); margin-bottom: 20px; }
+        .product-image-box { width: 100%; height: 240px; background: #1e293b; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+        .product-image-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .submit-btn { width: 100%; background: var(--accent-blue); color: #fff; border: none; border-radius: 10px; padding: 14px; font-weight: 700; cursor: pointer; }
+        .submit-btn:disabled { background: #475569; cursor: not-allowed; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #0b1120; display: flex; height: 65px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; font-size: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="task-card">
+            <div id="mediaBoxContainer" class="product-image-box">
+                <img id="productImg" src="" alt="Product">
+            </div>
+            <h3 id="productName">Loading...</h3>
+            <div style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">USD <span id="productPriceDisplay">0.00</span></div>
+            <div style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+                <span>Profit: 0.5% | Earnings: <b id="earningsDisplay">0.00</b> USD</span>
+            </div>
+            <button class="submit-btn" id="submitTaskBtn" onclick="completeTask()">Submit Task</button>
+        </div>
+    </div>
+
+    <script>
+        const currentUsername = localStorage.getItem('userName') || 'User';
+        const balanceKey = `userBalance_${currentUsername}`;
+        const taskKey = `completedTasks_${currentUsername}`;
+        const profitKey = `todaysProfit_${currentUsername}`;
+
+        const products = [
+            { name: "Luxury Watch", price: 100.00, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" },
+            { name: "Leather Bag", price: 200.00, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600" }
+        ];
+
+        function loadTask() {
+            const count = parseInt(localStorage.getItem(taskKey) || '0');
+            if (count >= 40) {
+                document.getElementById('submitTaskBtn').disabled = true;
+                document.getElementById('submitTaskBtn').textContent = "Daily Limit Reached";
+                return;
+            }
+            const p = products[count % products.length];
+            document.getElementById('productImg').src = p.image;
+            document.getElementById('productName').textContent = p.name;
+            document.getElementById('productPriceDisplay').textContent = p.price.toFixed(2);
+            document.getElementById('earningsDisplay').textContent = (p.price * 0.005).toFixed(2);
+        }
+
+        function completeTask() {
+            const count = parseInt(localStorage.getItem(taskKey) || '0');
+            const p = products[count % products.length];
+            const commission = p.price * 0.005;
+            
+            // 1. Update User's Balance and Profit
+            let bal = parseFloat(localStorage.getItem(balanceKey) || '10.00');
+            let profit = parseFloat(localStorage.getItem(profitKey) || '0.00');
+            
+            bal += commission;
+            profit += commission;
+            
+            localStorage.setItem(balanceKey, bal.toFixed(2));
+            localStorage.setItem(profitKey, profit.toFixed(2));
+            localStorage.setItem(taskKey, count + 1);
+
+            // 2. REFERRAL LOGIC: Award 15% of profit to the referrer
+            const allUsers = JSON.parse(localStorage.getItem('allUsers') || '{}');
+            const myData = allUsers[currentUsername];
+            
+            if (myData && myData.referredBy && myData.referredBy !== 'SYSTEM') {
+                const referrerName = myData.referredBy;
+                const referralBonus = commission * 0.15;
+                
+                const referrerBalKey = `userBalance_${referrerName}`;
+                let referrerBal = parseFloat(localStorage.getItem(referrerBalKey) || '10.00');
+                referrerBal += referralBonus;
+                
+                localStorage.setItem(referrerBalKey, referrerBal.toFixed(2));
+                console.log(`Referral Bonus of $${referralBonus.toFixed(4)} awarded to ${referrerName}`);
+            }
+
+            alert(`Task Successful! Profit: $${commission.toFixed(2)}`);
+            loadTask();
+        }
+
+        loadTask();
+    </script>
+</body>
+</html>
