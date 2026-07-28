@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account - Luxury VIP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        :root {
+            --primary-color: #0b1120;
+            --accent-color: #38bdf8;
+            --bg-color: #0b1120;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.3);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .auth-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px 24px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 440px;
+        }
+        .language-header { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+        .language-header select { padding: 6px 10px; font-size: 11px; background: #0f172a; border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); }
+        h2 { color: #38bdf8; text-align: center; font-size: 22px; font-weight: 800; margin-bottom: 20px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        input, select { width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-color); border-radius: 10px; box-sizing: border-box; font-size: 14px; color: var(--text-color); }
+        .phone-group { display: flex; gap: 10px; }
+        .phone-group select { width: 120px; }
+        button.submit-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #38bdf8, #0284c7); color: #0f172a; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+        .error-msg { color: #ef4444; font-size: 12px; margin-top: 5px; display: none; }
+        .switch-link { text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-muted); }
+        .switch-link a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="auth-card">
+        <div class="language-header">
+            <select id="langSelect">
+                <option value="en">English</option>
+                <option value="my">မြန်မာဘာသာ</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="ru">Русский</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ar">العربية</option>
+                <option value="pt">Português</option>
+                <option value="it">Italiano</option>
+                <option value="ko">한국어</option>
+                <option value="ja">日本語</option>
+                <option value="vi">Tiếng Việt</option>
+                <option value="th">ไทย</option>
+            </select>
+        </div>
+        <h2 id="titleText">Create Account</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label id="userLabel">Username</label>
+                <input type="text" id="username" placeholder="Choose a username" required>
+            </div>
+            <div class="form-group">
+                <label id="phoneLabel">Phone Number</label>
+                <div class="phone-group">
+                    <select id="countryCode">
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+95">🇲🇲 +95</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+86">🇨🇳 +86</option>
+                        <option value="+81">🇯🇵 +81</option>
+                        <option value="+49">🇩🇪 +49</option>
+                        <option value="+33">🇫🇷 +33</option>
+                        <option value="+7">🇷🇺 +7</option>
+                        <option value="+82">🇰🇷 +82</option>
+                        <option value="+84">🇻🇳 +84</option>
+                        <option value="+66">🇹🇭 +66</option>
+                    </select>
+                    <input type="tel" id="phone" placeholder="Phone number" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="genderLabel">Gender</label>
+                <select id="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="passLabel">Login Password</label>
+                <input type="password" id="password" placeholder="At least 6 characters" required>
+            </div>
+            <div class="form-group">
+                <label id="txPassLabel">Transaction Password</label>
+                <input type="password" id="txPassword" placeholder="Set withdrawal password" required>
+            </div>
+            <div class="form-group">
+                <label id="inviteLabel">Invite Code</label>
+                <input type="text" id="inviteCode" placeholder="Enter invite code (e.g. A1B2)" required>
+                <div id="formError" class="error-msg"></div>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Sign Up</button>
+            <div class="switch-link">
+                <span id="switchText">Already have an account?</span> <a href="login.html">Log In</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        const translations = {
+            en: { title: "Create Account", user: "Username", phone: "Phone Number", gender: "Gender", pass: "Login Password", txPass: "Transaction Password", invite: "Invite Code", submit: "Sign Up", switch: "Already have an account?" },
+            my: { title: "အကောင့်ဖွင့်ပါ", user: "အသုံးပြုသူအမည်", phone: "ဖုန်းနံပါတ်", gender: "ကျား/မ", pass: "လျှို့ဝှက်နံပါတ်", txPass: "ငွေထုတ်လျှို့ဝှက်နံပါတ်", invite: "ဖိတ်ကြားကုဒ်", submit: "အကောင့်ဖွင့်ရန်", switch: "အကောင့်ရှိပြီးသားလား?" },
+            es: { title: "Crear cuenta", user: "Usuario", phone: "Teléfono", gender: "Género", pass: "Contraseña", txPass: "Contraseña de transacción", invite: "Código de invitación", submit: "Registrarse", switch: "¿Ya tienes cuenta?" },
+            vi: { title: "Tạo tài khoản", user: "Tên đăng nhập", phone: "Số điện thoại", gender: "Giới tính", pass: "Mật khẩu", txPass: "Mật khẩu giao dịch", invite: "Mã giới thiệu", submit: "Đăng ký", switch: "Đã có tài khoản?" },
+            th: { title: "สร้างบัญชี", user: "ชื่อผู้ใช้", phone: "เบอร์โทรศัพท์", gender: "เพศ", pass: "รหัสผ่าน", txPass: "รหัสผ่านธุรกรรม", invite: "รหัสเชิญ", submit: "ลงชื่อเข้าใช้", switch: "มีบัญชีอยู่แล้ว?" }
+        };
+
+        document.getElementById('langSelect').addEventListener('change', function() {
+            const t = translations[this.value] || translations.en;
+            document.getElementById('titleText').textContent = t.title;
+            document.getElementById('userLabel').textContent = t.user;
+            document.getElementById('phoneLabel').textContent = t.phone;
+            document.getElementById('genderLabel').textContent = t.gender;
+            document.getElementById('passLabel').textContent = t.pass;
+            document.getElementById('txPassLabel').textContent = t.txPass;
+            document.getElementById('inviteLabel').textContent = t.invite;
+            document.getElementById('submitBtn').textContent = t.submit;
+            document.getElementById('switchText').textContent = t.switch;
+        });
+
+        const MASTER_CODE = 'BGTY';
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formError = document.getElementById('formError');
+            const usernameInput = document.getElementById('username').value.trim();
+            const inviteCodeInput = document.getElementById('inviteCode').value.trim().toUpperCase();
+            const allUsers = JSON.parse(localStorage.getItem('allUsers') || '{}');
+
+            if (allUsers[usernameInput]) {
+                formError.textContent = 'Username taken.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            let referrer = (inviteCodeInput === MASTER_CODE) ? 'SYSTEM' : null;
+            if (!referrer) {
+                for (let name in allUsers) {
+                    if (allUsers[name].myInviteCode === inviteCodeInput) { referrer = name; break; }
+                }
+            }
+
+            if (!referrer) {
+                formError.textContent = 'Invalid code.';
+                formError.style.display = 'block';
+                return;
+            }
+
+            const myNewCode = 'LUX-' + Math.floor(1000 + Math.random() * 9000);
+            allUsers[usernameInput] = {
+                username: usernameInput,
+                phone: document.getElementById('phone').value.trim(),
+                password: document.getElementById('password').value,
+                txPassword: document.getElementById('txPassword').value,
+                gender: document.getElementById('gender').value,
+                myInviteCode: myNewCode,
+                referredBy: referrer
+            };
+            localStorage.setItem('allUsers', JSON.stringify(allUsers));
+            localStorage.setItem('userName', usernameInput);
+            localStorage.setItem(`userBalance_${usernameInput}`, '10.00');
+            alert('Success! Code: ' + myNewCode);
+            window.location.href = 'login.html';
+        });
+    </script>
+    <!-- Master Invite Code: BGTY -->
+</body>
+</html>
